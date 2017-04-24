@@ -80,3 +80,41 @@ Cette webapp permet de:
 
 ### Real-Life-Game Human vs Zombies Companion
 Cette application mobile permet aux joueurs d'avoir un certain nombre d'informations in-game (comme le dashboard, mais personnalisé selon le camp du joueur)
+
+
+## Hardware Specs
+Work In Progress:
+
+Pour la balise, il faut que ce soit autonome et potentiellement "tout inclus".
+On peut prendre des petites valises tactiques, et en virant la mousse, on peut faire un joli control board imprimé en 3D ou découpé au laser.
+On peut faire rentrer toute l'électronique à l'intérieur et faire fonctionner ça sur batterie.
+https://goo.gl/nLR0GN  
+![Valise](https://images-na.ssl-images-amazon.com/images/I/61dpjR0mYEL._SL1000_.jpg)
+
+Pour tout ce qui est hardware, le mieux c'est quand même d'avoir un microcontroller assez bas niveau (genre Arduino Mega)
+https://goo.gl/pntpjE  
+Ce qui est cool, c'est qu'il contient plusieurs UARTs (interfaces Série), un SPI (un bus série) et un I2C (un autre protocole de bus série), c'est les standards de communication avec le reste.  
+![Arduino Mega](https://images-na.ssl-images-amazon.com/images/I/713dm0ARCcL._SL1500_.jpg)
+
+Pour le gyrophare, j'ai regardé et il y a des trucs sympa en chine, mais ca n'arrivera jamais à temps. On peut commencer simplement par des LEDs programmables genre  
+https://goo.gl/kzSVHU  
+![LEDs programmables](https://images-na.ssl-images-amazon.com/images/I/61PEUB2SdsL._SL1000_.jpg)
+Ca permettra aussi de faire les différentes jauges de la couleur qu'on veut!
+
+Pour tout ce qui est interrupteurs, le plus stylé reste encore ça:  
+https://goo.gl/4XW2hE  
+![Interrupteurs](https://images-na.ssl-images-amazon.com/images/I/51xoma%2BMy-L._SL1043_.jpg)
+
+Je n'ai jamais fait de NFC ou de RFID, y'a plein de normes et de protocoles assez bas niveau, et LA puce de référence semble être la NXP PN532.
+Plutôt que de tout se taper l'électronique, y'a des modules tout faits avec une liaison I2C pour arduino, et des APIs pour Arduino (magnifique!)  
+https://goo.gl/iizwLA  
+![NFC Reader](https://images-na.ssl-images-amazon.com/images/I/51TPRHRHdAL.jpg)
+
+Les cartes qu'il faut prendre sont des cartes "writeable", afin de pouvoir écrire la quantité de nourriture collectée par exemple.
+Les cartes de référence s'appellent S50 ou Mifare 1K.
+
+Pour le reste, c'est simple, un petit écran, et quelques interrupteurs, stabilisateurs de tension, et transistors feront l'affaire.  
+https://goo.gl/TGvw2G
+
+
+Pour le reste (écran et boutons), c'est facile
