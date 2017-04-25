@@ -96,6 +96,9 @@ https://goo.gl/pntpjE
 Ce qui est cool, c'est qu'il contient plusieurs UARTs (interfaces Série), un SPI (un bus série) et un I2C (un autre protocole de bus série), c'est les standards de communication avec le reste.  
 ![Arduino Mega](https://images-na.ssl-images-amazon.com/images/I/713dm0ARCcL._SL1500_.jpg)
 
+Arduino n'est pas connecté à internet, pour cela on va utiliser des ESP-8266 qui se connecteront à un Access-Point.
+J'en ai une floppée donc je les fournirai directement.
+
 Pour le gyrophare, j'ai regardé et il y a des trucs sympa en chine, mais ca n'arrivera jamais à temps. On peut commencer simplement par des LEDs programmables genre  
 https://goo.gl/kzSVHU  
 ![LEDs programmables](https://images-na.ssl-images-amazon.com/images/I/61PEUB2SdsL._SL1000_.jpg)
