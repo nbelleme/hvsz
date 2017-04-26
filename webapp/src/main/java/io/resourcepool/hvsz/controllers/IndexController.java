@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class DashboardController {
-  @GetMapping("/dashboard")
-  public String dashboard(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-    model.addAttribute("name", name);
-    return "dashboard";
+public class IndexController {
+  @GetMapping("/index")
+  public String index() {
+    return "index";
   }
 
 }
