@@ -8,51 +8,54 @@
     <h1>Formulaire de configuration</h1>
     <form method="post" action="/configuration">
         <fieldset>
+            <legend>Général</legend>
+            <div>
+                <label for="gameDuration">Durée de la partie (minute)</label>
+                <input type="number" name="gameDuration" id="gameDuration" min="1" value="30"/>
+            </div>
+            <div>
+                <label for="difficulty">Difficulté de la partie</label>
+                <select name="difficulty" id="difficulty">
+                    <option value="facile">facile</option>
+                    <option value="normal" selected="true">normal</option>
+                    <option value="difficile">difficile</option>
+                </select>
+            </div>
+        </fieldset>
+        <fieldset>
             <legend>Humain</legend>
             <div>
                 <label for="nbHuman">Nombre d'humains</label>
-                <input type="text" name="nbHuman" id="nbHuman"/>
-            </div>
-            <div>
-                <label for="nbHumanMaxResources">Nombre maximum de ressources par humain</label>
-                <input type="text" name="nbHumanMaxResources" id="nbHumanMaxResources"/>
+                <input type="number" name="nbHuman" id="nbHuman" min="1" value="30"/>
             </div>
         </fieldset>
         <fieldset>
             <legend>Zombie</legend>
             <div>
                 <label for="nbZombie">Nombre de zombies</label>
-                <input type="text" name="nbZombie" id="nbZombie"/>
+                <input type="number" name="nbZombie" id="nbZombie" min="1" value="10"/>
             </div>
         </fieldset>
         <fieldset>
             <legend>Zone de sécurité</legend>
             <div>
                 <label for="nbSafezone">Nombre de zones de sécurité</label>
-                <input type="text" name="nbSafezone" id="nbSafezone"/>
+                <input type="number" name="nbSafezone" id="nbSafezone" min="1" value="2"/>
             </div>
             <div>
-                <label for="nbSafezoneLifes">Nombre de vies</label>
-                <input type="text" name="nbSafezoneLifes" id="nbSafezoneLifes"/>
-            </div>
-            <div>
-                <label for="safezoneResourcesDroppedBySecond">Nombres de ressources perdues par seconde</label>
-                <input type="text" name="safezoneResourcesDroppedBySecond" id="safezoneResourcesDroppedBySecond"/>
+                <label for="nbSafezoneLifes">Nombre de vies total</label>
+                <input type="number" name="nbSafezoneLifes" id="nbSafezoneLifes" min="1" value="40"/>
             </div>
         </fieldset>
         <fieldset>
             <legend>Bunker et ressources</legend>
             <div>
-                <label for="nbBunker">Nombre de bunkers</label>
-                <input type="text" name="nbBunker" id="nbBunker"/>
+                <label for="nbSupplyZone">Nombre de bunkers</label>
+                <input type="number" name="nbSupplyZone" id="nbSupplyZone" min="1" value="2"/>
             </div>
             <div>
-                <label for="nbBunkerResources">Nombre de ressources</label>
-                <input type="text" name="nbBunkerResources" id="nbBunkerResources"/>
-            </div>
-            <div>
-                <label for="bunkerTimeToFullLoad">Durée pour chargement complet</label>
-                <input type="text" name="bunkerTimeToFullLoad" id="bunkerTimeToFullLoad"/>
+                <label for="nbSupplyResources">Nombre de ressources total</label>
+                <input type="number" name="nbSupplyResources" id="nbSupplyResources" min="1" value="180"/>
             </div>
         </fieldset>
         <button type="submit">Envoyer</button>
