@@ -11,4 +11,13 @@ public class RestApiController {
   public @ResponseBody Game greeting(@RequestParam(value="name", defaultValue="World") String name) {
     return new Game();
   }
+
+  @RequestMapping(value = "/game", method = RequestMethod.POST)
+  public @ResponseBody Game newGame(@RequestParam(value="name", defaultValue="World") String name) {
+
+    return new Game();
+  }
+  /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE) public void
+  deletePlace(@PathVariable(value = "id") Long id) {
+    this.placeService.deletePlace(id);*/
 }
