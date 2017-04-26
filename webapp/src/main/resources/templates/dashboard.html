@@ -5,6 +5,14 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <p th:text="'Hello, ' + ${name} + '!'" />
+    <p th:text="'Nombre de Joueur Humain : ' + ${nbhumain}"/>
+    <p th:text="'Nombre de Joueur Zombie : ' + ${nbzombie}"/>
+    <p th:text="'Temps de jeu restant : ' + ${time} + ' minutes'"/>
+    <p th:text="'Nombre de vies restantes : ' + ${nblife}"/>
+
+    <ul>
+        <li th:each="zone : ${zones}" th:text="${zone.name} + ' : ' + ${zone.resource}"/>
+    </ul>
+
 </body>
 </html>
