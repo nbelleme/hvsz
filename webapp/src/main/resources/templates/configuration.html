@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Formulaire de configuration</h1>
+    <form method="post" action="/configuration">
+        <fieldset>
+            <legend>Humain</legend>
+            <div>
+                <label for="nbHuman">Nombre d'humains</label>
+                <input type="text" name="nbHuman" id="nbHuman"/>
+            </div>
+            <div>
+                <label for="nbHumanMaxResources">Nombre maximum de ressources par humain</label>
+                <input type="text" name="nbHumanMaxResources" id="nbHumanMaxResources"/>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Zombie</legend>
+            <div>
+                <label for="nbZombie">Nombre de zombies</label>
+                <input type="text" name="nbZombie" id="nbZombie"/>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Zone de sécurité</legend>
+            <div>
+                <label for="nbSafezone">Nombre de zones de sécurité</label>
+                <input type="text" name="nbSafezone" id="nbSafezone"/>
+            </div>
+            <div>
+                <label for="nbSafezoneLifes">Nombre de vies</label>
+                <input type="text" name="nbSafezoneLifes" id="nbSafezoneLifes"/>
+            </div>
+            <div>
+                <label for="safezoneResourcesDroppedBySecond">Nombres de ressources perdues par seconde</label>
+                <input type="text" name="safezoneResourcesDroppedBySecond" id="safezoneResourcesDroppedBySecond"/>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Bunker et ressources</legend>
+            <div>
+                <label for="nbBunker">Nombre de bunkers</label>
+                <input type="text" name="nbBunker" id="nbBunker"/>
+            </div>
+            <div>
+                <label for="nbBunkerResources">Nombre de ressources</label>
+                <input type="text" name="nbBunkerResources" id="nbBunkerResources"/>
+            </div>
+            <div>
+                <label for="bunkerTimeToFullLoad">Durée pour chargement complet</label>
+                <input type="text" name="bunkerTimeToFullLoad" id="bunkerTimeToFullLoad"/>
+            </div>
+        </fieldset>
+        <button type="submit">Envoyer</button>
+    </form>
+</body>
+</html>
