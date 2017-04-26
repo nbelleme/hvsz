@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+</head>
+<body>
+    <p>Get a new life <a href="/human?newlife=1">here</a></p>
+    <p th:text="${newlife}" />
+
+    <p>Drop a resource  <a href="/resource/drop?resourcedrop=1">here</a></p>
+    <p th:text="${resourcedrop}" />
+
+    <p>Return index : <a href="/index">here</a></p>
+</body>
+</html>
