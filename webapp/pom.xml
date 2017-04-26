@@ -6,7 +6,7 @@
 	<groupId>io.resourcepool.hvsz</groupId>
 	<artifactId>webapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>webapp</name>
 	<description>Demo project for Spring Boot</description>
@@ -17,6 +17,7 @@
 		<version>1.5.3.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,6 +39,7 @@
 	</dependencies>
 
 	<build>
+		<defaultGoal>clean package</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
