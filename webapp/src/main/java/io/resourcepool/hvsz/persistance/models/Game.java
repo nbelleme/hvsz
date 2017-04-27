@@ -59,13 +59,19 @@ public class Game implements Serializable {
         this.status = status;
     }
 
+  public void setConfig(GameConfig config) {
+    this.config = config;
+    supplyZones = new ArrayList<>();
+    int nbSupplyZones = config.getNbSupplyZone();
+    int nbSupplyResources = config.getNbSupplyResources();
+    for(int i =0; i<config.getNbSupplyZone(); i++){
+      supplyZones.add(new SupplyZone(i, nbSupplyResources/nbSupplyZones));
+    }
+  }
     public GameConfig getConfig() {
         return config;
     }
 
-    public void setConfig(GameConfig config) {
-        this.config = config;
-    }
 
     public ArrayList<SafeZone> getSafeZones() {
         return safeZones;
