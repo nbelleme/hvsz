@@ -3,10 +3,10 @@ package io.resourcepool.hvsz.persistance.models;
 import java.io.Serializable;
 
 public class GameStatus implements Serializable {
-  Integer humanPlayers;
-  Integer zombiePlayers;
-  Integer nbHumanAlive;
-  Integer timeLeft; // in min
+  Integer humanPlayers = 1;
+  Integer zombiePlayers = 1;
+  Integer nbHumanAlive = 2;
+  Integer timeLeft = 5; // in min
   Boolean started = false;
 
   public Integer getHumanPlayers() {

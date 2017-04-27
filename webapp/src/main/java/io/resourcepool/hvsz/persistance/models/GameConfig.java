@@ -4,11 +4,11 @@ package io.resourcepool.hvsz.persistance.models;
 import java.io.Serializable;
 
 public class GameConfig implements Serializable {
-  Integer humansLives;
-  Integer gameLength;
-  Integer resourceDrainRate;
-  Integer nbSafeZones;
-  Integer nbSupplyZones;
+  Integer humansLives = 2;
+  Integer gameLength = 2;
+  Integer resourceDrainRate = 2;
+  Integer nbSafeZones = 2;
+  Integer nbSupplyZones = 2;
 
   public Integer getHumansLives() {
     return humansLives;

@@ -1,9 +1,10 @@
 package io.resourcepool.hvsz.service;
 
-import io.resourcepool.hvsz.persistance.models.SafeZone;
-import io.resourcepool.hvsz.persistance.models.SupplyZone;
-import io.resourcepool.hvsz.persistance.models.Zone;
-import io.resourcepool.hvsz.persistance.models.ZoneResource;
+import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
+import io.resourcepool.hvsz.persistance.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,33 +12,44 @@ import java.util.List;
 /**
  * Created by ebiz on 27/04/17.
  */
+@Service
 public class DashboardServiceImpl implements DashboardService {
+
     @Override
     public int getLifeLeft() {
-        return 56;
+        Game game = get();
+        return game.getConfig().getHumansLives();
     }
 
     @Override
     public int getHuman() {
-        return 20;
+        Game game = get();
+        return game.getStatus().getNbHumanAlive();
     }
 
     @Override
     public int getZombie() {
-        return 5;
+        Game game = get();
+        return game.getStatus().getZombiePlayers();
     }
 
     @Override
     public int getTime() {
-        return 42;
+        Game game = get();
+        return game.getStatus().getTimeLeft();
     }
 
     @Override
     public List<ZoneResource> getZoneResource() {
-        ArrayList<ZoneResource> listeZones = new ArrayList<>();
-        listeZones.add(new SafeZone());
-        listeZones.add(new SupplyZone());
-        listeZones.add(new SafeZone());
-        return listeZones;
+        Game game = get();
+        ArrayList<ZoneResource> zoneResources = new ArrayList<ZoneResource>(game.getSafeZones());
+        zoneResources.addAll(game.getSupplyZones());
+        return zoneResources;
+    }
+
+    private Game get() {
+        final String uri = "http://localhost:8080/game/1";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(uri, Game.class);
     }
 }
