@@ -1,7 +1,7 @@
 package io.resourcepool.hvsz.service;
 
-/**
- * Created by ebiz on 27/04/17.
- */
+import io.resourcepool.hvsz.persistance.models.GameConfig;
+
 public interface  ConfigurationService {
+    GameConfig add(GameConfig gameConfig, Long gameId);
 }
