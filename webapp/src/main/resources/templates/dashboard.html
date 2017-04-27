@@ -33,6 +33,7 @@
         <ul class="zones">
             <li th:each="zone : ${zones}" th:text="${zone.name} + ' : ' + ${zone.resource}"/>
         </ul>
+        <a class="waves-effect waves-light btn" href="/game/start">Lancer le jeu</a>
     </section>
     <footer>
 
