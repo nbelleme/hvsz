@@ -16,9 +16,6 @@ public class ConfigurationController {
   @PostMapping("/configuration")
   public String postForm(Model model) {
 
-
-
-
     return "configuration";
   }
 
