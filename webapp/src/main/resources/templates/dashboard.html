@@ -23,11 +23,13 @@
     </header>
     <section class="container">
         <h1>Dashboard</h1>
-        <p th:text="'Nombre de Joueur Humain : ' + ${nbhumain}"/>
-        <p th:text="'Nombre de Joueur Zombie : ' + ${nbzombie}"/>
-        <p th:text="'Temps de jeu restant : ' + ${time} + ' minutes'"/>
-        <p th:text="'Nombre de vies restantes : ' + ${nblife}"/>
-        <ul>
+        <div class="mainInfos">
+            <p th:text="'Nombre de Joueur Humain : ' + ${nbhumain}"/>
+            <p th:text="'Nombre de Joueur Zombie : ' + ${nbzombie}"/>
+            <p th:text="'Temps de jeu restant : ' + ${time} + ' minutes'"/>
+            <p th:text="'Nombre de vies restantes : ' + ${nblife}"/>
+        </div>
+        <ul class="zones">
             <li th:each="zone : ${zones}" th:text="${zone.name} + ' : ' + ${zone.resource}"/>
         </ul>
     </section>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 
 
 @RestController
@@ -22,9 +23,10 @@ public class RestApiController {
   }
 
   @RequestMapping(value = "/game", method = RequestMethod.POST)
-  public @ResponseBody Game newGame() {
-    dao.set(1L, new Game()); //use index, not id
-    Game g = dao.get(1L);
+  public @ResponseBody Game newGame(@RequestParam(value="key", defaultValue="1") String key) {
+    Long newKey = Long.getLong(key);
+    dao.set(newKey, new Game(newKey)); //use index, not id
+    Game g = dao.get(newKey);
     return g;
   }
 

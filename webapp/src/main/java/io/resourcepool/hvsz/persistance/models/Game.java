@@ -1,11 +1,20 @@
 package io.resourcepool.hvsz.persistance.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Game implements Serializable {
   Long id = 0L; //uselss
   GameStatus status;
   GameConfig config;
+  ArrayList<SafeZone> safeZones;
+  ArrayList<SupplyZone> supplyZones;
+  ArrayList<ZombieZone> zombieZones;
+
+  public Game(){}
+  public Game(Long id) {
+    this.id = id;
+  }
 
   public Long getId() {
     return id;
