@@ -16,25 +16,41 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public int getLifeLeft() {
         Game game = get();
-        return game.getConfig().getNbSafezoneLifes();
+        Integer result = game.getConfig().getNbSafezoneLifes();
+        if (result == null) {
+            return -1;
+        }
+        return result;
     }
 
     @Override
     public int getHuman() {
         Game game = get();
-        return game.getStatus().getNbHumanAlive();
+        Integer result = game.getStatus().getNbHumanAlive();
+        if (result == null) {
+            return -1;
+        }
+        return result;
     }
 
     @Override
     public int getZombie() {
         Game game = get();
-        return game.getStatus().getZombiePlayers();
+        Integer result = game.getStatus().getZombiePlayers();
+        if (result == null) {
+            return -1;
+        }
+        return result;
     }
 
     @Override
     public int getTime() {
         Game game = get();
-        return game.getStatus().getTimeLeft();
+        Integer result = game.getStatus().getTimeLeft();
+        if (result == null) {
+            return -1;
+        }
+        return result;
     }
 
     @Override
@@ -46,8 +62,8 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     private Game get() {
-        final String uri = "http://localhost:8080/game/1";
+        final String uri = "http://localhost:8080/api/game/1";
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(uri, Game.class);
+        return new Game(restTemplate.getForObject(uri, Game.class));
     }
 }

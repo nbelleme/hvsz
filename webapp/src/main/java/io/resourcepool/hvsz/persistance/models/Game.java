@@ -14,6 +14,31 @@ public class Game implements Serializable {
     public Game() {
     }
 
+    public Game(Game g) {
+        this.id = g.id;
+        if (g.status != null) {
+            this.status = g.status;
+        }
+        if (g.config != null) {
+            this.config = g.config;
+        }
+        if (g.supplyZones != null) {
+            this.supplyZones = g.supplyZones;
+        } else {
+            this.supplyZones = new ArrayList<>();
+        }
+        if (g.safeZones != null) {
+            this.safeZones = g.safeZones;
+        } else {
+            this.safeZones = new ArrayList<>();
+        }
+        if (g.zombieZones != null) {
+            this.zombieZones = g.zombieZones;
+        } else {
+            this.zombieZones = new ArrayList<>();
+        }
+    }
+
     public Game(Long id) {
         this.id = id;
     }
