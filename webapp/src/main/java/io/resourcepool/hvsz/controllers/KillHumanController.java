@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class KillHumanController {
 
     @RequestMapping("/kill")
-    public String kill(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
+    public String kill(Model model) {
         return "kill";
     }
 }

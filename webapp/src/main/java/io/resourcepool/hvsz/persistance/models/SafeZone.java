@@ -5,8 +5,10 @@ package io.resourcepool.hvsz.persistance.models;
  */
 public class SafeZone implements ZoneResource {
     private int resource = 5;
+    private int maxResource = 10;
     private String name = "SafeZone x";
 
+    @Override
     public int getResource() {
         return resource;
     }
@@ -14,5 +16,15 @@ public class SafeZone implements ZoneResource {
     @Override
     public String getName() {
         return name;
+    }
+
+    public int drop(int quantite) {
+        resource += quantite;
+        if (resource > maxResource) {
+            int over = resource - maxResource;
+            resource = maxResource;
+            return quantite - over;
+        }
+        return quantite;
     }
 }
