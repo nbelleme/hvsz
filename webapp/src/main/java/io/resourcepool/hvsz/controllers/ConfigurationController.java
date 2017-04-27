@@ -46,6 +46,6 @@ public class ConfigurationController {
 
     confService.add(conf, 1L);
 
-    return "configuration";
+    return "redirect:dashboard";
   }
 }
