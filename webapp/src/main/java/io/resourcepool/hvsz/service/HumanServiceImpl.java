@@ -18,7 +18,7 @@ public class HumanServiceImpl implements HumanService {
 
         GameStatus status = g.getStatus();
 
-        if(status.getNbLifeLeft() <= 0) {
+        if (status.getNbLifeLeft() <= 0) {
             return false;
         } else {
             status.setNbLifeLeft(status.getNbLifeLeft() - 1);

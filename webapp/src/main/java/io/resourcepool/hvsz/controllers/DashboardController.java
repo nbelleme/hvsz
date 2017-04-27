@@ -1,7 +1,6 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.service.DashboardService;
-import io.resourcepool.hvsz.service.DashboardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +17,9 @@ public class DashboardController {
     public String dashboard(Model model) {
         model.addAttribute("nbhumain", dashboardService.getHuman());
         model.addAttribute("nbzombie", dashboardService.getZombie());
-        model.addAttribute("time",  dashboardService.getTime());
+        model.addAttribute("time", dashboardService.getTime());
         model.addAttribute("nblife", dashboardService.getLifeLeft());
-        model.addAttribute("zones",dashboardService.getZoneResource());
+        model.addAttribute("zones", dashboardService.getZoneResource());
 
         return "dashboard";
     }

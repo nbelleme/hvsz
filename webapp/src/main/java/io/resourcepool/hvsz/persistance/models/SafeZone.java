@@ -12,10 +12,10 @@ public class SafeZone implements ZoneResource, Serializable {
     private int maxResource;
     private String name;
 
-    public SafeZone(){
+    public SafeZone() {
     }
 
-    public SafeZone(int id, int resource, int maxResource){
+    public SafeZone(int id, int resource, int maxResource) {
         this.id = id;
         this.resource = resource;
         this.maxResource = maxResource;
@@ -79,9 +79,16 @@ public class SafeZone implements ZoneResource, Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        SafeZone safeZone = (SafeZone) o;
+        return resource == safeZone.resource && maxResource == safeZone.maxResource && (id != null ? id.equals(safeZone.id) : safeZone.id == null) && (name != null ? name.equals(safeZone.name) : safeZone.name == null);
+    }
 
-        SafeZone supplyZone = (SafeZone) o;
-
-        return getId().equals(supplyZone.getId());
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + resource;
+        result = 31 * result + maxResource;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

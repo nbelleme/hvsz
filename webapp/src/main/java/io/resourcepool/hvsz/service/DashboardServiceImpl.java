@@ -1,10 +1,10 @@
 package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
-import io.resourcepool.hvsz.persistance.models.*;
+import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.ZoneResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public List<ZoneResource> getZoneResource() {
         Game game = get();
-        ArrayList<ZoneResource> zoneResources = new ArrayList<ZoneResource>(game.getSafeZones());
+        ArrayList<ZoneResource> zoneResources = new ArrayList<>(game.getSafeZones());
         zoneResources.addAll(game.getSupplyZones());
         return zoneResources;
     }
