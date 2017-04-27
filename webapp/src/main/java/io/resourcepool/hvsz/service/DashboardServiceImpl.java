@@ -1,17 +1,20 @@
 package io.resourcepool.hvsz.service;
 
+import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ebiz on 27/04/17.
- */
+
 @Service
 public class DashboardServiceImpl implements DashboardService {
+
+    @Autowired
+    private DaoMapDb dao;
 
     @Override
     public int getLifeLeft() {
@@ -62,8 +65,6 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     private Game get() {
-        final String uri = "http://localhost:8080/api/game/1";
-        RestTemplate restTemplate = new RestTemplate();
-        return new Game(restTemplate.getForObject(uri, Game.class));
+        return new Game(dao.get(1L));
     }
 }
