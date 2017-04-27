@@ -16,14 +16,14 @@ public class Cron {
     @Autowired
     private ResourceServiceImpl resourceService;
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(fixedRate = 60000)
     public void doSomething() {
 
         GameStatus status = statusService.get(1L);
-        if (status.getStarted()) {
+        if (status.getStarted() && status.getTimeLeft() > 0) {
             status.setTimeLeft(status.getTimeLeft() - 1);
             statusService.add(status, 1L);
-            resourceService.decreaseSafezones(1);
+            resourceService.decreaseSafezones(-1);
         }
     }
 }

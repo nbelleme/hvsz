@@ -1,10 +1,13 @@
 package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
+import io.resourcepool.hvsz.persistance.models.Game;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
@@ -23,8 +26,12 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     public void decreaseSafezones(int amount) {
-        for(SafeZone safezone : dao.get(1L).getSafeZones()) {
-            drop(safezone, amount);
+        ArrayList<SafeZone> safeZones = dao.get(1L).getSafeZones();
+        for (SafeZone safeZone : safeZones) {
+            drop(safeZone, amount);
         }
+        Game g = dao.get(1L);
+        g.setSafeZones(safeZones);
+        dao.set(1L, g);
     }
 }

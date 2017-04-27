@@ -62,7 +62,6 @@ public class RestApiController {
         .with(GameConfig::setNbSupplyResources, Integer.parseInt(nbSupplyResources))
         .build();
 
-
     confService.add(conf,id);
 
     return conf;

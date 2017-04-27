@@ -25,8 +25,7 @@ public class DaoMapDb {
 
   public DaoMapDb() {
     DB db = DBMaker.fileDB(DB_FILE).closeOnJvmShutdown().make();
-    ConcurrentMap map = db.hashMap("games").createOrOpen();
-    games = map;
+    games = (ConcurrentMap) db.hashMap("games").createOrOpen();
   }
 
   public Game get(Long key) {

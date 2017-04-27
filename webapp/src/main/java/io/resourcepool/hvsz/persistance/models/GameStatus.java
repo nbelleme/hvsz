@@ -6,6 +6,7 @@ public class GameStatus implements Serializable {
     Integer humanPlayers;
     Integer zombiePlayers;
     Integer nbHumanAlive;
+    Integer nbLifeLeft;
     Integer timeLeft; // in min
     Boolean started = false;
 
@@ -48,4 +49,13 @@ public class GameStatus implements Serializable {
     public void setStarted(Boolean started) {
         this.started = started;
     }
+
+    public Integer getNbLifeLeft() {
+        return nbLifeLeft;
+    }
+
+    public void setNbLifeLeft(Integer nbLifeLeft) {
+        this.nbLifeLeft = nbLifeLeft;
+    }
+
 }
