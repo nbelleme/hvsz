@@ -2,63 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Dashboard</title>
+    <title>Configuration</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-    <h1>Formulaire de configuration</h1>
-    <form method="post" action="/configuration">
-        <fieldset>
-            <legend>Général</legend>
-            <div>
-                <label for="gameDuration">Durée de la partie (minute)</label>
-                <input type="number" name="gameDuration" id="gameDuration" min="1" value="30"/>
+    <header class="row">
+        <nav class="col s12 brown darken-3">
+            <div class="nav-wrapper">
+                <a href="/index" class="brand-logo">Zombie Game</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/configuration">Configuration</a></li>
+                    <li><a href="/human">Humain</a></li>
+                    <li><a href="/resource/get">Récupérer des ressources</a></li>
+                    <li><a href="/kill">Tuer un humain</a></li>
+                </ul>
             </div>
-            <div>
-                <label for="difficulty">Difficulté de la partie</label>
-                <select name="difficulty" id="difficulty">
-                    <option value="facile">facile</option>
-                    <option value="normal" selected="true">normal</option>
-                    <option value="difficile">difficile</option>
-                </select>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Humain</legend>
-            <div>
-                <label for="nbHuman">Nombre d'humains</label>
-                <input type="number" name="nbHuman" id="nbHuman" min="1" value="30"/>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Zombie</legend>
-            <div>
-                <label for="nbZombie">Nombre de zombies</label>
-                <input type="number" name="nbZombie" id="nbZombie" min="1" value="10"/>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Zone de sécurité</legend>
-            <div>
-                <label for="nbSafezone">Nombre de zones de sécurité</label>
-                <input type="number" name="nbSafezone" id="nbSafezone" min="1" value="2"/>
-            </div>
-            <div>
-                <label for="nbSafezoneLifes">Nombre de vies total</label>
-                <input type="number" name="nbSafezoneLifes" id="nbSafezoneLifes" min="1" value="40"/>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Bunker et ressources</legend>
-            <div>
-                <label for="nbSupplyZone">Nombre de bunkers</label>
-                <input type="number" name="nbSupplyZone" id="nbSupplyZone" min="1" value="2"/>
-            </div>
-            <div>
-                <label for="nbSupplyResources">Nombre de ressources total</label>
-                <input type="number" name="nbSupplyResources" id="nbSupplyResources" min="1" value="180"/>
-            </div>
-        </fieldset>
-        <button type="submit">Envoyer</button>
-    </form>
+        </nav>
+    </header>
+    <section class="container">
+        <h1>Formulaire de configuration</h1>
+        <form method="post" action="/configuration">
+            <fieldset class="row">
+                <legend>Général</legend>
+                <div class="input-field col s6">
+                    <label for="gameDuration">Durée de la partie (minute)</label>
+                    <input type="number" name="gameDuration" id="gameDuration" min="1" value="30"/>
+                </div>
+                <div class="input-field col s6">
+                    <select name="difficulty" id="difficulty">
+                        <option value="facile">facile</option>
+                        <option value="normal" selected="true">normal</option>
+                        <option value="difficile">difficile</option>
+                    </select>
+                    <label for="difficulty">Difficulté de la partie</label>
+                </div>
+            </fieldset>
+            <fieldset class="row">
+                <legend>Humain</legend>
+                <div class="input-field col s12">
+                    <label for="nbHuman">Nombre d'humains</label>
+                    <input type="number" name="nbHuman" id="nbHuman" min="1" value="30"/>
+                </div>
+            </fieldset>
+            <fieldset class="row">
+                <legend>Zombie</legend>
+                <div class="input-field col s12">
+                    <label for="nbZombie">Nombre de zombies</label>
+                    <input type="number" name="nbZombie" id="nbZombie" min="1" value="10"/>
+                </div>
+            </fieldset>
+            <fieldset class="row">
+                <legend>Zone de sécurité</legend>
+                <div class="input-field col s6">
+                    <label for="nbSafezone">Nombre de zones de sécurité</label>
+                    <input type="number" name="nbSafezone" id="nbSafezone" min="1" value="2"/>
+                </div>
+                <div class="input-field col s6">
+                    <label for="nbSafezoneLifes">Nombre de vies total</label>
+                    <input type="number" name="nbSafezoneLifes" id="nbSafezoneLifes" min="1" value="40"/>
+                </div>
+            </fieldset>
+            <fieldset class="row">
+                <legend>Bunker et ressources</legend>
+                <div class="input-field col s6">
+                    <label for="nbSupplyZone">Nombre de bunkers</label>
+                    <input type="number" name="nbSupplyZone" id="nbSupplyZone" min="1" value="2"/>
+                </div>
+                <div class="input-field col s6">
+                    <label for="nbSupplyResources">Nombre de ressources total</label>
+                    <input type="number" name="nbSupplyResources" id="nbSupplyResources" min="1" value="180"/>
+                </div>
+            </fieldset>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Envoyer
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </section>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
+    <script type="text/javascript" src="js/materialize.js"/>
 </body>
 </html>
