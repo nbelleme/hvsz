@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Game implements Serializable {
   Long id = 0L; //uselss
-  GameStatus status;
-  GameConfig config;
+  GameStatus status = new GameStatus();
+  GameConfig config = new GameConfig();
   ArrayList<SafeZone> safeZones;
   ArrayList<SupplyZone> supplyZones;
   ArrayList<ZombieZone> zombieZones;
