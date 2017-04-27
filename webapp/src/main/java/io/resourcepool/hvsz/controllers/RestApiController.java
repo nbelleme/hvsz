@@ -7,6 +7,7 @@ import io.resourcepool.hvsz.persistance.models.GenericBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,14 +44,23 @@ public class RestApiController {
                            @RequestParam(value="gameLength", defaultValue="30") String gameLength,
                            @RequestParam(value="resourceDrainRate", defaultValue="15") String resourceDrainRate,
                            @RequestParam(value="nbSafeZones", defaultValue="1") String nbSafeZones,
-                           @RequestParam(value="nbSupplyZones", defaultValue="2") String nbSupplyZones) {
+                           @RequestParam(value="nbSupplyZones", defaultValue="2") String nbSupplyZones,
+                           @RequestParam(value="supplyZonesStorage", defaultValue="2,2") String supplyZonesStorage) {
     Game g = dao.get(id);
+
+    ArrayList<Integer> storages = new ArrayList<>(); // supplyZonesStorage;
+    String[] storage = supplyZonesStorage.split(",");
+    for(String s : storage) {
+      storages.add(Integer.parseInt(s));
+    }
+
     GameConfig config = GenericBuilder.of(GameConfig::new)
-        .with(GameConfig::setHumansLives, Integer.getInteger(humanLives))
-        .with(GameConfig::setGameLength, Integer.getInteger(gameLength))
-        .with(GameConfig::setNbSafeZones, Integer.getInteger(nbSafeZones))
-        .with(GameConfig::setNbSupplyZones, Integer.getInteger(nbSupplyZones))
-        .with(GameConfig::setResourceDrainRate, Integer.getInteger(resourceDrainRate))
+        .with(GameConfig::setHumansLives, Integer.parseInt(humanLives))
+        .with(GameConfig::setGameLength, Integer.parseInt(gameLength))
+        .with(GameConfig::setNbSafeZones, Integer.parseInt(nbSafeZones))
+        .with(GameConfig::setNbSupplyZones, Integer.parseInt(nbSupplyZones))
+        .with(GameConfig::setResourceDrainRate, Integer.parseInt(resourceDrainRate))
+        .with(GameConfig::setSupplyZonesStorage, storages)
         .build();
     g.setConfig(config);
     dao.set(g.getId(), g); //use index, not id

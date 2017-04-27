@@ -2,6 +2,8 @@ package io.resourcepool.hvsz.persistance.models;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameConfig implements Serializable {
   Integer humansLives;
@@ -9,6 +11,14 @@ public class GameConfig implements Serializable {
   Integer resourceDrainRate;
   Integer nbSafeZones;
   Integer nbSupplyZones;
+  ArrayList<Integer> supplyZonesStorage = new ArrayList<>();
+  public ArrayList<Integer> getSupplyZonesStorage() {
+    return supplyZonesStorage;
+  }
+
+  public void setSupplyZonesStorage(ArrayList<Integer> supplyZonesStorage) {
+    this.supplyZonesStorage = supplyZonesStorage;
+  }
 
   public Integer getHumansLives() {
     return humansLives;
