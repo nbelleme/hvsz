@@ -4,51 +4,106 @@ package io.resourcepool.hvsz.persistance.models;
 import java.io.Serializable;
 
 public class GameConfig implements Serializable {
-  Integer humansLives = 2;
-  Integer gameLength = 2;
-  Integer resourceDrainRate = 2;
-  Integer nbSafeZones = 2;
-  Integer nbSupplyZones = 2;
 
-  public Integer getHumansLives() {
-    return humansLives;
-  }
+    //configurated values
+    Integer gameDuration;
+    Integer difficulty;
+    Integer nbHuman;
+    Integer nbZombie;
+    Integer nbSafezone;
+    Integer nbSafezoneLifes;
+    Integer nbSupplyZone;
+    Integer nbSupplyResources;
 
-  public void setHumansLives(Integer humansLives) {
-    this.humansLives = humansLives;
-  }
+    //generated values with difficulty
+    Integer safezoneDropRate;
 
-  public Integer getGameLength() {
-    return gameLength;
-  }
+    public GameConfig() {}
 
-  public void setGameLength(Integer gameLength) {
-    this.gameLength = gameLength;
-  }
+    public Integer getGameDuration() {
+        return gameDuration;
+    }
 
-  public Integer getResourceDrainRate() {
-    return resourceDrainRate;
-  }
+    public void setGameDuration(Integer gameDuration) {
+        this.gameDuration = gameDuration;
+    }
 
-  public void setResourceDrainRate(Integer resourceDrainRate) {
-    this.resourceDrainRate = resourceDrainRate;
-  }
+    public Integer getDifficulty() {
+        return difficulty;
+    }
 
-  public Integer getNbSafeZones() {
-    return nbSafeZones;
-  }
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
+    }
 
-  public void setNbSafeZones(Integer nbSafeZones) {
-    this.nbSafeZones = nbSafeZones;
-  }
+    public Integer getNbHuman() {
+        return nbHuman;
+    }
 
-  public Integer getNbSupplyZones() {
-    return nbSupplyZones;
-  }
+    public void setNbHuman(Integer nbHuman) {
+        this.nbHuman = nbHuman;
+    }
 
-  public void setNbSupplyZones(Integer nbSupplyZones) {
-    this.nbSupplyZones = nbSupplyZones;
-  }
+    public Integer getNbZombie() {
+        return nbZombie;
+    }
 
+    public void setNbZombie(Integer nbZombie) {
+        this.nbZombie = nbZombie;
+    }
 
+    public Integer getNbSafezone() {
+        return nbSafezone;
+    }
+
+    public void setNbSafezone(Integer nbSafezone) {
+        this.nbSafezone = nbSafezone;
+    }
+
+    public Integer getNbSafezoneLifes() {
+        return nbSafezoneLifes;
+    }
+
+    public void setNbSafezoneLifes(Integer nbSafezoneLifes) {
+        this.nbSafezoneLifes = nbSafezoneLifes;
+    }
+
+    public Integer getNbSupplyZone() {
+        return nbSupplyZone;
+    }
+
+    public void setNbSupplyZone(Integer nbSupplyZone) {
+        this.nbSupplyZone = nbSupplyZone;
+    }
+
+    public Integer getNbSupplyResources() {
+        return nbSupplyResources;
+    }
+
+    public void setNbSupplyResources(Integer nbSupplyResources) {
+        this.nbSupplyResources = nbSupplyResources;
+    }
+
+    public Integer getSafezoneDropRate() {
+        return safezoneDropRate;
+    }
+
+    public void setSafezoneDropRate(Integer safezoneDropRate) {
+        this.safezoneDropRate = safezoneDropRate;
+    }
+
+    @Override
+    public String toString() {
+        return "GameConfig{" +
+                "gameDuration=" + gameDuration +
+                ", difficulty=" + difficulty +
+                ", nbHuman=" + nbHuman +
+                ", nbZombie=" + nbZombie +
+                ", nbSafezone=" + nbSafezone +
+                ", nbSafezoneLifes=" + nbSafezoneLifes +
+                ", nbSupplyZone=" + nbSupplyZone +
+                ", nbSupplyResources=" + nbSupplyResources +
+                ", safezoneDropRate=" + safezoneDropRate +
+                '}';
+    }
 }

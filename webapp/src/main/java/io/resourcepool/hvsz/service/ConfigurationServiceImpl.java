@@ -6,11 +6,8 @@ import io.resourcepool.hvsz.persistance.models.GameConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by ebiz on 27/04/17.
- */
-@Service
 
+@Service
 public class ConfigurationServiceImpl implements ConfigurationService {
 
     @Autowired

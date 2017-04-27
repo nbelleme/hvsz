@@ -7,9 +7,9 @@ public class Game implements Serializable {
     Long id = 0L; //uselss
     GameStatus status = new GameStatus();
     GameConfig config = new GameConfig();
-    ArrayList<SafeZone> safeZones = new ArrayList<>();
-    ArrayList<SupplyZone> supplyZones = new ArrayList<>();
-    ArrayList<ZombieZone> zombieZones = new ArrayList<>();
+    ArrayList<SafeZone> safeZones;
+    ArrayList<SupplyZone> supplyZones;
+    ArrayList<ZombieZone> zombieZones;
 
     public Game() {
     }
