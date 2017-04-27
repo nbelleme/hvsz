@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 
 
 @RestController
@@ -54,6 +53,8 @@ public class RestApiController {
         .with(GameConfig::setResourceDrainRate, Integer.getInteger(resourceDrainRate))
         .build();
     g.setConfig(config);
+    dao.set(g.getId(), g); //use index, not id
+
     return dao.get(id).getConfig(); //use index, not id
   }
 
