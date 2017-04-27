@@ -1,24 +1,29 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.models.GameStatus;
+import io.resourcepool.hvsz.service.ResourceServiceImpl;
 import io.resourcepool.hvsz.service.StatusServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CronController {
+public class Cron {
 
     @Autowired
     private StatusServiceImpl statusService;
 
-    @Scheduled(fixedRate = 60000)
+    @Autowired
+    private ResourceServiceImpl resourceService;
+
+    @Scheduled(fixedRate = 2000)
     public void doSomething() {
 
         GameStatus status = statusService.get(1L);
-        if(status.getStarted()) {
+        if (status.getStarted()) {
             status.setTimeLeft(status.getTimeLeft() - 1);
             statusService.add(status, 1L);
+            resourceService.decreaseSafezones(1);
         }
     }
 }

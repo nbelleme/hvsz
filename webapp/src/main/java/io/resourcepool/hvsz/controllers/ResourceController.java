@@ -5,6 +5,7 @@ import io.resourcepool.hvsz.persistance.models.Game;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import io.resourcepool.hvsz.service.ConfigurationServiceImpl;
+import io.resourcepool.hvsz.service.ResourceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class ResourceController {
     private DaoMapDb dao;
     @Autowired
     private ConfigurationServiceImpl confService;
+    @Autowired
+    private ResourceService resourceService;
 
 
     private final static int ID_SUPPLY_ZONE = 1;
