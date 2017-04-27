@@ -33,19 +33,18 @@ public class ConfigurationController {
           @RequestParam(value = "nbSupplyResources", defaultValue = "180") String nbSupplyResources,
           Model model) {
 
-    confService.add(
-            GenericBuilder.of(GameConfig::new)
-                    .with(GameConfig::setGameDuration, Integer.getInteger(gameDuration))
-                    .with(GameConfig::setDifficulty, Integer.getInteger(difficulty))
-                    .with(GameConfig::setNbHuman, Integer.getInteger(nbHuman))
-                    .with(GameConfig::setNbZombie, Integer.getInteger(nbZombie))
-                    .with(GameConfig::setNbSafezone, Integer.getInteger(nbSafezone))
-                    .with(GameConfig::setNbSafezoneLifes, Integer.getInteger(nbSafezoneLifes))
-                    .with(GameConfig::setNbSupplyZone, Integer.getInteger(nbSupplyZone))
-                    .with(GameConfig::setNbSupplyResources, Integer.getInteger(nbSupplyResources))
-                    .build(),
-            0L
-    );
+    GameConfig conf = GenericBuilder.of(GameConfig::new)
+            .with(GameConfig::setGameDuration, Integer.parseInt(gameDuration))
+            .with(GameConfig::setDifficulty, Integer.parseInt(difficulty))
+            .with(GameConfig::setNbHuman, Integer.parseInt(nbHuman))
+            .with(GameConfig::setNbZombie, Integer.parseInt(nbZombie))
+            .with(GameConfig::setNbSafezone, Integer.parseInt(nbSafezone))
+            .with(GameConfig::setNbSafezoneLifes, Integer.parseInt(nbSafezoneLifes))
+            .with(GameConfig::setNbSupplyZone, Integer.parseInt(nbSupplyZone))
+            .with(GameConfig::setNbSupplyResources, Integer.parseInt(nbSupplyResources))
+            .build();
+
+    confService.add(conf, 1L);
 
     return "configuration";
   }
