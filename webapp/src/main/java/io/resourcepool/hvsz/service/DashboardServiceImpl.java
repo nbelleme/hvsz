@@ -1,43 +1,70 @@
 package io.resourcepool.hvsz.service;
 
-import io.resourcepool.hvsz.persistance.models.SafeZone;
-import io.resourcepool.hvsz.persistance.models.SupplyZone;
-import io.resourcepool.hvsz.persistance.models.Zone;
-import io.resourcepool.hvsz.persistance.models.ZoneResource;
+import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
+import io.resourcepool.hvsz.persistance.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ebiz on 27/04/17.
- */
+
+@Service
 public class DashboardServiceImpl implements DashboardService {
+
+    @Autowired
+    private DaoMapDb dao;
+
     @Override
     public int getLifeLeft() {
-        return 56;
+        Game game = get();
+        Integer result = game.getConfig().getNbSafezoneLifes();
+        if (result == null) {
+            return -1;
+        }
+        return result;
     }
 
     @Override
     public int getHuman() {
-        return 20;
+        Game game = get();
+        Integer result = game.getStatus().getNbHumanAlive();
+        if (result == null) {
+            return -1;
+        }
+        return result;
     }
 
     @Override
     public int getZombie() {
-        return 5;
+        Game game = get();
+        Integer result = game.getStatus().getZombiePlayers();
+        if (result == null) {
+            return -1;
+        }
+        return result;
     }
 
     @Override
     public int getTime() {
-        return 42;
+        Game game = get();
+        Integer result = game.getStatus().getTimeLeft();
+        if (result == null) {
+            return -1;
+        }
+        return result;
     }
 
     @Override
     public List<ZoneResource> getZoneResource() {
-        ArrayList<ZoneResource> listeZones = new ArrayList<>();
-        listeZones.add(new SafeZone());
-        listeZones.add(new SupplyZone());
-        listeZones.add(new SafeZone());
-        return listeZones;
+        Game game = get();
+        ArrayList<ZoneResource> zoneResources = new ArrayList<ZoneResource>(game.getSafeZones());
+        zoneResources.addAll(game.getSupplyZones());
+        return zoneResources;
+    }
+
+    private Game get() {
+        return new Game(dao.get(1L));
     }
 }

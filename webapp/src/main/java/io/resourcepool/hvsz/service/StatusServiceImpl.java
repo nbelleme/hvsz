@@ -2,27 +2,27 @@ package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
-import io.resourcepool.hvsz.persistance.models.GameConfig;
+import io.resourcepool.hvsz.persistance.models.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class ConfigurationServiceImpl implements ConfigurationService {
+public class StatusServiceImpl implements StatusService {
 
     @Autowired
     private DaoMapDb dao;
 
     @Override
-    public GameConfig add(GameConfig gameConfig, Long gameId) {
+    public GameStatus add(GameStatus gameStatus, Long gameId) {
         Game g = dao.get(gameId);
-        g.setConfig(gameConfig);
+        g.setStatus(gameStatus);
         dao.set(gameId, g);
-        return dao.get(gameId).getConfig();
+        return dao.get(gameId).getStatus();
     }
 
     @Override
-    public GameConfig get(Long gameId) {
-        return dao.get(gameId).getConfig();
+    public GameStatus get(Long gameId) {
+        return dao.get(gameId).getStatus();
     }
 }

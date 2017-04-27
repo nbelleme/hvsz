@@ -4,37 +4,60 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Game implements Serializable {
-  Long id = 0L; //uselss
-  GameStatus status = new GameStatus();
-  GameConfig config = new GameConfig();
-  ArrayList<SafeZone> safeZones;
-  ArrayList<SupplyZone> supplyZones;
-  ArrayList<ZombieZone> zombieZones;
+    Long id = 0L; //uselss
+    GameStatus status = new GameStatus();
+    GameConfig config = new GameConfig();
+    ArrayList<SafeZone> safeZones;
+    ArrayList<SupplyZone> supplyZones;
+    ArrayList<ZombieZone> zombieZones;
 
-  public Game(){}
-  public Game(Long id) {
-    this.id = id;
-  }
+    public Game() {
+    }
 
-  public Long getId() {
-    return id;
-  }
+    public Game(Game g) {
+        this.id = g.id;
+        if (g.status != null) {
+            this.status = g.status;
+        }
+        if (g.config != null) {
+            this.config = g.config;
+        }
+        if (g.supplyZones != null) {
+            this.supplyZones = g.supplyZones;
+        } else {
+            this.supplyZones = new ArrayList<>();
+        }
+        if (g.safeZones != null) {
+            this.safeZones = g.safeZones;
+        } else {
+            this.safeZones = new ArrayList<>();
+        }
+        if (g.zombieZones != null) {
+            this.zombieZones = g.zombieZones;
+        } else {
+            this.zombieZones = new ArrayList<>();
+        }
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public Game(Long id) {
+        this.id = id;
+    }
 
-  public GameStatus getStatus() {
-    return status;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setStatus(GameStatus status) {
-    this.status = status;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public GameConfig getConfig() {
-    return config;
-  }
+    public GameStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(GameStatus status) {
+        this.status = status;
+    }
 
   public void setConfig(GameConfig config) {
     this.config = config;
@@ -45,31 +68,51 @@ public class Game implements Serializable {
       supplyZones.add(new SupplyZone(i, nbSupplyResources/nbSupplyZones));
     }
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+    public GameConfig getConfig() {
+        return config;
     }
 
-    Game game = (Game) o;
 
-    return getId().equals(game.getId());
-  }
+    public ArrayList<SafeZone> getSafeZones() {
+        return safeZones;
+    }
 
-  @Override
-  public int hashCode() {
-    return getId().hashCode();
-  }
+    public void setSafeZones(ArrayList<SafeZone> safeZones) {
+        this.safeZones = safeZones;
+    }
 
-  public ArrayList<SupplyZone> getSupplyZones() {
-    return this.supplyZones;
-  }
+    public ArrayList<SupplyZone> getSupplyZones() {
+        return supplyZones;
+    }
 
-  public void setSupplyZones(ArrayList<SupplyZone> supplyZones) {
-    this.supplyZones = supplyZones;
-  }
+    public void setSupplyZones(ArrayList<SupplyZone> supplyZones) {
+        this.supplyZones = supplyZones;
+    }
+
+    public ArrayList<ZombieZone> getZombieZones() {
+        return zombieZones;
+    }
+
+    public void setZombieZones(ArrayList<ZombieZone> zombieZones) {
+        this.zombieZones = zombieZones;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Game game = (Game) o;
+
+        return getId().equals(game.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }
