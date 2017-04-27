@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by ebiz on 27/04/17.
  */
-@Service
+@Service/1/config
 public class ResourceServiceImpl implements ResourceService {
     @Override
     public int get(SupplyZone supplyZone, int amount) {

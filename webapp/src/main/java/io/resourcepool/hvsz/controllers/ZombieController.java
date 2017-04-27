@@ -20,6 +20,6 @@ public class ZombieController {
                 model.addAttribute("message", "one human have been killed, no more respawn for human");
             }
         }
-        return "kill";
+        return "zombie";
     }
 }

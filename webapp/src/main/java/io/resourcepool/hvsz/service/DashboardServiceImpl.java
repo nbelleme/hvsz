@@ -18,7 +18,7 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public int getLifeLeft() {
         Game game = get();
-        return game.getConfig().getHumansLives();
+        return game.getConfig().getNbSafezoneLifes();
     }
 
     @Override
