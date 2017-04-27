@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ResourceController {
+
     @GetMapping("/resource/drop")
     public String resourceDrop(@RequestParam(value="resourcedrop", required=false) String resourceDrop, Model model) {
         if(resourceDrop != null) {

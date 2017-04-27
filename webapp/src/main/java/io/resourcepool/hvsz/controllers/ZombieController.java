@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class KillHumanController {
+public class ZombieController {
 
-    @RequestMapping("/kill")
+    @RequestMapping("/zombie")
     public String kill(@RequestParam(value="kill", required=false) String kill, Model model) {
         if (kill != null) {
             ZombieService zombieService = new ZombieServiceImpl();
