@@ -37,10 +37,8 @@ public class DaoMapDb {
     games.put(key, val);
   }
 
-
   public List<Game> getAll() {
     return games.values().stream().collect(Collectors.toList());
   }
-
 
 }
