@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -24,7 +25,7 @@ public class ResourceController {
      * @param model Model
      * @return String (human vue)
      */
-    @GetMapping("/resource/drop")
+    @PostMapping("/resource/drop")
     public String dropResource(@RequestParam(value = "safeZone", required = false) String safeZone, Model model) {
         if (safeZone != null) {
             Game g = dao.get(1L);
