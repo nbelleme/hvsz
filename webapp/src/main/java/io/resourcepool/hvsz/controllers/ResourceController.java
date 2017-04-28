@@ -30,7 +30,7 @@ public class ResourceController {
     /**
      * Drop a resource.
      * @param safeZone SupplyZone id
-     * @param lifeId life id
+     * @param lifeId lifeId
      * @param model Model
      * @return String (human vue)
      */
@@ -60,8 +60,8 @@ public class ResourceController {
 
     /**
      * Take a resource.
-     * @param supplyZone Supply zone id
-     * @param lifeId life id
+     * @param supplyZone SupplyZone id
+     * @param lifeId lifeId
      * @param model Model
      * @return String (supply-zone)
      */
