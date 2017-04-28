@@ -21,7 +21,7 @@ public class DaoMapDb {
     private static final String KEY_CONF_PATH = "zombie-game.resources.path";
     private static final Logger LOGGER = LoggerFactory.getLogger(DaoMapDb.class);
 
-    private Map<Long, Game> games = new HashMap<>();
+    private static Map<Long, Game> games = new HashMap<>();
 
     /**
      * Initizalize a map_db db backed on a file at DB_FILE.

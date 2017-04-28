@@ -15,7 +15,6 @@ public class HumanServiceImpl implements HumanService {
     private static final int MAX_ID = 5;
     private static int incrementor = 0;
 
-
     @Autowired
     private DaoMapDb dao;
 
@@ -59,10 +58,12 @@ public class HumanServiceImpl implements HumanService {
      */
     public Life getLife(Integer id) {
         Game g = dao.get(1L);
+        int i = 0;
         for (Life l : g.getStatus().getLives()) {
             if (l.getId() == id) {
-                return l;
+                return g.getStatus().getLives().get(i);
             }
+            i++;
         }
         return null;
     }
@@ -76,6 +77,9 @@ public class HumanServiceImpl implements HumanService {
     public Integer getLastId(Long id) {
         Game g = dao.get(id);
         int maxId = 0;
+        if (g.getStatus().getLives() == null) {
+            return maxId;
+        }
         for (Life l : g.getStatus().getLives()) {
             if (l.getId() > maxId) {
                 maxId = l.getId();
@@ -105,10 +109,10 @@ public class HumanServiceImpl implements HumanService {
      */
     public Integer getResources(SupplyZone z, Integer qt, Integer id) {
         Game g = dao.get(1L);
-        //Life l = g.getStatus().getLives().get(id); //getLife(id);//TODO get by id, not index, use service
-        Life l = getLife(id);
-        Integer gotR = resourceService.get(z, qt);
-        //Integer gotR = z.getResource(qt);
+        Life l = g.getStatus().getLives().get(id); //getLife(id);//TODO get by id, not index, use service
+        //Life l = getLife(id); reference fuckup, does not work sadly
+        //Integer gotR = resourceService.get(z, qt);
+        Integer gotR = z.getResource(qt);
         l.addResource(gotR);
         dao.set(1L, g);
         return gotR;
@@ -123,11 +127,11 @@ public class HumanServiceImpl implements HumanService {
      */
     public Integer getResources(Integer zId, Integer qt, Integer id) {
         Game g = dao.get(1L);
-        //Life l = g.getStatus().getLives().get(id); //getLife(id);
-        Life l = getLife(id);
+        Life l = g.getStatus().getLives().get(id); // work but use indexs instead of id
+        //Life l = getLife(id); reference fuckup, does not work sadly
         SupplyZone z = g.getSupplyZones().get(zId); //TODO get by id, not index, use zone service
-        Integer gotR = resourceService.get(z, qt);
-        //Integer gotR = z.getResource(qt);
+        //Integer gotR = resourceService.get(z, qt);
+        Integer gotR = z.getResource(qt);
         l.addResource(gotR);
         dao.set(1L, g);
         return gotR;
