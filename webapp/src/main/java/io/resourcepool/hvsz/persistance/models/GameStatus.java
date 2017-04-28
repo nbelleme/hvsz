@@ -1,6 +1,7 @@
 package io.resourcepool.hvsz.persistance.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class GameStatus implements Serializable {
     Integer humanPlayers;
@@ -9,6 +10,7 @@ public class GameStatus implements Serializable {
     Integer nbLifeLeft;
     Integer timeLeft; // in min
     Boolean started = false;
+    ArrayList<Life> lives = new ArrayList<>();
 
     public Integer getHumanPlayers() {
         return humanPlayers;
@@ -58,4 +60,11 @@ public class GameStatus implements Serializable {
         this.nbLifeLeft = nbLifeLeft;
     }
 
+    public ArrayList<Life> getLives() {
+        return this.lives;
+    }
+
+    public void setLives(ArrayList<Life> lives) {
+        this.lives = lives;
+    }
 }
