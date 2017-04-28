@@ -14,8 +14,8 @@ public interface ResourceService {
     int get(SupplyZone supplyZone, int amount);
 
     /**
-     * Take resources on a supply zone.
-     * @param safeZone the supply zone where we drop resources.
+     * Drop resources on a safe zone.
+     * @param safeZone the safe zone where we drop resources.
      * @param amount number max of resources we want to drop.
      * @return the number of resources dropped.
      */
@@ -28,11 +28,20 @@ public interface ResourceService {
     void decreaseSafezones(int amount);
 
     /**
-     * Take resources on a supply zone by id of life.
-     * @param safeZone the supply zone where we drop resources.
+     * Drop resources on a safe zone by id.
+     * @param safeZone the safe zone where we drop resources.
      * @param amount number max of resources we want to drop.
-     * @param id of the life who get the resource
-     * @return the amount of resource dropped
+     * @param id life id
+     * @return dropped amount
      */
     int dropById(SafeZone safeZone, int amount, int id);
+
+    /**
+     ** Drop resources on a safe zone by id.
+     * @param safeZoneId the safe zone id where we drop resources.
+     * @param amount qte
+     * @param id life id
+     * @return dropped amount
+     */
+    int dropById(Integer safeZoneId, int amount, int id);
 }

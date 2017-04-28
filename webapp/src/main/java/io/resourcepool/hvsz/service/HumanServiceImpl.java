@@ -1,11 +1,7 @@
 package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
-import io.resourcepool.hvsz.persistance.models.Game;
-import io.resourcepool.hvsz.persistance.models.GameStatus;
-import io.resourcepool.hvsz.persistance.models.GenericBuilder;
-import io.resourcepool.hvsz.persistance.models.Life;
-import io.resourcepool.hvsz.persistance.models.SupplyZone;
+import io.resourcepool.hvsz.persistance.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +67,24 @@ public class HumanServiceImpl implements HumanService {
     public Integer getResources(SupplyZone z, Integer qt, Integer id) {
         Game g = dao.get(1L);
         Life l = g.getStatus().getLives().get(id); //getLife(id);
+        Integer gotR = resourceService.get(z, qt);
+        //Integer gotR = z.getResource(qt);
+        l.addResource(gotR);
+        dao.set(1L, g);
+        return gotR;
+    }
+
+    /**
+     *
+     * @param zId ZoneResource id
+     * @param qt Integer : resources amount
+     * @param id Integer : life id
+     * @return Integer : amount got
+     */
+    public Integer getResources(Integer zId, Integer qt, Integer id) {
+        Game g = dao.get(1L);
+        Life l = g.getStatus().getLives().get(id); //getLife(id);
+        SupplyZone z = g.getSupplyZones().get(zId); //TODO get by id, not index
         Integer gotR = resourceService.get(z, qt);
         //Integer gotR = z.getResource(qt);
         l.addResource(gotR);

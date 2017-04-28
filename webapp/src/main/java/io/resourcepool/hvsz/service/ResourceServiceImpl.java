@@ -38,6 +38,17 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    public int dropById(Integer safeZoneId, int amount, int id) {
+        Game g = dao.get(1L);
+        Life l = humanService.getLife(id);
+        l.dropResources(amount);
+        SafeZone safeZone = g.getSafeZones().get(safeZoneId); //TODO replace get by id, call zone service
+        Integer dropped = safeZone.drop(amount);
+        dao.set(1L, g);
+        return dropped;
+    }
+
+    @Override
     public void decreaseSafezones(int amount) {
         ArrayList<SafeZone> safeZones = dao.get(1L).getSafeZones();
         for (SafeZone safeZone : safeZones) {

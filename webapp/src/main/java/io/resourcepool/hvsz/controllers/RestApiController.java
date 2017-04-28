@@ -4,8 +4,10 @@ import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
 import io.resourcepool.hvsz.persistance.models.GameConfig;
 import io.resourcepool.hvsz.persistance.models.GenericBuilder;
+import io.resourcepool.hvsz.persistance.models.Zone;
 import io.resourcepool.hvsz.service.ConfigurationService;
 import io.resourcepool.hvsz.service.HumanService;
+import io.resourcepool.hvsz.service.ResourceService;
 import io.resourcepool.hvsz.service.ZombieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -30,7 +33,10 @@ public class RestApiController {
     private ZombieService zService;
 
     @Autowired
-    HumanService humanService;
+    private HumanService humanService;
+
+    @Autowired
+    ResourceService resourceService;
 
     /**
      * Get all games.
@@ -134,6 +140,52 @@ public class RestApiController {
         confService.add(conf, id);
 
         return conf;
+    }
+
+
+    /**
+     * Get resource from zone.
+     *
+     */
+    @RequestMapping(value = "/api/game/{id}/zone/{zoneId}/get", method = RequestMethod.POST)
+    @ResponseBody
+    public Integer getResource(@PathVariable(value = "id") Long id,
+                            @PathVariable(value = "zoneId") Integer zoneId,
+                            @RequestParam(value = "lifeId") Integer lifeId,
+                            @RequestParam(value = "qte") Integer qte) {
+
+        Integer gotRes = humanService.getResources(zoneId, qte, lifeId);
+
+        return gotRes;
+    }
+
+    /**
+     * Drop resource in zone.
+     *
+     */
+    @RequestMapping(value = "/api/game/{id}/zone/{zoneId}/drop", method = RequestMethod.POST)
+    @ResponseBody
+    public Integer dropResource(@PathVariable(value = "id") Long id,
+                            @PathVariable(value = "zoneId") Integer zoneId,
+                            @RequestParam(value = "lifeId") Integer lifeId,
+                            @RequestParam(value = "qte") Integer qte) {
+
+        Integer droppedRes = resourceService.dropById(zoneId, qte, lifeId);
+        return droppedRes;
+    }
+
+    /**
+     * Get zone from id.
+     * @return
+     */
+    @RequestMapping(value = "/api/game/{id}/zone/{zoneId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Zone getZone(@PathVariable(value = "id") Long id,
+                            @PathVariable(value = "zoneId") Long zoneId) {
+        //Game g = dao.get(id);
+        //TODO Use zoneservice
+        throw new NotImplementedException();
+        //return g.getSafeZones().get(1);
     }
 
 }

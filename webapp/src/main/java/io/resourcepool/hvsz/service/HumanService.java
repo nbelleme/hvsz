@@ -7,6 +7,7 @@ public interface HumanService {
 
     /**
      * Get a new life.
+     *
      * @return true if success, false else
      */
     Integer newLife();
@@ -19,11 +20,18 @@ public interface HumanService {
     Life getLife(Integer id);
 
     /**
-     *
-     * @param z ZoneResource
+     * @param z  ZoneResource
      * @param qt Integer : resources amount
      * @param id Integer : life id
      * @return Integer : amount got
      */
     Integer getResources(SupplyZone z, Integer qt, Integer id);
+
+    /**
+     * @param zId  ZoneResource id
+     * @param qt Integer : resources amount
+     * @param id Integer : life id
+     * @return Integer : amount got
+     */
+    Integer getResources(Integer zId, Integer qt, Integer id);
 }
