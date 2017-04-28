@@ -44,7 +44,7 @@ public class ResourceController {
      * Show the supply-zone view
      * @return String (supply-zone vue)
      */
-    @GetMapping("/resource/get")
+    @GetMapping("/resource")
     public String resourceGet() {
         return "supply-zone";
     }

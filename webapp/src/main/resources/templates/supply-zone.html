@@ -16,27 +16,25 @@
                     <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/configuration">Configuration</a></li>
                     <li><a href="/human">Humain</a></li>
-                    <li><a href="/resource/get">Récupérer des ressources</a></li>
+                    <li><a href="/resource">Récupérer des ressources</a></li>
                     <li><a href="/zombie">Zombie</a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <section class="container">
-        <h1>Zone de sécurité</h1>
-        <p>Get a resource for supply zone n°1 :<a href="/resource/get?supplyZone=0">here</a></p>
-        <p th:text="${nbSupplyResources}" />
+        <h1>Zone d'approvisionnement</h1>
 
-        <form method="post" action="/zombie/kill">
+        <form method="post" action="/resource/get">
             <fieldset class="row">
-                <legend>Tuer un humain</legend>
+                <legend>Prendre une ressource</legend>
                 <input type="hidden" name="safeZone" value="0"/>
                 <div class="input-field col s12">
                     <label for="lifeId">Votre code utilisateur</label>
                     <input type="text" name="lifeId" id="lifeId"/>
                 </div>
-                <p th:text="${message}" />
-                <button class="btn waves-effect waves-light red" type="submit" name="action">Tuer
+                <p th:text="${nbSupplyResources}" />
+                <button class="btn waves-effect waves-light red" type="submit" name="action">Prendre
                     <i class="material-icons right">send</i>
                 </button>
             </fieldset>
