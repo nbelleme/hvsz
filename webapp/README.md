@@ -3,7 +3,7 @@
 
 ## Set up
 
-Create MapDb : http://localhost:8080/api/game
+Create Game :
+http://localhost:8080/api/game </br>
 Set up config : 
-- Supply Zones
-http://localhost:8080/api/game/1/config
+http://localhost:8080/api/game/1/config </br>

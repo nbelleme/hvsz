@@ -8,20 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-    <header class="row">
-        <nav class="col s12 brown darken-3">
-            <div class="nav-wrapper">
-                <a href="/" class="brand-logo">Zombie Game</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/dashboard">Dashboard</a></li>
-                    <li><a href="/configuration">Configuration</a></li>
-                    <li><a href="/human">Humain</a></li>
-                    <li><a href="/resource">Récupérer des ressources</a></li>
-                    <li><a href="/zombie">Zombie</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <div th:include="menu"/>
     <section class="container">
         <h1>Zombie</h1>
 
