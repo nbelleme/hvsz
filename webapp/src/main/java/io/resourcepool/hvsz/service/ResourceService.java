@@ -23,16 +23,16 @@ public interface ResourceService {
 
     /**
      * Decrease an amount on all safezones.
-     * @param amount int
+     * @param amount of resource de decrease all Safe Zone
      */
     void decreaseSafezones(int amount);
 
     /**
-     * Take resources on a supply zone by id.
+     * Take resources on a supply zone by id of life.
      * @param safeZone the supply zone where we drop resources.
      * @param amount number max of resources we want to drop.
-     * @param id .
-     * @return .
+     * @param id of the life who get the resource
+     * @return the amount of resource dropped
      */
     int dropById(SafeZone safeZone, int amount, int id);
 }

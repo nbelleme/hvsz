@@ -10,26 +10,22 @@ public class SafeZone implements ZoneResource, Serializable {
     private String name;
 
     /**
-     * SafeZone constructor.
+     * SafeZone Empty constructor.
      */
     public SafeZone() {
     }
 
     /**
      * SafeZone constructor.
-     * @param id int
-     * @param resource int
-     * @param maxResource int
+     * @param id the id of the SafeZone
+     * @param resource the amount of Resource at the start of the game
+     * @param maxResource the max of Resource the zone can hold.
      */
     public SafeZone(int id, int resource, int maxResource) {
         this.id = id;
         this.resource = resource;
         this.maxResource = maxResource;
         name = NAME + id;
-    }
-
-    public static String getNAME() {
-        return SafeZone.NAME;
     }
 
     public Integer getId() {
@@ -68,9 +64,9 @@ public class SafeZone implements ZoneResource, Serializable {
     }
 
     /**
-     * Drop an amount.
-     * @param quantite int
-     * @return int
+     * Drop an amount of resource.
+     * @param quantite amount of resource we want to drop
+     * @return how many resource we have realy drop
      */
     public int drop(int quantite) {
         resource += quantite;
