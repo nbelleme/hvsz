@@ -1,6 +1,5 @@
 package io.resourcepool.hvsz.controllers;
 
-import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.Zone;
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
 import io.resourcepool.hvsz.service.HumanService;
@@ -51,11 +50,6 @@ public class HumanController {
     @GetMapping("/human/zone")
     public String selectZone(Model model) {
         List<ZoneResource> zones = resourceService.getAllZoneResource();
-        Zone zone = zones.get(0);
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("zones : " + zones);
         model.addAttribute("zones", zones);
         return "zone";
     }
@@ -64,18 +58,25 @@ public class HumanController {
      * Interface for select a safe zone.
      *
      * @param model Model
-     * @param zone  the zone we want to access
+     * @param id    the zone we want to access
+     * @param type  the type of zone
      * @return String (safe-zone vue)
      */
     @PostMapping("/human/zone")
-    public String displayZone(@RequestParam(value = "zone") ZoneResource zone, Model model) {
-        model.addAttribute("zone", zone);
+    public String displayZone(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "type") String type,
+            Model model) {
 
-        if (zone.getClass().equals(SafeZone.class)) {
-            //redirect safe zone
+        Zone zone;
+        if (type.equals("safezone")) {
+            zone = resourceService.getSafeZone(id);
+            model.addAttribute("zone", zone);
             return "safe-zone";
+        } else {
+            zone = resourceService.getSupplyZone(Integer.parseInt(id));
+            model.addAttribute("zone", zone);
+            return "supply-zone";
         }
-        // redirect supply zone
-        return "supply-zone";
     }
 }

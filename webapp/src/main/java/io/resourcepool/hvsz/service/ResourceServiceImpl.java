@@ -91,6 +91,17 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    public SupplyZone getSupplyZone(int supplyId) {
+        return getAllSupplyZone().get(supplyId);
+    }
+
+    @Override
+    public List<SupplyZone> getAllSupplyZone() {
+        Game g = dao.get(1L);
+        return g.getSupplyZones();
+    }
+
+    @Override
     public List<ZoneResource> getAllZoneResource() {
         Game g = dao.get(1L);
         ArrayList<ZoneResource> zoneResources = new ArrayList<>(g.getSupplyZones());

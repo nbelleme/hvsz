@@ -5,9 +5,11 @@ import java.io.Serializable;
 
 public class SupplyZone implements ZoneResource, Serializable {
     private static final String NAME = "supply zone n°";
+    private static final String TYPE = "supplyzone";
     private Integer id;
     private int resource;
     private String name;
+    private String type;
 
     /**
      * SupplyZone Empty constructor.
@@ -24,7 +26,13 @@ public class SupplyZone implements ZoneResource, Serializable {
         this.id = id;
         this.resource = resource;
         name = NAME + id;
+        type = TYPE;
     }
+
+    public String getType() {
+        return type;
+    }
+
 
     public static String getNAME() {
         return SupplyZone.NAME;

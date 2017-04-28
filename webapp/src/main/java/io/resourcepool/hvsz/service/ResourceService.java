@@ -67,6 +67,19 @@ public interface ResourceService {
     List<SafeZone> getAllSafeZone();
 
     /**
+     * Get the correponding supply zone.
+     * @param supplyId the id of the supply zone
+     * @return the SupplyZone
+     */
+    SupplyZone getSupplyZone(int supplyId);
+
+    /**
+     * Return all the Supply Zone.
+     * @return a list of supply zone
+     */
+    List<SupplyZone> getAllSupplyZone();
+
+    /**
      * Return all the Safe Zone and Supply Zone.
      * @return a list of ZoneResource
      */
