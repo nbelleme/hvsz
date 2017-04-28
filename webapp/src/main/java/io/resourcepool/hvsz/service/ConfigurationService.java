@@ -6,16 +6,16 @@ public interface  ConfigurationService {
 
     /**
      * Add and return the game configuration.
-     * @param gameConfig GameConfig
-     * @param gameId Long
-     * @return GameConfig
+     * @param gameConfig GameConfig to add
+     * @param gameId id of the game
+     * @return GameConfig generated
      */
     GameConfig add(GameConfig gameConfig, Long gameId);
 
     /**
      * Return the game configuration.
-     * @param gameId Long
-     * @return GameConfig
+     * @param gameId id of the game
+     * @return current GameConfig
      */
     GameConfig get(Long gameId);
 }

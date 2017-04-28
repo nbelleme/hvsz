@@ -13,9 +13,8 @@ public interface HumanService {
 
     /**
      * get life by id.
-     *
-     * @param id .
-     * @return life.
+     * @param id the id of the life
+     * @return the life corresponding
      */
     Life getLife(Integer id);
 

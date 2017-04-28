@@ -12,16 +12,15 @@ public class SupplyZone implements ZoneResource, Serializable {
     private String type;
 
     /**
-     * SupplyZone constructor.
+     * SupplyZone Empty constructor.
      */
     public SupplyZone() {
     }
 
     /**
      * SupplyZone constructor.
-     *
-     * @param id       int
-     * @param resource int
+     * @param id the id of the SupplyZone
+     * @param resource the amount of Resource at the start of the game
      */
     public SupplyZone(int id, int resource) {
         this.id = id;
@@ -67,8 +66,7 @@ public class SupplyZone implements ZoneResource, Serializable {
 
     /**
      * Get resource with an amount.
-     *
-     * @param quantite int
+     * @param quantite amount of resource we want to get
      * @return int (return the successfull getted amount)
      */
     public int getResource(int quantite) {
