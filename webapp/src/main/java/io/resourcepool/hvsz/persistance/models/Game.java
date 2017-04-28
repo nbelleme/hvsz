@@ -11,6 +11,8 @@ public class Game implements Serializable {
     ArrayList<SupplyZone> supplyZones;
     ArrayList<ZombieZone> zombieZones;
 
+    private static final int OFFSET_NB_LIFE_SAFE_ZONE = 10;
+
     public Game() {
     }
 
@@ -59,15 +61,22 @@ public class Game implements Serializable {
         this.status = status;
     }
 
-  public void setConfig(GameConfig config) {
-    this.config = config;
-    supplyZones = new ArrayList<>();
-    int nbSupplyZones = config.getNbSupplyZone();
-    int nbSupplyResources = config.getNbSupplyResources();
-    for(int i =0; i<config.getNbSupplyZone(); i++){
-      supplyZones.add(new SupplyZone(i, nbSupplyResources/nbSupplyZones));
+    public void setConfig(GameConfig config) {
+        this.config = config;
+        supplyZones = new ArrayList<>();
+        int nbSupplyZones = config.getNbSupplyZone();
+        int nbSupplyResources = config.getNbSupplyResources();
+        for (int i = 0; i < config.getNbSupplyZone(); i++) {
+            supplyZones.add(new SupplyZone(i, nbSupplyResources / nbSupplyZones));
+        }
+        safeZones = new ArrayList<>();
+        int nbSafeZones = config.getNbSafezone();
+        int nbSafeZonesLifes = config.getNbSafezoneLifes();
+        for (int i = 0; i < config.getNbSupplyZone(); i++) {
+            safeZones.add(new SafeZone(i, nbSafeZonesLifes / nbSafeZones, nbSafeZonesLifes / nbSafeZones + OFFSET_NB_LIFE_SAFE_ZONE));
+        }
     }
-  }
+
     public GameConfig getConfig() {
         return config;
     }

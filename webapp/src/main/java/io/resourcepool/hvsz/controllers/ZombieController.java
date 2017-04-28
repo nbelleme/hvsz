@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ZombieController {
 
     @RequestMapping("/zombie")
-    public String kill(@RequestParam(value="kill", required=false) String kill, Model model) {
+    public String kill(@RequestParam(value = "kill", required = false) String kill, Model model) {
         if (kill != null) {
             ZombieService zombieService = new ZombieServiceImpl();
             if (zombieService.kill()) {

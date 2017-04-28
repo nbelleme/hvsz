@@ -3,16 +3,16 @@ package io.resourcepool.hvsz.persistance.models;
 
 import java.io.Serializable;
 
-public class SupplyZone implements ZoneResource, Serializable {
+public class    SupplyZone implements ZoneResource, Serializable {
     private static final String NAME = "supply zone n°";
     private Integer id;
     private int resource;
     private String name;
 
-    public SupplyZone(){
+    public SupplyZone() {
     }
 
-    public SupplyZone(int id, int resource){
+    public SupplyZone(int id, int resource) {
         this.id = id;
         this.resource = resource;
         name = NAME + id;
@@ -67,8 +67,16 @@ public class SupplyZone implements ZoneResource, Serializable {
             return false;
         }
 
-        SupplyZone supplyZone = (SupplyZone) o;
+        SupplyZone that = (SupplyZone) o;
 
-        return getId().equals(supplyZone.getId());
+        return resource == that.resource && (id != null ? id.equals(that.id) : that.id == null) && (name != null ? name.equals(that.name) : that.name == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + resource;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }
