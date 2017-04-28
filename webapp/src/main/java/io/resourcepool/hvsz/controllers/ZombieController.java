@@ -28,18 +28,18 @@ public class ZombieController {
     }
 
     /**
-     * Kill an human by life id
+     * Kill an human by life id.
      * @param lifeId .
      * @param model .
-     * @return
+     * @return .
      */
     @PostMapping("/zombie/kill")
     public String kill(@RequestParam(value = "lifeId") String lifeId, Model model) {
         if (zombieService.kill(lifeId)) {
             model.addAttribute("message", "one human have been killed. There are " + gameStatus.get(1L).getNbHumanAlive() + " humans alive.");
         } else {
-            model.addAttribute("message", "There are no more human alive ... Zombies won !");
+            model.addAttribute("message", "No human alive with this token!");
         }
-        return "redirect:/zombie";
+        return "zombie";
     }
 }

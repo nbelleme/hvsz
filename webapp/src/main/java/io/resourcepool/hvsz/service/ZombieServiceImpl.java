@@ -18,19 +18,18 @@ public class ZombieServiceImpl implements ZombieService {
 
         GameStatus status = g.getStatus();
 
-        if (status.getNbLifeLeft() <= 0) {
-            return false;
-        } else {
+            Boolean lifeFound = false;
             //Decrement nbHumaneAlive in game status
             status.setNbHumanAlive(status.getNbHumanAlive() - 1);
             for (Life l : status.getLives()) {
-                if (l.getId().toString() == lifeId) {
+                if (l.getId().toString().equals(lifeId)) {
                     l.setAlive(false);
+                    lifeFound = true;
                 }
             }
             g.setStatus(status);
             dao.set(1L, g);
-            return true;
-        }
+            return lifeFound;
+
     }
 }
