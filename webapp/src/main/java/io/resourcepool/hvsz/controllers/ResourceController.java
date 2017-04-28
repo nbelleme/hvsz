@@ -1,8 +1,5 @@
 package io.resourcepool.hvsz.controllers;
 
-import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
-import io.resourcepool.hvsz.persistance.models.Game;
-import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import io.resourcepool.hvsz.service.HumanService;
 import io.resourcepool.hvsz.service.ResourceService;
@@ -15,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ResourceController {
-
-    @Autowired
-    private DaoMapDb dao;
 
     @Autowired
     private HumanService humanService;
@@ -40,12 +34,10 @@ public class ResourceController {
             @RequestParam(value = "lifeId") String lifeId,
             Model model) {
 
-        Game g = dao.get(1L);
-
-        SafeZone s = g.getSafeZones().get(Integer.parseInt(safeZone)); //TODO get safezone by id
-        resourceService.dropById(s, 1, Integer.parseInt(lifeId));
-        model.addAttribute("nbResources",   "1 resource has been dropped : supply zone n°" + ID_SUPPLY_ZONE + " contains :" + s.getResource() + "resources");
-        dao.set(1L, g);
+        //TODO get safezone by id
+        resourceService.dropById(Integer.parseInt(safeZone), 1, Integer.parseInt(lifeId));
+        int resource = resourceService.getCurrentResource(Integer.parseInt(safeZone));
+        model.addAttribute("nbResources",   "1 resource has been dropped : supply zone n°" + ID_SUPPLY_ZONE + " contains :" + resource + "resources");
         return "human";
     }
 
@@ -72,13 +64,11 @@ public class ResourceController {
             Model model) {
 
         //TODO: get zone by id
-        Game g = dao.get(1L);
-        SupplyZone s = g.getSupplyZones().get(Integer.parseInt(supplyZone));
+        SupplyZone s = resourceService.getSupplyZone(Integer.parseInt(supplyZone));
 
         int gotRes = humanService.getResources(s, 1, Integer.parseInt(lifeId));
 
         model.addAttribute("nbSupplyResources", gotRes + " resource has been taken : remaining resources :" + s.getResource());
-        //dao.set(1L, g);
         return "supply-zone";
     }
 }

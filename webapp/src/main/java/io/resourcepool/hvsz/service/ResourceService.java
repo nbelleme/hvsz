@@ -34,5 +34,26 @@ public interface ResourceService {
      * @param id of the life who get the resource
      * @return the amount of resource dropped
      */
-    int dropById(SafeZone safeZone, int amount, int id);
+    int dropById(int safeZone, int amount, int id);
+
+    /**
+     * Get a safeZone of the current Game.
+     * @param id the id of the SafeZone
+     * @return the safe zone corresponding
+     */
+    SafeZone getSafeZone(int id);
+
+    /**
+     * Get a supply zone of the current Game.
+     * @param id the id of the SupplyZone
+     * @return the supply zone corresponding
+     */
+    SupplyZone getSupplyZone(int id);
+
+    /**
+     * Get the amount of resource of a supply zone.
+     * @param id the id of the supply zone
+     * @return current amount of resource
+     */
+    int getCurrentResource(int id);
 }
