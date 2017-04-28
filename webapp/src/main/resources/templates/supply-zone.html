@@ -11,12 +11,12 @@
     <div th:include="menu"/>
     <section class="container">
         <p th:text="${nbSupplyResources}" />
-        <h1>Zone de ravitaillement</h1>
+        <h1 th:text="${zone.name}"></h1>
 
         <form method="post" action="/resource/get">
             <fieldset class="row">
                 <legend>Prendre une ressource</legend>
-                <input type="hidden" name="supplyZone" value="0"/>
+                <input type="hidden" name="supplyZone" th:value="${zone.id}"/>
                 <div class="input-field col s12">
                     <label for="lifeId">Votre code utilisateur</label>
                     <input type="text" name="lifeId" id="lifeId"/>

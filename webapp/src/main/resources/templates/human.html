@@ -15,21 +15,6 @@
             <a href="/human?newlife=1">Prendre une nouvelle vie</a>
             <p th:text="${newlife}" />
         </div>
-
-        <form method="post" action="/resource/drop">
-            <fieldset class="row">
-                <legend>Déposer des ressources dans une zone de sécurité</legend>
-                <input type="hidden" name="safeZone" value="0"/>
-                <div class="input-field col s12">
-                    <label for="lifeId">Votre code utilisateur</label>
-                    <input type="text" name="lifeId" id="lifeId"/>
-                </div>
-                <p th:text="${nbResources}" />
-                <button class="btn waves-effect waves-light" type="submit" name="action">Déposer
-                    <i class="material-icons right">send</i>
-                </button>
-            </fieldset>
-        </form>
     </section>
     <footer>
 

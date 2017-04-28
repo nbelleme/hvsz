@@ -45,8 +45,9 @@ public class ResourceController {
         SafeZone s = g.getSafeZones().get(Integer.parseInt(safeZone)); //TODO get safezone by id
         resourceService.dropById(s, 1, Integer.parseInt(lifeId));
         model.addAttribute("nbResources",   "1 resource has been dropped : supply zone n°" + ID_SUPPLY_ZONE + " contains :" + s.getResource() + "resources");
+        model.addAttribute("zone", s);
         dao.set(1L, g);
-        return "human";
+        return "safe-zone";
     }
 
     /**
@@ -78,6 +79,7 @@ public class ResourceController {
         int gotRes = humanService.getResources(s, 1, Integer.parseInt(lifeId));
 
         model.addAttribute("nbSupplyResources", gotRes + " resource has been taken : remaining resources :" + s.getResource());
+        model.addAttribute("zone", s);
         //dao.set(1L, g);
         return "supply-zone";
     }

@@ -8,24 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<header class="row">
-    <nav class="col s12 brown darken-3">
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo">Zombie Game</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/configuration">Configuration</a></li>
-                <li><a href="/human">Humain</a></li>
-                <li><a href="/resource/get">Récupérer des ressources</a></li>
-                <li><a href="/zombie">Zombie</a></li>
-            </ul>
-        </div>
-    </nav>
-</header>
+<div th:include="menu"/>
 <section class="container">
-    <h1>Zone de sécurité</h1>
-    <p>Déposer une ressource pour la zone de sécurité n°1 :<a href="#">ici</a></p>
     <p th:text="${nbSupplyResources}" />
+    <h1 th:text="${zone.name}"></h1>
+
+    <form method="post" action="/resource/drop">
+        <fieldset class="row">
+            <legend>Déposer une ressource</legend>
+            <input type="hidden" name="safeZone" th:value="${zone.id}"/>
+            <div class="input-field col s12">
+                <label for="lifeId">Votre code utilisateur</label>
+                <input type="text" name="lifeId" id="lifeId"/>
+            </div>
+            <p th:text="${nbResources}" />
+            <button class="btn waves-effect waves-light" type="submit" name="action">Déposer
+                <i class="material-icons right">send</i>
+            </button>
+        </fieldset>
+    </form>
 </section>
 <footer>
 
