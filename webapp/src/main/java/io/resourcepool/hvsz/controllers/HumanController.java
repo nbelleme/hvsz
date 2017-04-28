@@ -22,8 +22,9 @@ public class HumanController {
     @GetMapping("/human")
     public String human(@RequestParam(value = "newlife", required = false) String newLife, Model model) {
         if (newLife != null) {
-            if (humanService.newLife()) {
-                model.addAttribute("newlife", "New life for you <3");
+            Integer lifeToken = humanService.newLife();
+            if (lifeToken != -1) {
+                model.addAttribute("newlife", "New life for you <3  token: " + lifeToken);
             } else {
                 model.addAttribute("newlife", "Sorry no more life ;-(");
             }

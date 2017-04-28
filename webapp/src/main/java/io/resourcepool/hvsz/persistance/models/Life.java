@@ -1,9 +1,11 @@
 package io.resourcepool.hvsz.persistance.models;
 
+import java.io.Serializable;
+
 /**
  * Created by ebiz on 28/04/17.
  */
-public class Life {
+public class Life implements Serializable {
 
     private Integer id;
     private boolean alive;
@@ -32,5 +34,24 @@ public class Life {
 
     public void setNbResources(int nbResources) {
         this.nbResources = nbResources;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Life life = (Life) o;
+
+        return getId().equals(life.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
     }
 }

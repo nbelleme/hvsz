@@ -4,7 +4,9 @@ import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
 import io.resourcepool.hvsz.persistance.models.GameConfig;
 import io.resourcepool.hvsz.persistance.models.GenericBuilder;
-import io.resourcepool.hvsz.service.ConfigurationServiceImpl;
+import io.resourcepool.hvsz.service.ConfigurationService;
+import io.resourcepool.hvsz.service.HumanService;
+import io.resourcepool.hvsz.service.ZombieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,11 +24,18 @@ public class RestApiController {
     @Autowired
     private DaoMapDb dao;
     @Autowired
-    private ConfigurationServiceImpl confService;
+    private ConfigurationService confService;
+
+    @Autowired
+    private ZombieService zService;
+
+    @Autowired
+    HumanService humanService;
 
     /**
      * Get all games.
-     * @return List<Game>
+     *
+     * @return List all games
      */
     @RequestMapping(value = "/api/game", method = RequestMethod.GET)
     @ResponseBody
@@ -36,6 +45,7 @@ public class RestApiController {
 
     /**
      * Create a new game.
+     *
      * @param key String
      * @return Game
      */
@@ -49,6 +59,7 @@ public class RestApiController {
 
     /**
      * Get a game by id.
+     *
      * @param id Long
      * @return Game
      */
@@ -59,15 +70,41 @@ public class RestApiController {
     }
 
     /**
+     * Kill life by token.
+     *
+     * @param id    game id.
+     * @param token life token.
+     * @return bool succes?
+     */
+    @RequestMapping(value = "/api/game/{id}/kill/{token}", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean killHuman(@PathVariable("id") Long id, @PathVariable(value = "token") String token) {
+        return zService.kill(token); //use index, not id
+    }
+
+    /**
+     * Get a new life, return token.
+     *
+     * @param id game id.
+     * @return life token
+     */
+    @RequestMapping(value = "/api/game/{id}/newLife", method = RequestMethod.GET)
+    @ResponseBody
+    public Integer newLife(@PathVariable("id") Long id) {
+        return humanService.newLife(); //use index, not id
+    }
+
+    /**
      * Set a game config by game id.
-     * @param id Long
-     * @param gameDuration String
-     * @param difficulty String
-     * @param nbHuman String
-     * @param nbZombie String
-     * @param nbSafezone String
-     * @param nbSafezoneLifes String
-     * @param nbSupplyZone String
+     *
+     * @param id                Long
+     * @param gameDuration      String
+     * @param difficulty        String
+     * @param nbHuman           String
+     * @param nbZombie          String
+     * @param nbSafezone        String
+     * @param nbSafezoneLifes   String
+     * @param nbSupplyZone      String
      * @param nbSupplyResources String
      * @return GameConfig
      */
