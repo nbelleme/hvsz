@@ -5,6 +5,7 @@ import io.resourcepool.hvsz.persistance.models.Game;
 import io.resourcepool.hvsz.persistance.models.GameStatus;
 import io.resourcepool.hvsz.persistance.models.GenericBuilder;
 import io.resourcepool.hvsz.persistance.models.Life;
+import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,9 @@ public class HumanServiceImpl implements HumanService {
 
     @Autowired
     private DaoMapDb dao;
+
+    @Autowired
+    private ResourceService resourceService;
 
     @Override
     public Integer newLife() {
@@ -39,5 +43,38 @@ public class HumanServiceImpl implements HumanService {
             dao.set(1L, g);
             return life.getId();
         }
+    }
+
+    /**
+     * get life by id.
+     *
+     * @param id .
+     * @return life.
+     */
+    public Life getLife(Integer id) {
+        Game g = dao.get(1L);
+        for (Life l : g.getStatus().getLives()) {
+            if (l.getId() == id) {
+                return l;
+            }
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param z ZoneResource
+     * @param qt Integer : resources amount
+     * @param id Integer : life id
+     * @return Integer : amount got
+     */
+    public Integer getResources(SupplyZone z, Integer qt, Integer id) {
+        Game g = dao.get(1L);
+        Life l = g.getStatus().getLives().get(id); //getLife(id);
+        Integer gotR = resourceService.get(z, qt);
+        //Integer gotR = z.getResource(qt);
+        l.addResource(gotR);
+        dao.set(1L, g);
+        return gotR;
     }
 }
