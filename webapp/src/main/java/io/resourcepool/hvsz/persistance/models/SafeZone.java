@@ -37,10 +37,6 @@ public class SafeZone implements ZoneResource, Serializable {
     }
 
 
-    public static String getNAME() {
-        return SafeZone.NAME;
-    }
-
     public Integer getId() {
         return this.id;
     }
