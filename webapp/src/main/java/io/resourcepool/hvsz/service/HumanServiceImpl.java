@@ -1,7 +1,11 @@
 package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
-import io.resourcepool.hvsz.persistance.models.*;
+import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.GameStatus;
+import io.resourcepool.hvsz.persistance.models.GenericBuilder;
+import io.resourcepool.hvsz.persistance.models.Life;
+import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +28,10 @@ public class HumanServiceImpl implements HumanService {
 
         GameStatus status = g.getStatus();
 
+        if (incrementor == 0) {
+            setLastId(1L); // in case of reload of base, to avoid having incrementor reset
+        }
+
         if (status.getNbLifeLeft() <= 0) {
             return -1;
         } else {
@@ -32,7 +40,7 @@ public class HumanServiceImpl implements HumanService {
             status.setNbHumanAlive(status.getNbHumanAlive() + 1);
             //Create new Life
             Life life = GenericBuilder.of(Life::new)
-                    .with(Life::setId, ((int) (Math.random() * MAX_ID))) // TODO update and increment to avoid duplicate id
+                    .with(Life::setId, incrementor++) // TODO update and increment to avoid duplicate id
                     .with(Life::setAlive, true)
                     .with(Life::setNbResources, 0)
                     .build();
@@ -58,6 +66,35 @@ public class HumanServiceImpl implements HumanService {
         }
         return null;
     }
+
+    /**
+     * get life by id.
+     *
+     * @param id .
+     * @return life.
+     */
+    public Integer getLastId(Long id) {
+        Game g = dao.get(id);
+        int maxId = 0;
+        for (Life l : g.getStatus().getLives()) {
+            if (l.getId() > maxId) {
+                maxId = l.getId();
+            }
+        }
+        return maxId;
+    }
+
+    /**
+     * set last life id from db.
+     * @param id game id
+     */
+    public void setLastId(Long id) {
+        Integer maxId = getLastId(id);
+        if (incrementor <= maxId) {
+            incrementor = maxId;
+        }
+    }
+
 
     /**
      *
