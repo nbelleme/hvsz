@@ -1,6 +1,5 @@
 package io.resourcepool.hvsz.controllers;
 
-import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.Zone;
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
 import io.resourcepool.hvsz.service.HumanService;
