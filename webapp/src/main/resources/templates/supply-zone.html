@@ -10,10 +10,8 @@
 <body>
     <div th:include="menu"/>
     <section class="container">
-        <h1>Zone de ravitaillement</h1>
-        <p>Prendre une ressource pour la zone de ravitaillement n°1 :<a href="/resource/get?supplyZone=0">ici</a></p>
         <p th:text="${nbSupplyResources}" />
-        <h1>Zone d'approvisionnement</h1>
+        <h1>Zone de ravitaillement</h1>
 
         <form method="post" action="/resource/get">
             <fieldset class="row">
