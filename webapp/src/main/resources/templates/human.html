@@ -29,7 +29,7 @@
             <p th:text="${newlife}" />
         </div>
 
-        <form method="get" action="/resource/drop">
+        <form method="post" action="/resource/drop">
             <fieldset class="row">
                 <legend>Déposer des ressources dans une zone de sécurité</legend>
                 <input type="hidden" name="safeZone" value="0"/>
@@ -43,7 +43,6 @@
                 </button>
             </fieldset>
         </form>
-        
     </section>
     <footer>
 
