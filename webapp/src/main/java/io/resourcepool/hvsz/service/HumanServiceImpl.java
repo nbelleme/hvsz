@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 public class HumanServiceImpl implements HumanService {
 
     private static final int MAX_ID = 5;
+    private static int incrementor = 0;
+
 
     @Autowired
     private DaoMapDb dao;
@@ -30,7 +32,7 @@ public class HumanServiceImpl implements HumanService {
             status.setNbHumanAlive(status.getNbHumanAlive() + 1);
             //Create new Life
             Life life = GenericBuilder.of(Life::new)
-                    .with(Life::setId, ((int) (Math.random() * MAX_ID)))
+                    .with(Life::setId, ((int) (Math.random() * MAX_ID))) // TODO update and increment to avoid duplicate id
                     .with(Life::setAlive, true)
                     .with(Life::setNbResources, 0)
                     .build();
@@ -66,7 +68,8 @@ public class HumanServiceImpl implements HumanService {
      */
     public Integer getResources(SupplyZone z, Integer qt, Integer id) {
         Game g = dao.get(1L);
-        Life l = g.getStatus().getLives().get(id); //getLife(id);
+        //Life l = g.getStatus().getLives().get(id); //getLife(id);//TODO get by id, not index, use service
+        Life l = getLife(id);
         Integer gotR = resourceService.get(z, qt);
         //Integer gotR = z.getResource(qt);
         l.addResource(gotR);
@@ -83,8 +86,9 @@ public class HumanServiceImpl implements HumanService {
      */
     public Integer getResources(Integer zId, Integer qt, Integer id) {
         Game g = dao.get(1L);
-        Life l = g.getStatus().getLives().get(id); //getLife(id);
-        SupplyZone z = g.getSupplyZones().get(zId); //TODO get by id, not index
+        //Life l = g.getStatus().getLives().get(id); //getLife(id);
+        Life l = getLife(id);
+        SupplyZone z = g.getSupplyZones().get(zId); //TODO get by id, not index, use zone service
         Integer gotR = resourceService.get(z, qt);
         //Integer gotR = z.getResource(qt);
         l.addResource(gotR);
