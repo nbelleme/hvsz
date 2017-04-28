@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 public class SafeZone implements ZoneResource, Serializable {
     private static final String NAME = "safe zone n°";
+    private static final String TYPE = "safezone";
     private Integer id;
     private int resource;
     private int maxResource;
     private String name;
+    private String type;
 
     /**
      * SafeZone constructor.
@@ -26,7 +28,14 @@ public class SafeZone implements ZoneResource, Serializable {
         this.resource = resource;
         this.maxResource = maxResource;
         name = NAME + id;
+        type = TYPE;
     }
+
+
+    public String getType() {
+        return type;
+    }
+
 
     public static String getNAME() {
         return SafeZone.NAME;
