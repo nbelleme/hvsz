@@ -25,6 +25,7 @@ public class ResourceServiceImpl implements ResourceService {
         return safeZone.drop(amount);
     }
 
+    @Override
     public void decreaseSafezones(int amount) {
         ArrayList<SafeZone> safeZones = dao.get(1L).getSafeZones();
         for (SafeZone safeZone : safeZones) {

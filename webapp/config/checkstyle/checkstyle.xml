@@ -62,8 +62,7 @@
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocMethod">
             <property name="allowMissingPropertyJavadoc" value="true"/>
-            <property name="allowedAnnotations" value="Override"/>
-            <property name="allowedAnnotations" value="RequestMapping,PostConstruct"/>
+            <property name="allowedAnnotations" value="Override,RequestMapping,PostConstruct"/>
         </module>
         <module name="JavadocStyle"/>
         <!-- <module name="JavadocType"/> <module name="JavadocVariable"/> -->

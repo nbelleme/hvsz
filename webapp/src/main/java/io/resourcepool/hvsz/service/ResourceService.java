@@ -3,9 +3,6 @@ package io.resourcepool.hvsz.service;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 
-/**
- * Created by ebiz on 27/04/17.
- */
 public interface ResourceService {
 
     /**
@@ -23,4 +20,10 @@ public interface ResourceService {
      * @return the number of resources dropped.
      */
     int drop(SafeZone safeZone, int amount);
+
+    /**
+     * Decrease an amount on all safezones.
+     * @param amount int
+     */
+    void decreaseSafezones(int amount);
 }
