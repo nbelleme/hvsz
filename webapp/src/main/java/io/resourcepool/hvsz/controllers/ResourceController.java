@@ -25,7 +25,7 @@ public class ResourceController {
      * @return String (human vue)
      */
     @GetMapping("/resource/drop")
-    public String dropResource(@RequestParam(value = "safeZone", required = false) String safeZone, Model model) {
+    public String dropResource(@RequestParam(value = "selectZone", required = false) String safeZone, Model model) {
         if (safeZone != null) {
             Game g = dao.get(1L);
             SafeZone s = g.getSafeZones().get(Integer.parseInt(safeZone));

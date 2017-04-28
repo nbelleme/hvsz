@@ -7,4 +7,10 @@ public interface ZoneResource extends Zone {
      * @return int
      */
     int getResource();
+
+    /**
+     * Get the id of the zone.
+     * @return int
+     */
+    Integer getId();
 }
