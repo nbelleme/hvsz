@@ -4,6 +4,8 @@ import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
+import io.resourcepool.hvsz.service.HumanService;
+import io.resourcepool.hvsz.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,12 @@ public class ResourceController {
 
     @Autowired
     private DaoMapDb dao;
+
+    @Autowired
+    private HumanService humanService;
+
+    @Autowired
+    private ResourceService resourceService;
 
     private static final int ID_SUPPLY_ZONE = 1;
 
@@ -31,10 +39,11 @@ public class ResourceController {
             @RequestParam(value = "lifeId") String lifeId,
             Model model) {
 
-        //TODO: Faire une méthode pour dropper des ressources par un utilisateur (lifeId)
         Game g = dao.get(1L);
-        SafeZone s = g.getSafeZones().get(Integer.parseInt(safeZone));
-        model.addAttribute("nbResources", s.drop(1) + " resource has been dropped : supply zone n°" + ID_SUPPLY_ZONE + " contains :" + s.getResource() + "resources");
+
+        SafeZone s = g.getSafeZones().get(Integer.parseInt(safeZone)); //TODO get safezone by id
+        resourceService.dropById(s, 1, Integer.parseInt(lifeId));
+        model.addAttribute("nbResources",   "1 resource has been dropped : supply zone n°" + ID_SUPPLY_ZONE + " contains :" + s.getResource() + "resources");
         dao.set(1L, g);
         return "human";
     }
@@ -61,11 +70,14 @@ public class ResourceController {
             @RequestParam(value = "lifeId") String lifeId,
             Model model) {
 
-        //TODO: prendre une ressource en tant qu'utilisateur (lifeId) dans un supplyZone
+        //TODO: get zone by id
         Game g = dao.get(1L);
         SupplyZone s = g.getSupplyZones().get(Integer.parseInt(supplyZone));
-        model.addAttribute("nbSupplyResources", s.getResource(1) + " resource has been taken : remaining resources :" + s.getResource());
-        dao.set(1L, g);
+
+        int gotRes = humanService.getResources(s, 1, Integer.parseInt(lifeId));
+
+        model.addAttribute("nbSupplyResources", gotRes + " resource has been taken : remaining resources :" + s.getResource());
+        //dao.set(1L, g);
         return "supply-zone";
     }
 }

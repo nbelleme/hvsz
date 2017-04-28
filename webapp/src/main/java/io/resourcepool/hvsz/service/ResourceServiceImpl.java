@@ -2,6 +2,7 @@ package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
@@ -17,6 +18,9 @@ public class ResourceServiceImpl implements ResourceService {
     @Autowired
     private DaoMapDb dao;
 
+    @Autowired
+    private HumanService humanService;
+
     @Override
     public int get(SupplyZone supplyZone, int amount) {
         return supplyZone.getResource(amount);
@@ -31,6 +35,14 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public int drop(SafeZone safeZone, int amount) {
+        return safeZone.drop(amount);
+    }
+
+    @Override
+    public int dropById(SafeZone safeZone, int amount, int id) {
+        Game g = dao.get(1L);
+        Life l = humanService.getLife(id);
+        l.dropResources(amount);
         return safeZone.drop(amount);
     }
 

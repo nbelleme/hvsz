@@ -47,6 +47,15 @@ public interface ResourceService {
     void decreaseSafezones(int amount);
 
     /**
+     * Take resources on a supply zone by id.
+     * @param safeZone the supply zone where we drop resources.
+     * @param amount number max of resources we want to drop.
+     * @param id .
+     * @return .
+     */
+    int dropById(SafeZone safeZone, int amount, int id);
+
+    /**
      * Get the correponding safe zone.
      * @param safeId the id of the safe zone
      * @return the SafeZone

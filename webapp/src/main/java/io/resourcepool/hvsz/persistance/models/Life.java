@@ -36,6 +36,31 @@ public class Life implements Serializable {
         this.nbResources = nbResources;
     }
 
+
+    /**
+     * drop res.
+     * @param qte qte to drop
+     * @return dropped qte
+     */
+    public int dropResources(int qte) {
+        if (nbResources - qte >= 0) {
+            this.nbResources -= qte;
+            return qte;
+        } else {
+            int removed = this.nbResources;
+            this.nbResources = 0;
+            return removed;
+        }
+    }
+
+    /**
+     * .
+     * @param qte .
+     */
+    public void addResource(int qte) {
+        this.nbResources += qte;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
