@@ -6,5 +6,5 @@ public interface HumanService {
      * Get a new life.
      * @return true if success, false else
      */
-    boolean newLife();
+    Integer newLife();
 }
