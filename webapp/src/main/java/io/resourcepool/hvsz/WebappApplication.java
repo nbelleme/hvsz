@@ -10,6 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan(basePackages = "io.resourcepool.hvsz")
 public class WebappApplication {
 
+    /**
+     * Webapp application.
+     * @param args String[]
+     */
     public static void main(String[] args) {
         SpringApplication.run(WebappApplication.class, args);
     }

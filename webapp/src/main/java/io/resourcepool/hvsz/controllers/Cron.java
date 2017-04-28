@@ -16,8 +16,11 @@ public class Cron {
     @Autowired
     private ResourceServiceImpl resourceService;
 
+    /**
+     * The game timer : for all minute, decrease the time and safezones resources.
+     */
     @Scheduled(fixedRate = 60000)
-    public void doSomething() {
+    public void gameTimer() {
 
         GameStatus status = statusService.get(1L);
         if (status.getStarted() && status.getTimeLeft() > 0) {

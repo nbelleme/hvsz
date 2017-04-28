@@ -18,6 +18,11 @@ public class GameController {
     @Autowired
     private StatusServiceImpl statusService;
 
+    /**
+     * Start the game.
+     * @param model Model
+     * @return String (redirect to dashboard)
+     */
     @GetMapping("/game/start")
     public String startGame(Model model) {
 

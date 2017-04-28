@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
 @RestController
 public class RestApiController {
 
@@ -25,12 +24,21 @@ public class RestApiController {
     @Autowired
     private ConfigurationServiceImpl confService;
 
+    /**
+     * Get all games.
+     * @return List<Game>
+     */
     @RequestMapping(value = "/api/game", method = RequestMethod.GET)
     @ResponseBody
-    public List<Game> greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public List<Game> getAllGames() {
         return dao.getAll();
     }
 
+    /**
+     * Create a new game.
+     * @param key String
+     * @return Game
+     */
     @RequestMapping(value = "/api/game", method = RequestMethod.POST)
     @ResponseBody
     public Game newGame(@RequestParam(value = "key", defaultValue = "1") String key) {
@@ -39,12 +47,30 @@ public class RestApiController {
         return dao.get(newKey);
     }
 
+    /**
+     * Get a game by id.
+     * @param id Long
+     * @return Game
+     */
     @RequestMapping(value = "/api/game/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Game getGame(@PathVariable(value = "id") Long id) {
         return dao.get(id); //use index, not id
     }
 
+    /**
+     * Set a game config by game id.
+     * @param id Long
+     * @param gameDuration String
+     * @param difficulty String
+     * @param nbHuman String
+     * @param nbZombie String
+     * @param nbSafezone String
+     * @param nbSafezoneLifes String
+     * @param nbSupplyZone String
+     * @param nbSupplyResources String
+     * @return GameConfig
+     */
     @PostMapping("/api/game/{id}/config")
     @ResponseBody
     public GameConfig setGameConfig(@PathVariable(value = "id") Long id,

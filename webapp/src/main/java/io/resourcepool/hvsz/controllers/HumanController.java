@@ -13,6 +13,12 @@ public class HumanController {
     @Autowired
     HumanService humanService;
 
+    /**
+     * Get the human page.
+     * @param newLife String
+     * @param model Model
+     * @return String (human)
+     */
     @GetMapping("/human")
     public String human(@RequestParam(value = "newlife", required = false) String newLife, Model model) {
         if (newLife != null) {

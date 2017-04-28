@@ -16,11 +16,29 @@ public class ConfigurationController {
   @Autowired
   private ConfigurationServiceImpl confService;
 
+  /**
+   * Get the configuration form.
+   * @param model Model
+   * @return String (configuration vue)
+   */
   @GetMapping("/configuration")
   public String showForm(Model model) {
     return "configuration";
   }
 
+  /**
+   * Post the configuration form.
+   * @param gameDuration String
+   * @param difficulty String
+   * @param nbHuman String
+   * @param nbZombie String
+   * @param nbSafezone String
+   * @param nbSafezoneLifes String
+   * @param nbSupplyZone String
+   * @param nbSupplyResources String
+   * @param model Model
+   * @return String (redirect to dashboard)
+   */
   @PostMapping("/configuration")
   public String postForm(
           @RequestParam(value = "gameDuration", defaultValue = "30") String gameDuration,

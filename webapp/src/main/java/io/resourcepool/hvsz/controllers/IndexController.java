@@ -10,6 +10,10 @@ public class IndexController {
   @Autowired
   private StatusService statusService;
 
+  /**
+   * Get the index page.
+   * @return String (index vue)
+   */
   @GetMapping("/")
   public String index() {
     return "index";

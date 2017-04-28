@@ -2,9 +2,6 @@ package io.resourcepool.hvsz.persistance.models;
 
 import java.io.Serializable;
 
-/**
- * Created by root on 26/04/17.
- */
 public class SafeZone implements ZoneResource, Serializable {
     private static final String NAME = "safe zone n°";
     private Integer id;
@@ -12,9 +9,18 @@ public class SafeZone implements ZoneResource, Serializable {
     private int maxResource;
     private String name;
 
+    /**
+     * SafeZone constructor.
+     */
     public SafeZone() {
     }
 
+    /**
+     * SafeZone constructor.
+     * @param id int
+     * @param resource int
+     * @param maxResource int
+     */
     public SafeZone(int id, int resource, int maxResource) {
         this.id = id;
         this.resource = resource;
@@ -61,6 +67,11 @@ public class SafeZone implements ZoneResource, Serializable {
         return name;
     }
 
+    /**
+     * Drop an amount.
+     * @param quantite int
+     * @return int
+     */
     public int drop(int quantite) {
         resource += quantite;
         if (resource > maxResource) {

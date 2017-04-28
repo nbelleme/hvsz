@@ -12,7 +12,11 @@ public class DashboardController {
     @Autowired
     private DashboardService dashboardService;
 
-
+    /**
+     * Get the dashboard page.
+     * @param model Model
+     * @return String (dashboard vue)
+     */
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         model.addAttribute("nbhumain", dashboardService.getHuman());

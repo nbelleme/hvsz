@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ZombieController {
 
+    /**
+     * Get the zombie page.
+     * @param kill String
+     * @param model Model
+     * @return String (zombie vue)
+     */
     @RequestMapping("/zombie")
     public String kill(@RequestParam(value = "kill", required = false) String kill, Model model) {
         if (kill != null) {

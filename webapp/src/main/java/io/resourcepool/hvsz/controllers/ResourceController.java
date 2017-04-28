@@ -18,6 +18,12 @@ public class ResourceController {
 
     private static final int ID_SUPPLY_ZONE = 1;
 
+    /**
+     * Drop a resource.
+     * @param safeZone SupplyZone id
+     * @param model Model
+     * @return String (human vue)
+     */
     @GetMapping("/resource/drop")
     public String dropResource(@RequestParam(value = "safeZone", required = false) String safeZone, Model model) {
         if (safeZone != null) {
@@ -29,6 +35,12 @@ public class ResourceController {
         return "human";
     }
 
+    /**
+     * Take a resource.
+     * @param supplyZone SupplyZone id
+     * @param model Model
+     * @return String (supply-zone vue)
+     */
     @GetMapping("/resource/get")
     public String resourceGet(@RequestParam(value = "supplyZone", required = false) String supplyZone, Model model) {
 

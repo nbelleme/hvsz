@@ -13,9 +13,16 @@ public class Game implements Serializable {
 
     private static final int OFFSET_NB_LIFE_SAFE_ZONE = 10;
 
+    /**
+     * Game constructor.
+     */
     public Game() {
     }
 
+    /**
+     * Set default values to the status if null.
+     * @param g Game
+     */
     public Game(Game g) {
         this.id = g.id;
         if (g.status != null) {
@@ -41,6 +48,10 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Game constructor, set an id.
+     * @param id Long
+     */
     public Game(Long id) {
         this.id = id;
     }
@@ -61,6 +72,10 @@ public class Game implements Serializable {
         this.status = status;
     }
 
+    /**
+     * Set the configs.
+     * @param config GameConfig
+     */
     public void setConfig(GameConfig config) {
         this.config = config;
         supplyZones = new ArrayList<>();
@@ -80,7 +95,6 @@ public class Game implements Serializable {
     public GameConfig getConfig() {
         return config;
     }
-
 
     public ArrayList<SafeZone> getSafeZones() {
         return safeZones;

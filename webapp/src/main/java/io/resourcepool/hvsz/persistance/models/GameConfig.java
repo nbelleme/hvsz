@@ -18,6 +18,9 @@ public class GameConfig implements Serializable {
     //generated values with difficulty
     Integer safezoneDropRate;
 
+    /**
+     * GameConfig constructor.
+     */
     public GameConfig() {
     }
 

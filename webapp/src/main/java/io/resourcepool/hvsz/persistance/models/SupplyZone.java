@@ -3,15 +3,23 @@ package io.resourcepool.hvsz.persistance.models;
 
 import java.io.Serializable;
 
-public class    SupplyZone implements ZoneResource, Serializable {
+public class SupplyZone implements ZoneResource, Serializable {
     private static final String NAME = "supply zone n°";
     private Integer id;
     private int resource;
     private String name;
 
+    /**
+     * SupplyZone constructor.
+     */
     public SupplyZone() {
     }
 
+    /**
+     * SupplyZone constructor.
+     * @param id int
+     * @param resource int
+     */
     public SupplyZone(int id, int resource) {
         this.id = id;
         this.resource = resource;
@@ -48,6 +56,11 @@ public class    SupplyZone implements ZoneResource, Serializable {
         return name;
     }
 
+    /**
+     * Get resource with an amount.
+     * @param quantite int
+     * @return int (return the successfull getted amount)
+     */
     public int getResource(int quantite) {
         resource -= quantite;
         if (resource < 0) {
