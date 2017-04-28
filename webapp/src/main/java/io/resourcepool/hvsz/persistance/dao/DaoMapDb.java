@@ -23,19 +23,36 @@ public class DaoMapDb {
 
     private Map<Long, Game> games = new HashMap<>();
 
+    /**
+     * Initizalize a map_db db backed on a file at DB_FILE.
+     */
     public DaoMapDb() {
         DB db = DBMaker.fileDB(DB_FILE).closeOnJvmShutdown().make();
         games = (ConcurrentMap) db.hashMap("games").createOrOpen();
     }
 
+    /**
+     * return the game by key.
+     * @param key to retrive, default game 1
+     * @return game obj
+     */
     public Game get(Long key) {
         return games.get(key);
     }
 
+    /**
+     * save a game by key.
+     * @param key key to save to
+     * @param val game object to save
+     */
     public void set(Long key, Game val) {
         games.put(key, val);
     }
 
+    /**
+     * return all saved games.
+     * @return list of games
+     */
     public List<Game> getAll() {
         return new ArrayList<>(games.values());
     }
