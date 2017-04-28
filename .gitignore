@@ -1,11 +1,12 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
-
+HvsZ-webapp/
 *.zip
 target/*
 target/
 webapp/target/
 webapp/target/*
+*db
 
 ### STS ###
 .apt_generated
