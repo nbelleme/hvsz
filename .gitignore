@@ -31,3 +31,4 @@ dist/
 nbdist/
 .nb-gradle/
 out/
+/training.pem
