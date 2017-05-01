@@ -1,8 +1,9 @@
-package io.resourcepool.hvsz.service;
+package io.resourcepool.hvsz.service.impl;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
 import io.resourcepool.hvsz.persistance.models.GameStatus;
+import io.resourcepool.hvsz.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

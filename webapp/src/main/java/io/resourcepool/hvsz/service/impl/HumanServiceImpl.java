@@ -1,4 +1,4 @@
-package io.resourcepool.hvsz.service;
+package io.resourcepool.hvsz.service.impl;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
@@ -6,20 +6,19 @@ import io.resourcepool.hvsz.persistance.models.GameStatus;
 import io.resourcepool.hvsz.persistance.models.GenericBuilder;
 import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
+import io.resourcepool.hvsz.service.HumanService;
+import io.resourcepool.hvsz.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class HumanServiceImpl implements HumanService {
 
-    private static final int MAX_ID = 5;
     private static int incrementor = 0;
 
     @Autowired
     private DaoMapDb dao;
 
-    @Autowired
-    private ResourceService resourceService;
 
     @Override
     public Integer newLife() {
@@ -90,6 +89,7 @@ public class HumanServiceImpl implements HumanService {
 
     /**
      * set last life id from db.
+     *
      * @param id game id
      */
     public void setLastId(Long id) {
@@ -101,8 +101,7 @@ public class HumanServiceImpl implements HumanService {
 
 
     /**
-     *
-     * @param z ZoneResource
+     * @param z  ZoneResource
      * @param qt Integer : resources amount
      * @param id Integer : life id
      * @return Integer : amount got
@@ -119,10 +118,9 @@ public class HumanServiceImpl implements HumanService {
     }
 
     /**
-     *
      * @param zId ZoneResource id
-     * @param qt Integer : resources amount
-     * @param id Integer : life id
+     * @param qt  Integer : resources amount
+     * @param id  Integer : life id
      * @return Integer : amount got
      */
     public Integer getResources(Integer zId, Integer qt, Integer id) {

@@ -30,6 +30,7 @@
         <guava>21.0</guava>
         <spring.webmvc>4.3.8.RELEASE</spring.webmvc>
         <mapdb>3.0.3</mapdb>
+        <mqtt>1.1.1</mqtt>
 
 
         <!--Plugins-->
@@ -77,6 +78,13 @@
             <groupId>org.mapdb</groupId>
             <artifactId>mapdb</artifactId>
             <version>${mapdb}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+            <version>${mqtt}</version>
         </dependency>
 
 

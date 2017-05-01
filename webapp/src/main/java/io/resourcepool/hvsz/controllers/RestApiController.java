@@ -26,6 +26,7 @@ public class RestApiController {
 
     @Autowired
     private DaoMapDb dao;
+
     @Autowired
     private ConfigurationService confService;
 
@@ -36,7 +37,7 @@ public class RestApiController {
     private HumanService humanService;
 
     @Autowired
-    ResourceService resourceService;
+    private ResourceService resourceService;
 
     /**
      * Get all games.
@@ -145,14 +146,13 @@ public class RestApiController {
 
     /**
      * Get resource from zone.
-     *
      */
     @RequestMapping(value = "/api/game/{id}/zone/{zoneId}/get", method = RequestMethod.POST)
     @ResponseBody
     public Integer getResource(@PathVariable(value = "id") Long id,
-                            @PathVariable(value = "zoneId") Integer zoneId,
-                            @RequestParam(value = "lifeId") Integer lifeId,
-                            @RequestParam(value = "qte") Integer qte) {
+                               @PathVariable(value = "zoneId") Integer zoneId,
+                               @RequestParam(value = "lifeId") Integer lifeId,
+                               @RequestParam(value = "qte") Integer qte) {
 
         Integer gotRes = humanService.getResources(zoneId, qte, lifeId);
 
@@ -161,14 +161,13 @@ public class RestApiController {
 
     /**
      * Drop resource in zone.
-     *
      */
     @RequestMapping(value = "/api/game/{id}/zone/{zoneId}/drop", method = RequestMethod.POST)
     @ResponseBody
     public Integer dropResource(@PathVariable(value = "id") Long id,
-                            @PathVariable(value = "zoneId") Integer zoneId,
-                            @RequestParam(value = "lifeId") Integer lifeId,
-                            @RequestParam(value = "qte") Integer qte) {
+                                @PathVariable(value = "zoneId") Integer zoneId,
+                                @RequestParam(value = "lifeId") Integer lifeId,
+                                @RequestParam(value = "qte") Integer qte) {
 
         Integer droppedRes = resourceService.dropById(zoneId, qte, lifeId);
         return droppedRes;
@@ -176,12 +175,13 @@ public class RestApiController {
 
     /**
      * Get zone from id.
+     *
      * @return
      */
     @RequestMapping(value = "/api/game/{id}/zone/{zoneId}", method = RequestMethod.GET)
     @ResponseBody
     public Zone getZone(@PathVariable(value = "id") Long id,
-                            @PathVariable(value = "zoneId") Long zoneId) {
+                        @PathVariable(value = "zoneId") Long zoneId) {
         //Game g = dao.get(id);
         //TODO Use zoneservice
         throw new NotImplementedException();

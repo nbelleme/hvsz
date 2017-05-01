@@ -1,8 +1,8 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.models.GameStatus;
-import io.resourcepool.hvsz.service.ResourceServiceImpl;
-import io.resourcepool.hvsz.service.StatusServiceImpl;
+import io.resourcepool.hvsz.service.impl.ResourceServiceImpl;
+import io.resourcepool.hvsz.service.impl.StatusServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
