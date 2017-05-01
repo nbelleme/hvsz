@@ -7,7 +7,6 @@ import io.resourcepool.hvsz.persistance.models.GenericBuilder;
 import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import io.resourcepool.hvsz.service.HumanService;
-import io.resourcepool.hvsz.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
