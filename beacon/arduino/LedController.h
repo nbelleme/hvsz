@@ -1,4 +1,4 @@
-#include "Gauge.h"
+#include "FastLED.h"
 
 #define NUM_LEDS 52
 #define V_GAUGE_NUM_LEDS 14
@@ -18,13 +18,7 @@
 #define LED_PIN 10
 #endif
 
-/**
- * Horizontal LEDs Strategy:
- * Separate: Will treat each line as a separate Gauge
- * Combine: Will consider the three lines as equal (as in parallel)
- * Beacon: The LEDs will be animated like a beacon (custom animation)
- */
-enum HLEDsStrategy { Separate, Combine, Beacon };
+class Gauge;
 
 /**
  * The Led Controller controls all the leds of the Beacon
@@ -38,8 +32,8 @@ public:
   /**
    * See enum declaration for details
    */
-  HLEDsStrategy getHorizontalLEDsStrategy();
-  void setHorizontalLEDsStrategy(HLEDsStrategy str);
+  byte getHorizontalLEDsStrategy();
+  void setHorizontalLEDsStrategy(byte str);
   Gauge* getVGauge1();
   Gauge* getVGauge2();
   Gauge* getHGauge1();
@@ -51,7 +45,7 @@ private:
   Gauge* hGauge1;
   Gauge* hGauge2;
   Gauge* hGauge3;
-  HLEDsStrategy ledStrategy;
+  byte ledStrategy;
   CRGB leds[NUM_LEDS];
   byte bri;
   boolean dir;

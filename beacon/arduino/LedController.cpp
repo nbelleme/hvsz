@@ -1,6 +1,10 @@
 #include "LedController.h"
 #include "FastLED.h"
 #include <math.h>
+#include "Gauge.h"
+#include "BeaconUtils.h"
+
+using namespace beacon;
 
 /**
  * The Led Controller controls all the leds of the Beacon
@@ -11,7 +15,7 @@ LedController::LedController() {
   this->hGauge1 = new Gauge(H_GAUGE_NUM_LEDS);
   this->hGauge2 = new Gauge(H_GAUGE_NUM_LEDS);
   this->hGauge3 = new Gauge(H_GAUGE_NUM_LEDS);
-  this-> ledStrategy = HLEDsStrategy::Beacon;
+  this->ledStrategy = HLEDsStrategy::Beacon;
   bri = 0;
   dir = true;
 }
@@ -32,10 +36,10 @@ Gauge* LedController::getHGauge3() {
   return this->hGauge3;
 }
 
-HLEDsStrategy LedController::getHorizontalLEDsStrategy() {
+byte LedController::getHorizontalLEDsStrategy() {
   return this->ledStrategy;
 }
-void LedController::setHorizontalLEDsStrategy(HLEDsStrategy str) {
+void LedController::setHorizontalLEDsStrategy(byte str) {
   this->ledStrategy = str;
 }
 
@@ -50,19 +54,19 @@ void LedController::update() {
   updateGauge(0, vGauge1);
   updateGauge(14, vGauge2);
   switch (this->ledStrategy) {
-    case Separate:
+    case HLEDsStrategy::Separate:
       // Separate <=> each line is a separate gauge
       updateGauge(28, hGauge1);
       updateGauge(36, hGauge2);
       updateGauge(44, hGauge3);
       break;
-    case Combine:
+    case HLEDsStrategy::Combine:
       // Combine <=> hGauge1 is the model, the others are identical
       updateGauge(28, hGauge1);
       updateGauge(36, hGauge1);
       updateGauge(44, hGauge1);
       break;
-    case Beacon:
+    case HLEDsStrategy::Beacon:
       // TODO will implement cool animation
       updateGauge(28, hGauge1);
       updateGauge(36, hGauge2);
@@ -78,13 +82,13 @@ void LedController::updateGauge(byte offset, Gauge* gauge) {
   byte level = (byte) (((double) gauge->getLevel()) / ratio);
   CRGB color = CRGB::Black;
   switch (gauge->getColorStrategy()) {
-    case SingleColor:
+    case ColorStrategy::SingleColor:
       color = gauge->computeColor(gauge->getLevel());
       for (byte i = 0; i < level; i++) {
         leds[i + offset] = color;
       }
       break;
-    case ColorGradient:
+    case ColorStrategy::ColorGradient:
       for (byte i = 0; i < level; i++) {
         leds[i + offset] = gauge->computeColor(ratio * i);
       }

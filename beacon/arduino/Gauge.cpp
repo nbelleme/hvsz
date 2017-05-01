@@ -1,5 +1,8 @@
 #include "Gauge.h"
 #include "FastLED.h"
+#include "BeaconUtils.h"
+
+using namespace beacon;
 
 CRGB defaultComputeColorFunc(byte level) {
   if (level <= 20) {
@@ -40,11 +43,11 @@ void Gauge::setLedCount(byte ledCount) {
   this->ledCount = ledCount;
 }
 
-ColorStrategy Gauge::getColorStrategy() {
+byte Gauge::getColorStrategy() {
   return this->colorStrategy;
 }
 
-void Gauge::setColorStrategy(ColorStrategy str) {
+void Gauge::setColorStrategy(byte str) {
   this->colorStrategy = str;
 }
 
