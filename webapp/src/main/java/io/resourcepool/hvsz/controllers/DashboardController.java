@@ -29,8 +29,6 @@ public class DashboardController {
         model.addAttribute("nblife", dashboardService.getLifeLeft());
         model.addAttribute("zones", dashboardService.getZoneResource());
         model.addAttribute("status", statusService.get(1L).getGameState());
-
         return "dashboard";
     }
-
 }
