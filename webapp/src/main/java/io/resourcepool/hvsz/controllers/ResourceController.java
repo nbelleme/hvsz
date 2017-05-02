@@ -30,24 +30,22 @@ public class ResourceController {
     /**
      * Drop a resource.
      * @param safeZone SupplyZone id
-     * @param lifeId lifeId
+     * @param lifeToken lifeToken
      * @param model Model
      * @return String (human vue)
      */
     @PostMapping("/resource/drop")
     public String dropResource(
             @RequestParam(value = "safeZone") String safeZone,
-            @RequestParam(value = "lifeId") String lifeId,
+            @RequestParam(value = "lifeToken") String lifeToken,
             Model model) {
-
-
-        //SafeZone s = g.getSafeZones().get(Integer.parseInt(safeZone)); //TODO get safezone by id
-        resourceService.dropById(Integer.parseInt(safeZone), 1, Integer.parseInt(lifeId));
         Game g = dao.get(1L);
+        int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
+
+        resourceService.dropById(Integer.parseInt(safeZone), 1, lifeId);
         SafeZone s = g.getSafeZoneById(Integer.parseInt(safeZone));
-        model.addAttribute("nbResources",   "1 resource has been dropped : supply zone n°" + ID_SUPPLY_ZONE + " contains :" + s.getResource() + "resources");
+        model.addAttribute("nbResources",   "1 resource has been dropped : safe zone n°" + safeZone + " contains :" + s.getResource() + "resources");
         model.addAttribute("zone", s);
-        //dao.set(1L, g);
         return "safe-zone";
     }
 
@@ -63,17 +61,19 @@ public class ResourceController {
     /**
      * Take a resource.
      * @param supplyZone SupplyZone id
-     * @param lifeId lifeId
+     * @param lifeToken lifeToken
      * @param model Model
      * @return String (supply-zone)
      */
     @PostMapping("/resource/get")
     public String resourceGet(
             @RequestParam(value = "supplyZone") String supplyZone,
-            @RequestParam(value = "lifeId") String lifeId,
+            @RequestParam(value = "lifeToken") String lifeToken,
             Model model) {
-        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, Integer.parseInt(lifeId));
         Game g = dao.get(1L);
+        int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
+        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, lifeId);
+        g = dao.get(1L);
         SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
         model.addAttribute("nbSupplyResources", gotRes + " resource has been taken : remaining resources :" + s.getResource());
         model.addAttribute("zone", s);

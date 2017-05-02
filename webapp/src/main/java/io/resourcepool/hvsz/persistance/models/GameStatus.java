@@ -81,4 +81,18 @@ public class GameStatus implements Serializable {
         }
         return null;
     }
+
+    /**
+     * get life by id.
+     * @param token .
+     * @return .
+     */
+    public Life getLifeByToken(String token) {
+        for (Life l : lives) {
+            if (l.getToken() == token) {
+                return l;
+            }
+        }
+        return null;
+    }
 }

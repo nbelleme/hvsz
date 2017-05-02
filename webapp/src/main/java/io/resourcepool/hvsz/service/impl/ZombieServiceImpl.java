@@ -14,7 +14,7 @@ public class ZombieServiceImpl implements ZombieService {
     private DaoMapDb dao;
 
     @Override
-    public boolean kill(String lifeId) {
+    public boolean kill(String lifeToken) {
         Game g = dao.get(1L);
 
         GameStatus status = g.getStatus();
@@ -23,7 +23,7 @@ public class ZombieServiceImpl implements ZombieService {
             //Decrement nbHumaneAlive in game status
             status.setNbHumanAlive(status.getNbHumanAlive() - 1);
             for (Life l : status.getLives()) {
-                if (l.getId().toString().equals(lifeId)) {
+                if (l.getToken().toString().equals(lifeToken)) {
                     l.setAlive(false);
                     lifeFound = true;
                 }

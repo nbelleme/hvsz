@@ -31,7 +31,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public int get(int idSupplyZone, int amount) {
         Game g = dao.get(1L);
-        SupplyZone s = g.getSupplyZones().get(idSupplyZone);
+        SupplyZone s = g.getSupplyZoneById(idSupplyZone);
         return get(s, amount);
     }
 
