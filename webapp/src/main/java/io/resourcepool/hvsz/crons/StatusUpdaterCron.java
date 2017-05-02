@@ -58,9 +58,11 @@ public class StatusUpdaterCron {
                     status.setGameState(GameStateEnum.HUMAN_VICTORY.name());
                     statusService.add(status, game.getId());
                 }
+
+                //decrease resources, faster if difficulty higher.
+                resourceService.decreaseSafezones(-(1 + game.getConfig().getDifficulty()));
             }
 
-            resourceService.decreaseSafezones(-1);
         }
     }
 
