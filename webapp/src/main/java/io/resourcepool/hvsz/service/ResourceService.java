@@ -87,15 +87,6 @@ public interface ResourceService {
     List<ZoneResource> getAllZoneResource();
 
     /**
-     * Drop resources on a safe zone by id.
-     * @param safeZone the safe zone where we drop resources.
-     * @param amount number max of resources we want to drop.
-     * @param id life id
-     * @return dropped amount
-     */
-    int dropById(SafeZone safeZone, int amount, int id);
-
-    /**
      ** Drop resources on a safe zone by id.
      * @param safeZoneId the safe zone id where we drop resources.
      * @param amount qte
