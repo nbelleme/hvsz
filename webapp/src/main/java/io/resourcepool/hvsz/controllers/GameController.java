@@ -64,4 +64,15 @@ public class GameController {
 
         return "redirect:/dashboard";
     }
+
+    /**
+     * Return game over view.
+     * @param model Model
+     * @return String (redirect to dashboard)
+     */
+    @GetMapping("/game/over")
+    public String gameOver(Model model) {
+        model.addAttribute("game_status", statusService.get(1L).getGameState());
+        return "game-over";
+    }
 }

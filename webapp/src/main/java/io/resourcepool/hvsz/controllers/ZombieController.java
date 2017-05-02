@@ -1,5 +1,6 @@
 package io.resourcepool.hvsz.controllers;
 
+import io.resourcepool.hvsz.persistance.models.GameStateEnum;
 import io.resourcepool.hvsz.service.StatusService;
 import io.resourcepool.hvsz.service.ZombieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class ZombieController {
     @Autowired
     StatusService gameStatus;
 
+    @Autowired
+    StatusService statusService;
+
     /**
      * Get the zombie page.
      *
@@ -24,6 +28,10 @@ public class ZombieController {
      */
     @GetMapping("/zombie")
     public String get() {
+        if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
+            return "redirect:/game/over";
+        }
+
         return "zombie";
     }
 
@@ -35,6 +43,10 @@ public class ZombieController {
      */
     @PostMapping("/zombie/kill")
     public String kill(@RequestParam(value = "lifeId") String lifeToken, Model model) {
+        if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
+            return "redirect:/game/over";
+        }
+
         if (zombieService.kill(lifeToken)) {
             model.addAttribute("message", "one human have been killed. There are " + gameStatus.get(1L).getNbHumanAlive() + " humans alive.");
         } else {

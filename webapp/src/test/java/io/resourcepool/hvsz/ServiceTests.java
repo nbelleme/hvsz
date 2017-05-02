@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@Ignore
+@Ignore
 public class ServiceTests {
     private static final int NBLIFE = 100;
     private static final int GAME_DURATION = 100;

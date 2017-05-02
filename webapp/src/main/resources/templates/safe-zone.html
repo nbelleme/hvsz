@@ -10,40 +10,38 @@
 <body>
 <div th:include="menu"/>
 <section class="container">
-    <div th:switch="${game_status}">
-        <p th:case="'HUMAN_VICTORY'">HUMAN VICTORY</p>
-        <p th:case="'ZOMBIE_VICTORY'">ZOMBIE VICTORY</p>
-        <p th:case="'NOT_STARTED'">La partie n'a pas encore démarrée ! </p>
-        <p th:case="'ONGOING'"></p>
-    </div>
+    <h1 th:text="${zone.name}"></h1>
 
     <div th:switch="${zone.resource}">
-        <p th:case="0">SAFE ZONE DESTROYED</p>
-    </div>
 
-    <h1 th:text="${zone.name}"></h1>
-    <div class="card" th:if="${nbDropped != null}">
-        <div class="card-content teal darken-1">
-            <div th:switch="${nbDropped > 0}">
-                <p th:case="${true}" class="white-text"><span th:text="${nbDropped}"></span> ressource(s) déposée(s).</p>
-                <p th:case="${false}" class="white-text">Vous n'avez aucune ressource à déposer ou safezone pleine.</p>
+        <p th:case="0">SAFE ZONE DESTROYED</p>
+
+        <div th:case="*">
+            <div class="card" th:if="${nbDropped != null}">
+                <div class="card-content teal darken-1">
+                    <div th:switch="${nbDropped > 0}">
+                        <p th:case="${true}" class="white-text"><span th:text="${nbDropped}"></span> ressource(s) déposée(s).</p>
+                        <p th:case="${false}" class="white-text">Vous n'avez aucune ressource à déposer ou safezone pleine.</p>
+                    </div>
+                </div>
             </div>
+
+            <form method="post" action="/resource/drop">
+                <fieldset class="row">
+                    <legend>Déposer une ressource</legend>
+                    <input type="hidden" name="safeZone" th:value="${zone.id}"/>
+                    <div class="input-field col s12">
+                        <label for="lifeToken">Votre code utilisateur</label>
+                        <input type="text" name="lifeToken" id="lifeToken"/>
+                    </div>
+                    <p th:text="${nbResources}" />
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Déposer
+                        <i class="material-icons right">send</i>
+                    </button>
+                </fieldset>
+            </form>
         </div>
     </div>
-    <form method="post" action="/resource/drop">
-        <fieldset class="row">
-            <legend>Déposer une ressource</legend>
-            <input type="hidden" name="safeZone" th:value="${zone.id}"/>
-            <div class="input-field col s12">
-                <label for="lifeToken">Votre code utilisateur</label>
-                <input type="text" name="lifeToken" id="lifeToken"/>
-            </div>
-            <p th:text="${nbResources}" />
-            <button class="btn waves-effect waves-light" type="submit" name="action">Déposer
-                <i class="material-icons right">send</i>
-            </button>
-        </fieldset>
-    </form>
 </section>
 <footer>
 
