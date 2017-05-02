@@ -33,7 +33,6 @@ public class StatusUpdaterCron {
 
     private static final int SCHEDULED_TIME = 60000;
 
-    
     /**
      * Schedules the update of all runing games.
      */

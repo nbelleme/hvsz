@@ -1,7 +1,10 @@
 package io.resourcepool.hvsz.controllers;
 
-import io.resourcepool.hvsz.persistance.models.*;
-import io.resourcepool.hvsz.service.ResourceService;
+import io.resourcepool.hvsz.persistance.models.GameConfig;
+import io.resourcepool.hvsz.persistance.models.GameStatus;
+import io.resourcepool.hvsz.persistance.models.GenericBuilder;
+import io.resourcepool.hvsz.persistance.models.SafeZone;
+import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import io.resourcepool.hvsz.service.impl.ConfigurationServiceImpl;
 import io.resourcepool.hvsz.service.impl.ResourceServiceImpl;
 import io.resourcepool.hvsz.service.impl.StatusServiceImpl;
@@ -53,9 +56,8 @@ public class GameController {
 
         ArrayList<SafeZone> safeZones = new ArrayList<>();
         int nbSafeZones = conf.getNbSafezone();
-        int nbSafeZonesLifes = conf.getNbSafezoneLifes();
-        for (int i = 0; i < conf.getNbSupplyZone(); i++) {
-            safeZones.add(new SafeZone(i, nbSafeZonesLifes / nbSafeZones, nbSafeZonesLifes / nbSafeZones));
+        for (int i = 0; i < conf.getNbSafezone(); i++) {
+            safeZones.add(new SafeZone(i, 0, 100));
         }
         resourceService.setSafeZones(safeZones);
 

@@ -86,9 +86,8 @@ public class Game implements Serializable {
         }
         safeZones = new ArrayList<>();
         int nbSafeZones = config.getNbSafezone();
-        int nbSafeZonesLifes = config.getNbSafezoneLifes();
-        for (int i = 0; i < config.getNbSupplyZone(); i++) {
-            safeZones.add(new SafeZone(i, nbSafeZonesLifes / nbSafeZones, nbSafeZonesLifes / nbSafeZones + OFFSET_NB_LIFE_SAFE_ZONE));
+        for (int i = 0; i < config.getNbSafezone(); i++) {
+            safeZones.add(new SafeZone(i, 0, 100));
         }
     }
 
