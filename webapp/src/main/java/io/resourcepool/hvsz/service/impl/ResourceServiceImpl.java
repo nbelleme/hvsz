@@ -110,4 +110,24 @@ public class ResourceServiceImpl implements ResourceService {
         zoneResources.addAll(g.getSafeZones());
         return zoneResources;
     }
+
+    /**
+     * set supply zones.
+     * @param zones .
+     */
+    public void setSupplyZones (ArrayList<SupplyZone> zones) {
+        Game g = dao.get(1L);
+        g.setSupplyZones(zones);
+        dao.set(1L, g);
+    }
+
+    /**
+     * set safe zones.
+     * @param zones .
+     */
+    public void setSafeZones (ArrayList<SafeZone> zones) {
+        Game g = dao.get(1L);
+        g.setSafeZones(zones);
+        dao.set(1L, g);
+    }
 }
