@@ -1,7 +1,11 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
-import io.resourcepool.hvsz.persistance.models.*;
+import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.GameConfig;
+import io.resourcepool.hvsz.persistance.models.GenericBuilder;
+import io.resourcepool.hvsz.persistance.models.Life;
+import io.resourcepool.hvsz.persistance.models.Zone;
 import io.resourcepool.hvsz.service.ConfigurationService;
 import io.resourcepool.hvsz.service.HumanService;
 import io.resourcepool.hvsz.service.ResourceService;
