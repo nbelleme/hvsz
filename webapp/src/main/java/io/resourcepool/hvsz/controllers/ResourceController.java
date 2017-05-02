@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ResourceController {
 
-  @Autowired
-  private DaoMapDb dao;
+    @Autowired
+    private DaoMapDb dao;
 
-  @Autowired
-  private HumanService humanService;
+    @Autowired
+    private HumanService humanService;
 
-  @Autowired
-  private ResourceService resourceService;
+    @Autowired
+    private ResourceService resourceService;
 
   @Autowired
   StatusService statusService;
@@ -51,15 +51,18 @@ public class ResourceController {
     }
 
     Game g = dao.get(1L);
-    int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
-    int nbRes = humanService.getLife(lifeId).getNbResources();
-    int dropRes = resourceService.dropById(Integer.parseInt(safeZone), nbRes, lifeId);
-
-    resourceService.dropById(Integer.parseInt(safeZone), 1, lifeId);
-    SafeZone s = g.getSafeZoneById(Integer.parseInt(safeZone));
-    model.addAttribute("nbDropped", dropRes);
-    model.addAttribute("zone", s);
-    return "safe-zone";
+      if (g.getStatus().getLifeByToken(lifeToken) == null) {
+          model.addAttribute("message", "Wrong token, please try again !");
+      } else {
+          int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
+          int nbRes = humanService.getLife(lifeId).getNbResources();
+          int dropRes = resourceService.dropById(Integer.parseInt(safeZone), nbRes, lifeId);
+          resourceService.dropById(Integer.parseInt(safeZone), 1, lifeId);
+          model.addAttribute("nbDropped", dropRes);
+      }
+      SafeZone s = g.getSafeZoneById(Integer.parseInt(safeZone));
+      model.addAttribute("zone", s);
+      return "safe-zone";
   }
 
   /**
@@ -93,12 +96,15 @@ public class ResourceController {
 
     Game g = dao.get(1L);
     Life lifeId = g.getStatus().getLifeByToken(lifeToken);
-    int id = lifeId.getId();
-    int gotRes = humanService.getResources(Integer.parseInt(supplyZone), Integer.parseInt(nbResWanted), id);
-
-    SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
-    model.addAttribute("nbTaken", gotRes);
-    model.addAttribute("zone", s);
-    return "supply-zone";
+      if (g.getStatus().getLifeByToken(lifeToken) == null) {
+          model.addAttribute("message", "Wrong token, please try again !");
+      } else {
+          int id = lifeId.getId();
+          int gotRes = humanService.getResources(Integer.parseInt(supplyZone), Integer.parseInt(nbResWanted), id);
+          model.addAttribute("nbTaken", gotRes);
+      }
+      SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
+      model.addAttribute("zone", s);
+      return "supply-zone";
   }
 }

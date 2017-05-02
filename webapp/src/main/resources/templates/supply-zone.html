@@ -12,6 +12,11 @@
 <div th:include="menu"/>
 <section class="container">
     <h1 th:text="${zone.name}"></h1>
+    <div th:if="${message}" class="card">
+        <div class="card-content red lighten-2 darken-1">
+            <p class="white-text"><span th:text="${message}"></span></p>
+        </div>
+    </div>
     <div class="card">
         <div class="card-content brown darken-1">
             <p class="white-text">Il reste <span th:text="${zone.resource}"></span> ressource(s).</p>
