@@ -64,6 +64,7 @@ public class ResourceController {
     /**
      * Take a resource.
      * @param supplyZone SupplyZone id
+     * @param nbResWanted number of resource wanted
      * @param lifeToken lifeToken
      * @param model Model
      * @return String (supply-zone)
@@ -71,15 +72,13 @@ public class ResourceController {
     @PostMapping("/resource/get")
     public String resourceGet(
             @RequestParam(value = "supplyZone") String supplyZone,
+            @RequestParam(value = "nbResWanted") String nbResWanted,
             @RequestParam(value = "lifeToken") String lifeToken,
             Model model) {
         Game g = dao.get(1L);
-        Life lifeId = g
-                .getStatus()
-                .getLifeByToken(lifeToken);
-
+        Life lifeId = g.getStatus().getLifeByToken(lifeToken);
         int id = lifeId.getId();
-        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, id);
+        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), Integer.parseInt(nbResWanted), id);
 
         SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
         model.addAttribute("nbTaken", gotRes);
