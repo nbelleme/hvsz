@@ -74,5 +74,52 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
     <script type="text/javascript" src="js/materialize.js"/>
+    <script>
+        $(function () {
+            var diffArray = [];
+            // Difficulty : easy
+            diffArray.push({
+                "gameDuration": 20,
+                "nbHuman": 20,
+                "nbZombie": 5,
+                "nbSafezone": 4,
+                "nbSafezoneLifes": 40,
+                "nbSupplyZone": 3,
+                "nbSupplyResources": 150
+            });
+            //Difficulty : medium
+            diffArray.push({
+                "gameDuration": 30,
+                "nbHuman": 30,
+                "nbZombie": 10,
+                "nbSafezone": 2,
+                "nbSafezoneLifes": 40,
+                "nbSupplyZone": 2,
+                "nbSupplyResources": 180
+            });
+            // Difficulty : hard
+            diffArray.push({
+                "gameDuration": 30,
+                "nbHuman": 20,
+                "nbZombie": 20,
+                "nbSafezone": 3,
+                "nbSafezoneLifes": 40,
+                "nbSupplyZone": 2,
+                "nbSupplyResources": 180
+            });
+
+            function setDifficulty() {
+                var diffLevel = parseInt($("#difficulty").val());
+                var diff = diffArray[diffLevel];
+                for(var key in diff){
+                    $("#" + key).val(diff[key]);
+                    console.log(key);
+                }
+            }
+            setDifficulty();
+            $("#difficulty").change(setDifficulty);
+
+        });
+    </script>
 </body>
 </html>
