@@ -14,6 +14,8 @@ import io.resourcepool.hvsz.service.HumanService;
 import io.resourcepool.hvsz.service.ResourceService;
 import io.resourcepool.hvsz.service.StatusService;
 import io.resourcepool.hvsz.service.ZombieService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +49,9 @@ public class RestApiController {
 
     @Autowired
     private StatusService statusService;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DaoMapDb.class);
+
 
     /**
      * Get all games.
@@ -125,6 +130,48 @@ public class RestApiController {
     public Game getGame(@PathVariable(value = "id") Long id) {
         return dao.get(id); //use index, not id
     }
+
+    /**
+     * Get a game by id.
+     *
+     * @param id Long
+     * @return Game
+     */
+    @RequestMapping(value = "/api/game/{id}/start", method = RequestMethod.POST)
+    @ResponseBody
+    public Game startGame(@PathVariable(value = "id") Long id) {
+        LOGGER.debug("Starting game " + id);
+        GameConfig conf = confService.get(id);
+
+        GameStatus status = GenericBuilder.of(GameStatus::new)
+            .with(GameStatus::setHumanPlayers, conf.getNbHuman())
+            .with(GameStatus::setZombiePlayers, conf.getNbZombie())
+            .with(GameStatus::setNbHumanAlive, 0)
+            .with(GameStatus::setTimeLeft, conf.getGameDuration())
+            .with(GameStatus::setNbLifeLeft, conf.getNbSafezoneLifes())
+            .with(GameStatus::setStarted, true)
+            .build();
+
+        statusService.add(status, id);
+
+        ArrayList<SupplyZone> supplyZones = new ArrayList<>();
+        int nbSupplyZones = conf.getNbSupplyZone();
+        int nbSupplyResources = conf.getNbSupplyResources();
+        for (int i = 0; i < conf.getNbSupplyZone(); i++) {
+            supplyZones.add(new SupplyZone(i, nbSupplyResources / nbSupplyZones));
+        }
+        resourceService.setSupplyZones(supplyZones);
+
+        ArrayList<SafeZone> safeZones = new ArrayList<>();
+        int nbSafeZones = conf.getNbSafezone();
+        for (int i = 0; i < conf.getNbSafezone(); i++) {
+            safeZones.add(new SafeZone(i, 25, 100));
+        }
+        resourceService.setSafeZones(safeZones);
+
+        return dao.get(id);
+    }
+
 
     /**
      * Kill life by token.
