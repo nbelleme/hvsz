@@ -17,8 +17,9 @@
     <div class="row">
         <div class="col s6" th:each="zone : ${zones}">
             <div class="card horizontal">
-                <div class="card-image">
-                    <img src="https://a0.muscache.com/im/pictures/9d368b5b-9c04-4b54-b366-759e4ca80ef4.jpg?aki_policy=x_medium"/>
+                <div th:switch="${zone.type}" class="card-image">
+                    <img th:case="'supplyzone'" src="http://img.over-blog.com/225x300/4/07/69/36/donon-sentiers-des-bunkers/col-de-engin-et-sentier-bunkers-183.jpg"/>
+                    <img th:case="'safezone'" src="https://www.lizio.fr/files/pictures/visites/chapelle/1393583422.jpg"/>
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
