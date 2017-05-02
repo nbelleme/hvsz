@@ -5,6 +5,7 @@ import io.resourcepool.hvsz.persistance.models.Zone;
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
 import io.resourcepool.hvsz.service.HumanService;
 import io.resourcepool.hvsz.service.ResourceService;
+import io.resourcepool.hvsz.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ public class HumanController {
     HumanService humanService;
     @Autowired
     ResourceService resourceService;
+    @Autowired
+    StatusService statusService;
 
     /**
      * Get the human page.
@@ -76,6 +79,7 @@ public class HumanController {
         if (type.equals("safezone")) {
             zone = resourceService.getSafeZone(id);
             model.addAttribute("zone", zone);
+            model.addAttribute("game_status", statusService.get(1L).getGameState());
             return "safe-zone";
         } else {
             zone = resourceService.getSupplyZone(Integer.parseInt(id));

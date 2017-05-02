@@ -10,6 +10,17 @@
 <body>
 <div th:include="menu"/>
 <section class="container">
+    <div th:switch="${game_status}">
+        <p th:case="'HUMAN_VICTORY'">HUMAN VICTORY</p>
+        <p th:case="'ZOMBIE_VICTORY'">ZOMBIE VICTORY</p>
+        <p th:case="'NOT_STARTED'">La partie n'a pas encore démarrée ! </p>
+        <p th:case="'ONGOING'"></p>
+    </div>
+
+    <div th:switch="${zone.resource}">
+        <p th:case="0">SAFE ZONE DESTROYED</p>
+    </div>
+
     <h1 th:text="${zone.name}"></h1>
     <div class="card" th:if="${nbDropped != null}">
         <div class="card-content teal darken-1">
