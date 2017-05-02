@@ -1,6 +1,7 @@
 package io.resourcepool.hvsz.crons;
 
 import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.GameStateEnum;
 import io.resourcepool.hvsz.persistance.models.GameStatus;
 import io.resourcepool.hvsz.service.GameService;
 import io.resourcepool.hvsz.service.ResourceService;
@@ -48,6 +49,13 @@ public class StatusUpdaterCron {
                 GameStatus status = game.getStatus();
                 if (status.getStarted() && status.getTimeLeft() > 0) {
                     status.setTimeLeft(status.getTimeLeft() - 1);
+                    if (!game.checkSafeZoneLeft()) { // if no safezone has resource left, z victory
+                        status.setGameState(GameStateEnum.ZOMBIE_VICTORY.name());
+                    }
+                    statusService.add(status, game.getId());
+                } else if (status.getStarted() && status.getTimeLeft() <= 0 && status.getGameState().equals(GameStateEnum.ONGOING.name())) {
+                    // End game, decide victory
+                    status.setGameState(GameStateEnum.HUMAN_VICTORY.name());
                     statusService.add(status, game.getId());
                 }
             }

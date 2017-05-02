@@ -57,7 +57,7 @@ public class GameController {
         ArrayList<SafeZone> safeZones = new ArrayList<>();
         int nbSafeZones = conf.getNbSafezone();
         for (int i = 0; i < conf.getNbSafezone(); i++) {
-            safeZones.add(new SafeZone(i, 0, 100));
+            safeZones.add(new SafeZone(i, 25, 100));
         }
         resourceService.setSafeZones(safeZones);
 

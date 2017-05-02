@@ -11,6 +11,7 @@ public class GameStatus implements Serializable {
     Integer timeLeft; // in min
     Boolean started = false;
     ArrayList<Life> lives = new ArrayList<>();
+    String gameState = GameStateEnum.NOT_STARTED.name();
 
     public Integer getHumanPlayers() {
         return humanPlayers;
@@ -48,8 +49,15 @@ public class GameStatus implements Serializable {
         return started;
     }
 
+    /**
+     * set started status, also set gameState to ongoing if true.
+     * @param started .
+     */
     public void setStarted(Boolean started) {
         this.started = started;
+        if (this.started) {
+            this.gameState = GameStateEnum.ONGOING.name();
+        }
     }
 
     public Integer getNbLifeLeft() {
@@ -67,6 +75,15 @@ public class GameStatus implements Serializable {
     public void setLives(ArrayList<Life> lives) {
         this.lives = lives;
     }
+
+    public String getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(String gameState) {
+        this.gameState = gameState;
+    }
+
 
     /**
      * get life by id.

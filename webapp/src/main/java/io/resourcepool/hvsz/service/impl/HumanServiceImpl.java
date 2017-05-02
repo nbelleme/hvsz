@@ -42,7 +42,7 @@ public class HumanServiceImpl implements HumanService {
                     .with(Life::setId, incrementor++)
                     .with(Life::setAlive, true)
                     .with(Life::setNbResources, 0)
-                    .with(Life::setToken, UUID.randomUUID().toString())
+                    .with(Life::setToken, UUID.randomUUID().toString()) // TODO smaller token, id + UUIDsubstring
                     .build();
             status.getLives().add(life);
             g.setStatus(status);
@@ -99,24 +99,6 @@ public class HumanServiceImpl implements HumanService {
         if (incrementor <= maxId) {
             incrementor = maxId;
         }
-    }
-
-
-    /**
-     * @param z  ZoneResource
-     * @param qt Integer : resources amount
-     * @param id Integer : life id
-     * @return Integer : amount got
-     */
-    public Integer getResources(SupplyZone z, Integer qt, Integer id) {
-        Game g = dao.get(1L);
-        Life l = g.getStatus().getLives().get(id); //getLife(id);//TODO get by id, not index, use service
-        //Life l = getLife(id); reference fuckup, does not work sadly
-        //Integer gotR = resourceService.get(z, qt);
-        Integer gotR = z.getResource(qt);
-        l.addResource(gotR);
-        dao.set(1L, g);
-        return gotR;
     }
 
     /**

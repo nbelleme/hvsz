@@ -120,6 +120,19 @@ public class Game implements Serializable {
     }
 
     /**
+     * check at least one zone has resources left.
+     * @return .
+     */
+    public Boolean checkSafeZoneLeft() {
+        for (SafeZone s : safeZones) {
+            if (s.getResource() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * get supply zonr by id.
      * @param id .
      * @return .

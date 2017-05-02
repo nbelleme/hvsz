@@ -1,7 +1,6 @@
 package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.models.Life;
-import io.resourcepool.hvsz.persistance.models.SupplyZone;
 
 public interface HumanService {
 
@@ -18,14 +17,6 @@ public interface HumanService {
      * @return the life corresponding
      */
     Life getLife(Integer id);
-
-    /**
-     * @param z  ZoneResource
-     * @param qt Integer : resources amount
-     * @param id Integer : life id
-     * @return Integer : amount got
-     */
-    Integer getResources(SupplyZone z, Integer qt, Integer id);
 
     /**
      * @param zId  ZoneResource id

@@ -2,6 +2,7 @@ package io.resourcepool.hvsz.service.impl;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.GameStateEnum;
 import io.resourcepool.hvsz.persistance.models.GameStatus;
 import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.service.ZombieService;
@@ -27,6 +28,9 @@ public class ZombieServiceImpl implements ZombieService {
                     l.setAlive(false);
                     lifeFound = true;
                 }
+            }
+            if (status.getNbHumanAlive() + status.getNbLifeLeft() <= 0) {
+                status.setGameState(GameStateEnum.ZOMBIE_VICTORY.name());
             }
             g.setStatus(status);
             dao.set(1L, g);
