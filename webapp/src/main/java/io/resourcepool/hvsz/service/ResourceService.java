@@ -93,7 +93,7 @@ public interface ResourceService {
      * @param id life id
      * @return dropped amount
      */
-    int dropById(Integer safeZoneId, int amount, int id);
+    int dropById(int safeZoneId, int amount, int id);
 
     /**
      * set supply zones.

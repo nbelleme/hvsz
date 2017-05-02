@@ -1,12 +1,8 @@
 package io.resourcepool.hvsz;
 
-import io.resourcepool.hvsz.service.ResourceService;
+import io.resourcepool.hvsz.service.*;
 import org.junit.Ignore;
-import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.*;
-import io.resourcepool.hvsz.service.DashboardService;
-import io.resourcepool.hvsz.service.HumanService;
-import io.resourcepool.hvsz.service.ZombieService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +22,7 @@ import static org.junit.Assert.*;
 public class ServiceTests {
     private static final int NBLIFE = 100;
     private static final int GAME_DURATION = 100;
-    private static final int DIFFICULTY = 1;
+    private static final int DIFFICULTY = 0;
     private static final int NBHUMAN = 10;
     private static final int NBZONBIE = 3;
     private static final int NBSAFE_ZONE = 3;
@@ -34,9 +31,6 @@ public class ServiceTests {
 
     //TODO get la valeur
     private static final int NBSAFE_ZONE_RESOURCES = 25;
-
-    @Autowired
-    private DaoMapDb dao;
 
     @Autowired
     private DashboardService dashboardService;
@@ -50,10 +44,15 @@ public class ServiceTests {
     @Autowired
     private ResourceService resourceService;
 
+    @Autowired
+    private StatusService statusService;
+
+    @Autowired
+    private ConfigurationService configurationService;
+
     @Before
     public void init () {
-        Game gameTest = initGame();
-        dao.set(1L, gameTest);
+        initGame();
     }
 
     @Test
@@ -86,15 +85,6 @@ public class ServiceTests {
         humanService.newLife();
         int result = dashboardService.getHuman();
         assertTrue("Test getHuman expected : " + (init + 2) + " current : " + result, result == (init + 2));
-    }
-
-    @Test
-    public void humanServiceGetResourcesBySupplyZone() {
-        Life human = humanService.newLife();
-        SupplyZone supplyZone = resourceService.getSupplyZone(0);
-        int init = supplyZone.getResource();
-        int result = humanService.getResources(supplyZone,5,human.getId());
-        assertTrue("Test GetResourcesBySupplyZone expected : " + (init-5) + " current : " + (init-result), (init-5) == (init-result));
     }
 
     @Test
@@ -155,7 +145,7 @@ public class ServiceTests {
         SafeZone safeZone = resourceService.getSafeZone(0);
         int init = safeZone.getResource();
         int result = resourceService.drop(safeZone,5);
-        assertTrue("Test resourceServiceDropBySafeZone expected : " + (init+5) + " current : " + result, (init+5) == result);
+        assertTrue("Test resourceServiceDropBySafeZone expected : " + (init+5) + " current : " + (init+result), (init+5) == (init+result));
     }
 
     @Test
@@ -163,7 +153,7 @@ public class ServiceTests {
         SafeZone safeZone = resourceService.getSafeZone(0);
         int init = safeZone.getResource();
         int result = resourceService.drop(0,5);
-        assertTrue("Test resourceServiceDropByID expected : " + (init+5) + " current : " + result, (init+5) == result);
+        assertTrue("Test resourceServiceDropByID expected : " + (init+5) + " current : " + (init+result), (init+5) == (init+result));
     }
 
     @Test
@@ -171,46 +161,46 @@ public class ServiceTests {
         SafeZone safeZone = resourceService.getSafeZone(0);
         int init = safeZone.getResource();
         int result = resourceService.drop(0,-5);
-        assertTrue("Test resourceServiceDropByIDInvalidQuantite expected : " + init + " current : " + result, init == result);
+        assertTrue("Test resourceServiceDropByIDInvalidQuantite expected : " + init + " current : " + (init-result), init == (init-result));
     }
 
     @Test
     public void resourceServiceHumanDropByID() {
         Life life = humanService.newLife();
-        life.addResource(5);
+        humanService.getResources(0,5,life.getId());
         SafeZone safeZone = resourceService.getSafeZone(0);
         int init = safeZone.getResource();
         int result = resourceService.dropById(0, 5, life.getId());
-        assertTrue("Test resourceServiceHumanDropByID expected : " + (init+5) + " current : " + result, (init+5) == result);
+        assertTrue("Test resourceServiceHumanDropByID expected : " + (init+5) + " current : " + (init+result), (init+5) == (init+result));
     }
 
     @Test
     public void resourceServiceHumanDropByIDLessQuantite() {
         Life life = humanService.newLife();
-        life.addResource(2);
+        humanService.getResources(0,2,life.getId());
         SafeZone safeZone = resourceService.getSafeZone(0);
         int init = safeZone.getResource();
         int result = resourceService.dropById(0, 5, life.getId());
-        assertTrue("Test resourceServiceHumanDropByIDLessQuantite expected : " + (init+2) + " current : " + result, (init+2) == result);
+        assertTrue("Test resourceServiceHumanDropByIDLessQuantite expected : " + (init+2) + " current : " + (init+result), (init+2) == (init+result));
     }
 
     @Test
     public void resourceServiceHumanDropByIDInvalidQuantite() {
         Life life = humanService.newLife();
-        life.addResource(-2);
+        humanService.getResources(0,5,life.getId());
         SafeZone safeZone = resourceService.getSafeZone(0);
         int init = safeZone.getResource();
-        int result = resourceService.dropById(0, 5, life.getId());
-        assertTrue("Test resourceServiceHumanDropByIDInvalidQuantite expected : " + init + " current : " + result, init == result);
+        int result = resourceService.dropById(0, -2, life.getId());
+        assertTrue("Test resourceServiceHumanDropByIDInvalidQuantite expected : " + init + " current : " + (init-result), init == (init-result));
     }
 
     @Test
     public void resourceServiceDecreaseSafeZones() {
-        ArrayList<SafeZone> safeZonesInit = new ArrayList(resourceService.getAllSafeZone());
+        List<SafeZone> safeZonesInit = resourceService.getAllSafeZone();
         resourceService.decreaseSafezones(5);
-        ArrayList<SafeZone> safeZonesResult = new ArrayList(resourceService.getAllSafeZone());
+        List<SafeZone> safeZonesResult = resourceService.getAllSafeZone();
         for(int i =0; i < safeZonesInit.size(); i++) {
-            assertTrue("Test resourceServiceDecreaseSafeZones expected : " + (safeZonesInit.get(i).getResource() - 5) + " current : " + safeZonesResult.get(i).getResource(), (safeZonesInit.get(i).getResource() - 5) == safeZonesResult.get(i).getResource());
+            assertTrue("Test resourceServiceDecreaseSafeZones expected : " + (safeZonesInit.get(i).getResource() + 5) + " current : " + safeZonesResult.get(i).getResource(), (safeZonesInit.get(i).getResource() + 5) == safeZonesResult.get(i).getResource());
         }
     }
 
@@ -263,12 +253,12 @@ public class ServiceTests {
         return cpt;
     }
 
-    private Game initGame () {
+    private void initGame () {
         Game gameTest = new Game();
         GameConfig config = GenericBuilder.of(GameConfig::new)
                 .with(GameConfig::setGameDuration, GAME_DURATION)
                 .with(GameConfig::setDifficulty, DIFFICULTY)
-                .with(GameConfig::setNbHuman, NBHUMAN)
+                .with(GameConfig::setNbHuman, 0)
                 .with(GameConfig::setNbZombie, NBZONBIE)
                 .with(GameConfig::setNbSafezone, NBSAFE_ZONE)
                 .with(GameConfig::setNbSafezoneLifes, NBLIFE)
@@ -276,6 +266,8 @@ public class ServiceTests {
                 .with(GameConfig::setNbSupplyResources, NBSUPPLY_ZONE_RESOURCES)
                 .build();
         gameTest.setConfig(config);
+
+        configurationService.add(config, 1L);
 
         GameStatus status = GenericBuilder.of(GameStatus::new)
                 .with(GameStatus::setHumanPlayers, config.getNbHuman())
@@ -287,6 +279,21 @@ public class ServiceTests {
                 .build();
         gameTest.setStatus(status);
 
-        return gameTest;
+        statusService.add(status, 1L);
+
+        ArrayList<SupplyZone> supplyZones = new ArrayList<>();
+        int nbSupplyZones = config.getNbSupplyZone();
+        int nbSupplyResources = config.getNbSupplyResources();
+        for (int i = 0; i < config.getNbSupplyZone(); i++) {
+            supplyZones.add(new SupplyZone(i, nbSupplyResources / nbSupplyZones));
+        }
+        resourceService.setSupplyZones(supplyZones);
+
+        ArrayList<SafeZone> safeZones = new ArrayList<>();
+        int nbSafeZones = config.getNbSafezone();
+        for (int i = 0; i < nbSafeZones; i++) {
+            safeZones.add(new SafeZone(i, 25, 100));
+        }
+        resourceService.setSafeZones(safeZones);
     }
 }
