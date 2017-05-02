@@ -2,6 +2,7 @@ package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import io.resourcepool.hvsz.service.HumanService;
@@ -73,8 +74,12 @@ public class ResourceController {
             @RequestParam(value = "lifeToken") String lifeToken,
             Model model) {
         Game g = dao.get(1L);
-        int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
-        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, lifeId);
+        Life lifeId = g
+                .getStatus()
+                .getLifeByToken(lifeToken);
+
+        int id = lifeId.getId();
+        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, id);
 
         SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
         model.addAttribute("nbTaken", gotRes);

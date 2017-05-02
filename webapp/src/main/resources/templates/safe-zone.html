@@ -16,7 +16,7 @@
         <div class="card-content teal darken-1">
             <div th:switch="${nbDropped > 0}">
                 <p th:case="${true}" class="white-text"><span th:text="${nbDropped}"></span> ressource(s) déposée(s).</p>
-                <p th:case="${false}" class="white-text">Vous n'avez aucune ressource à déposer.</p>
+                <p th:case="${false}" class="white-text">Vous n'avez aucune ressource à déposer ou safezone pleine.</p>
             </div>
         </div>
     </div>
