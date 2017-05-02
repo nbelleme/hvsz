@@ -22,7 +22,7 @@ public class HumanServiceImpl implements HumanService {
 
 
     @Override
-    public Integer newLife() {
+    public Life newLife() {
         Game g = dao.get(1L);
 
         GameStatus status = g.getStatus();
@@ -32,7 +32,7 @@ public class HumanServiceImpl implements HumanService {
         }
 
         if (status.getNbLifeLeft() <= 0) {
-            return -1;
+            return null;
         } else {
             //Decrement nbLifeLeft in game status and increment nbHumanAlive
             status.setNbLifeLeft(status.getNbLifeLeft() - 1);
@@ -47,7 +47,7 @@ public class HumanServiceImpl implements HumanService {
             status.getLives().add(life);
             g.setStatus(status);
             dao.set(1L, g);
-            return life.getId();
+            return life;
         }
     }
 

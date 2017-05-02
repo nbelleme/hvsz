@@ -1,5 +1,6 @@
 package io.resourcepool.hvsz.controllers;
 
+import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.persistance.models.Zone;
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
 import io.resourcepool.hvsz.service.HumanService;
@@ -30,8 +31,12 @@ public class HumanController {
     @GetMapping("/human")
     public String human(@RequestParam(value = "newlife", required = false) String newLife, Model model) {
         if (newLife != null) {
-            Integer lifeToken = humanService.newLife();
-            if (lifeToken != -1) {
+            Life life = humanService.newLife();
+            String lifeToken = null;
+            if (life != null) {
+                lifeToken = life.getToken();
+            }
+            if (lifeToken != null) {
                 model.addAttribute("newlife", "New life for you <3  token: " + lifeToken);
             } else {
                 model.addAttribute("newlife", "Sorry no more life ;-(");

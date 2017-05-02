@@ -1,10 +1,7 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
-import io.resourcepool.hvsz.persistance.models.Game;
-import io.resourcepool.hvsz.persistance.models.GameConfig;
-import io.resourcepool.hvsz.persistance.models.GenericBuilder;
-import io.resourcepool.hvsz.persistance.models.Zone;
+import io.resourcepool.hvsz.persistance.models.*;
 import io.resourcepool.hvsz.service.ConfigurationService;
 import io.resourcepool.hvsz.service.HumanService;
 import io.resourcepool.hvsz.service.ResourceService;
@@ -97,7 +94,7 @@ public class RestApiController {
      */
     @RequestMapping(value = "/api/game/{id}/newLife", method = RequestMethod.GET)
     @ResponseBody
-    public Integer newLife(@PathVariable("id") Long id) {
+    public Life newLife(@PathVariable("id") Long id) {
         return humanService.newLife(); //use index, not id
     }
 

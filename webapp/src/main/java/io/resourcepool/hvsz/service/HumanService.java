@@ -10,7 +10,7 @@ public interface HumanService {
      *
      * @return true if success, false else
      */
-    Integer newLife();
+    Life newLife();
 
     /**
      * get life by id.
