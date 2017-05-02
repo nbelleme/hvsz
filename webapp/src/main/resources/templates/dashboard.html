@@ -20,7 +20,23 @@
         <ul class="zones">
             <li th:each="zone : ${zones}" th:text="${zone.name} + ' : ' + ${zone.resource}"/>
         </ul>
-        <a class="waves-effect waves-light btn" href="/game/start">Lancer le jeu</a>
+        <th:block th:switch="${status}">
+            <div th:case="'NOT_STARTED'">
+                <a class="waves-effect waves-light btn" href="/game/start">Lancer le jeu</a>
+            </div>
+            <div th:case="'ONGOING'">
+                <a class="waves-effect waves-light btn" href="/game/start">Stopper le jeu</a>
+            </div>
+            <div th:case="'PAUSED'">
+                <a class="waves-effect waves-light btn" href="/game/start">Relancer le jeu</a>
+            </div>
+            <div th:case="'HUMAN_VICTORY'">
+                <span>VICTOIRE DES HUMAINS !</span>
+            </div>
+            <div th:case="'ZOMBIE_VICTORY'">
+                <span>VICTOIRE DES ZOMBIES !</span>
+            </div>
+        </th:block>
     </section>
     <footer>
 

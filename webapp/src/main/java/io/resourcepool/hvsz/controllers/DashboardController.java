@@ -1,6 +1,7 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.service.DashboardService;
+import io.resourcepool.hvsz.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,9 @@ public class DashboardController {
 
     @Autowired
     private DashboardService dashboardService;
+
+    @Autowired
+    StatusService statusService;
 
     /**
      * Get the dashboard page.
@@ -24,6 +28,7 @@ public class DashboardController {
         model.addAttribute("time", dashboardService.getTime());
         model.addAttribute("nblife", dashboardService.getLifeLeft());
         model.addAttribute("zones", dashboardService.getZoneResource());
+        model.addAttribute("status", statusService.get(1L).getGameState());
 
         return "dashboard";
     }
