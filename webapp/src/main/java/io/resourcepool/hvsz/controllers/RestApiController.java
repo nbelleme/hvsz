@@ -1,15 +1,8 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
-import io.resourcepool.hvsz.persistance.models.Game;
-import io.resourcepool.hvsz.persistance.models.GameConfig;
-import io.resourcepool.hvsz.persistance.models.GenericBuilder;
-import io.resourcepool.hvsz.persistance.models.Life;
-import io.resourcepool.hvsz.persistance.models.Zone;
-import io.resourcepool.hvsz.service.ConfigurationService;
-import io.resourcepool.hvsz.service.HumanService;
-import io.resourcepool.hvsz.service.ResourceService;
-import io.resourcepool.hvsz.service.ZombieService;
+import io.resourcepool.hvsz.persistance.models.*;
+import io.resourcepool.hvsz.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -40,6 +34,9 @@ public class RestApiController {
     @Autowired
     private ResourceService resourceService;
 
+    @Autowired
+    private StatusService statusService;
+
     /**
      * Get all games.
      *
@@ -48,6 +45,47 @@ public class RestApiController {
     @RequestMapping(value = "/api/game", method = RequestMethod.GET)
     @ResponseBody
     public List<Game> getAllGames() {
+        return dao.getAll();
+    }
+
+    /**
+     * Init
+     *
+     * @return List all games
+     */
+    @RequestMapping(value = "/api/init", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Game> init() {
+        newGame("1");
+        setGameConfig(1L, "30", "0", "30", "10", "2", "40", "2", "180");
+        GameConfig conf = confService.get(1L);
+
+        GameStatus status = GenericBuilder.of(GameStatus::new)
+            .with(GameStatus::setHumanPlayers, conf.getNbHuman())
+            .with(GameStatus::setZombiePlayers, conf.getNbZombie())
+            .with(GameStatus::setNbHumanAlive, 0)
+            .with(GameStatus::setTimeLeft, conf.getGameDuration())
+            .with(GameStatus::setNbLifeLeft, conf.getNbSafezoneLifes())
+            .with(GameStatus::setStarted, true)
+            .build();
+
+        statusService.add(status, 1L);
+
+        ArrayList<SupplyZone> supplyZones = new ArrayList<>();
+        int nbSupplyZones = conf.getNbSupplyZone();
+        int nbSupplyResources = conf.getNbSupplyResources();
+        for (int i = 0; i < conf.getNbSupplyZone(); i++) {
+            supplyZones.add(new SupplyZone(i, nbSupplyResources / nbSupplyZones));
+        }
+        resourceService.setSupplyZones(supplyZones);
+
+        ArrayList<SafeZone> safeZones = new ArrayList<>();
+        int nbSafeZones = conf.getNbSafezone();
+        for (int i = 0; i < conf.getNbSafezone(); i++) {
+            safeZones.add(new SafeZone(i, 25, 100));
+        }
+        resourceService.setSafeZones(safeZones);
+
         return dao.getAll();
     }
 

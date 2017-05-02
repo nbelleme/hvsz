@@ -4,6 +4,7 @@ import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ResourceService {
@@ -102,4 +103,18 @@ public interface ResourceService {
      * @return dropped amount
      */
     int dropById(Integer safeZoneId, int amount, int id);
+
+
+    /**
+     * set supply zones.
+     * @param zones .
+     */
+    void setSupplyZones(ArrayList<SupplyZone> zones);
+
+
+    /**
+     * set safes zones.
+     * @param zones .
+     */
+    void setSafeZones(ArrayList<SafeZone> zones);
 }
