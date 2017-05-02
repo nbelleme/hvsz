@@ -76,8 +76,7 @@ public class ResourceController {
         Game g = dao.get(1L);
         SupplyZone s = g.getSupplyZones().get(Integer.parseInt(supplyZone));
 
-        int gotRes = humanService.getResources(s, 1, Integer.parseInt(lifeId));
-
+        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, Integer.parseInt(lifeId));
         model.addAttribute("nbSupplyResources", gotRes + " resource has been taken : remaining resources :" + s.getResource());
         model.addAttribute("zone", s);
         //dao.set(1L, g);

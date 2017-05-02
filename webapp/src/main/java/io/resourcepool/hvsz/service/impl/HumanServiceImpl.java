@@ -10,6 +10,8 @@ import io.resourcepool.hvsz.service.HumanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class HumanServiceImpl implements HumanService {
 
@@ -37,9 +39,10 @@ public class HumanServiceImpl implements HumanService {
             status.setNbHumanAlive(status.getNbHumanAlive() + 1);
             //Create new Life
             Life life = GenericBuilder.of(Life::new)
-                    .with(Life::setId, incrementor++) // TODO update and increment to avoid duplicate id
+                    .with(Life::setId, incrementor++)
                     .with(Life::setAlive, true)
                     .with(Life::setNbResources, 0)
+                    .with(Life::setToken, UUID.randomUUID().toString())
                     .build();
             status.getLives().add(life);
             g.setStatus(status);
