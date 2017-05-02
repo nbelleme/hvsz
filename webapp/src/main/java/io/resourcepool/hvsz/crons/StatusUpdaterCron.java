@@ -43,7 +43,7 @@ public class StatusUpdaterCron {
         if (runningGames != null || runningGames.isEmpty()) {
             LOGGER.info("No running game to update.");
         } else {
-            for (Game game: runningGames) {
+            for (Game game : runningGames) {
                 LOGGER.info("Update the game of id " + game.getId());
                 GameStatus status = game.getStatus();
                 if (status.getStarted() && status.getTimeLeft() > 0) {

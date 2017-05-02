@@ -10,9 +10,17 @@
 <body>
     <div th:include="menu"/>
     <section class="container">
-        <p th:text="${nbSupplyResources}" />
         <h1 th:text="${zone.name}"></h1>
-
+        <div class="card">
+            <div class="card-content brown darken-1">
+                <p class="white-text">Il reste <span th:text="${zone.resource}"></span> ressource(s).</p>
+            </div>
+        </div>
+        <div th:if="${nbTaken}" class="card">
+            <div class="card-content teal darken-1">
+                <p class="white-text"><span th:text="${nbTaken}"></span> ressource(s) prise(s) ou safezone pleine.</p>
+            </div>
+        </div>
         <form method="post" action="/resource/get">
             <fieldset class="row">
                 <legend>Prendre une ressource</legend>
@@ -21,7 +29,6 @@
                     <label for="lifeToken">Votre code utilisateur</label>
                     <input type="text" name="lifeToken" id="lifeToken"/>
                 </div>
-                <p th:text="${nbSupplyResources}" />
                 <button class="btn waves-effect waves-light" type="submit" name="action">Prendre
                     <i class="material-icons right">send</i>
                 </button>

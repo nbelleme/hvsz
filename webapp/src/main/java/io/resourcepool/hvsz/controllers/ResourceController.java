@@ -41,10 +41,12 @@ public class ResourceController {
             Model model) {
         Game g = dao.get(1L);
         int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
+        int nbRes = humanService.getLife(lifeId).getNbResources();
+        int dropRes = resourceService.dropById(Integer.parseInt(safeZone), nbRes, lifeId);
 
         resourceService.dropById(Integer.parseInt(safeZone), 1, lifeId);
         SafeZone s = g.getSafeZoneById(Integer.parseInt(safeZone));
-        model.addAttribute("nbResources",   "1 resource has been dropped : safe zone n°" + safeZone + " contains :" + s.getResource() + "resources");
+        model.addAttribute("nbDropped", dropRes);
         model.addAttribute("zone", s);
         return "safe-zone";
     }
@@ -73,9 +75,9 @@ public class ResourceController {
         Game g = dao.get(1L);
         int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
         int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, lifeId);
-        g = dao.get(1L);
+
         SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
-        model.addAttribute("nbSupplyResources", gotRes + " resource has been taken : remaining resources :" + s.getResource());
+        model.addAttribute("nbTaken", gotRes);
         model.addAttribute("zone", s);
         return "supply-zone";
     }
