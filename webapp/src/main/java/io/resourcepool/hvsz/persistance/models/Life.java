@@ -11,7 +11,7 @@ public class Life implements Serializable {
     private boolean alive;
     private int nbResources;
     private String token;
-
+    private static final int MAX_RESOURCES = 10;
 
     public Integer getId() {
         return this.id;
@@ -62,11 +62,19 @@ public class Life implements Serializable {
     }
 
     /**
-     * .
-     * @param qte .
+     * add a resource to inventory.
+     * @param qte qte to add
+     * @return qte added
      */
-    public void addResource(int qte) {
-        this.nbResources += qte;
+    public int addResource(int qte) {
+        if (this.nbResources + qte <= MAX_RESOURCES) {
+            this.nbResources += qte;
+            return qte;
+        } else {
+            int addedRes = MAX_RESOURCES - this.nbResources;
+            this.nbResources = MAX_RESOURCES;
+            return addedRes;
+        }
     }
 
     @Override
