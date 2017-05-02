@@ -21,12 +21,12 @@ public class ZombieServiceImpl implements ZombieService {
         GameStatus status = g.getStatus();
 
             Boolean lifeFound = false;
-            //Decrement nbHumaneAlive in game status
-            status.setNbHumanAlive(status.getNbHumanAlive() - 1);
             for (Life l : status.getLives()) {
                 if (l.getToken().toString().equals(lifeToken)) {
                     l.setAlive(false);
                     lifeFound = true;
+                    //Decrement nbHumaneAlive in game status
+                    status.setNbHumanAlive(status.getNbHumanAlive() - 1);
                 }
             }
             if (status.getNbHumanAlive() + status.getNbLifeLeft() <= 0) {
