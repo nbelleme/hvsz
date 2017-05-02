@@ -1,8 +1,19 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
-import io.resourcepool.hvsz.persistance.models.*;
-import io.resourcepool.hvsz.service.*;
+import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.GameConfig;
+import io.resourcepool.hvsz.persistance.models.GameStatus;
+import io.resourcepool.hvsz.persistance.models.GenericBuilder;
+import io.resourcepool.hvsz.persistance.models.Life;
+import io.resourcepool.hvsz.persistance.models.SafeZone;
+import io.resourcepool.hvsz.persistance.models.SupplyZone;
+import io.resourcepool.hvsz.persistance.models.Zone;
+import io.resourcepool.hvsz.service.ConfigurationService;
+import io.resourcepool.hvsz.service.HumanService;
+import io.resourcepool.hvsz.service.ResourceService;
+import io.resourcepool.hvsz.service.StatusService;
+import io.resourcepool.hvsz.service.ZombieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +60,7 @@ public class RestApiController {
     }
 
     /**
-     * Init
+     * Init a new game with defautl config and start it.
      *
      * @return List all games
      */

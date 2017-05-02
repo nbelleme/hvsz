@@ -1,9 +1,6 @@
 package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.models.GameStatus;
-import io.resourcepool.hvsz.persistance.models.SupplyZone;
-
-import java.util.ArrayList;
 
 public interface StatusService {
 
