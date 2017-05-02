@@ -95,13 +95,11 @@ public interface ResourceService {
      */
     int dropById(Integer safeZoneId, int amount, int id);
 
-
     /**
      * set supply zones.
      * @param zones .
      */
     void setSupplyZones(ArrayList<SupplyZone> zones);
-
 
     /**
      * set safes zones.

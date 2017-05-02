@@ -5,9 +5,9 @@ import io.resourcepool.hvsz.persistance.models.GameStatus;
 import io.resourcepool.hvsz.persistance.models.GenericBuilder;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
-import io.resourcepool.hvsz.service.impl.ConfigurationServiceImpl;
-import io.resourcepool.hvsz.service.impl.ResourceServiceImpl;
-import io.resourcepool.hvsz.service.impl.StatusServiceImpl;
+import io.resourcepool.hvsz.service.ConfigurationService;
+import io.resourcepool.hvsz.service.ResourceService;
+import io.resourcepool.hvsz.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +19,11 @@ import java.util.ArrayList;
 public class GameController {
 
     @Autowired
-    private ConfigurationServiceImpl confService;
+    private ConfigurationService confService;
     @Autowired
-    private StatusServiceImpl statusService;
+    private StatusService statusService;
     @Autowired
-    private ResourceServiceImpl resourceService;
+    private ResourceService resourceService;
 
     /**
      * Start the game.
@@ -49,14 +49,14 @@ public class GameController {
         ArrayList<SupplyZone> supplyZones = new ArrayList<>();
         int nbSupplyZones = conf.getNbSupplyZone();
         int nbSupplyResources = conf.getNbSupplyResources();
-        for (int i = 0; i < conf.getNbSupplyZone(); i++) {
+        for (int i = 0; i < nbSupplyZones; i++) {
             supplyZones.add(new SupplyZone(i, nbSupplyResources / nbSupplyZones));
         }
         resourceService.setSupplyZones(supplyZones);
 
         ArrayList<SafeZone> safeZones = new ArrayList<>();
         int nbSafeZones = conf.getNbSafezone();
-        for (int i = 0; i < conf.getNbSafezone(); i++) {
+        for (int i = 0; i < nbSafeZones; i++) {
             safeZones.add(new SafeZone(i, 25, 100));
         }
         resourceService.setSafeZones(safeZones);
