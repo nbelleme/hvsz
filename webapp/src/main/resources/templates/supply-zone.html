@@ -36,8 +36,8 @@
                 <label for="lifeToken">Votre code utilisateur</label>
                 <input type="text" name="lifeToken" id="lifeToken"/>
             </div>
-            <button class="btn waves-effect waves-light" type="submit" name="action" id="take-button">Prendre</button>
-
+            <button class="btn waves-effect waves-light" type="submit"
+                    name="action" id="take-button">Prendre (maintenir appuyé)</button>
         </fieldset>
     </form>
 </section>
@@ -47,7 +47,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
 <script>
     $(function () {
-        var text = "Prendre ";
+        var text = "Prendre (maintenir appuyé)";
         var defaultNb = 1;
         var nb = 1;
         var increase = false;
@@ -64,12 +64,10 @@
         }
 
         function onMouseDown(e) {
-            console.log("down");
             e.preventDefault();
             increase = true;
             increaseLoop(function () {
-                console.log("cb");
-                $("#take-button").text(text + nb + ' ressources');
+                $("#take-button").text('Prendre ' + nb + ' ressources');
             });
         }
 

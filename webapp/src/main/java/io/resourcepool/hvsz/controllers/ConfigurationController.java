@@ -51,8 +51,6 @@ public class ConfigurationController {
           @RequestParam(value = "nbSupplyResources", defaultValue = "180") String nbSupplyResources,
           Model model) {
 
-    int diff = confService.get(1L).getDifficulty();
-
     GameConfig conf = GenericBuilder.of(GameConfig::new)
             .with(GameConfig::setGameDuration, Integer.parseInt(gameDuration))
             .with(GameConfig::setDifficulty, Integer.parseInt(difficulty))

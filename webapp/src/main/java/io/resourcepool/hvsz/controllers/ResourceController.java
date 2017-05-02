@@ -28,27 +28,27 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
-  @Autowired
-  StatusService statusService;
+    @Autowired
+    StatusService statusService;
 
-  private static final int ID_SUPPLY_ZONE = 1;
+    private static final int ID_SUPPLY_ZONE = 1;
 
-  /**
-   * Drop a resource.
-   *
-   * @param safeZone  SupplyZone id
-   * @param lifeToken lifeToken
-   * @param model     Model
-   * @return String (human vue)
-   */
-  @PostMapping("/resource/drop")
-  public String dropResource(
-      @RequestParam(value = "safeZone") String safeZone,
-      @RequestParam(value = "lifeToken") String lifeToken,
-      Model model) {
-    if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
-      return "redirect:/game/over";
-    }
+    /**
+     * Drop a resource.
+     *
+     * @param safeZone  SupplyZone id
+     * @param lifeToken lifeToken
+     * @param model     Model
+     * @return String (human vue)
+     */
+    @PostMapping("/resource/drop")
+    public String dropResource(
+            @RequestParam(value = "safeZone") String safeZone,
+            @RequestParam(value = "lifeToken") String lifeToken,
+            Model model) {
+        if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
+            return "redirect:/game/over";
+        }
 
     Game g = dao.get(1L);
       if (g.getStatus().getLifeByToken(lifeToken) == null) {
@@ -65,34 +65,34 @@ public class ResourceController {
       return "safe-zone";
   }
 
-  /**
-   * Show the supply-zone view.
-   *
-   * @return String (supply-zone vue)
-   */
-  @GetMapping("/resource")
-  public String resourceGet() {
-    return "supply-zone";
-  }
-
-  /**
-   * Take a resource.
-   *
-   * @param supplyZone  SupplyZone id
-   * @param nbResWanted number of resource wanted
-   * @param lifeToken   lifeToken
-   * @param model       Model
-   * @return String (supply-zone)
-   */
-  @PostMapping("/resource/get")
-  public String resourceGet(
-      @RequestParam(value = "supplyZone") String supplyZone,
-      @RequestParam(value = "nbResWanted") String nbResWanted,
-      @RequestParam(value = "lifeToken") String lifeToken,
-      Model model) {
-    if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
-      return "redirect:/game/over";
+    /**
+     * Show the supply-zone view.
+     *
+     * @return String (supply-zone vue)
+     */
+    @GetMapping("/resource")
+    public String resourceGet() {
+        return "supply-zone";
     }
+
+    /**
+     * Take a resource.
+     *
+     * @param supplyZone  SupplyZone id
+     * @param nbResWanted number of resource wanted
+     * @param lifeToken   lifeToken
+     * @param model       Model
+     * @return String (supply-zone)
+     */
+    @PostMapping("/resource/get")
+    public String resourceGet(
+            @RequestParam(value = "supplyZone") String supplyZone,
+            @RequestParam(value = "nbResWanted") String nbResWanted,
+            @RequestParam(value = "lifeToken") String lifeToken,
+            Model model) {
+        if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
+            return "redirect:/game/over";
+        }
 
     Game g = dao.get(1L);
     Life lifeId = g.getStatus().getLifeByToken(lifeToken);
@@ -103,6 +103,7 @@ public class ResourceController {
           int gotRes = humanService.getResources(Integer.parseInt(supplyZone), Integer.parseInt(nbResWanted), id);
           model.addAttribute("nbTaken", gotRes);
       }
+      g = dao.get(1L);
       SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
       model.addAttribute("zone", s);
       return "supply-zone";
