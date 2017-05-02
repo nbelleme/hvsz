@@ -11,7 +11,6 @@
 <div th:include="menu"/>
 <section class="container">
     <h1 th:text="${zone.name}"></h1>
-    <h1 th:text="${nbDropped}"></h1>
     <div class="card" th:if="${nbDropped != null}">
         <div class="card-content teal darken-1">
             <div th:switch="${nbDropped > 0}">
