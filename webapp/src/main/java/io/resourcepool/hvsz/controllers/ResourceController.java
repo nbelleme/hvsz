@@ -2,6 +2,7 @@ package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.dao.DaoMapDb;
 import io.resourcepool.hvsz.persistance.models.Game;
+import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.persistance.models.SupplyZone;
 import io.resourcepool.hvsz.service.HumanService;
@@ -41,10 +42,12 @@ public class ResourceController {
             Model model) {
         Game g = dao.get(1L);
         int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
+        int nbRes = humanService.getLife(lifeId).getNbResources();
+        int dropRes = resourceService.dropById(Integer.parseInt(safeZone), nbRes, lifeId);
 
         resourceService.dropById(Integer.parseInt(safeZone), 1, lifeId);
         SafeZone s = g.getSafeZoneById(Integer.parseInt(safeZone));
-        model.addAttribute("nbResources",   "1 resource has been dropped : safe zone n°" + safeZone + " contains :" + s.getResource() + "resources");
+        model.addAttribute("nbDropped", dropRes);
         model.addAttribute("zone", s);
         return "safe-zone";
     }
@@ -71,11 +74,15 @@ public class ResourceController {
             @RequestParam(value = "lifeToken") String lifeToken,
             Model model) {
         Game g = dao.get(1L);
-        int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
-        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, lifeId);
-        g = dao.get(1L);
+        Life lifeId = g
+                .getStatus()
+                .getLifeByToken(lifeToken);
+
+        int id = lifeId.getId();
+        int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, id);
+
         SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
-        model.addAttribute("nbSupplyResources", gotRes + " resource has been taken : remaining resources :" + s.getResource());
+        model.addAttribute("nbTaken", gotRes);
         model.addAttribute("zone", s);
         return "supply-zone";
     }

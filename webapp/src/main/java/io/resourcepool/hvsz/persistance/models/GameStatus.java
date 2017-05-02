@@ -106,7 +106,7 @@ public class GameStatus implements Serializable {
      */
     public Life getLifeByToken(String token) {
         for (Life l : lives) {
-            if (l.getToken() == token) {
+            if (l.getToken().equals(token)) {
                 return l;
             }
         }
