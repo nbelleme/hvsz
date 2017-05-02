@@ -67,4 +67,18 @@ public class GameStatus implements Serializable {
     public void setLives(ArrayList<Life> lives) {
         this.lives = lives;
     }
+
+    /**
+     * get life by id.
+     * @param id .
+     * @return .
+     */
+    public Life getLife(int id) {
+        for (Life l : lives) {
+            if (l.getId() == id) {
+                return l;
+            }
+        }
+        return null;
+    }
 }

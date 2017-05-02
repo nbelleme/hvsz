@@ -127,10 +127,8 @@ public class HumanServiceImpl implements HumanService {
      */
     public Integer getResources(Integer zId, Integer qt, Integer id) {
         Game g = dao.get(1L);
-        Life l = g.getStatus().getLives().get(id); // work but use indexs instead of id
-        //Life l = getLife(id); reference fuckup, does not work sadly
-        SupplyZone z = g.getSupplyZones().get(zId); //TODO get by id, not index, use zone service
-        //Integer gotR = resourceService.get(z, qt);
+        Life l = g.getStatus().getLife(id);
+        SupplyZone z = g.getSupplyZoneById(zId);
         Integer gotR = z.getResource(qt);
         l.addResource(gotR);
         dao.set(1L, g);

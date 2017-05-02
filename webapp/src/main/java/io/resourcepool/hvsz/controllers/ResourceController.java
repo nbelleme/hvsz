@@ -40,13 +40,14 @@ public class ResourceController {
             @RequestParam(value = "lifeId") String lifeId,
             Model model) {
 
-        Game g = dao.get(1L);
 
-        SafeZone s = g.getSafeZones().get(Integer.parseInt(safeZone)); //TODO get safezone by id
-        resourceService.dropById(s, 1, Integer.parseInt(lifeId));
+        //SafeZone s = g.getSafeZones().get(Integer.parseInt(safeZone)); //TODO get safezone by id
+        resourceService.dropById(Integer.parseInt(safeZone), 1, Integer.parseInt(lifeId));
+        Game g = dao.get(1L);
+        SafeZone s = g.getSafeZoneById(Integer.parseInt(safeZone));
         model.addAttribute("nbResources",   "1 resource has been dropped : supply zone n°" + ID_SUPPLY_ZONE + " contains :" + s.getResource() + "resources");
         model.addAttribute("zone", s);
-        dao.set(1L, g);
+        //dao.set(1L, g);
         return "safe-zone";
     }
 
@@ -71,15 +72,11 @@ public class ResourceController {
             @RequestParam(value = "supplyZone") String supplyZone,
             @RequestParam(value = "lifeId") String lifeId,
             Model model) {
-
-        //TODO: get zone by id
-        Game g = dao.get(1L);
-        SupplyZone s = g.getSupplyZones().get(Integer.parseInt(supplyZone));
-
         int gotRes = humanService.getResources(Integer.parseInt(supplyZone), 1, Integer.parseInt(lifeId));
+        Game g = dao.get(1L);
+        SupplyZone s = g.getSupplyZoneById(Integer.parseInt(supplyZone));
         model.addAttribute("nbSupplyResources", gotRes + " resource has been taken : remaining resources :" + s.getResource());
         model.addAttribute("zone", s);
-        //dao.set(1L, g);
         return "supply-zone";
     }
 }

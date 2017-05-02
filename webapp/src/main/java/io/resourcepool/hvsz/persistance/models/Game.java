@@ -120,6 +120,34 @@ public class Game implements Serializable {
         this.zombieZones = zombieZones;
     }
 
+    /**
+     * get supply zonr by id.
+     * @param id .
+     * @return .
+     */
+    public SupplyZone getSupplyZoneById(int id) {
+        for (SupplyZone z : supplyZones) {
+            if (z.getId() == id) {
+                return z;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * get safe zone by id.
+     * @param id .
+     * @return .
+     */
+    public SafeZone getSafeZoneById(int id) {
+        for (SafeZone z : safeZones) {
+            if (z.getId() == id) {
+                return z;
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

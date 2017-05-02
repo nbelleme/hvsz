@@ -51,9 +51,9 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public int dropById(Integer safeZoneId, int amount, int id) {
         Game g = dao.get(1L);
-        Life l = humanService.getLife(id);
+        Life l = g.getStatus().getLife(id);//humanService.getLife(id);
         l.dropResources(amount);
-        SafeZone safeZone = g.getSafeZones().get(safeZoneId); //TODO replace get by id, call zone service
+        SafeZone safeZone = g.getSafeZoneById(safeZoneId); //TODO replace get by id, call zone service
         Integer dropped = safeZone.drop(amount);
         dao.set(1L, g);
         return dropped;
