@@ -41,7 +41,7 @@ public class StatusUpdaterCron {
     public void gameTimer() {
         List<Game> runningGames = gameService.getAllRuningGames();
 
-        if (runningGames != null || runningGames.isEmpty()) {
+        if (runningGames == null || runningGames.isEmpty()) {
             LOGGER.info("No running game to update.");
         } else {
             for (Game game : runningGames) {

@@ -60,7 +60,7 @@ public class RestApiController {
     }
 
     /**
-     * Init a new game with defautl config and start it.
+     * Init a new game with default config and start it.
      *
      * @return List all games
      */
