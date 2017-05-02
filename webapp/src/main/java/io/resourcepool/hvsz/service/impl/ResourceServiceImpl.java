@@ -41,20 +41,12 @@ public class ResourceServiceImpl implements ResourceService {
   }
 
   @Override
-  public int dropById(SafeZone safeZone, int amount, int id) {
-    Game g = dao.get(1L);
-    Life l = humanService.getLife(id);
-    l.dropResources(amount);
-    return safeZone.drop(amount);
-  }
-
-  @Override
-  public int dropById(Integer safeZoneId, int amount, int id) {
+  public int dropById(int safeZoneId, int amount, int id) {
     Game g = dao.get(1L);
     Life l = g.getStatus().getLife(id); //humanService.getLife(id);
-    l.dropResources(amount);
-    SafeZone safeZone = g.getSafeZoneById(safeZoneId); //TODO replace get by id, call zone service
-    Integer dropped = safeZone.drop(amount);
+    int dropped = l.dropResources(amount);
+    SafeZone safeZone = getSafeZone(safeZoneId);
+    dropped = safeZone.drop(dropped);
     dao.set(1L, g);
     return dropped;
   }
@@ -67,13 +59,15 @@ public class ResourceServiceImpl implements ResourceService {
 
   @Override
   public void decreaseSafezones(int amount) {
-    ArrayList<SafeZone> safeZones = dao.get(1L).getSafeZones();
-    for (SafeZone safeZone : safeZones) {
-      drop(safeZone, amount);
-    }
-    Game g = dao.get(1L);
-    g.setSafeZones(safeZones);
-    dao.set(1L, g);
+      if (amount > 0) {
+          ArrayList<SafeZone> safeZones = dao.get(1L).getSafeZones();
+          for (SafeZone safeZone : safeZones) {
+              drop(safeZone, amount);
+          }
+          Game g = dao.get(1L);
+          g.setSafeZones(safeZones);
+          dao.set(1L, g);
+      }
   }
 
   @Override

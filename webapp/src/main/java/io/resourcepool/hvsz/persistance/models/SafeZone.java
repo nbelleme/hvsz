@@ -78,6 +78,9 @@ public class SafeZone implements ZoneResource, Serializable {
      * @return how many resource we have realy drop
      */
     public int drop(int quantite) {
+        if (quantite <= 0) {
+            return 0;
+        }
         resource += quantite;
         if (resource > maxResource) {
             int over = resource - maxResource;

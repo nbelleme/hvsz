@@ -2,7 +2,7 @@ package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.models.GameConfig;
 import io.resourcepool.hvsz.persistance.models.GenericBuilder;
-import io.resourcepool.hvsz.service.impl.ConfigurationServiceImpl;
+import io.resourcepool.hvsz.service.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ConfigurationController {
 
   @Autowired
-  private ConfigurationServiceImpl confService;
+  private ConfigurationService confService;
 
   /**
    * Get the configuration form.

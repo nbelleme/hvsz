@@ -42,7 +42,7 @@ public class HumanServiceImpl implements HumanService {
                     .with(Life::setId, incrementor++)
                     .with(Life::setAlive, true)
                     .with(Life::setNbResources, 0)
-                    .with(Life::setToken, UUID.randomUUID().toString()) // TODO smaller token, id + UUIDsubstring
+                    .with(Life::setToken, (incrementor - 1) + UUID.randomUUID().toString().substring(0, 5))
                     .build();
             status.getLives().add(life);
             g.setStatus(status);
