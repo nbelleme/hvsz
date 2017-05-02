@@ -1,7 +1,5 @@
 package io.resourcepool.hvsz.controllers;
 
-import io.resourcepool.hvsz.persistance.models.GameStateEnum;
-import io.resourcepool.hvsz.persistance.models.GameStatus;
 import io.resourcepool.hvsz.service.DashboardService;
 import io.resourcepool.hvsz.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ public class DashboardController {
         model.addAttribute("nblife", dashboardService.getLifeLeft());
         model.addAttribute("zones", dashboardService.getZoneResource());
         model.addAttribute("status", statusService.get(1L).getGameState());
-        
+
         return "dashboard";
     }
 
