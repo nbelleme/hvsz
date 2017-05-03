@@ -10,12 +10,17 @@
 <body>
     <div th:include="menu"/>
     <section class="container">
-        <h1>Index</h1>
-        <p>Dashboard <a href="/dashboard">ici</a></p>
-        <p>Configuration <a href="/configuration">ici</a></p>
-        <p>Human/Safe Zone interface <a href="/human">ici</a></p>
-        <p>Supply-zone interface <a href="/resource">ici</a></p>
-        <p>Zombie interface <a href="/zombie">ici</a></p>
+        <div>
+            <h1>Pour l'administrateur</h1>
+            <p>Accès au Dashboard <a href="/dashboard">ici</a></p>
+            <p>Changer la Configuration <a href="/configuration">ici</a></p>
+        </div>
+        <br/>
+        <div>
+            <h1>Configurez ce poste en : </h1>
+            <p>Supply-zone/Safe-Zone interface <a href="/human/zone">ici</a></p>
+            <p>Zombie interface <a href="/zombie">ici</a></p>
+        </div>
     </section>
     <footer>
 
