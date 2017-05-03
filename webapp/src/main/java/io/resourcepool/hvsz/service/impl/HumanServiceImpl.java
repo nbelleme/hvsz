@@ -117,8 +117,12 @@ public class HumanServiceImpl implements HumanService {
             return 0;
         }
         SupplyZone z = g.getSupplyZoneById(zId);
+        int originalResources = z.getResource();
         Integer gotR = z.getResource(qt);
         int addedRes = l.addResource(gotR);
+        if (addedRes != gotR) { //if player inventory full or dead, set resources of the zone accordingly.
+            z.setResource(originalResources - addedRes);
+        }
         dao.set(1L, g);
         return addedRes;
     }
