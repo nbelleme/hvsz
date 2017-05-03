@@ -47,7 +47,7 @@ public class StatusUpdaterCron {
             for (Game game : runningGames) {
                 LOGGER.info("Update the game of id " + game.getId());
                 GameStatus status = game.getStatus();
-                if (status.getStarted() && status.getTimeLeft() > 0) {
+                if (status.getStarted() && status.getTimeLeft() > 0 && status.getGameState().equals(GameStateEnum.ONGOING.name())) {
                     status.setTimeLeft(status.getTimeLeft() - 1);
                     if (!game.checkSafeZoneLeft()) { // if no safezone has resource left, z victory
                         status.setGameState(GameStateEnum.ZOMBIE_VICTORY.name());
