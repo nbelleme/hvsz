@@ -33,7 +33,7 @@
             <form method="post" action="/resource/drop">
                 <fieldset class="row">
                     <legend>Déposer une ressource</legend>
-                    <input type="hidden" name="safeZone" th:value="${zone.id}"/>
+                    <input type="hidden" name="zoneId" th:value="${zone.id}"/>
                     <div class="input-field col s12">
                         <label for="lifeToken">Votre code utilisateur</label>
                         <input type="text" name="lifeToken" id="lifeToken" required="required" />

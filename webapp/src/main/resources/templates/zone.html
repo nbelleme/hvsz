@@ -25,13 +25,15 @@
                     <div class="card-content">
                         <p th:text="${zone.name}">1</p>
                     </div>
-                    <form method="post" action="/human/zone" class="card-action">
-                        <input type="hidden" name="id" th:value="${zone.id}"/>
-                        <input type="hidden" name="type" th:value="${zone.type}"/>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Aller à la zone
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </form>
+
+                    <th:block th:switch="${zone.type}">
+                        <a th:case="supplyzone"
+                           th:href="@{/resource/get(zoneId=${zone.id})}"
+                           class="waves-effect waves-light btn">Aller à la zone <i class="material-icons right">send</i></a>
+                        <a th:case="safezone"
+                           th:href="@{/resource/drop(zoneId=${zone.id})}"
+                           class="waves-effect waves-light btn">Aller à la zone <i class="material-icons right">send</i></a>
+                    </th:block>
                 </div>
             </div>
         </div>

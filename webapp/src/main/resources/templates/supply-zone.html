@@ -31,7 +31,7 @@
     <form method="post" action="/resource/get">
         <fieldset class="row">
             <legend>Prendre une ressource</legend>
-            <input type="hidden" name="supplyZone" th:value="${zone.id}"/>
+            <input type="hidden" name="zoneId" th:value="${zone.id}"/>
             <input type="hidden" name="nbResWanted" id="nbResWanted" value="1"/>
             <div class="input-field col s12">
                 <label for="lifeToken">Votre code utilisateur</label>
