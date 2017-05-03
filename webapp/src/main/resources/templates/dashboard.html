@@ -60,7 +60,7 @@
 
     setInterval(timer, 1000);
     timer();
-    function timer() { // TODO handle pause (stop counting), handle game end
+    function timer() { // TODO handle pause (stop counting), handle game end other than timer=0
         if (timestampStart != -1) {
             var currentTime = Date.now() / 1000;
             var elapsed = currentTime - timestampStart;
@@ -70,7 +70,12 @@
 
             var timeLeft = duration  - elapsed - 3600; //for some reason, one hour appear out of nowhere... so we remove it here
             var myDate = new Date(timeLeft * 1000).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-            $("#timeleft").text("Temps de jeu restant  " + myDate);
+            if (timeLeft > 0) {
+                $("#timeleft").text("Temps de jeu restant  " + myDate);
+            } else {
+                $("#timeleft").text("Partie terminée ! ");
+            }
+
         } else {
             $("#timeleft").text("Partie non démarrée, durée " + duration / 60 + " mins");
         }
