@@ -31,12 +31,12 @@ public class SafeZone implements ZoneResource, Serializable {
         type = TYPE;
     }
 
-
+    @Override
     public String getType() {
         return type;
     }
 
-
+    @Override
     public Integer getId() {
         return this.id;
     }

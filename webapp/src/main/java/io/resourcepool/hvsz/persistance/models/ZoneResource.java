@@ -13,4 +13,10 @@ public interface ZoneResource extends Zone {
      * @return int
      */
     Integer getId();
+
+    /**
+     * Return the type of the ResourceZone.
+     * @return the type of the ResourceZone
+     */
+    String getType();
 }

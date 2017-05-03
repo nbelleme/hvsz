@@ -29,6 +29,7 @@ public class SupplyZone implements ZoneResource, Serializable {
         type = TYPE;
     }
 
+    @Override
     public String getType() {
         return type;
     }
@@ -38,6 +39,7 @@ public class SupplyZone implements ZoneResource, Serializable {
         return SupplyZone.NAME;
     }
 
+    @Override
     public Integer getId() {
         return this.id;
     }

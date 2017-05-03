@@ -18,7 +18,10 @@
             <p th:text="'Nombre de vies restantes : ' + ${nblife}"/>
         </div>
         <ul class="zones">
-            <li th:each="zone : ${zones}" th:text="${zone.name} + ' : ' + ${zone.resource}"/>
+            <li th:each="zone : ${zones}">
+                <p  th:text="${zone.name} + ' : ' + ${zone.resource}"></p>
+                <a th:href="'/resource/'+ (${zone.type == 'supplyzone'} ? 'get' : 'drop') +'?zoneId=' + ${zone.id}" >accès rapide</a>
+            </li>
         </ul>
         <th:block th:switch="${status}">
             <div th:case="'NOT_STARTED'">
