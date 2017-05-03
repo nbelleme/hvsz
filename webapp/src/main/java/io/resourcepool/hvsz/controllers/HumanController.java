@@ -4,7 +4,6 @@ package io.resourcepool.hvsz.controllers;
 import io.resourcepool.hvsz.persistance.models.GameStateEnum;
 import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
-import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.service.HumanService;
 import io.resourcepool.hvsz.service.ResourceService;
 import io.resourcepool.hvsz.service.StatusService;
@@ -52,10 +51,7 @@ public class HumanController {
         model.addAttribute("newlife", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");
       }
     }
-
-    SafeZone zone = resourceService.getSafeZone(Integer.parseInt(id));
-    model.addAttribute("zone", zone);
-    model.addAttribute("game_status", statusService.get(1L).getGameState());
+    model.addAttribute("zone", resourceService.getSafeZone(Integer.parseInt(id)));
     return "safe-zone";
   }
 
@@ -70,7 +66,6 @@ public class HumanController {
         if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
             return "redirect:/game/over";
         }
-
         List<ZoneResource> zones = resourceService.getAllZoneResource();
         model.addAttribute("zones", zones);
         return "zone";

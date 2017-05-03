@@ -46,7 +46,6 @@ public class ResourceController {
         if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
             return "redirect:/game/over";
         }
-        
         Zone zone = resourceService.getSafeZone(Integer.parseInt(zoneId));
         model.addAttribute("zone", zone);
         return "safe-zone";
