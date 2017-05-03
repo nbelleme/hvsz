@@ -21,6 +21,10 @@
         <p th:case="0">SAFE ZONE DESTROYED</p>
 
         <div th:case="*">
+            <div>
+                <a th:href="'/human?id='+${zone.id}">Prendre une nouvelle vie</a>
+                <p th:text="${newlife}" />
+            </div>
             <div class="card" th:if="${nbDropped != null}">
                 <div class="card-content teal darken-1">
                     <div th:switch="${nbDropped > 0}">

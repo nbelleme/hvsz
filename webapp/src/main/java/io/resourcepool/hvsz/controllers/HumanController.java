@@ -1,8 +1,10 @@
 package io.resourcepool.hvsz.controllers;
 
+
 import io.resourcepool.hvsz.persistance.models.GameStateEnum;
 import io.resourcepool.hvsz.persistance.models.Life;
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
+import io.resourcepool.hvsz.persistance.models.SafeZone;
 import io.resourcepool.hvsz.service.HumanService;
 import io.resourcepool.hvsz.service.ResourceService;
 import io.resourcepool.hvsz.service.StatusService;
@@ -24,37 +26,38 @@ public class HumanController {
     @Autowired
     StatusService statusService;
 
-    /**
-     * Get the human page.
-     *
-     * @param newLife String
-     * @param model   Model
-     * @return String (human)
-     */
-    @GetMapping("/human")
-    public String human(@RequestParam(value = "newlife", required = false) String newLife, Model model) {
-        if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
-            return "redirect:/game/over";
-        }
-
-        if (newLife != null) {
-            Life life = humanService.newLife();
-            String lifeToken = null;
-            if (life != null) {
-                lifeToken = life.getToken();
-            }
-            if (lifeToken != null) {
-                model.addAttribute("newlife", "Une nouvelle vie pour toi <3  token: " + lifeToken);
-            } else {
-                if (humanService.countLifeLeft() > 0) {
-                    model.addAttribute("newlife", "Toutes les vies sont utilisées");
-                } else {
-                    model.addAttribute("newlife", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");
-                }
-            }
-        }
-        return "human";
+  /**
+   * Get a the human life.
+   * @param model   Model
+   * @param id id of the safe zone
+   * @return String (human)
+   */
+  @GetMapping("/human")
+  public String human(@RequestParam(value = "id") String id,
+                      Model model) {
+    if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
+      return "redirect:/game/over";
     }
+    Life life = humanService.newLife();
+    String lifeToken = null;
+    if (life != null) {
+      lifeToken = life.getToken();
+    }
+    if (lifeToken != null) {
+      model.addAttribute("newlife", "Une nouvelle vie pour toi <3  token: " + lifeToken);
+    } else {
+      if (humanService.countLifeLeft() > 0) {
+        model.addAttribute("newlife", "Toutes les vies sont utilisées");
+      } else {
+        model.addAttribute("newlife", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");
+      }
+    }
+
+    SafeZone zone = resourceService.getSafeZone(Integer.parseInt(id));
+    model.addAttribute("zone", zone);
+    model.addAttribute("game_status", statusService.get(1L).getGameState());
+    return "safe-zone";
+  }
 
     /**
      * Interface for select a safe zone.

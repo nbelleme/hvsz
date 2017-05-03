@@ -32,8 +32,6 @@ public class ResourceController {
     @Autowired
     StatusService statusService;
 
-    private static final int ID_SUPPLY_ZONE = 1;
-
     /**
      * Show the safe-zone view.
      *
