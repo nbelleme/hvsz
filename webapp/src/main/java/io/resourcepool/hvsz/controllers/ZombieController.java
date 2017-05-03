@@ -42,7 +42,7 @@ public class ZombieController {
      * @return .
      */
     @PostMapping("/zombie/kill")
-    public String kill(@RequestParam(value = "lifeId") String lifeToken, Model model) {
+    public String kill(@RequestParam(value = "lifeToken") String lifeToken, Model model) {
         if (!statusService.get(1L).getGameState().equals(GameStateEnum.ONGOING.name())) {
             return "redirect:/game/over";
         }
