@@ -23,9 +23,16 @@ public class DashboardController {
      */
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
+
+        if (dashboardService.getTime() != null) {
+            model.addAttribute("time", dashboardService.getTime().getEpochSecond());
+        } else {
+            model.addAttribute("time", -1);
+        }
+
         model.addAttribute("nbhumain", dashboardService.getHuman());
         model.addAttribute("nbzombie", dashboardService.getZombie());
-        model.addAttribute("time", dashboardService.getTime());
+        model.addAttribute("duration", dashboardService.getGameLength());
         model.addAttribute("nblife", dashboardService.getLifeLeft());
         model.addAttribute("zones", dashboardService.getZoneResource());
         model.addAttribute("status", statusService.get(1L).getGameState());

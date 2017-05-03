@@ -36,4 +36,11 @@ public interface DashboardService {
      * @return the list of ZoneResource
      */
     List<ZoneResource> getZoneResource();
-}
+
+    /**
+     * Get game length config.
+     * @return game length configured in minutes
+     */
+    Integer getGameLength();
+
+    }

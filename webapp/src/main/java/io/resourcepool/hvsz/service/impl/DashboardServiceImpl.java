@@ -50,11 +50,17 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public Instant getTime() {
         Game game = get();
-        Instant result = game.getStatus().getTimestampStart();//getTimeLeft();
+        Instant result = game.getStatus().getTimestampStart(); //getTimeLeft();
         if (result == null) {
             return null;
         }
         return result;
+    }
+
+    @Override
+    public Integer getGameLength() {
+        Game game = get();
+        return game.getConfig().getGameDuration();
     }
 
     @Override
