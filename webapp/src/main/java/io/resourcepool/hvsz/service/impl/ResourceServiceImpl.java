@@ -62,7 +62,7 @@ public class ResourceServiceImpl implements ResourceService {
       if (amount > 0) {
           ArrayList<SafeZone> safeZones = dao.get(1L).getSafeZones();
           for (SafeZone safeZone : safeZones) {
-              drop(safeZone, amount);
+            safeZone.lose(amount);
           }
           Game g = dao.get(1L);
           g.setSafeZones(safeZones);

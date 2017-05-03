@@ -73,9 +73,9 @@ public class SafeZone implements ZoneResource, Serializable {
     }
 
     /**
-     * Drop an amount of resource.
-     * @param quantite amount of resource we want to drop
-     * @return how many resource we have realy drop
+     * Drop an amount of resource (drop in).
+     * @param quantite amount of resource we want to drop in
+     * @return how many resource we have really drop
      */
     public int drop(int quantite) {
         if (quantite <= 0) {
@@ -85,6 +85,24 @@ public class SafeZone implements ZoneResource, Serializable {
         if (resource > maxResource) {
             int over = resource - maxResource;
             resource = maxResource;
+            return quantite - over;
+        }
+        return quantite;
+    }
+
+    /**
+     * Lose an amount of resource (drop out).
+     * @param quantite amount of resource we want to drop out
+     * @return how many resource we have really drop
+     */
+    public int lose(int quantite) {
+        if (quantite <= 0) {
+            return 0;
+        }
+        resource -= quantite;
+        if (resource < 0) {
+            int over = resource;
+            resource = 0;
             return quantite - over;
         }
         return quantite;

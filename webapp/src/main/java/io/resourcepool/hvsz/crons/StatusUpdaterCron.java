@@ -60,7 +60,7 @@ public class StatusUpdaterCron {
                 }
 
                 //decrease resources, faster if difficulty higher.
-                resourceService.decreaseSafezones(-(1 + game.getConfig().getDifficulty()));
+                resourceService.decreaseSafezones(1 + game.getConfig().getDifficulty());
             }
 
         }
