@@ -115,9 +115,9 @@ public class HumanServiceImpl implements HumanService {
         Life l = g.getStatus().getLife(id);
         SupplyZone z = g.getSupplyZoneById(zId);
         Integer gotR = z.getResource(qt);
-        l.addResource(gotR);
+        int addedRes = l.addResource(gotR);
         dao.set(1L, g);
-        return gotR;
+        return addedRes;
     }
 
     @Override
