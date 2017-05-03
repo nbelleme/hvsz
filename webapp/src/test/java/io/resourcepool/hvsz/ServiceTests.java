@@ -141,30 +141,6 @@ public class ServiceTests {
     }
 
     @Test
-    public void resourceServiceDropBySafeZone() {
-        SafeZone safeZone = resourceService.getSafeZone(0);
-        int init = safeZone.getResource();
-        int result = resourceService.drop(safeZone,5);
-        assertTrue("Test resourceServiceDropBySafeZone expected : " + (init+5) + " current : " + (init+result), (init+5) == (init+result));
-    }
-
-    @Test
-    public void resourceServiceDropByID() {
-        SafeZone safeZone = resourceService.getSafeZone(0);
-        int init = safeZone.getResource();
-        int result = resourceService.drop(0,5);
-        assertTrue("Test resourceServiceDropByID expected : " + (init+5) + " current : " + (init+result), (init+5) == (init+result));
-    }
-
-    @Test
-    public void resourceServiceDropByIDInvalidQuantite() {
-        SafeZone safeZone = resourceService.getSafeZone(0);
-        int init = safeZone.getResource();
-        int result = resourceService.drop(0,-5);
-        assertTrue("Test resourceServiceDropByIDInvalidQuantite expected : " + init + " current : " + (init-result), init == (init-result));
-    }
-
-    @Test
     public void resourceServiceHumanDropByID() {
         Life life = humanService.newLife();
         humanService.getResources(0,5,life.getId());
