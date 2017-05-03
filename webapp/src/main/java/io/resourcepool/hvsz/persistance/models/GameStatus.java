@@ -1,6 +1,7 @@
 package io.resourcepool.hvsz.persistance.models;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class GameStatus implements Serializable {
@@ -9,6 +10,7 @@ public class GameStatus implements Serializable {
     Integer nbHumanAlive;
     Integer nbLifeLeft;
     Integer timeLeft; // in min
+    Instant timestampStart;
     Boolean started = false;
     ArrayList<Life> lives = new ArrayList<>();
     String gameState = GameStateEnum.NOT_STARTED.name();
@@ -49,6 +51,15 @@ public class GameStatus implements Serializable {
         return started;
     }
 
+    public Instant getTimestampStart() {
+        return timestampStart;
+    }
+
+    public void setTimestampStart(Instant timestampStart) {
+        this.timestampStart = timestampStart;
+    }
+
+
     /**
      * set started status, also set gameState to ongoing if true.
      * @param started .
@@ -57,6 +68,7 @@ public class GameStatus implements Serializable {
         this.started = started;
         if (this.started) {
             this.gameState = GameStateEnum.ONGOING.name();
+            this.timestampStart = Instant.now();
         }
     }
 

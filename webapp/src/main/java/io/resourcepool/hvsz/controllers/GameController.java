@@ -41,7 +41,7 @@ public class GameController {
                 .with(GameStatus::setHumanPlayers, conf.getNbHuman())
                 .with(GameStatus::setZombiePlayers, conf.getNbZombie())
                 .with(GameStatus::setNbHumanAlive, 0)
-                .with(GameStatus::setTimeLeft, conf.getGameDuration())
+                .with(GameStatus::setTimeLeft, conf.getGameDuration()) 
                 .with(GameStatus::setNbLifeLeft, conf.getNbSafezoneLifes())
                 .with(GameStatus::setStarted, true)
                 .build();
