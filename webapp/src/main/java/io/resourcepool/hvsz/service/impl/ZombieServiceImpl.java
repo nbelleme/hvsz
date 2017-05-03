@@ -22,7 +22,7 @@ public class ZombieServiceImpl implements ZombieService {
 
             Boolean lifeFound = false;
             for (Life l : status.getLives()) {
-                if (l.getToken().toString().equals(lifeToken)) {
+                if (l.getToken().toString().equals(lifeToken) && l.isAlive()) {
                     l.setAlive(false);
                     lifeFound = true;
                     //Decrement nbHumaneAlive in game status
