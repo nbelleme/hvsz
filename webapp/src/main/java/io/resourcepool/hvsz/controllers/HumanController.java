@@ -46,9 +46,13 @@ public class HumanController {
         lifeToken = life.getToken();
       }
       if (lifeToken != null) {
-        model.addAttribute("newlife", "New life for you <3  token: " + lifeToken);
+        model.addAttribute("newlife", "Une nouvelle vie pour toi <3  token: " + lifeToken);
       } else {
-        model.addAttribute("newlife", "Sorry no more life ;-(");
+        if (humanService.countLifeLeft() > 0) {
+          model.addAttribute("newlife", "Toutes les vies sont utilisées");
+        } else {
+          model.addAttribute("newlife", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");
+        }
       }
     }
     return "human";

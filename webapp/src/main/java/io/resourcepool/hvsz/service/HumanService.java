@@ -25,4 +25,10 @@ public interface HumanService {
      * @return Integer : amount got
      */
     Integer getResources(Integer zId, Integer qt, Integer id);
+
+    /**
+     * Count how many life in stock.
+     * @return the amount of life in stock
+     */
+    int countLifeLeft();
 }

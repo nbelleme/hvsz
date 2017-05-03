@@ -59,6 +59,7 @@ public class HumanServiceImpl implements HumanService {
      * @param id .
      * @return life.
      */
+    @Override
     public Life getLife(Integer id) {
         Game g = dao.get(1L);
         int i = 0;
@@ -77,7 +78,7 @@ public class HumanServiceImpl implements HumanService {
      * @param id .
      * @return life.
      */
-    public Integer getLastId(Long id) {
+    private Integer getLastId(Long id) {
         Game g = dao.get(id);
         int maxId = 0;
         if (g.getStatus().getLives() == null) {
@@ -96,7 +97,7 @@ public class HumanServiceImpl implements HumanService {
      *
      * @param id game id
      */
-    public void setLastId(Long id) {
+    private void setLastId(Long id) {
         Integer maxId = getLastId(id);
         if (incrementor <= maxId) {
             incrementor = maxId;
@@ -117,5 +118,12 @@ public class HumanServiceImpl implements HumanService {
         l.addResource(gotR);
         dao.set(1L, g);
         return gotR;
+    }
+
+    @Override
+    public int countLifeLeft() {
+        Game g = dao.get(1L);
+        GameStatus status = g.getStatus();
+        return status.getNbLifeLeft();
     }
 }
