@@ -3,7 +3,7 @@ package io.resourcepool.hvsz.persistance.models;
 import java.io.Serializable;
 
 public class SafeZone implements ZoneResource, Serializable {
-    private static final String NAME = "safe zone n°";
+    private static final String NAME = "Zone de sécurité n°";
     private static final String TYPE = "safezone";
     private Integer id;
     private int resource;

@@ -19,7 +19,8 @@
     </div>
     <div class="card">
         <div class="card-content brown darken-1">
-            <p class="white-text">Il reste <span th:text="${zone.resource}"></span> ressource(s).</p>
+            <p class="white-text">Il reste <span th:text="${zone.resource}"></span> ressource(s) dans la zone de
+                sécurité et vous pouvez porter <span th:text="${maxResource}"></span> ressources maximum.</p>
         </div>
     </div>
     <div th:if="${nbTaken}" class="card">
@@ -37,7 +38,8 @@
                 <input type="text" name="lifeToken" id="lifeToken" required="required" />
             </div>
             <button class="btn waves-effect waves-light" type="submit"
-                    name="action" id="take-button">Prendre (maintenir appuyé)</button>
+                    name="action" id="take-button">Prendre (maintenir appuyé)
+            </button>
         </fieldset>
     </form>
 </section>
@@ -45,16 +47,19 @@
 </footer>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
-<script>
+<script th:inline="javascript">
     $(function () {
         var text = "Prendre (maintenir appuyé)";
-        var defaultNb = 1;
-        var nb = 1;
+        var defaultNb = 0;
+        var nb = 0;
         var increase = false;
+        var defaultMaxRes = [[${maxResource}]]; //default max resource
+        var maxRes = defaultMaxRes;
+        var token = null;
 
         function increaseLoop(cb) {
             var loop = setInterval(function () {
-                if (!increase) {
+                if (!increase || nb >= maxRes) {
                     clearInterval(loop);
                     return;
                 }
@@ -63,19 +68,36 @@
             }, 1000);
         }
 
-        function onMouseDown(e) {
-            e.preventDefault();
-            increase = true;
-            increaseLoop(function () {
-                $("#take-button").text('Prendre ' + nb + ' ressources');
-            });
-        }
-
+        /**
+         * Utils
+         */
         function reset() {
             increase = false;
             $("#take-button").text(text);
             $("#nbResWanted").val(nb);
             nb = defaultNb;
+        }
+
+        function getNbResource(callback) {
+            var token = $("#lifeToken").val();
+            $.getJSON("/api/game/1/life/" + token + "/nbResource", function (nbResource) {
+                maxRes = defaultMaxRes - nbResource;
+                console.log("OK");
+                callback();
+            }, function(err) { console.log(err); });
+        }
+
+        /**
+         * Button
+         */
+        function onMouseDown(e) {
+            getNbResource(function () {
+                e.preventDefault();
+                increase = true;
+                increaseLoop(function () {
+                    $("#take-button").text('Prendre ' + nb + ' ressources');
+                });
+            });
         }
 
         function onMouseUp(e) {

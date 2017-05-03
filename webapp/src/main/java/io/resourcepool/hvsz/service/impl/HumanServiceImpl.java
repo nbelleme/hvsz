@@ -72,6 +72,12 @@ public class HumanServiceImpl implements HumanService {
         return null;
     }
 
+    @Override
+    public Life getLifeByToken(String token) {
+        Game g = dao.get(1L);
+        return g.getStatus().getLifeByToken(token);
+    }
+
     /**
      * get life by id.
      *

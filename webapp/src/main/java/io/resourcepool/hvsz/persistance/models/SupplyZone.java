@@ -4,7 +4,7 @@ package io.resourcepool.hvsz.persistance.models;
 import java.io.Serializable;
 
 public class SupplyZone implements ZoneResource, Serializable {
-    private static final String NAME = "supply zone n°";
+    private static final String NAME = "Zone de ravitaillement n°";
     private static final String TYPE = "supplyzone";
     private Integer id;
     private int resource;

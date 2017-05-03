@@ -100,6 +100,7 @@ public class HumanController {
       return "safe-zone";
     } else {
       zone = resourceService.getSupplyZone(Integer.parseInt(id));
+      model.addAttribute("maxResource", Life.getMaxResources());
       model.addAttribute("zone", zone);
       return "supply-zone";
     }

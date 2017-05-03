@@ -11,6 +11,7 @@ public class Life implements Serializable {
     private boolean alive;
     private int nbResources;
     private String token;
+
     private static final int MAX_RESOURCES = 10;
 
     public Integer getId() {
@@ -43,6 +44,10 @@ public class Life implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public static int getMaxResources() {
+        return MAX_RESOURCES;
     }
 
     /**

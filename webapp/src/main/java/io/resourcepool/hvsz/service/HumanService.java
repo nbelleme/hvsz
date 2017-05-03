@@ -31,4 +31,12 @@ public interface HumanService {
      * @return the amount of life in stock
      */
     int countLifeLeft();
+
+    /**
+     * get life by token.
+     *
+     * @param token .
+     * @return life.
+     */
+    Life getLifeByToken(String token);
 }

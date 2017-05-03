@@ -199,6 +199,15 @@ public class RestApiController {
     }
 
     /**
+     * Get resource number by life.
+     */
+    @RequestMapping(value = "/api/game/{id}/life/{lifeToken}/nbResource", method = RequestMethod.GET)
+    @ResponseBody
+    public int getNbResourceByLife(@PathVariable("lifeToken") String lifeToken) {
+        return humanService.getLifeByToken(lifeToken).getNbResources();
+    }
+
+    /**
      * Set a game config by game id.
      *
      * @param id                Long
