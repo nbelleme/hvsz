@@ -2,6 +2,7 @@ package io.resourcepool.hvsz.service;
 
 import io.resourcepool.hvsz.persistance.models.ZoneResource;
 
+import java.time.Instant;
 import java.util.List;
 
 public interface DashboardService {
@@ -28,7 +29,7 @@ public interface DashboardService {
      * Get time left.
      * @return minute before the end of the game.
      */
-    int getTime();
+    Instant getTime();
 
     /**
      * Get the list of ZoneResource.

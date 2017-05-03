@@ -7,6 +7,7 @@ import io.resourcepool.hvsz.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +48,11 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public int getTime() {
+    public Instant getTime() {
         Game game = get();
-        Integer result = game.getStatus().getTimeLeft();
+        Instant result = game.getStatus().getTimestampStart();//getTimeLeft();
         if (result == null) {
-            return -1;
+            return null;
         }
         return result;
     }
