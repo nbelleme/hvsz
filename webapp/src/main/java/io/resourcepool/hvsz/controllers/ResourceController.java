@@ -53,6 +53,8 @@ public class ResourceController {
     Game g = dao.get(1L);
       if (g.getStatus().getLifeByToken(lifeToken) == null) {
           model.addAttribute("message", "Wrong token, please try again !");
+      } else if (!g.getStatus().getLifeByToken(lifeToken).isAlive()) {
+        model.addAttribute("message", "You are dead !");
       } else {
           int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
           int nbRes = humanService.getLife(lifeId).getNbResources();
