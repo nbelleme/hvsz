@@ -16,6 +16,10 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     @Override
     public GameConfig add(GameConfig gameConfig, Long gameId) {
         Game g = dao.get(gameId);
+        if (g == null) { // init new game if none found at this ID
+            g = new Game(gameId);
+            dao.set(gameId, g);
+        }
         g.setConfig(gameConfig);
         dao.set(gameId, g);
         return dao.get(gameId).getConfig();
