@@ -90,7 +90,7 @@ public class HumanController {
 
     Zone zone;
     if (type.equals("safezone")) {
-      zone = resourceService.getSafeZone(id);
+      zone = resourceService.getSafeZone(Integer.parseInt(id));
       model.addAttribute("zone", zone);
       model.addAttribute("game_status", statusService.get(1L).getGameState());
       return "safe-zone";

@@ -52,13 +52,6 @@ public interface ResourceService {
      * @param safeId the id of the safe zone
      * @return the SafeZone
      */
-    SafeZone getSafeZone(String safeId);
-
-    /**
-     * Get the correponding safe zone.
-     * @param safeId the id of the safe zone
-     * @return the SafeZone
-     */
     SafeZone getSafeZone(int safeId);
 
     /**

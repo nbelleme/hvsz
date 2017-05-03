@@ -57,7 +57,6 @@ public class ResourceController {
           int lifeId = g.getStatus().getLifeByToken(lifeToken).getId();
           int nbRes = humanService.getLife(lifeId).getNbResources();
           int dropRes = resourceService.dropById(Integer.parseInt(safeZone), nbRes, lifeId);
-          resourceService.dropById(Integer.parseInt(safeZone), 1, lifeId);
           model.addAttribute("nbDropped", dropRes);
       }
       SafeZone s = g.getSafeZoneById(Integer.parseInt(safeZone));
