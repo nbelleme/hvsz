@@ -1,6 +1,7 @@
 package io.resourcepool.hvsz.controllers;
 
 import io.resourcepool.hvsz.persistance.models.GameConfig;
+import io.resourcepool.hvsz.persistance.models.GameStateEnum;
 import io.resourcepool.hvsz.persistance.models.GameStatus;
 import io.resourcepool.hvsz.persistance.models.GenericBuilder;
 import io.resourcepool.hvsz.persistance.models.SafeZone;
@@ -27,6 +28,7 @@ public class GameController {
 
     /**
      * Start the game.
+     *
      * @param model Model
      * @return String (redirect to dashboard)
      */
@@ -66,7 +68,50 @@ public class GameController {
     }
 
     /**
+     * Pause the game.
+     *
+     * @param model Model
+     * @return String (redirect to dashboard)
+     */
+    @GetMapping("/game/pause")
+    public String pauseGame(Model model) {
+        GameStatus gameStatus = statusService.get(1L);
+        gameStatus.setGameState(GameStateEnum.PAUSED.name());
+        statusService.add(gameStatus, 1L);
+        return "redirect:/dashboard";
+    }
+
+    /**
+     * Resume the game.
+     *
+     * @param model Model
+     * @return String (redirect to dashboard)
+     */
+    @GetMapping("/game/resume")
+    public String resumeGame(Model model) {
+        GameStatus gameStatus = statusService.get(1L);
+        gameStatus.setGameState(GameStateEnum.ONGOING.name());
+        statusService.add(gameStatus, 1L);
+        return "redirect:/dashboard";
+    }
+
+    /**
+     * Stop the game.
+     *
+     * @param model Model
+     * @return String (redirect to dashboard)
+     */
+    @GetMapping("/game/stop")
+    public String stopGame(Model model) {
+        GameStatus gameStatus = statusService.get(1L);
+        gameStatus.setGameState(GameStateEnum.ZOMBIE_VICTORY.name());
+        statusService.add(gameStatus, 1L);
+        return "redirect:/dashboard";
+    }
+
+    /**
      * Return game over view.
+     *
      * @param model Model
      * @return String (redirect to dashboard)
      */

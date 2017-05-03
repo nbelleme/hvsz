@@ -25,16 +25,20 @@
                 <a class="waves-effect waves-light btn" href="/game/start">Lancer le jeu</a>
             </div>
             <div th:case="'ONGOING'">
-                <a class="waves-effect waves-light btn" href="/game/start">Stopper le jeu</a>
+                <a class="waves-effect waves-light btn" href="/game/pause">Mettre le jeu en pause</a>
             </div>
             <div th:case="'PAUSED'">
-                <a class="waves-effect waves-light btn" href="/game/start">Relancer le jeu</a>
+                <a class="waves-effect waves-light btn" href="/game/resume">Reprendre le jeu</a>
+                <a class="waves-effect waves-light red lighten-2
+                btn" href="/game/stop">Adandonner le jeu</a>
             </div>
             <div th:case="'HUMAN_VICTORY'">
-                <span>VICTOIRE DES HUMAINS !</span>
+                <p>VICTOIRE DES HUMAINS !</p>
+                <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
             </div>
             <div th:case="'ZOMBIE_VICTORY'">
-                <span>VICTOIRE DES ZOMBIES !</span>
+                <p>VICTOIRE DES ZOMBIES !</p>
+                <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
             </div>
         </th:block>
     </section>
