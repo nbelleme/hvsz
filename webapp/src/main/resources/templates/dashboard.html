@@ -68,8 +68,10 @@
             //alert(new Date(currentTime * 1000).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") + " -- start:" + new Date(timestampStart * 1000).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1") );
             //alert(new Date(elapsed * 1000).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1"));
 
-            var timeLeft = duration  - elapsed - 3600; //for some reason, one hour appear out of nowhere... so we remove it here
-            var myDate = new Date(timeLeft * 1000).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+            var timeLeft = duration  - elapsed;
+            var myDate = new Date(timeLeft * 1000);
+            myDate.setHours(myDate.getHours() - 1); //for some reason, one hour appear out of nowhere... so we remove it here
+            myDate = myDate.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
             if (timeLeft > 0) {
                 $("#timeleft").text("Temps de jeu restant  " + myDate);
             } else {
