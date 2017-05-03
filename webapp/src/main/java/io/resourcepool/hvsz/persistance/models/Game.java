@@ -78,7 +78,7 @@ public class Game implements Serializable {
      */
     public void setConfig(GameConfig config) {
         this.config = config;
-        supplyZones = new ArrayList<>();
+        /*supplyZones = new ArrayList<>();
         int nbSupplyZones = config.getNbSupplyZone();
         int nbSupplyResources = config.getNbSupplyResources();
         for (int i = 0; i < config.getNbSupplyZone(); i++) {
@@ -88,7 +88,7 @@ public class Game implements Serializable {
         int nbSafeZones = config.getNbSafezone();
         for (int i = 0; i < config.getNbSafezone(); i++) {
             safeZones.add(new SafeZone(i, 0, 100));
-        }
+        }*/
     }
 
     public GameConfig getConfig() {
