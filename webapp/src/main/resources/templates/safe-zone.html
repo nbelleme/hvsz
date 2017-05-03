@@ -18,8 +18,18 @@
     </div>
     <div th:switch="${zone.resource}">
 
-        <p th:case="0">SAFE ZONE DESTROYED</p>
-
+        <div class="card" th:case="0">
+            <div class="card-content red darken-1">
+                <p>SAFE ZONE DETRUITE</p>
+            </div>
+        </div>
+        <!-- TODO Nécéssite le rafraichissement de la Page -> AJAX
+        <div class="card" th:case="100">
+            <div class="card-content orange darken-1">
+                <p>Zone pleine, vous ne pouvez pas déposer</p>
+            </div>
+        </div>
+        -->
         <div th:case="*">
             <div>
                 <a th:href="'/human?id='+${zone.id}">Prendre une nouvelle vie</a>

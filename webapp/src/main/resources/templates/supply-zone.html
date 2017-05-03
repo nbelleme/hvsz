@@ -28,20 +28,29 @@
             <p class="white-text"><span th:text="${nbTaken}"></span> ressource(s) prise(s)</p>
         </div>
     </div>
-    <form method="post" action="/resource/get">
-        <fieldset class="row">
-            <legend>Prendre une ressource</legend>
-            <input type="hidden" name="zoneId" th:value="${zone.id}"/>
-            <input type="hidden" name="nbResWanted" id="nbResWanted" value="1"/>
-            <div class="input-field col s12">
-                <label for="lifeToken">Votre code utilisateur</label>
-                <input type="text" name="lifeToken" id="lifeToken" required="required" />
+    <div th:switch="${zone.resource}">
+        <div class="card" th:case="0">
+            <div class="card-content orange darken-1">
+                <p>Zone vide, vous avez tout pris</p>
             </div>
-            <button class="btn waves-effect waves-light" type="submit"
-                    name="action" id="take-button">Prendre (maintenir appuyé)
-            </button>
-        </fieldset>
-    </form>
+        </div>
+        <div th:case="*">
+            <form method="post" action="/resource/get">
+                <fieldset class="row">
+                    <legend>Prendre une ressource</legend>
+                    <input type="hidden" name="zoneId" th:value="${zone.id}"/>
+                    <input type="hidden" name="nbResWanted" id="nbResWanted" value="1"/>
+                    <div class="input-field col s12">
+                        <label for="lifeToken">Votre code utilisateur</label>
+                        <input type="text" name="lifeToken" id="lifeToken" required="required" />
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit"
+                            name="action" id="take-button">Prendre (maintenir appuyé)
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </section>
 <footer>
 </footer>
