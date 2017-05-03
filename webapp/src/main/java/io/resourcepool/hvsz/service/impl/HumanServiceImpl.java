@@ -33,6 +33,8 @@ public class HumanServiceImpl implements HumanService {
 
         if (status.getNbLifeLeft() <= 0) {
             return null;
+        } else if (status.getNbHumanAlive() + 1 > status.getHumanPlayers()) {
+            return null;
         } else {
             //Decrement nbLifeLeft in game status and increment nbHumanAlive
             status.setNbLifeLeft(status.getNbLifeLeft() - 1);
