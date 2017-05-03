@@ -67,6 +67,9 @@ public class Life implements Serializable {
      * @return qte added
      */
     public int addResource(int qte) {
+        if(!alive) {
+            return 0;
+        }
         if (this.nbResources + qte <= MAX_RESOURCES) {
             this.nbResources += qte;
             return qte;

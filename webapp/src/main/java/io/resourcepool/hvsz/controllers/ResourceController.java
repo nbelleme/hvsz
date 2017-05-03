@@ -97,6 +97,8 @@ public class ResourceController {
     Life lifeId = g.getStatus().getLifeByToken(lifeToken);
       if (g.getStatus().getLifeByToken(lifeToken) == null) {
           model.addAttribute("message", "Wrong token, please try again !");
+      } else if (!g.getStatus().getLifeByToken(lifeToken).isAlive()) {
+        model.addAttribute("message", "You are dead !");
       } else {
           int id = lifeId.getId();
           int gotRes = humanService.getResources(Integer.parseInt(supplyZone), Integer.parseInt(nbResWanted), id);

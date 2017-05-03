@@ -113,6 +113,9 @@ public class HumanServiceImpl implements HumanService {
     public Integer getResources(Integer zId, Integer qt, Integer id) {
         Game g = dao.get(1L);
         Life l = g.getStatus().getLife(id);
+        if (!l.isAlive()) {
+            return 0;
+        }
         SupplyZone z = g.getSupplyZoneById(zId);
         Integer gotR = z.getResource(qt);
         int addedRes = l.addResource(gotR);
