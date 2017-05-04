@@ -19,8 +19,8 @@ before_install:
 
 after_success:
   - eval "$(ssh-agent -s)"
-  - chmod 600 training.pem
-  - ssh-add training.pem
-  - scp target/*.jar -i training.pem $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-  - ssh -i training.pem $DEPLOY_USER@$DEPLOY_HOST "pkill -f \"java -jar\“"
-  - ssh -i training.pem $DEPLOY_USER@$DEPLOY_HOST "java -jar $APPLICATION-$VERSION.jar"
+  - chmod 600 $KEY_PATH
+  - ssh-add $KEY_PATH
+  - scp target/*.jar -i $KEY_PATH $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+  - ssh -i $KEY_PATH $DEPLOY_USER@$DEPLOY_HOST "pkill -f \"java -jar\“"
+  - ssh -i $KEY_PATH $DEPLOY_USER@$DEPLOY_HOST "java -jar $APPLICATION-$VERSION.jar"
