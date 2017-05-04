@@ -1,0 +1,25 @@
+language: java
+branches:
+  only:
+  - master
+  except:
+  - dev
+jdk:
+  - oraclejdk8
+
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_8dadb8712759_key -iv $encrypted_8dadb8712759_iv -in training.pem.enc -out training.pem -d
+
+addons:
+  ssh_known_hosts:
+    - 52.59.145.37
+
+
+after_success:
+  - eval "$(ssh-agent -s)" #start the ssh agent
+  - chmod 600 training.pem # this key should have push access
+  - ssh-add training.pem
+  - scp target/*.jar -i training.pem ec2-user@52.59.145.37:/home/ec2-user/
+  - ssh -i training.pem ec2-user@52.59.145.37 "pkill -f \"java -jar\“"
+  - ssh -i training.pem ec2-user@52.59.145.37 "mvn spring-boot:run"
