@@ -11,29 +11,19 @@
 <body>
 <div th:include="menu"/>
 <section class="container">
-
-    <h1>Quelle zone afficher ?</h1>
-
+    <h1>Quelle Safe-Zone afficher ?</h1>
     <div class="row">
         <div class="col s6" th:each="zone : ${zones}">
             <div class="card horizontal">
-                <div th:switch="${zone.type}" class="card-image">
-                    <img th:case="'supplyzone'" src="http://img.over-blog.com/225x300/4/07/69/36/donon-sentiers-des-bunkers/col-de-engin-et-sentier-bunkers-183.jpg"/>
-                    <img th:case="'safezone'" src="https://www.lizio.fr/files/pictures/visites/chapelle/1393583422.jpg"/>
-                </div>
+                <img th:case="'safezone'" src="https://www.lizio.fr/files/pictures/visites/chapelle/1393583422.jpg"/>
                 <div class="card-stacked">
                     <div class="card-content">
                         <p th:text="${zone.name}">1</p>
                     </div>
 
-                    <th:block th:switch="${zone.type}">
-                        <a th:case="supplyzone"
-                           th:href="@{/level/get(zoneId=${zone.id})}"
-                           class="waves-effect waves-light btn">Aller à la zone <i class="material-icons right">send</i></a>
-                        <a th:case="safezone"
-                           th:href="@{/level/drop(zoneId=${zone.id})}"
-                           class="waves-effect waves-light btn">Aller à la zone <i class="material-icons right">send</i></a>
-                    </th:block>
+                    <a th:case="safezone"
+                       th:href="@{/zone/${zone.id}}"
+                       class="waves-effect waves-light btn">Aller à la zone <i class="material-icons right">send</i></a>
                 </div>
             </div>
         </div>

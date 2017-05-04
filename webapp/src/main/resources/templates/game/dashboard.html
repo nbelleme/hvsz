@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <div th:include="menu"/>
+    <section class="container">
+        <h1>Dashboard</h1>
+        <div class="mainInfos">
+            <p th:text="'Nombre de Tickets Humains restant : ' + ${remainingHumanTickets} ' + ${humanTickets}"/>
+            <span id="remainingTimeValue" class="display: none;" th:text="${remainingTime}"/>
+            <p id="remainingTime" th:text="'Temps de jeu restant : ' + ${remainingTime} + ' secondes'"/>
+        </div>
+        <h2>Etat des Safe Zones:</h2>
+        <ul class="zones">
+            <li th:each="zone : ${safeZones}">
+                <p th:text="${zone.name} + ' : ' + ${zone.level} + ' / ' + ${zone.capacity}"></p>
+                <a th:href="'/safe-zone/'+ ${zone.id}" >accès rapide</a>
+            </li>
+        </ul>
+        <h2>Etat des Food Supplies:</h2>
+        <ul class="zones">
+            <li th:each="zone : ${foodSupplies}">
+                <p th:text="${zone.name} + ' : ' + ${zone.level} + ' / ' + ${zone.capacity}"></p>
+                <a th:href="'/food-supply/'+ ${zone.id}" >accès rapide</a>
+            </li>
+        </ul>
+        <th:block th:switch="${status}">
+            <div th:case="'NOT_STARTED'">
+                <a class="waves-effect waves-light btn" href="/game/start">Lancer le jeu</a>
+            </div>
+            <div th:case="'ONGOING'">
+                <a class="waves-effect waves-light btn" href="/game/pause">Mettre le jeu en pause</a>
+            </div>
+            <div th:case="'PAUSED'">
+                <a class="waves-effect waves-light btn" href="/game/resume">Reprendre le jeu</a>
+                <a class="waves-effect waves-light red lighten-2
+                btn" href="/game/stop">Adandonner le jeu</a>
+            </div>
+            <div th:case="'HUMAN_VICTORY'">
+                <p>VICTOIRE DES HUMAINS !</p>
+                <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
+            </div>
+            <div th:case="'ZOMBIE_VICTORY'">
+                <p>VICTOIRE DES ZOMBIES !</p>
+                <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
+            </div>
+        </th:block>
+    </section>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
+    <script type="text/javascript" src="js/materialize.js"/>
+
+<script th:inline="javascript" >
+    /*<![CDATA[*/
+    var remainingTime = [[${remainingTime}]];
+    /*]]>*/
+    // TODO handle pause / resume / stop game
+    setInterval(function() {
+      if (remainingTime > 0) {
+        $("#remainingTime").text("Temps de jeu restant  " + remainingTime / 60 + " min et " + remainingTime % 60 + " s.");
+      } else {
+        $("#remainingTime").text("Partie terminée ! ");
+      }
+    }, 1000);
+    
+</script>
+</body>
+</html>
