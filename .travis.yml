@@ -1,24 +1,24 @@
 language: java
 branches:
   only:
-  - master
+    - master
   except:
-  - dev
+    - dev
 jdk:
   - oraclejdk8
-
-
-before_install:
-  - openssl aes-256-cbc -K $encrypted_8dadb8712759_key -iv $encrypted_8dadb8712759_iv -in training.pem.enc -out training.pem -d
 
 addons:
   ssh_known_hosts:
     - 52.59.145.37
 
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_1f212c0bd921_key -iv $encrypted_1f212c0bd921_iv -in training.pem.enc -out training.pem -d
+
+
 after_success:
-  - eval "$(ssh-agent -s)" #start the ssh agent
-  - chmod 600 training.pem # this key should have push access
+  - eval "$(ssh-agent -s)"
+  - chmod 600 training.pem
   - ssh-add training.pem
   - scp target/*.jar -i training.pem $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
   - ssh -i training.pem $DEPLOY_USER@$DEPLOY_HOST "pkill -f \"java -jar\“"
