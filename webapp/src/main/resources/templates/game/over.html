@@ -14,8 +14,12 @@
     <div class="card">
         <div class="card-content teal darken-1">
             <div th:switch="${status}">
-                <p th:case="'HUMAN_VICTORY'" class="white-text">VICTOIRE DES HUMAINS</p>
-                <p th:case="'ZOMBIE_VICTORY'">VICTOIRE DES ZOMBIES</p>
+                <p th:case="'HUMAN_VICTORY'" class="white-text">VICTOIRE DES HUMAINS
+                    <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
+                </p>
+                <p th:case="'ZOMBIE_VICTORY'">VICTOIRE DES ZOMBIES
+                    <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
+                </p>
                 <p th:case="'NOT_STARTED'">La partie n'a pas encore démarré!</p>
                 <p th:case="'PAUSED'">La partie est en pause</p>
             </div>
