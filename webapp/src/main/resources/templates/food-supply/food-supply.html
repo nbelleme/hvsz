@@ -23,7 +23,7 @@
                 sécurité et vous pouvez porter <span th:text="${maxFoodTransfer}"></span>kgs de nourriture maximum.</p>
         </div>
     </div>
-    <div th:if="${foodTaken}" class="card">
+    <div th:if="${foodTaken != null}" class="card">
         <div class="card-content teal darken-1">
             <p class="white-text"><span th:text="${foodTaken}"></span> kg(s) de nourriture pris.</p>
         </div>
