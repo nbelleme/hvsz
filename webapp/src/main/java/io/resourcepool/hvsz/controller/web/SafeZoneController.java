@@ -101,6 +101,7 @@ public class SafeZoneController {
       //SafeZone s = g.getSafeZones().stream().filter(foodSupply -> foodSupply.getId().equals(zoneId)).findFirst().get();
       int amountRefilled = zoneService.refill(zoneId, lifeToken);
       model.addAttribute("amountRefilled", amountRefilled);
+      safeZone = zoneService.getSafeZone(zoneId); //refresh object if resources have been deposited
     }
     model.addAttribute("zone", safeZone);
     return "safe-zone/safe-zone";
