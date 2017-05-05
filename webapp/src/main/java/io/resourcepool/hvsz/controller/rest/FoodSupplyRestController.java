@@ -14,7 +14,7 @@ import java.util.List;
  * Created by gdanguy on 05/05/17.
  */
 @RestController
-@RequestMapping("/food-supply")
+@RequestMapping("/api/food-supply")
 public class FoodSupplyRestController {
     @Autowired
     private FoodSupplyService foodSupplyService;

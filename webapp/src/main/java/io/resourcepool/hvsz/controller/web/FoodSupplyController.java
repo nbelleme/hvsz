@@ -70,7 +70,8 @@ public class FoodSupplyController {
   /**
    * Take a resource.
    *
-   * @param zoneId    SupplyZone id
+   * @param zoneId    Supp
+   *                  lyZone id
    * @param amount    amount of food desired
    * @param lifeToken lifeToken
    * @param model     Model

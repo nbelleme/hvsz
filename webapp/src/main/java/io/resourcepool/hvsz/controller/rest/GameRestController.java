@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by gdanguy on 05/05/17.
  */
 @RestController
-@RequestMapping("/game")
+@RequestMapping("/api/game")
 public class GameRestController {
 
     @Autowired
