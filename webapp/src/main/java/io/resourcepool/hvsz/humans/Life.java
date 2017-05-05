@@ -67,6 +67,16 @@ public class Life implements Serializable {
     }
 
     /**
+     * refill res.
+     * @return dropped qte
+     */
+    public int dropAllResources() {
+        int removed = this.nbResources;
+        this.nbResources = 0;
+        return removed;
+    }
+
+    /**
      * add a resource to inventory.
      * @param qte qte to add
      * @return qte added

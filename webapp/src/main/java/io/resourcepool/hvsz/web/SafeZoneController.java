@@ -88,12 +88,13 @@ public class SafeZoneController {
   public String offloadFood(@PathVariable Long zoneId, @RequestParam(value = "lifeToken") int lifeToken, Model model) {
     Game g = gameService.getActive();
     Assert.gameActive(g);
-    Life life = humanService.getLifeByToken(lifeToken);
+    Life life = g.getStatus().getLifeByToken(lifeToken);
     if (life == null) {
       model.addAttribute("message", "Token invalide, essayes encore !");
     } else if (!life.isAlive()) {
       model.addAttribute("message", "Tu es mort !");
     } else {
+      //SafeZone s = g.getSafeZones().stream().filter(foodSupply -> foodSupply.getId().equals(zoneId)).findFirst().get();
       int amountRefilled = zoneService.refill(zoneId, lifeToken);
       model.addAttribute("amountRefilled", amountRefilled);
     }

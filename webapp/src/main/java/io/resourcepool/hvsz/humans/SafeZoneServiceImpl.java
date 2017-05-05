@@ -32,10 +32,13 @@ public class SafeZoneServiceImpl implements SafeZoneService {
 
   @Override
   public int refill(Long zoneId, int token) {
-    SafeZone safeZone = getSafeZone(zoneId);
-    Life life = humanService.getLifeByToken(token);
+    Game g = gameService.getActive();
+    SafeZone safeZone = g.getSafeZones().stream().filter(z -> z.getId().equals(zoneId)).findFirst().get();
+    Life life = g.getStatus().getLifeByToken(token);
     Assert.humanAlive(life);
-    return safeZone.refill(life.getNbResources());
+    int refilled = safeZone.refill(life.dropAllResources());
+    gameService.update(g);
+    return refilled;
   }
 
   @Override
