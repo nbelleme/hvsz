@@ -40,6 +40,9 @@ public class GameController {
       model.addAttribute("status", GameState.NONE);
       return "game/inactive";
     }
+    if (active.getStatus().isOver()) {
+      return "redirect:/game/over";
+    }
     if (active.getStatus().isReadyToStart()) {
       model.addAttribute("status", active.getStatus().getGameState());
       return "game/inactive";
@@ -66,7 +69,7 @@ public class GameController {
   public String gameOver(Model model) {
     Game game = gameService.getActive();
     Assert.gameOver(game);
-    model.addAttribute("status", game.getStatus().getGameState());
+    model.addAttribute("status", game.getStatus().getGameState().name());
     return "game/over";
   }
 
