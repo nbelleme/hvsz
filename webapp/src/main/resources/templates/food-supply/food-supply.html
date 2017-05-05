@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<div th:include="menu"/>
+<div th:include="/partials/menu"/>
 <section class="container">
     <h1 th:text="${zone.name}"></h1>
     <div th:if="${message}" class="card">
@@ -35,17 +35,16 @@
             </div>
         </div>
         <div th:case="*">
-            <form method="post" action="/level/get">
+            <form method="post" th:action="@{/food-supply/{zoneId}(zoneId=${zone.id})}">
                 <fieldset class="row">
                     <legend>Prendre une ressource</legend>
-                    <input type="hidden" name="zoneId" th:value="${zone.id}"/>
-                    <input type="hidden" name="nbResWanted" id="nbResWanted" value="1"/>
+                    <input type="hidden" name="amount" id="amount" value="1"/>
                     <div class="input-field col s12">
                         <label for="lifeToken">Votre code utilisateur</label>
                         <input type="text" name="lifeToken" id="lifeToken" required="required" />
                     </div>
                     <button class="btn waves-effect waves-light" type="submit"
-                            name="action" id="take-button">Prendre (maintenir appuyé)
+                            name="action" id="takeButton">Prendre (maintenir appuyé)
                     </button>
                 </fieldset>
             </form>
@@ -82,13 +81,14 @@
          */
         function reset() {
             increase = false;
-            $("#take-button").text(text);
-            $("#nbResWanted").val(nb);
+            $("#takeButton").text(text);
+            $("#amount").val(nb);
             nb = defaultNb;
         }
 
         function getNbResource(callback) {
             var token = $("#lifeToken").val();
+            // FIXME
             $.getJSON("/api/game/1/life/" + token + "/nbResource", function (nbResource) {
                 maxRes = defaultMaxRes - nbResource;
                 console.log("OK");

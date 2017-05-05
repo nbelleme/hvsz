@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/game")
@@ -27,14 +27,22 @@ public class GameController {
    * Get the dashboard page.
    *
    * @param model Model
+   * @param error Error on other page
    * @return String (dashboard vue)
    */
-  @GetMapping("/")
-  public String dashboard(Model model) {
+  @GetMapping()
+  public String dashboard(@RequestParam(required = false) String error, Model model) {
     Game active = gameService.getActive();
+    if (error != null && !error.isEmpty()) {
+      model.addAttribute("errorMessage", error);
+    }
     if (active == null) {
-      model.addAttribute("status", GameState.NOT_STARTED);
-      return "game/dashboard";
+      model.addAttribute("status", GameState.NONE);
+      return "game/inactive";
+    }
+    if (active.getStatus().isReadyToStart()) {
+      model.addAttribute("status", active.getStatus().getGameState());
+      return "game/inactive";
     }
     model.addAttribute("remainingTime", active.getStatus().getRemainingTime());
     model.addAttribute("humanTickets", active.getConfig().getHumanTickets());
@@ -67,7 +75,7 @@ public class GameController {
    * @param model Model
    * @return String (redirect to dashboard)
    */
-  @PostMapping("/start")
+  @GetMapping("/start")
   public String startGame(Model model) {
     Game game = gameService.getActive();
     Assert.gameReadyToStart(game);
@@ -81,7 +89,7 @@ public class GameController {
    * @param model Model
    * @return String (redirect to dashboard)
    */
-  @PostMapping("/pause")
+  @GetMapping("/pause")
   public String pauseGame(Model model) {
     Game game = gameService.getActive();
     Assert.gameActive(game);
@@ -95,7 +103,7 @@ public class GameController {
    * @param model Model
    * @return String (redirect to dashboard)
    */
-  @PostMapping("/resume")
+  @GetMapping("/resume")
   public String resumeGame(Model model) {
     Game game = gameService.getActive();
     Assert.gameOngoing(game);
@@ -109,7 +117,7 @@ public class GameController {
    * @param model Model
    * @return String (redirect to dashboard)
    */
-  @PostMapping("/stop")
+  @GetMapping("/stop")
   public String stopGame(Model model) {
     Game game = gameService.getActive();
     Assert.gameOngoing(game);

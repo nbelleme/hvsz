@@ -31,7 +31,7 @@ public abstract class Assert {
    */
   public static void gameOngoing(Game game) {
     gameDefined(game);
-    if (game.getStatus().isOngoing()) {
+    if (!game.getStatus().isOngoing()) {
       throw new GameOverOrPausedException();
     }
   }

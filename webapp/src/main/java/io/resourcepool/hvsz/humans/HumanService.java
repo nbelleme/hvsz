@@ -39,4 +39,11 @@ public interface HumanService {
    * @return life.
    */
   Life getLifeByToken(int token);
+
+  /**
+   * Save life.
+   *
+   * @param life .
+   */
+  void save(Life life);
 }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class FoodSupply implements Serializable {
   private static final String NAME = "Zone de ravitaillement n°";
-  private Integer id;
+  private Long id;
   private int level;
   private int capacity;
   private String name;
@@ -23,21 +23,18 @@ public class FoodSupply implements Serializable {
    * @param level    the current amount of resource
    * @param capacity the maximum amount of Resource (<=> available at the start of the game)
    */
-  public FoodSupply(int id, int level, int capacity) {
+  public FoodSupply(Long id, int level, int capacity) {
     this.id = id;
+    this.level = level;
     this.capacity = capacity;
     name = NAME + id;
   }
 
-  public static String getNAME() {
-    return FoodSupply.NAME;
-  }
-
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -42,7 +42,7 @@ public class FoodSupplyController {
    * @param model Model
    * @return String (food-supply-zone vue)
    */
-  @GetMapping("/")
+  @GetMapping()
   public String showAvailableZones(Model model) {
     Game game = gameService.getActive();
     Assert.gameOngoing(game);
@@ -78,13 +78,13 @@ public class FoodSupplyController {
    */
   @PostMapping("/{zoneId}")
   public String takeFood(@PathVariable Long zoneId,
-                         @RequestParam(value = "amount") Integer amount,
-                         @RequestParam(value = "lifeToken") int lifeToken,
+                         @RequestParam Integer amount,
+                         @RequestParam int lifeToken,
                          Model model) {
     int foodTaken = foodSupplyService.takeFood(zoneId, lifeToken, amount);
     model.addAttribute("foodTaken", foodTaken);
     FoodSupply s = foodSupplyService.get(zoneId);
-    model.addAttribute("foodSupply", s);
+    model.addAttribute("zone", s);
     return "food-supply/food-supply";
   }
 

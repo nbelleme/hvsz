@@ -5,12 +5,10 @@ import io.resourcepool.hvsz.common.exceptions.CannotSpawnException;
 import io.resourcepool.hvsz.common.exceptions.NoHumanLeftException;
 import io.resourcepool.hvsz.common.models.GenericBuilder;
 import io.resourcepool.hvsz.game.Game;
+import io.resourcepool.hvsz.game.GameService;
 import io.resourcepool.hvsz.game.Status;
-import io.resourcepool.hvsz.persistence.dao.DaoMapDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import static io.resourcepool.hvsz.common.Constants.GAME_ID;
 
 @Service
 public class HumanServiceImpl implements HumanService {
@@ -18,7 +16,7 @@ public class HumanServiceImpl implements HumanService {
   private Long nextId = 0L;
 
   @Autowired
-  private DaoMapDb dao;
+  private GameService gameService;
 
 
   /**
@@ -30,14 +28,14 @@ public class HumanServiceImpl implements HumanService {
 
   @Override
   public boolean isAlive(int lifeToken) {
-    Game g = dao.get(GAME_ID);
+    Game g = gameService.getActive();
     Life lifeByToken = g.getStatus().getLifeByToken(lifeToken);
     return lifeByToken.isAlive();
   }
 
   @Override
   public boolean hasTicketsLeft() {
-    Game g = dao.get(GAME_ID);
+    Game g = gameService.getActive();
     Assert.gameActive(g);
     return g.getStatus().getRemainingHumanTickets() > 0;
 
@@ -45,13 +43,13 @@ public class HumanServiceImpl implements HumanService {
 
   @Override
   public boolean canSpawn() {
-    Game g = dao.get(GAME_ID);
+    Game g = gameService.getActive();
     return hasTicketsLeft() && g.getStatus().getCurrentHumansOnField() < g.getStatus().getMaxHumansOnField();
   }
 
   @Override
   public Life spawn() {
-    Game g = dao.get(GAME_ID);
+    Game g = gameService.getActive();
     Assert.gameActive(g);
     Status status = g.getStatus();
 
@@ -74,15 +72,22 @@ public class HumanServiceImpl implements HumanService {
       .build();
     status.getLives().add(life);
     g.setStatus(status);
-    dao.set(GAME_ID, g);
+    gameService.update(g);
     return life;
   }
 
   @Override
   public Life getLifeByToken(int token) {
-    Game g = dao.get(GAME_ID);
+    Game g = gameService.getActive();
     Assert.gameActive(g);
-    return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().get();
+    return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElseGet(() -> null);
+  }
+
+  @Override
+  public void save(Life life) {
+    Game g = gameService.getActive();
+    g.getStatus().setLife(life.getId(), life);
+    gameService.update(g);
   }
 
   /**

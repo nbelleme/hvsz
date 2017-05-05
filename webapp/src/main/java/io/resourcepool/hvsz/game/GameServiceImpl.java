@@ -42,6 +42,7 @@ public class GameServiceImpl implements GameService {
       .with(Status::setRemainingHumanTickets, conf.getHumanTickets())
       .with(Status::setCurrentHumansOnField, 0)
       .with(Status::setRemainingTime, conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
+      .with(Status::setMaxHumansOnField, conf.getMaxHumansOnField())
       .with(Status::setStarted, true)
       .build();
     game.setStatus(status);
@@ -49,14 +50,14 @@ public class GameServiceImpl implements GameService {
     List<FoodSupply> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
     int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
     for (int i = 0; i < conf.getNbFoodSupplyZones(); i++) {
-      foodSupplies.add(new FoodSupply(i, foodPerZone, foodPerZone));
+      foodSupplies.add(new FoodSupply((long) i, foodPerZone, foodPerZone));
     }
     game.setFoodSupplies(foodSupplies);
     // Init game safe zones
     List<SafeZone> safeZones = new ArrayList<>(conf.getNbSafeZones());
     int nbSafeZones = conf.getNbSafeZones();
     for (int i = 0; i < nbSafeZones; i++) {
-      safeZones.add(new SafeZone(i, 100, 100)); // FIXME add variables into game settings
+      safeZones.add(new SafeZone((long) i, 100, 100)); // FIXME add variables into game settings
     }
     game.setSafeZones(safeZones);
     // Save game
@@ -125,7 +126,7 @@ public class GameServiceImpl implements GameService {
    * @return true if all safe zones were destroyed
    */
   private boolean allSafeZonesDestroyed(Game g) {
-    return g.getSafeZones().stream().filter(z -> z.getLevel() > 0).count() == 0;
+    return g.getSafeZones() == null ? true : g.getSafeZones().stream().filter(z -> z.getLevel() > 0).count() == 0;
   }
 
 }

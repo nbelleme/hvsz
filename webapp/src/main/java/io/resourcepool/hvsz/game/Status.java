@@ -155,4 +155,19 @@ public class Status implements Serializable {
   public boolean isPaused() {
     return PAUSED.equals(gameState);
   }
+
+  /**
+   * Set life in place of a previous life content.
+   *
+   * @param id   the life id
+   * @param life the new life object
+   */
+  public void setLife(Long id, Life life) {
+    for (int i = 0; i < lives.size(); i++) {
+      Life l = lives.get(i);
+      if (l.getId() == id) {
+        lives.set(i, life);
+      }
+    }
+  }
 }

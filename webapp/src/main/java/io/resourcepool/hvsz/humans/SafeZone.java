@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class SafeZone implements Serializable {
   private static final String NAME = "Zone de sécurité n°";
-  private Integer id;
+  private Long id;
   private int level;
   private int capacity;
   private String name;
@@ -22,18 +22,18 @@ public class SafeZone implements Serializable {
    * @param level    the amount of Resource at the start of the game
    * @param capacity the max of Resource the zone can hold.
    */
-  public SafeZone(int id, int level, int capacity) {
+  public SafeZone(Long id, int level, int capacity) {
     this.id = id;
     this.level = level;
     this.capacity = capacity;
     name = NAME + id;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -53,9 +53,8 @@ public class SafeZone implements Serializable {
     this.name = name;
   }
 
-
   public int getLevel() {
-    return level;
+    return this.level;
   }
 
   public String getName() {
@@ -74,35 +73,19 @@ public class SafeZone implements Serializable {
     return level - oldLevel;
   }
 
-  /**
-   * Lose an amount of level (refill out).
-   *
-   * @param quantite amount of level we want to refill out
-   * @return how many level we have really refill
-   */
-  public int lose(int quantite) {
-    if (quantite <= 0) {
-      return 0;
-    }
-    level -= quantite;
-    if (level < 0) {
-      int over = level;
-      level = 0;
-      return quantite - over;
-    }
-    return quantite;
-  }
+  // CHECKSTYLE_OFF
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
     SafeZone safeZone = (SafeZone) o;
-    return level == safeZone.level && capacity == safeZone.capacity && (id != null ? id.equals(safeZone.id) : safeZone.id == null) && (name != null ? name.equals(safeZone.name) : safeZone.name == null);
+
+    if (level != safeZone.level) return false;
+    if (capacity != safeZone.capacity) return false;
+    if (id != null ? !id.equals(safeZone.id) : safeZone.id != null) return false;
+    return name != null ? name.equals(safeZone.name) : safeZone.name == null;
   }
 
   @Override
@@ -113,4 +96,6 @@ public class SafeZone implements Serializable {
     result = 31 * result + (name != null ? name.hashCode() : 0);
     return result;
   }
+
+  // CHECKSTYLE_ON
 }

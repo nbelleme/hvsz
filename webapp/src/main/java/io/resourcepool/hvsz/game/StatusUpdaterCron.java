@@ -31,17 +31,20 @@ public class StatusUpdaterCron {
   public void gameTimer() {
     Game game = gameService.getActive();
     if (game == null || !game.getStatus().isOngoing()) {
-      LOGGER.info("No running game to update.");
+      LOGGER.debug("No running game to update.");
     } else {
 
       LOGGER.info("Update the game of id " + game.getId());
       Status status = game.getStatus();
       if (status.isActive() && status.getRemainingTime() > 0) {
         status.setRemainingTime(status.getRemainingTime() - 1);
+        gameService.update(game);
       }
       if (shouldDecreaseLevel(100, (long) (game.getConfig().getGameDuration() * 60), status.getRemainingTime(), game.getConfig().getDifficulty())) {
         safeZoneService.eatOneUnitOfFood();
       }
+      game = gameService.getActive();
+      gameService.update(game);
     }
   }
 

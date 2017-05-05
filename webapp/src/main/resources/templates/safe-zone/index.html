@@ -9,21 +9,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<div th:include="menu"/>
+<div th:include="/partials/menu"/>
 <section class="container">
     <h1>Quelle Safe-Zone afficher ?</h1>
     <div class="row">
         <div class="col s6" th:each="zone : ${zones}">
             <div class="card horizontal">
-                <img th:case="'safezone'" src="https://www.lizio.fr/files/pictures/visites/chapelle/1393583422.jpg"/>
+                <img src="https://www.lizio.fr/files/pictures/visites/chapelle/1393583422.jpg"/>
                 <div class="card-stacked">
                     <div class="card-content">
                         <p th:text="${zone.name}">1</p>
                     </div>
 
-                    <a th:case="safezone"
-                       th:href="@{/zone/${zone.id}}"
-                       class="waves-effect waves-light btn">Aller à la zone <i class="material-icons right">send</i></a>
+                    <a th:href="@{/safe-zone/{zoneId}(zoneId=${zone.id})}" class="waves-effect waves-light btn">Aller à la zone <i class="material-icons right">send</i></a>
                 </div>
             </div>
         </div>

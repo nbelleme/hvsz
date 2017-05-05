@@ -8,11 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-    <div th:include="menu"/>
+    <div th:include="/partials/menu"/>
     <section class="container">
         <h1>Dashboard</h1>
+        <div th:if="${errorMessage}" class="card">
+            <div class="card-content teal darken-1">
+                <p class="white-text"><span th:text="${errorMessage}"></span></p>
+            </div>
+        </div>
         <div class="mainInfos">
-            <p th:text="'Nombre de Tickets Humains restant : ' + ${remainingHumanTickets} ' + ${humanTickets}"/>
+            <p th:text="'Nombre de Tickets Humains restant : ' + ${remainingHumanTickets}  + ' / ' + ${humanTickets}"/>
             <span id="remainingTimeValue" class="display: none;" th:text="${remainingTime}"/>
             <p id="remainingTime" th:text="'Temps de jeu restant : ' + ${remainingTime} + ' secondes'"/>
         </div>
@@ -31,22 +36,22 @@
             </li>
         </ul>
         <th:block th:switch="${status}">
-            <div th:case="'NOT_STARTED'">
+            <div th:case="${T(io.resourcepool.hvsz.game.GameState).NOT_STARTED}">
                 <a class="waves-effect waves-light btn" href="/game/start">Lancer le jeu</a>
             </div>
-            <div th:case="'ONGOING'">
+            <div th:case="${T(io.resourcepool.hvsz.game.GameState).ACTIVE}">
                 <a class="waves-effect waves-light btn" href="/game/pause">Mettre le jeu en pause</a>
             </div>
-            <div th:case="'PAUSED'">
+            <div th:case="${T(io.resourcepool.hvsz.game.GameState).PAUSED}">
                 <a class="waves-effect waves-light btn" href="/game/resume">Reprendre le jeu</a>
                 <a class="waves-effect waves-light red lighten-2
                 btn" href="/game/stop">Adandonner le jeu</a>
             </div>
-            <div th:case="'HUMAN_VICTORY'">
+            <div th:case="${T(io.resourcepool.hvsz.game.GameState).HUMAN_VICTORY}">
                 <p>VICTOIRE DES HUMAINS !</p>
                 <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
             </div>
-            <div th:case="'ZOMBIE_VICTORY'">
+            <div th:case="${T(io.resourcepool.hvsz.game.GameState).ZOMBIE_VICTORY}">
                 <p>VICTOIRE DES ZOMBIES !</p>
                 <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
             </div>
@@ -66,7 +71,7 @@
     // TODO handle pause / resume / stop game
     setInterval(function() {
       if (remainingTime > 0) {
-        $("#remainingTime").text("Temps de jeu restant  " + remainingTime / 60 + " min et " + remainingTime % 60 + " s.");
+        $("#remainingTime").text("Temps de jeu restant  " + Math.floor(remainingTime / 60) + " min et " + remainingTime % 60 + " s.");
       } else {
         $("#remainingTime").text("Partie terminée ! ");
       }

@@ -8,6 +8,7 @@ public class GameSettings implements Serializable {
     Integer gameDuration;
     Integer difficulty;
     Integer humanTickets;
+    Integer maxHumansOnField;
     Integer nbSafeZones;
     Integer nbFoodSupplyZones;
     Integer nbFoodSupplies;
@@ -20,6 +21,14 @@ public class GameSettings implements Serializable {
      * GameConfig constructor.
      */
     public GameSettings() {
+    }
+
+    public Integer getMaxHumansOnField() {
+        return maxHumansOnField;
+    }
+
+    public void setMaxHumansOnField(Integer maxHumansOnField) {
+        this.maxHumansOnField = maxHumansOnField;
     }
 
     public Integer getGameDuration() {

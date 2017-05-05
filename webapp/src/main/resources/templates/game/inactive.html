@@ -8,17 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<div th:include="menu"/>
+<div th:include="/partials/menu"/>
 <section class="container">
-    <h1>Partie en attente</h1>
-    <div class="card">
+    <h1>Aucun jeu en cours</h1>
+    <div th:if="${errorMessage}" class="card">
         <div class="card-content teal darken-1">
-            <div th:switch="${status}">
-                <p th:case="'NOT_STARTED'">La partie n'a pas encore démarré!</p>
-                <p th:case="'PAUSED'">La partie est en pause</p>
-            </div>
+            <p class="white-text"><span th:text="${errorMessage}"></span>.</p>
         </div>
     </div>
+    <th:block th:switch="${status}">
+        <div th:case="${T(io.resourcepool.hvsz.game.GameState).NONE}">
+            <a class="waves-effect waves-light btn" href="/game/settings">Configurer le jeu</a>
+        </div>
+        <div th:case="${T(io.resourcepool.hvsz.game.GameState).ACTIVE}">
+            <a class="waves-effect waves-light btn" href="/game/pause">Mettre le jeu en pause</a>
+        </div>
+        <div th:case="${T(io.resourcepool.hvsz.game.GameState).PAUSED}">
+            <a class="waves-effect waves-light btn" href="/game/resume">Reprendre le jeu</a>
+            <a class="waves-effect waves-light red lighten-2
+                btn" href="/game/stop">Adandonner le jeu</a>
+        </div>
+        <div th:case="*">
+            <a class="waves-effect waves-light btn" href="/game/start">Lancer le jeu</a>
+        </div>
+
+    </th:block>
 </section>
 <footer>
 </footer>

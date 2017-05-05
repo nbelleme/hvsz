@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-    <div th:include="menu"/>
+    <div th:include="/partials/menu"/>
     <section class="container">
         <h1>Formulaire de configuration</h1>
-        <form method="post" action="/configuration">
+        <form method="post" action="/game/settings">
             <fieldset class="row">
                 <legend>Général</legend>
                 <div class="input-field col s6">
@@ -19,50 +19,48 @@
                     <input type="number" name="gameDuration" id="gameDuration" min="1" value="30"/>
                 </div>
                 <div class="input-field col s6">
-                    <select name="difficulty" id="difficulty">
-                        <option value="0">facile</option>
-                        <option value="1" selected="true">normal</option>
-                        <option value="2">difficile</option>
-                    </select>
                     <label for="difficulty">Difficulté de la partie</label>
+                    <select name="difficulty" id="difficulty">
+                        <option value="0">Facile</option>
+                        <option value="1" selected="selected">Normale</option>
+                        <option value="2">Difficile</option>
+                    </select>
                 </div>
             </fieldset>
             <fieldset class="row">
                 <legend>Humain</legend>
-                <div class="input-field col s12">
-                    <label for="humanTickets">Nombre d'humains</label>
-                    <input type="number" name="humanTickets" id="humanTickets" min="1" value="30"/>
-                </div>
-            </fieldset>
-            <fieldset class="row">
-                <legend>Zombie</legend>
-                <div class="input-field col s12">
-                    <label for="nbZombie">Nombre de zombies</label>
-                    <input type="number" name="nbZombie" id="nbZombie" min="1" value="10"/>
-                </div>
-            </fieldset>
-            <fieldset class="row">
-                <legend>Zone de sécurité</legend>
                 <div class="input-field col s6">
-                    <label for="nbSafezone">Nombre de zones de sécurité</label>
-                    <input type="number" name="nbSafezone" id="nbSafezone" min="1" value="2"/>
+                    <label for="humanTickets">Nombre de tickets humains</label>
+                    <input type="number" name="humanTickets" id="humanTickets" min="10" value="100"/>
                 </div>
                 <div class="input-field col s6">
-                    <label for="nbSafezoneLifes">Nombre de vies total</label>
-                    <input type="number" name="nbSafezoneLifes" id="nbSafezoneLifes" min="1" value="40"/>
+                    <label for="maxHumansOnField">Nombre d'humains maximum sur le terrain</label>
+                    <input type="number" name="maxHumansOnField" id="maxHumansOnField" min="1" value="20"/>
                 </div>
             </fieldset>
             <fieldset class="row">
-                <legend>Bunker et ressources</legend>
+                <legend>Safe-Zones and Bunkers</legend>
+                <div class="input-field col s6">
+                    <label for="nbSafeZones">Nombre de zones de sécurité</label>
+                    <input type="number" name="nbSafeZones" id="nbSafeZones" min="1" value="2"/>
+                </div>
                 <div class="input-field col s6">
                     <label for="nbFoodSupplyZones">Nombre de bunkers</label>
                     <input type="number" name="nbFoodSupplyZones" id="nbFoodSupplyZones" min="1" value="2"/>
                 </div>
+            </fieldset>
+            <fieldset class="row">
+                <legend>Ressources</legend>
                 <div class="input-field col s6">
-                    <label for="nbFoodSupplies">Nombre de ressources total</label>
+                    <label for="maximumFoodTransfer">Nombre d'unités de nourriture transportables en une fois</label>
+                    <input type="number" name="maximumFoodTransfer" id="maximumFoodTransfer" min="1" value="10"/>
+                </div>
+                <div class="input-field col s6">
+                    <label for="nbFoodSupplies">Nombre d'unités de nourriture (au total)</label>
                     <input type="number" name="nbFoodSupplies" id="nbFoodSupplies" min="1" value="180"/>
                 </div>
             </fieldset>
+            
             <button class="btn waves-effect waves-light" type="submit" name="action">Envoyer
                 <i class="material-icons right">send</i>
             </button>
@@ -73,53 +71,6 @@
     </footer>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
-    <script type="text/javascript" src="js/materialize.js"/>
-    <script>
-        $(function () {
-            var diffArray = [];
-            // Difficulty : easy
-            diffArray.push({
-                "gameDuration": 20,
-                "humanTickets": 20,
-                "nbZombie": 5,
-                "nbSafezone": 4,
-                "nbSafezoneLifes": 40,
-                "nbFoodSupplyZones": 3,
-                "nbFoodSupplies": 150
-            });
-            //Difficulty : medium
-            diffArray.push({
-                "gameDuration": 30,
-                "humanTickets": 30,
-                "nbZombie": 10,
-                "nbSafezone": 2,
-                "nbSafezoneLifes": 40,
-                "nbFoodSupplyZones": 2,
-                "nbFoodSupplies": 180
-            });
-            // Difficulty : hard
-            diffArray.push({
-                "gameDuration": 30,
-                "humanTickets": 20,
-                "nbZombie": 20,
-                "nbSafezone": 3,
-                "nbSafezoneLifes": 40,
-                "nbFoodSupplyZones": 2,
-                "nbFoodSupplies": 180
-            });
-
-            function setDifficulty() {
-                var diffLevel = parseInt($("#difficulty").val());
-                var diff = diffArray[diffLevel];
-                for(var key in diff){
-                    $("#" + key).val(diff[key]);
-                    console.log(key);
-                }
-            }
-            setDifficulty();
-            $("#difficulty").change(setDifficulty);
-
-        });
-    </script>
+    <script type="text/javascript" src="/static/js/materialize.js"/>
 </body>
 </html>

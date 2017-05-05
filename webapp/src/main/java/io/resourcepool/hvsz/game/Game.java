@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Game implements Serializable {
 
-  Long id = 0L; // Useless
+  Long id = 1L; // Useless
   Status status = new Status();
   GameSettings config = new GameSettings();
   List<SafeZone> safeZones;
@@ -115,67 +115,33 @@ public class Game implements Serializable {
     this.zombieZones = zombieZones;
   }
 
-
-  /**
-   * check at least one zone has resources left.
-   *
-   * @return .
-   */
-  public Boolean checkSafeZoneLeft() {
-    for (SafeZone s : safeZones) {
-      if (s.getLevel() > 0) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * get supply zonr by id.
-   *
-   * @param id .
-   * @return .
-   */
-  public FoodSupply getSupplyZoneById(int id) {
-    for (FoodSupply z : foodSupplies) {
-      if (z.getId() == id) {
-        return z;
-      }
-    }
-    return null;
-  }
-
-  /**
-   * get safe zone by id.
-   *
-   * @param id .
-   * @return .
-   */
-  public SafeZone getSafeZoneById(int id) {
-    for (SafeZone z : safeZones) {
-      if (z.getId() == id) {
-        return z;
-      }
-    }
-    return null;
-  }
+  // CHECKSTYLE_OFF
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
 
     Game game = (Game) o;
 
-    return getId().equals(game.getId());
+    if (id != null ? !id.equals(game.id) : game.id != null) return false;
+    if (status != null ? !status.equals(game.status) : game.status != null) return false;
+    if (config != null ? !config.equals(game.config) : game.config != null) return false;
+    if (safeZones != null ? !safeZones.equals(game.safeZones) : game.safeZones != null) return false;
+    if (foodSupplies != null ? !foodSupplies.equals(game.foodSupplies) : game.foodSupplies != null) return false;
+    return zombieZones != null ? zombieZones.equals(game.zombieZones) : game.zombieZones == null;
   }
 
   @Override
   public int hashCode() {
-    return getId().hashCode();
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (status != null ? status.hashCode() : 0);
+    result = 31 * result + (config != null ? config.hashCode() : 0);
+    result = 31 * result + (safeZones != null ? safeZones.hashCode() : 0);
+    result = 31 * result + (foodSupplies != null ? foodSupplies.hashCode() : 0);
+    result = 31 * result + (zombieZones != null ? zombieZones.hashCode() : 0);
+    return result;
   }
+
+  // CHECKSTYLE_ON
 }

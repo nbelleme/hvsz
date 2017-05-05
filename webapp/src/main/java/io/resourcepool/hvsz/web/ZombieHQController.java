@@ -34,7 +34,7 @@ public class ZombieHQController {
    * @param model the model
    * @return String (zombie HQ view)
    */
-  @GetMapping("/")
+  @GetMapping()
   public String get(Model model) {
     Game active = gameService.getActive();
     Assert.gameOngoing(active);

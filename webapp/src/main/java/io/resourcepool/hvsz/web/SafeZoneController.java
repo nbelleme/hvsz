@@ -8,7 +8,6 @@ import io.resourcepool.hvsz.humans.HumanService;
 import io.resourcepool.hvsz.humans.Life;
 import io.resourcepool.hvsz.humans.SafeZone;
 import io.resourcepool.hvsz.humans.SafeZoneService;
-import io.resourcepool.hvsz.persistence.dao.DaoMapDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-import static io.resourcepool.hvsz.common.Constants.GAME_ID;
-
 /**
  * TODO class details.
  *
@@ -31,10 +28,6 @@ import static io.resourcepool.hvsz.common.Constants.GAME_ID;
 @Controller
 @RequestMapping("/safe-zone")
 public class SafeZoneController {
-
-
-  @Autowired
-  private DaoMapDb dao;
 
   @Autowired
   private HumanService humanService;
@@ -52,7 +45,7 @@ public class SafeZoneController {
    * @param model Model
    * @return String (safe-zone vue)
    */
-  @GetMapping("/")
+  @GetMapping()
   public String showAvailableZones(Model model) {
     Game game = gameService.getActive();
     Assert.gameOngoing(game);
@@ -93,7 +86,7 @@ public class SafeZoneController {
    */
   @PostMapping("/{zoneId}/offload")
   public String offloadFood(@PathVariable Long zoneId, @RequestParam(value = "lifeToken") int lifeToken, Model model) {
-    Game g = dao.get(GAME_ID);
+    Game g = gameService.getActive();
     Assert.gameActive(g);
     Life life = humanService.getLifeByToken(lifeToken);
     if (life == null) {
@@ -117,10 +110,10 @@ public class SafeZoneController {
    * @param zoneId id of the safe zone
    * @return String (human)
    */
-  @PostMapping("/{zoneId}/spawn")
+  @GetMapping("/{zoneId}/spawn")
   public String spawnHuman(@PathVariable Long zoneId, Model model) {
-    Game game = gameService.getActive();
-    Assert.gameActive(game);
+    Game active = gameService.getActive();
+    Assert.gameActive(active);
     if (!humanService.canSpawn()) {
       model.addAttribute("spawnResultMsg", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");
     } else {
@@ -130,6 +123,12 @@ public class SafeZoneController {
     }
     SafeZone safeZone = zoneService.getSafeZone(zoneId);
     model.addAttribute("zone", safeZone);
+    model.addAttribute("remainingTime", active.getStatus().getRemainingTime());
+    model.addAttribute("humanTickets", active.getConfig().getHumanTickets());
+    model.addAttribute("duration", active.getConfig().getGameDuration());
+    model.addAttribute("humansOnField", active.getStatus().getCurrentHumansOnField());
+    model.addAttribute("remainingHumanTickets", active.getStatus().getRemainingHumanTickets());
+    model.addAttribute("status", active.getStatus().getGameState());
     return "safe-zone/safe-zone";
   }
 

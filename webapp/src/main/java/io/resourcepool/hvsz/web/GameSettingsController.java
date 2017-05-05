@@ -20,46 +20,52 @@ public class GameSettingsController {
 
   /**
    * Show the game settings view.
+   *
    * @param model Model
    * @return String (configuration view)
    */
-  @GetMapping("/")
+  @GetMapping()
   public String showGameSettingsView(Model model) {
     return "game/settings";
   }
 
   /**
    * Submit the game config page.
-   * @param gameDuration String
-   * @param difficulty String
-   * @param humanTickets String
-   * @param nbSafeZones String
-   * @param nbFoodSupplyZones String
-   * @param nbSupplyResources String
-   * @param model Model
+   *
+   * @param gameDuration      .
+   * @param difficulty        .
+   * @param humanTickets      .
+   * @param nbSafeZones       .
+   * @param nbFoodSupplyZones .
+   * @param nbFoodSupplies    .
+   * @param maxHumansOnField  .
+   * @param maximumFoodTransfer *
+   * @param model             Model
    * @return String (redirect to dashboard)
    */
-  @PostMapping("/")
+  @PostMapping()
   public String postForm(
-          @RequestParam(value = "gameDuration", defaultValue = "30") String gameDuration,
-          @RequestParam(value = "difficulty", defaultValue = "0") String difficulty,
-          @RequestParam(value = "humanTickets", defaultValue = "30") String humanTickets,
-          @RequestParam(value = "nbSafeZones", defaultValue = "2") String nbSafeZones,
-          @RequestParam(value = "nbFoodSupplyZones", defaultValue = "2") String nbFoodSupplyZones,
-          @RequestParam(value = "nbSupplyResources", defaultValue = "180") String nbSupplyResources,
-          Model model) {
+    @RequestParam(value = "gameDuration") int gameDuration,
+    @RequestParam(value = "difficulty") int difficulty,
+    @RequestParam(value = "humanTickets") int humanTickets,
+    @RequestParam(value = "maxHumansOnField") int maxHumansOnField,
+    @RequestParam(value = "nbSafeZones") int nbSafeZones,
+    @RequestParam(value = "nbFoodSupplyZones") int nbFoodSupplyZones,
+    @RequestParam(value = "maximumFoodTransfer") int maximumFoodTransfer,
+    @RequestParam(value = "nbFoodSupplies") int nbFoodSupplies,
+    Model model) {
 
     GameSettings conf = GenericBuilder.of(GameSettings::new)
-            .with(GameSettings::setGameDuration, Integer.parseInt(gameDuration))
-            .with(GameSettings::setDifficulty, Integer.parseInt(difficulty))
-            .with(GameSettings::setHumanTickets, Integer.parseInt(humanTickets))
-            .with(GameSettings::setNbSafeZones, Integer.parseInt(nbSafeZones))
-            .with(GameSettings::setNbFoodSupplyZones, Integer.parseInt(nbFoodSupplyZones))
-            .with(GameSettings::setNbFoodSupplies, Integer.parseInt(nbSupplyResources))
-            .build();
-
+      .with(GameSettings::setGameDuration, gameDuration)
+      .with(GameSettings::setDifficulty, difficulty)
+      .with(GameSettings::setHumanTickets, humanTickets)
+      .with(GameSettings::setNbSafeZones, nbSafeZones)
+      .with(GameSettings::setNbFoodSupplyZones, nbFoodSupplyZones)
+      .with(GameSettings::setMaxHumansOnField, maxHumansOnField)
+      .with(GameSettings::setNbFoodSupplies, nbFoodSupplies)
+      .with(GameSettings::setMaximumFoodTransfer, maximumFoodTransfer)
+      .build();
     confService.set(conf);
-
     return "redirect:/game";
   }
 }

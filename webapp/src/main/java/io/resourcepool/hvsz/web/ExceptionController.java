@@ -20,7 +20,7 @@ public class ExceptionController {
    */
   @ExceptionHandler({GameOverOrPausedException.class})
   public String gameOver() {
-    return "redirect:/game/dashboard?error=over-or-paused";
+    return "redirect:/game?error=over-or-paused";
   }
 
   /**
@@ -28,7 +28,7 @@ public class ExceptionController {
    */
   @ExceptionHandler({HumanIsDeadException.class})
   public String humanAlreadyDead() {
-    return "redirect:/game/dashboard?error=already-dead";
+    return "redirect:/game?error=already-dead";
   }
 
   /**
@@ -36,7 +36,7 @@ public class ExceptionController {
    */
   @ExceptionHandler({NoGameDefinedException.class})
   public String noGameDefined() {
-    return "redirect:/game/dashboard?error=no-game-defined";
+    return "redirect:/game?error=no-game-defined";
   }
 
   /**
@@ -44,6 +44,6 @@ public class ExceptionController {
    */
   @ExceptionHandler({GameOngoingException.class})
   public String gameOngoing() {
-    return "redirect:/game/dashboard?error=game-ongoing";
+    return "redirect:/game?error=game-ongoing";
   }
 }

@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-    <div th:include="menu"/>
+    <div th:include="/partials/menu"/>
     <section class="container">
         <h1>Zombie</h1>
 
-        <form method="post" action="/zombie/kill">
+        <form method="post" action="/zombie-hq/kill">
             <fieldset class="row">
                 <legend>Tuer un humain</legend>
                 <input type="hidden" name="safeZone" value="0"/>
