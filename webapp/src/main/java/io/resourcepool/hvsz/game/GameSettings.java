@@ -10,6 +10,7 @@ public class GameSettings implements Serializable {
     Integer humanTickets;
     Integer maxHumansOnField;
     Integer nbSafeZones;
+    Integer startingSafeZoneSupplies;
     Integer nbFoodSupplyZones;
     Integer nbFoodSupplies;
     Integer maximumFoodTransfer;
@@ -93,6 +94,14 @@ public class GameSettings implements Serializable {
 
     public void setMaximumFoodTransfer(Integer maximumFoodTransfer) {
         this.maximumFoodTransfer = maximumFoodTransfer;
+    }
+
+    public Integer getStartingSafeZoneSupplies() {
+        return startingSafeZoneSupplies;
+    }
+
+    public void setStartingSafeZoneSupplies(Integer startingSafeZoneSupplies) {
+        this.startingSafeZoneSupplies = startingSafeZoneSupplies;
     }
 
     @Override

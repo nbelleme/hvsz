@@ -40,6 +40,7 @@ public class GameSettingsController {
    * @param nbFoodSupplies    .
    * @param maxHumansOnField  .
    * @param maximumFoodTransfer *
+   * @param startingSafeZoneSupplies .
    * @param model             Model
    * @return String (redirect to dashboard)
    */
@@ -53,6 +54,7 @@ public class GameSettingsController {
     @RequestParam(value = "nbFoodSupplyZones") int nbFoodSupplyZones,
     @RequestParam(value = "maximumFoodTransfer") int maximumFoodTransfer,
     @RequestParam(value = "nbFoodSupplies") int nbFoodSupplies,
+    @RequestParam(value = "startingSafeZoneSupplies", defaultValue = "25") int startingSafeZoneSupplies,
     Model model) {
 
     GameSettings conf = GenericBuilder.of(GameSettings::new)
@@ -64,7 +66,8 @@ public class GameSettingsController {
       .with(GameSettings::setMaxHumansOnField, maxHumansOnField)
       .with(GameSettings::setNbFoodSupplies, nbFoodSupplies)
       .with(GameSettings::setMaximumFoodTransfer, maximumFoodTransfer)
-      .build();
+      .with(GameSettings::setStartingSafeZoneSupplies, startingSafeZoneSupplies)
+        .build();
     confService.set(conf);
     return "redirect:/game";
   }
