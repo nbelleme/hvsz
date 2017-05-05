@@ -92,4 +92,15 @@ public abstract class Assert {
     }
   }
 
+  /**
+   * Asserts that a human is not null and alive.
+   * @param life the human life
+   * @param zone zone that asked the check
+   */
+  public static void humanAlive(Life life, Object zone) {
+    if (life == null || !life.isAlive()) {
+      throw new HumanIsDeadException(zone);
+    }
+  }
+
 }

@@ -52,7 +52,7 @@
                     <input type="hidden" name="zoneId" th:value="${zone.id}"/>
                     <div class="input-field col s12">
                         <label for="lifeToken">Votre code utilisateur</label>
-                        <input type="text" name="lifeToken" id="lifeToken" required="required" pattern="\d*" />
+                        <input type="text" name="lifeToken" id="lifeToken" required="required" pattern="\d*" maxlength="6" />
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Déposer
                         <i class="material-icons right">send</i>

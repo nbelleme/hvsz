@@ -22,13 +22,21 @@ public class ExceptionController {
     return "redirect:/game?error=over-or-paused";
   }
 
+  // CHECKSTYLE_OFF
   /**
+   * @param ex .
    * @return .
    */
   @ExceptionHandler({HumanIsDeadException.class})
-  public String humanAlreadyDead() {
+  public String humanAlreadyDead(HumanIsDeadException ex) {
+    if (ex.supplyZone != null) return "redirect:/food-supply/"+ex.supplyZone.getId();
+    if (ex.safeZone != null) return "redirect:/safe-zone/"+ex.safeZone.getId();
+    if (ex.zombieZone != null) return "redirect:/zombie-hq";
+
     return "redirect:/game?error=already-dead";
   }
+
+  // CHECKSTYLE_ON
 
   /**
    * @return .

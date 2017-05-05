@@ -39,12 +39,13 @@ public class FoodSupplyServiceImpl implements FoodSupplyService {
     Game game = gameService.get();
     Assert.gameActive(game);
     Life life = game.getStatus().getLifeByToken(lifeToken);
-    Assert.humanAlive(life);
-
     FoodSupply foodSupply = game.getFoodSupplies().stream().filter(supply -> supply.getId().equals(zoneId)).findFirst().get();
     if (foodSupply == null) {
       throw new IllegalStateException("Cannot find the right food supply");
     }
+
+    Assert.humanAlive(life, foodSupply);
+
     int originalResources = foodSupply.getLevel();
     int result = foodSupply.pick(amount);
     int humanResult = life.addResource(result);
