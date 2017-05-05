@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" class="">
 <head>
     <meta charset="UTF-8"/>
     <title>--=Food Supply=--</title>
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<div th:include="/partials/menu"/>
+
 <section class="container">
     <h1 th:text="${zone.name}"></h1>
     <div th:if="${message}" class="card">
@@ -36,23 +36,43 @@
         </div>
         <div th:case="*">
             <form method="post" th:action="@{/food-supply/{zoneId}(zoneId=${zone.id})}">
-                <fieldset class="row">
+                <fieldset class="row valign-wrapper">
                     <legend>Prendre une ressource</legend>
                     <input type="hidden" name="amount" id="amount" value="1"/>
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                         <label for="lifeToken">Votre code utilisateur</label>
                         <input type="text" name="lifeToken" id="lifeToken" required="required" pattern="\d*" />
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit"
+                    <button class="btn waves-effect waves-light col s6" type="submit"
                             name="action" id="takeButton">Prendre (maintenir appuyé)
                     </button>
                 </fieldset>
             </form>
         </div>
     </div>
+    <div>
+        <div class="stats-label">
+            <p>Ressources<br/>restantes</p>
+            <span>25</span>
+        </div>
+        <div class="stats">
+            <div class="progress">
+                <div class="determinate" style="width: 70%"></div>
+            </div>
+            <div class="progress">
+                <div class="determinate" style="width: 70%"></div>
+            </div>
+        </div>
+        <div class="stats-label">
+            <p>Votre<br/>sac</p>
+            <span>8</span>
+        </div>
+    </div>
 </section>
+
 <footer>
 </footer>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
 <script th:inline="javascript">
