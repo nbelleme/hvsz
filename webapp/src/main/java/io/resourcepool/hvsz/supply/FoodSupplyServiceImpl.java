@@ -45,8 +45,12 @@ public class FoodSupplyServiceImpl implements FoodSupplyService {
     if (foodSupply == null) {
       throw new IllegalStateException("Cannot find the right food supply");
     }
+    int originalResources = foodSupply.getLevel();
     int result = foodSupply.pick(amount);
     int humanResult = life.addResource(result);
+    if (humanResult != result) { // if the human didn't have room for all resources, put excess back
+      foodSupply.setLevel(originalResources - humanResult);
+    }
     gameService.update(game);
     return humanResult;
   }

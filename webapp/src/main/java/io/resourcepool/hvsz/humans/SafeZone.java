@@ -8,6 +8,7 @@ public class SafeZone implements Serializable {
   private int level;
   private int capacity;
   private String name;
+  
 
   /**
    * SafeZone Empty constructor.

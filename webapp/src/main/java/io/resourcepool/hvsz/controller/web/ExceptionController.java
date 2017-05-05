@@ -46,4 +46,12 @@ public class ExceptionController {
   public String gameOngoing() {
     return "redirect:/game?error=game-ongoing";
   }
+
+  /**
+   * @return .
+   */
+  @ExceptionHandler({NumberFormatException.class})
+  public String numberFormatException() {
+    return "redirect:/game?error=wrong-input";
+  }
 }
