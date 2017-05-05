@@ -5,6 +5,7 @@ import io.resourcepool.hvsz.game.Game;
 import io.resourcepool.hvsz.game.GameService;
 import io.resourcepool.hvsz.game.GameSettings;
 import io.resourcepool.hvsz.game.GameSettingsService;
+import io.resourcepool.hvsz.humans.Life;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 /**
  * Created by gdanguy on 05/05/17.
@@ -57,6 +60,7 @@ public class GameRestController {
      */
     @GetMapping()
     public ResponseEntity<Game> get() {
+
         Game game = gameService.get();
         return new ResponseEntity<>(game, HttpStatus.OK);
     }

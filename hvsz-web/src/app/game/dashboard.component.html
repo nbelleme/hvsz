@@ -1,0 +1,46 @@
+<section class="container">
+    <h1>Dashboard</h1>
+
+    <div *ngIf="game">
+        <div class="mainInfos">
+            <p>Nombre de Tickets Humains restant : {{game.status.remainingHumanTickets}} / {{game.config.humanTickets}}</p>
+            <p>Temps de jeu restant : {{game.status.remainingTime}}</p>
+        </div>
+        <h2>Etat des Safe Zones:</h2>
+        <ul *ngIf="game.safeZones" class="zones">
+            <li *ngFor="let zone of game.safeZones">
+                <p>{{zone.name}} : {{zone.level}} / {{zone.capacity}}</p>
+                <a >accès rapide</a>
+            </li>
+        </ul>
+
+        <h2>Etat des Food Supplies:</h2>
+        <ul *ngIf="game.foodSupplies" class="zones">
+            <li *ngFor="let zone of game.foodSupplies">
+                <p>{{zone.name}} : {{zone.level}} / {{zone.capacity}}</p>
+                <a [routerLink]="['/food-supply', zone.id]">accès rapide</a>
+            </li>
+        </ul>
+
+        <div [ngSwitch]="game.status.gameState">
+            <div *ngSwitchCase="'NOT_STARTED'">Hello Mohan
+                <a class="waves-effect waves-light btn" href="/game/start">Lancer le jeu</a>
+            </div>
+            <div *ngSwitchCase="'ACTIVE'">
+                <a class="waves-effect waves-light btn" href="/game/pause">Mettre le jeu en pause</a>
+            </div>
+            <div *ngSwitchCase="'PAUSED'">
+                <a class="waves-effect waves-light btn" href="/game/resume">Reprendre le jeu</a>
+                <a class="waves-effect waves-light red lighten-2 btn" href="/game/stop">Adandonner le jeu</a>
+            </div>
+            <div *ngSwitchCase="'HUMAN_VICTORY'">
+                <p>VICTOIRE DES HUMAINS !</p>
+                <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
+            </div>
+            <div *ngSwitchCase="'ZOMBIE_VICTORY'">
+                <p>VICTOIRE DES ZOMBIES !</p>
+                <a class="waves-effect waves-light btn" href="/game/start">Rejouer</a>
+            </div>
+        </div>
+    </div>
+</section>

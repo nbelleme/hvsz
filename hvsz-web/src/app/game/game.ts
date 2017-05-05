@@ -12,5 +12,4 @@ export class Game {
   private config: GameSettings;
   private safeZones: SafeZone[];
   private foodSupplies: FoodSupply[];
-
 }

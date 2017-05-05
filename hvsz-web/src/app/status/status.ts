@@ -6,12 +6,12 @@ import {Life} from "../life/life";
  */
 export class Status {
 
-  private maxHumansOnField: number;
+  private active : boolean;
   private currentHumansOnField: number;
+  private gameState: GameState = GameState.NOT_STARTED;
+  private lives: Life[];
+  private maxHumansOnField: number;
   private remainingHumanTickets: number;
   private remainingTime: number;
   private timestampStart: number;
-  private started: boolean = false;
-  private lives: Life[];
-  private gameState: GameState = GameState.NOT_STARTED;
 }
