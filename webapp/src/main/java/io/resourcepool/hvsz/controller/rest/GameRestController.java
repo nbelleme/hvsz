@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by gdanguy on 05/05/17.
  */
 @RestController
-@RequestMapping("/game")
+@RequestMapping("/api/game")
 public class GameRestController {
 
     @Autowired
@@ -22,10 +22,11 @@ public class GameRestController {
     * Get the current game.
     * @return Game
     */
-    //TODO revoir les liens
     @GetMapping()
     @ResponseBody
     public Game getGame() {
         return dao.get(1L);
     }
+
+
 }
