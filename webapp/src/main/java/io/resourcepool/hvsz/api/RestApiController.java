@@ -90,17 +90,6 @@ public class RestApiController {
 //        return dao.get(newKey);
 //    }
 //
-//    /**
-//     * Get a game by id.
-//     *
-//     * @param id Long
-//     * @return Game
-//     */
-//    @RequestMapping(value = "/api/game/{id}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Game getGame(@PathVariable(value = "id") Long id) {
-//        return dao.get(id); //use index, not id
-//    }
 //
 //    /**
 //     * Get a game by id.
@@ -144,39 +133,6 @@ public class RestApiController {
 //    }
 //
 //
-//    /**
-//     * Kill life by token.
-//     *
-//     * @param id    game id.
-//     * @param token life token.
-//     * @return bool succes?
-//     */
-//    @RequestMapping(value = "/api/game/{id}/kill/{token}", method = RequestMethod.POST)
-//    @ResponseBody
-//    public Boolean killHuman(@PathVariable("id") Long id, @PathVariable(value = "token") String token) {
-//        return zService.kill(token); //use index, not id
-//    }
-//
-//    /**
-//     * Get a new life, return token.
-//     *
-//     * @param id game id.
-//     * @return life token
-//     */
-//    @RequestMapping(value = "/api/game/{id}/newLife", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Life newLife(@PathVariable("id") Long id) {
-//        return humanService.spawn(); //use index, not id
-//    }
-//
-//    /**
-//     * Get resource number by life.
-//     */
-//    @RequestMapping(value = "/api/game/{id}/life/{lifeToken}/nbResource", method = RequestMethod.GET)
-//    @ResponseBody
-//    public int getNbResourceByLife(@PathVariable("lifeToken") String lifeToken) {
-//        return humanService.getLifeByToken(lifeToken).getNbResources();
-//    }
 //
 //    /**
 //     * Set a game config by game id.

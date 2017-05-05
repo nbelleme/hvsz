@@ -1,4 +1,4 @@
-package io.resourcepool.hvsz.web;
+package io.resourcepool.hvsz.controller.web;
 
 import io.resourcepool.hvsz.common.exceptions.GameOngoingException;
 import io.resourcepool.hvsz.common.exceptions.GameOverOrPausedException;

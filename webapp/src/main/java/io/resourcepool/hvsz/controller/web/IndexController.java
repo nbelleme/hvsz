@@ -1,4 +1,4 @@
-package io.resourcepool.hvsz.web;
+package io.resourcepool.hvsz.controller.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

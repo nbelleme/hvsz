@@ -1,4 +1,4 @@
-package io.resourcepool.hvsz.web;
+package io.resourcepool.hvsz.controller.web;
 
 import io.resourcepool.hvsz.common.models.GenericBuilder;
 import io.resourcepool.hvsz.game.GameSettings;
