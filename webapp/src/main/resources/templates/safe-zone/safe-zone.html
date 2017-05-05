@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <form method="post" th:action="@{/safe-zone/{zoneId}/refill(zoneId=${zone.id})}">
+            <form method="post" th:action="@{/safe-zone/{zoneId}/offload(zoneId=${zone.id})}">
                 <fieldset class="row">
                     <legend>Déposer de la nourriture</legend>
                     <input type="hidden" name="zoneId" th:value="${zone.id}"/>
