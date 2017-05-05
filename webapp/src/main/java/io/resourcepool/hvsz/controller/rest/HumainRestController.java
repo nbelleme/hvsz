@@ -63,7 +63,7 @@ public class HumainRestController {
      */
     @GetMapping("/remaining")
     public int getRemainingLives() {
-        return gameService.getActive().getStatus().getRemainingHumanTickets();
+        return gameService.get().getStatus().getRemainingHumanTickets();
     }
 
     /**
@@ -72,7 +72,7 @@ public class HumainRestController {
      */
     @GetMapping("/active")
     public int getActiveLives() {
-        return gameService.getActive().getStatus().getCurrentHumansOnField();
+        return gameService.get().getStatus().getCurrentHumansOnField();
     }
 
 }

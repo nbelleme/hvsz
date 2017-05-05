@@ -47,7 +47,7 @@ public class SafeZoneController {
    */
   @GetMapping()
   public String showAvailableZones(Model model) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameOngoing(game);
     List<SafeZone> zones = zoneService.getSafeZones();
     model.addAttribute("zones", zones);
@@ -63,7 +63,7 @@ public class SafeZoneController {
    */
   @GetMapping("/{zoneId}")
   public String showSafeZoneDashboard(@PathVariable Long zoneId, Model model) {
-    Game active = gameService.getActive();
+    Game active = gameService.get();
     Assert.gameOngoing(active);
     SafeZone zone = zoneService.getSafeZone(zoneId);
     model.addAttribute("zone", zone);
@@ -86,7 +86,7 @@ public class SafeZoneController {
    */
   @PostMapping("/{zoneId}/offload")
   public String offloadFood(@PathVariable Long zoneId, @RequestParam(value = "lifeToken") int lifeToken, Model model) {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     Assert.gameActive(g);
     Life life = g.getStatus().getLifeByToken(lifeToken);
     if (life == null) {
@@ -113,7 +113,7 @@ public class SafeZoneController {
    */
   @GetMapping("/{zoneId}/spawn")
   public String spawnHuman(@PathVariable Long zoneId, Model model) {
-    Game active = gameService.getActive();
+    Game active = gameService.get();
     Assert.gameActive(active);
     if (!humanService.canSpawn()) {
       model.addAttribute("spawnResultMsg", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");

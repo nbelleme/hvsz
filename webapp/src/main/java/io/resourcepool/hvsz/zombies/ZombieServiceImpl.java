@@ -19,7 +19,7 @@ public class ZombieServiceImpl implements ZombieService {
 
   @Override
   public boolean kill(int lifeToken) {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     Status status = g.getStatus();
     Life life = humanService.getLifeByToken(lifeToken);
     if (life != null && life.isAlive()) {

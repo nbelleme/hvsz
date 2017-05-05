@@ -14,14 +14,13 @@ import static io.resourcepool.hvsz.game.GameState.PAUSED;
 import static io.resourcepool.hvsz.game.GameState.ZOMBIE_VICTORY;
 
 public class Status implements Serializable {
-  Integer maxHumansOnField;
-  Integer currentHumansOnField;
-  Integer remainingHumanTickets;
-  Long remainingTime;
-  Instant timestampStart;
-  Boolean started = false;
-  List<Life> lives = new ArrayList<>();
-  GameState gameState = GameState.NOT_STARTED;
+  private Integer maxHumansOnField;
+  private Integer currentHumansOnField;
+  private Integer remainingHumanTickets;
+  private Long remainingTime;
+  private Instant timestampStart;
+  private List<Life> lives = new ArrayList<>();
+  private GameState gameState = GameState.NOT_STARTED;
 
   public Integer getMaxHumansOnField() {
     return maxHumansOnField;
@@ -47,30 +46,12 @@ public class Status implements Serializable {
     this.remainingTime = remainingTime;
   }
 
-  public Boolean getStarted() {
-    return started;
-  }
-
   public Instant getTimestampStart() {
     return timestampStart;
   }
 
   public void setTimestampStart(Instant timestampStart) {
     this.timestampStart = timestampStart;
-  }
-
-
-  /**
-   * set started status, also set gameState to ongoing if true.
-   *
-   * @param started .
-   */
-  public void setStarted(Boolean started) {
-    this.started = started;
-    if (this.started) {
-      this.gameState = GameState.ACTIVE;
-      this.timestampStart = Instant.now();
-    }
   }
 
   public Integer getRemainingHumanTickets() {

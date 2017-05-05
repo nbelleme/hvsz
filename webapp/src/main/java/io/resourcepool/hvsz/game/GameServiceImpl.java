@@ -2,7 +2,6 @@ package io.resourcepool.hvsz.game;
 
 
 import io.resourcepool.hvsz.common.Assert;
-import io.resourcepool.hvsz.common.exceptions.NoGameDefinedException;
 import io.resourcepool.hvsz.common.models.GenericBuilder;
 import io.resourcepool.hvsz.humans.SafeZone;
 import io.resourcepool.hvsz.persistence.dao.DaoMapDb;
@@ -27,12 +26,18 @@ public class GameServiceImpl implements GameService {
   GameSettingsService settingsService;
 
   @Override
-  public Game getActive() {
+  public Game get() {
     return dao.get(GAME_ID);
   }
 
   @Override
   public void startGame() {
+    //Asserts that the game is over if it exists
+    Game currentGame = get();
+    if (currentGame != null) {
+      Assert.gameOver(currentGame);
+    }
+
     Game game = new Game();
     // Retrieve settings
     GameSettings conf = settingsService.get();
@@ -43,7 +48,7 @@ public class GameServiceImpl implements GameService {
       .with(Status::setCurrentHumansOnField, 0)
       .with(Status::setRemainingTime, conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
       .with(Status::setMaxHumansOnField, conf.getMaxHumansOnField())
-      .with(Status::setStarted, true)
+      .with(Status::setGameState, GameState.ACTIVE)
       .build();
     game.setStatus(status);
     // Init game supply zones
@@ -67,9 +72,7 @@ public class GameServiceImpl implements GameService {
   @Override
   public void pauseGame() {
     Game game = dao.get(GAME_ID);
-    if (game == null) {
-      throw new NoGameDefinedException();
-    }
+    Assert.gameActive(game);
     game.getStatus().setGameState(GameState.PAUSED);
     update(game);
   }
@@ -77,9 +80,7 @@ public class GameServiceImpl implements GameService {
   @Override
   public void resumeGame() {
     Game game = dao.get(GAME_ID);
-    if (game == null) {
-      throw new NoGameDefinedException();
-    }
+    Assert.gamePaused(game);
     game.getStatus().setGameState(GameState.ACTIVE);
     update(game);
   }
@@ -87,9 +88,7 @@ public class GameServiceImpl implements GameService {
   @Override
   public void stopGame() {
     Game game = dao.get(GAME_ID);
-    if (game == null) {
-      throw new NoGameDefinedException();
-    }
+    Assert.gameOngoing(game);
     game.getStatus().setGameState(GameState.ZOMBIE_VICTORY);
     update(game);
   }

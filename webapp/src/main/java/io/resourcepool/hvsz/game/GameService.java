@@ -5,12 +5,12 @@ public interface GameService {
   /**
    * @return the active game or null if none found.
    */
-  Game getActive();
+  Game get();
 
   /**
    * Start game using the game settings previously saved.
    *
-   * @throws io.resourcepool.hvsz.common.exceptions.GameOngoingException if game is already in progress.
+   * @throws io.resourcepool.hvsz.common.exceptions.IllegalGameStateException if game is already in progress.
    */
   void startGame();
 

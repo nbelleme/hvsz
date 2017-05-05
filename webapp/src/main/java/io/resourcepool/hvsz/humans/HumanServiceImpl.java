@@ -28,14 +28,14 @@ public class HumanServiceImpl implements HumanService {
 
   @Override
   public boolean isAlive(int lifeToken) {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     Life lifeByToken = g.getStatus().getLifeByToken(lifeToken);
     return lifeByToken.isAlive();
   }
 
   @Override
   public boolean hasTicketsLeft() {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     Assert.gameActive(g);
     return g.getStatus().getRemainingHumanTickets() > 0;
 
@@ -43,13 +43,13 @@ public class HumanServiceImpl implements HumanService {
 
   @Override
   public boolean canSpawn() {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     return hasTicketsLeft() && g.getStatus().getCurrentHumansOnField() < g.getStatus().getMaxHumansOnField();
   }
 
   @Override
   public Life spawn() {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     Assert.gameActive(g);
     Status status = g.getStatus();
 
@@ -78,14 +78,14 @@ public class HumanServiceImpl implements HumanService {
 
   @Override
   public Life getLifeByToken(int token) {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     Assert.gameActive(g);
     return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElseGet(() -> null);
   }
 
   @Override
   public void save(Life life) {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     g.getStatus().setLife(life.getId(), life);
     gameService.update(g);
   }

@@ -1,8 +1,7 @@
 package io.resourcepool.hvsz.controller.web;
 
-import io.resourcepool.hvsz.common.exceptions.GameOngoingException;
-import io.resourcepool.hvsz.common.exceptions.GameOverOrPausedException;
 import io.resourcepool.hvsz.common.exceptions.HumanIsDeadException;
+import io.resourcepool.hvsz.common.exceptions.IllegalGameStateException;
 import io.resourcepool.hvsz.common.exceptions.NoGameDefinedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,7 +17,7 @@ public class ExceptionController {
   /**
    * @return .
    */
-  @ExceptionHandler({GameOverOrPausedException.class})
+  @ExceptionHandler({IllegalGameStateException.class})
   public String gameOver() {
     return "redirect:/game?error=over-or-paused";
   }
@@ -39,11 +38,4 @@ public class ExceptionController {
     return "redirect:/game?error=no-game-defined";
   }
 
-  /**
-   * @return .
-   */
-  @ExceptionHandler({GameOngoingException.class})
-  public String gameOngoing() {
-    return "redirect:/game?error=game-ongoing";
-  }
 }
