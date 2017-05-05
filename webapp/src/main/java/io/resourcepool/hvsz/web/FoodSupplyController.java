@@ -81,6 +81,8 @@ public class FoodSupplyController {
                          @RequestParam Integer amount,
                          @RequestParam int lifeToken,
                          Model model) {
+    GameSettings settings = gameSettingsService.get();
+    model.addAttribute("maxFoodTransfer", settings.getMaximumFoodTransfer());
     int foodTaken = foodSupplyService.takeFood(zoneId, lifeToken, amount);
     model.addAttribute("foodTaken", foodTaken);
     FoodSupply s = foodSupplyService.get(zoneId);
