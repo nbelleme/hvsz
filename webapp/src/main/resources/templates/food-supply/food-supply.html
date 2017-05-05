@@ -108,10 +108,9 @@
 
         function getNbResource(callback) {
             var token = $("#lifeToken").val();
-            // FIXME
+            // FIXME we need the api
             $.getJSON("/api/game/1/life/" + token + "/nbResource", function (nbResource) {
                 maxRes = defaultMaxRes - nbResource;
-                console.log("OK");
                 callback();
             }, function(err) { console.log(err); });
         }
@@ -124,7 +123,7 @@
                 e.preventDefault();
                 increase = true;
                 increaseLoop(function () {
-                    $("#take-button").text('Prendre ' + nb + ' ressources');
+                    $("#takeButton").text('Prendre ' + nb + ' ressources');
                 });
             });
         }
@@ -137,12 +136,11 @@
         function onMouseLeave(e) {
             reset();
         }
-
         //Events
-        $("#take-button").mousedown(onMouseDown);
-        $("#take-button").mouseup(onMouseUp);
-        $("#take-button").mouseout(onMouseLeave);
-        $("#take-button").mouseleave(onMouseLeave);
+        $("#takeButton").mousedown(onMouseDown);
+        $("#takeButton").mouseup(onMouseUp);
+        $("#takeButton").mouseout(onMouseLeave);
+        $("#takeButton").mouseleave(onMouseLeave);
     });
 </script>
 </body>

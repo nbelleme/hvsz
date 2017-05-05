@@ -64,6 +64,7 @@ public class FoodSupplyController {
     FoodSupply foodSupply = foodSupplyService.get(zoneId);
     model.addAttribute("maxFoodTransfer", settings.getMaximumFoodTransfer());
     model.addAttribute("zone", foodSupply);
+    model.addAttribute("capacity", 10); //settings.getMaximumFoodTransfer());
     return "food-supply/food-supply";
   }
 
