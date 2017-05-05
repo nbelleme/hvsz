@@ -57,7 +57,7 @@ public class GameServiceImpl implements GameService {
     List<SafeZone> safeZones = new ArrayList<>(conf.getNbSafeZones());
     int nbSafeZones = conf.getNbSafeZones();
     for (int i = 0; i < nbSafeZones; i++) {
-      safeZones.add(new SafeZone((long) i, 100, 100)); // FIXME add variables into game settings
+      safeZones.add(new SafeZone((long) i, 5, 100)); // FIXME add variables into game settings
     }
     game.setSafeZones(safeZones);
     // Save game

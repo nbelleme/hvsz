@@ -89,16 +89,19 @@ public class SafeZoneController {
     Game g = gameService.getActive();
     Assert.gameActive(g);
     Life life = g.getStatus().getLifeByToken(lifeToken);
+    SafeZone safeZone = zoneService.getSafeZone(zoneId);
+
     if (life == null) {
       model.addAttribute("message", "Token invalide, essayes encore !");
     } else if (!life.isAlive()) {
       model.addAttribute("message", "Tu es mort !");
+    } else if (safeZone.isDestroyed()) {
+      model.addAttribute("message", "La zone est détruite !");
     } else {
       //SafeZone s = g.getSafeZones().stream().filter(foodSupply -> foodSupply.getId().equals(zoneId)).findFirst().get();
       int amountRefilled = zoneService.refill(zoneId, lifeToken);
       model.addAttribute("amountRefilled", amountRefilled);
     }
-    SafeZone safeZone = zoneService.getSafeZone(zoneId);
     model.addAttribute("zone", safeZone);
     return "safe-zone/safe-zone";
   }
@@ -115,14 +118,18 @@ public class SafeZoneController {
   public String spawnHuman(@PathVariable Long zoneId, Model model) {
     Game active = gameService.getActive();
     Assert.gameActive(active);
-    if (!humanService.canSpawn()) {
-      model.addAttribute("spawnResultMsg", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");
-    } else {
-      Life life = humanService.spawn();
-      int lifeToken = life.getToken();
-      model.addAttribute("spawnResultMsg", "Une nouvelle vie pour toi <3  token: " + lifeToken);
-    }
     SafeZone safeZone = zoneService.getSafeZone(zoneId);
+    if (!safeZone.isDestroyed()) {
+      if (!humanService.canSpawn()) {
+        model.addAttribute("spawnResultMsg", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");
+      } else {
+        Life life = humanService.spawn();
+        int lifeToken = life.getToken();
+        model.addAttribute("spawnResultMsg", "Une nouvelle vie pour toi <3  token: " + lifeToken);
+      }
+    } else {
+      model.addAttribute("spawnResultMsg", "Impossible d'obtenir une vie, la zone est détruite !");
+    }
     model.addAttribute("zone", safeZone);
     model.addAttribute("remainingTime", active.getStatus().getRemainingTime());
     model.addAttribute("humanTickets", active.getConfig().getHumanTickets());

@@ -8,7 +8,7 @@ public class SafeZone implements Serializable {
   private int level;
   private int capacity;
   private String name;
-  
+  private Boolean destroyed = false;
 
   /**
    * SafeZone Empty constructor.
@@ -38,8 +38,15 @@ public class SafeZone implements Serializable {
     this.id = id;
   }
 
+  /**
+   * set resource level, set destroyed to true if level = 0.
+   * @param level level to set
+   */
   public void setLevel(int level) {
     this.level = level;
+    if (level == 0) {
+      destroyed = true;
+    }
   }
 
   public int getCapacity() {
@@ -62,6 +69,14 @@ public class SafeZone implements Serializable {
     return name;
   }
 
+  public Boolean isDestroyed() {
+    return destroyed;
+  }
+
+  public void setDestroyed(Boolean destroyed) {
+    this.destroyed = destroyed;
+  }
+
   /**
    * Refill an amount of food.
    *
@@ -69,6 +84,9 @@ public class SafeZone implements Serializable {
    * @return how many level we have really refill
    */
   public int refill(int amount) {
+    if (destroyed) {
+      return 0;
+    }
     int oldLevel = level;
     level = Math.min(oldLevel + amount, capacity);
     return level - oldLevel;
