@@ -21,11 +21,11 @@ public class ZombieServiceImpl implements ZombieService {
   public boolean kill(int lifeToken) {
     Game g = gameService.get();
     Status status = g.getStatus();
-    Life life = humanService.getLifeByToken(lifeToken);
+    Life life = g.getStatus().getLifeByToken(lifeToken);
     if (life != null && life.isAlive()) {
       life.setAlive(false);
       life.setToken(-1);
-      humanService.save(life);
+      //humanService.save(life);
       // Decrement humans on field
       status.setCurrentHumansOnField(status.getCurrentHumansOnField() - 1);
       g.setStatus(status);
