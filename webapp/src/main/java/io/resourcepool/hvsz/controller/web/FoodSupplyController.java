@@ -87,6 +87,7 @@ public class FoodSupplyController {
     int foodTaken = foodSupplyService.takeFood(zoneId, lifeToken, amount);
     model.addAttribute("foodTaken", foodTaken);
     FoodSupply s = foodSupplyService.get(zoneId);
+    model.addAttribute("capacity", 10); //settings.getMaximumFoodTransfer());
     model.addAttribute("zone", s);
     return "food-supply/food-supply";
   }

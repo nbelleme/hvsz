@@ -50,10 +50,10 @@
             </form>
         </div>
     </div>
-    <div>
+    <div class="hide">
         <div class="stats-label">
             <p>Ressources<br/>restantes</p>
-            <span>25</span>
+            <span>$</span>
         </div>
         <div class="stats">
             <div class="progress">
@@ -109,7 +109,7 @@
         function getNbResource(callback) {
             var token = $("#lifeToken").val();
             // FIXME we need the api
-            $.getJSON("/api/game/1/life/" + token + "/nbResource", function (nbResource) {
+            $.getJSON("/api/human/" + token + "/nbResource", function (nbResource) {
                 maxRes = defaultMaxRes - nbResource;
                 callback();
             }, function(err) { console.log(err); });
