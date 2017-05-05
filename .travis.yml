@@ -17,6 +17,7 @@ after_success:
   - eval "$(ssh-agent -s)"
   - chmod 600 $KEY_PATH
   - ssh-add $KEY_PATH
-  - scp target/*.jar $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
   - ssh  $DEPLOY_USER@$DEPLOY_HOST "pkill -f \"java -jar\""
+  - ssh  $DEPLOY_USER@$DEPLOY_HOST "rm -rf $DEPLOY_PATH/*.jar"
+  - scp target/*.jar $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
   - ssh  $DEPLOY_USER@$DEPLOY_HOST "nohup java -jar $APPLICATION-$VERSION.jar > $APPLICATION-log.txt  2>&1&"
