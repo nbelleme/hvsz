@@ -45,6 +45,6 @@ public class FoodSupplyRestController {
      */
     @GetMapping("/{zoneId}/empty")
     public boolean isEmpty(@PathVariable(value = "zoneId") Long zoneId) {
-        return foodSupplyService.get(zoneId).getLevel() > 0;
+        return foodSupplyService.get(zoneId).getLevel() <= 0;
     }
 }
