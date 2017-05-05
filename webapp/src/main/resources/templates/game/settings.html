@@ -19,12 +19,12 @@
                     <input type="number" name="gameDuration" id="gameDuration" min="1" value="30"/>
                 </div>
                 <div class="input-field col s6">
-                    <label for="difficulty">Difficulté de la partie</label>
                     <select name="difficulty" id="difficulty">
                         <option value="0">Facile</option>
                         <option value="1" selected="selected">Normale</option>
                         <option value="2">Difficile</option>
                     </select>
+                    <label for="difficulty">Difficulté de la partie</label>
                 </div>
             </fieldset>
             <fieldset class="row">
@@ -75,6 +75,11 @@
     </footer>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
-    <script type="text/javascript" src="/static/js/materialize.js"/>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Materialize.updateTextFields();
+            $('select').material_select();
+        });
+    </script>
 </body>
 </html>
