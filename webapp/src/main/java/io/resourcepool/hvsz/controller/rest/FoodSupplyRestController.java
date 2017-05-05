@@ -14,7 +14,7 @@ import java.util.List;
  * Created by gdanguy on 05/05/17.
  */
 @RestController
-@RequestMapping("/food-supply")
+@RequestMapping("/api/food-supply")
 public class FoodSupplyRestController {
     @Autowired
     private FoodSupplyService foodSupplyService;
@@ -36,5 +36,15 @@ public class FoodSupplyRestController {
     @GetMapping("/all")
     public List<FoodSupply> getAllSupplyZone() {
         return foodSupplyService.getAll();
+    }
+
+    /**
+     * Get if the safe-zone is empty or not.
+     * @param zoneId the id of the safe
+     * @return true if empty, false else
+     */
+    @GetMapping("/{zoneId}/empty")
+    public boolean isEmpty(@PathVariable(value = "zoneId") Long zoneId) {
+        return foodSupplyService.get(zoneId).getLevel() > 0;
     }
 }

@@ -1,5 +1,6 @@
 package io.resourcepool.hvsz.controller.rest;
 
+import io.resourcepool.hvsz.game.GameService;
 import io.resourcepool.hvsz.humans.HumanService;
 import io.resourcepool.hvsz.humans.Life;
 import io.resourcepool.hvsz.zombies.ZombieService;
@@ -15,13 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by gdanguy on 05/05/17.
  */
 @RestController
-@RequestMapping("/human")
+@RequestMapping("/api/human")
 public class HumainRestController {
     @Autowired
     private HumanService humanService;
 
     @Autowired
     private ZombieService zService;
+
+    @Autowired
+    private GameService gameService;
 
     /**
      * Kill life by token.
@@ -53,5 +57,22 @@ public class HumainRestController {
         return humanService.getLifeByToken(lifeToken).getNbResources();
     }
 
+    /**
+     * Get remaining lives.
+     * @return the number of remaining live
+     */
+    @GetMapping("/remaining")
+    public int getRemainingLives() {
+        return gameService.getActive().getStatus().getRemainingHumanTickets();
+    }
+
+    /**
+     * Get current number of human on field.
+     * @return the current number of human on field
+     */
+    @GetMapping("/active")
+    public int getActiveLives() {
+        return gameService.getActive().getStatus().getCurrentHumansOnField();
+    }
 
 }
