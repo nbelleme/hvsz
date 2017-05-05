@@ -52,6 +52,7 @@ public class GameController {
     model.addAttribute("safeZones", active.getSafeZones());
     model.addAttribute("foodSupplies", active.getFoodSupplies());
     model.addAttribute("status", active.getStatus().getGameState());
+    model.addAttribute("statusName", active.getStatus().getGameState().name());
     return "game/dashboard";
   }
 

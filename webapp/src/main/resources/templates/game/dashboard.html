@@ -18,7 +18,7 @@
         </div>
         <div class="mainInfos">
             <p th:text="'Nombre de Tickets Humains restant : ' + ${remainingHumanTickets}  + ' / ' + ${humanTickets}"/>
-            <span id="remainingTimeValue" class="display: none;" th:text="${remainingTime}"/>
+            <span id="remainingTimeValue" class="hide" th:text="${remainingTime}"/>
             <p id="remainingTime" th:text="'Temps de jeu restant : ' + ${remainingTime} + ' secondes'"/>
         </div>
         <h2>Etat des Safe Zones:</h2>
@@ -67,10 +67,14 @@
 <script th:inline="javascript" >
     /*<![CDATA[*/
     var remainingTime = [[${remainingTime}]];
+    var status = [[${statusName}]];
     /*]]>*/
     // TODO handle pause / resume / stop game
     setInterval(function() {
       if (remainingTime > 0) {
+        if (status == "ACTIVE") {
+            remainingTime--;
+        }
         $("#remainingTime").text("Temps de jeu restant  " + Math.floor(remainingTime / 60) + " min et " + remainingTime % 60 + " s.");
       } else {
         $("#remainingTime").text("Partie terminée ! ");
