@@ -45,5 +45,4 @@ public class ExceptionController {
   public String numberFormatException() {
     return "redirect:/game?error=wrong-input";
   }
-  
 }
