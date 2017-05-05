@@ -22,21 +22,21 @@ public class FoodSupplyServiceImpl implements FoodSupplyService {
 
   @Override
   public FoodSupply get(Long zoneId) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameOngoing(game);
     return game.getFoodSupplies().stream().filter(foodSupply -> foodSupply.getId().equals(zoneId)).findFirst().get();
   }
 
   @Override
   public List<FoodSupply> getAll() {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameOngoing(game);
     return game.getFoodSupplies();
   }
 
   @Override
   public int takeFood(Long zoneId, int lifeToken, Integer amount) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameActive(game);
     Life life = game.getStatus().getLifeByToken(lifeToken);
     Assert.humanAlive(life);

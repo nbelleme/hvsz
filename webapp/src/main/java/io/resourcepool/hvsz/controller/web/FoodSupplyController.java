@@ -44,7 +44,7 @@ public class FoodSupplyController {
    */
   @GetMapping()
   public String showAvailableZones(Model model) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameOngoing(game);
     List<FoodSupply> zones = foodSupplyService.getAll();
     model.addAttribute("zones", zones);

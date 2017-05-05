@@ -6,11 +6,12 @@ import io.resourcepool.hvsz.game.GameService;
 import io.resourcepool.hvsz.game.GameSettings;
 import io.resourcepool.hvsz.game.GameSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -51,9 +52,12 @@ public class GameRestController {
     * @return Game
     */
     @GetMapping()
-    @ResponseBody
-    public Game getActive() {
-        return gameService.getActive();
+    public ResponseEntity<Game> get() {
+        Game game = gameService.get();
+        if (game == null) {
+            return new ResponseEntity<Game>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Game>(game, HttpStatus.OK);
     }
 
     /**
@@ -61,11 +65,10 @@ public class GameRestController {
      * @return the game created
      */
     @PostMapping("/start/default")
-    @ResponseBody
-    public Game startGameDefault() {
+    public Game startDefault() {
         gameSettingsService.set(DEFAULT_SETTINGS);
         gameService.startGame();
-        return gameService.getActive();
+        return gameService.get();
     }
 
     /**
@@ -74,11 +77,10 @@ public class GameRestController {
      * @return the game created
      */
     @PostMapping("/start")
-    @ResponseBody
     public Game startGame(@RequestBody GameSettings settings) {
         gameSettingsService.set(settings);
         gameService.startGame();
-        return gameService.getActive();
+        return gameService.get();
     }
 
     /**
@@ -94,7 +96,7 @@ public class GameRestController {
      */
     @PostMapping("/resume")
     public void resume() {
-        gameService.stopGame();
+        gameService.resumeGame();
     }
 
     /**

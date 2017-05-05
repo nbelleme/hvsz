@@ -25,14 +25,14 @@ public class SafeZoneServiceImpl implements SafeZoneService {
 
   @Override
   public List<SafeZone> getSafeZones() {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     Assert.gameOngoing(g);
     return g.getSafeZones();
   }
 
   @Override
   public int refill(Long zoneId, int token) {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     SafeZone safeZone = g.getSafeZones().stream().filter(z -> z.getId().equals(zoneId)).findFirst().get();
     Life life = g.getStatus().getLifeByToken(token);
     Assert.humanAlive(life);
@@ -43,7 +43,7 @@ public class SafeZoneServiceImpl implements SafeZoneService {
 
   @Override
   public void eatOneUnitOfFood() {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     g.getSafeZones().forEach(z -> {
       if (z.getLevel() > 0) {
         z.setLevel(z.getLevel() - 1);

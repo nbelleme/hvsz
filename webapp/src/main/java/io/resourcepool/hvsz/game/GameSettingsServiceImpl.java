@@ -18,7 +18,7 @@ public class GameSettingsServiceImpl implements GameSettingsService {
 
   @Override
   public void set(GameSettings gameSettings) {
-    Game g = gameService.getActive();
+    Game g = gameService.get();
     if (g == null) {
       g = new Game(GAME_ID);
     }
@@ -28,7 +28,7 @@ public class GameSettingsServiceImpl implements GameSettingsService {
 
   @Override
   public GameSettings get() {
-    Game active = gameService.getActive();
+    Game active = gameService.get();
     Assert.gameDefined(active);
     return active.getConfig();
   }

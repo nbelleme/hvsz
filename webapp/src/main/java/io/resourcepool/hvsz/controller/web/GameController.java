@@ -32,7 +32,7 @@ public class GameController {
    */
   @GetMapping()
   public String dashboard(@RequestParam(required = false) String error, Model model) {
-    Game active = gameService.getActive();
+    Game active = gameService.get();
     if (error != null && !error.isEmpty()) {
       model.addAttribute("errorMessage", error);
     }
@@ -67,7 +67,7 @@ public class GameController {
    */
   @GetMapping("/over")
   public String gameOver(Model model) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameOver(game);
     model.addAttribute("status", game.getStatus().getGameState().name());
     return "game/over";
@@ -81,7 +81,7 @@ public class GameController {
    */
   @GetMapping("/start")
   public String startGame(Model model) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameReadyToStart(game);
     gameService.startGame();
     return "redirect:/game";
@@ -95,7 +95,7 @@ public class GameController {
    */
   @GetMapping("/pause")
   public String pauseGame(Model model) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameActive(game);
     gameService.pauseGame();
     return "redirect:/game";
@@ -109,7 +109,7 @@ public class GameController {
    */
   @GetMapping("/resume")
   public String resumeGame(Model model) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameOngoing(game);
     gameService.resumeGame();
     return "redirect:/game";
@@ -123,7 +123,7 @@ public class GameController {
    */
   @GetMapping("/stop")
   public String stopGame(Model model) {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     Assert.gameOngoing(game);
     gameService.stopGame();
     return "redirect:/game";

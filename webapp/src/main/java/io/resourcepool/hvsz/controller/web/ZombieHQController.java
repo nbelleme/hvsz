@@ -36,7 +36,7 @@ public class ZombieHQController {
    */
   @GetMapping()
   public String get(Model model) {
-    Game active = gameService.getActive();
+    Game active = gameService.get();
     Assert.gameOngoing(active);
     model.addAttribute("remainingTime", active.getStatus().getRemainingTime());
     model.addAttribute("humanTickets", active.getConfig().getHumanTickets());
@@ -57,7 +57,7 @@ public class ZombieHQController {
    */
   @PostMapping("/kill")
   public String kill(@RequestParam(value = "lifeToken") int lifeToken, Model model) {
-    Game active = gameService.getActive();
+    Game active = gameService.get();
     Assert.gameOngoing(active);
     if (zombieService.kill(lifeToken)) {
       model.addAttribute("message", "one human has been killed. There are " + active.getStatus().getRemainingHumanTickets() + " humans left alive.");

@@ -29,7 +29,7 @@ public class StatusUpdaterCron {
    */
   @Scheduled(fixedRate = SCHEDULED_TIME)
   public void gameTimer() {
-    Game game = gameService.getActive();
+    Game game = gameService.get();
     if (game == null || !game.getStatus().isOngoing()) {
       LOGGER.debug("No running game to update.");
     } else {
@@ -43,7 +43,7 @@ public class StatusUpdaterCron {
       if (shouldDecreaseLevel(100, (long) (game.getConfig().getGameDuration() * 60), status.getRemainingTime(), game.getConfig().getDifficulty())) {
         safeZoneService.eatOneUnitOfFood();
       }
-      game = gameService.getActive();
+      game = gameService.get();
       gameService.update(game);
     }
   }
