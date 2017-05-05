@@ -14,36 +14,36 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionController {
 
-  /**
-   * @return .
-   */
-  @ExceptionHandler({IllegalGameStateException.class})
-  public String gameOver() {
-    return "redirect:/game?error=over-or-paused";
-  }
+    /**
+     * @return .
+     */
+    @ExceptionHandler({IllegalGameStateException.class})
+    public String gameOver() {
+        return "redirect:/game?error=over-or-paused";
+    }
 
-  /**
-   * @return .
-   */
-  @ExceptionHandler({HumanIsDeadException.class})
-  public String humanAlreadyDead() {
-    return "redirect:/game?error=already-dead";
-  }
+    /**
+     * @return .
+     */
+    @ExceptionHandler({HumanIsDeadException.class})
+    public String humanAlreadyDead() {
+        return "redirect:/game?error=already-dead";
+    }
 
-  /**
-   * @return .
-   */
-  @ExceptionHandler({NoGameDefinedException.class})
-  public String noGameDefined() {
-    return "redirect:/game?error=no-game-defined";
-  }
+    /**
+     * @return .
+     */
+    @ExceptionHandler({NoGameDefinedException.class})
+    public String noGameDefined() {
+        return "redirect:/game?error=no-game-defined";
+    }
 
-  /**
-   * @return .
-   */
-  @ExceptionHandler({NumberFormatException.class})
-  public String numberFormatException() {
-    return "redirect:/game?error=wrong-input";
-  }
-  
+    /**
+     * @return .
+     */
+    @ExceptionHandler({NumberFormatException.class})
+    public String numberFormatException() {
+        return "redirect:/game?error=wrong-input";
+    }
+
 }

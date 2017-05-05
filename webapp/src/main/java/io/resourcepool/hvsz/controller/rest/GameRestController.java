@@ -8,6 +8,7 @@ import io.resourcepool.hvsz.game.GameSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by gdanguy on 05/05/17.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/api/game")
 public class GameRestController {
@@ -31,37 +33,37 @@ public class GameRestController {
     private static final int DEFAULT_SAFE_ZONE_DROP_RATE = 30;
     private static final GameSettings DEFAULT_SETTINGS =
             GenericBuilder.of(GameSettings::new)
-            .with(GameSettings::setGameDuration, DEFAULT_GAME_DURATION)
-            .with(GameSettings::setDifficulty, DEFAULT_DIFFICULTY)
-            .with(GameSettings::setHumanTickets, DEFAULT_HUMAN_TICKETS)
-            .with(GameSettings::setMaxHumansOnField, DEFAULT_MAX_HUMAN_ON_FIELD)
-            .with(GameSettings::setNbSafeZones, DEFAULT_NB_SAFE_ZONE)
-            .with(GameSettings::setNbFoodSupplyZones, DEFAULT_NB_FOOD_ZONE)
-            .with(GameSettings::setNbFoodSupplies, DEFAULT_FOOD_SUPPLIES)
-            .with(GameSettings::setMaximumFoodTransfer, DEFAULT_MAX_FOOD_TRANSFERT)
-            .with(GameSettings::setSafezoneDropRate, DEFAULT_SAFE_ZONE_DROP_RATE)
-            .build();
+                    .with(GameSettings::setGameDuration, DEFAULT_GAME_DURATION)
+                    .with(GameSettings::setDifficulty, DEFAULT_DIFFICULTY)
+                    .with(GameSettings::setHumanTickets, DEFAULT_HUMAN_TICKETS)
+                    .with(GameSettings::setMaxHumansOnField, DEFAULT_MAX_HUMAN_ON_FIELD)
+                    .with(GameSettings::setNbSafeZones, DEFAULT_NB_SAFE_ZONE)
+                    .with(GameSettings::setNbFoodSupplyZones, DEFAULT_NB_FOOD_ZONE)
+                    .with(GameSettings::setNbFoodSupplies, DEFAULT_FOOD_SUPPLIES)
+                    .with(GameSettings::setMaximumFoodTransfer, DEFAULT_MAX_FOOD_TRANSFERT)
+                    .with(GameSettings::setSafezoneDropRate, DEFAULT_SAFE_ZONE_DROP_RATE)
+                    .build();
 
     @Autowired
     private GameService gameService;
 
     @Autowired
     private GameSettingsService gameSettingsService;
+
     /**
-    * Get the current game.
-    * @return Game
-    */
+     * Get the current game.
+     *
+     * @return Game
+     */
     @GetMapping()
     public ResponseEntity<Game> get() {
         Game game = gameService.get();
-        if (game == null) {
-            return new ResponseEntity<Game>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<Game>(game, HttpStatus.OK);
+        return new ResponseEntity<>(game, HttpStatus.OK);
     }
 
     /**
      * Start a new game with default parameter.
+     *
      * @return the game created
      */
     @PostMapping("/start/default")
@@ -73,6 +75,7 @@ public class GameRestController {
 
     /**
      * Start a new game using the GameSettings done.
+     *
      * @param settings GameSettings
      * @return the game created
      */

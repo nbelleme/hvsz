@@ -9,9 +9,9 @@ import {Game} from './game';
  * Created by nicolas on 05/05/2017.
  */
 @Component({
-  selector: 'hero-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: [ './hero-detail.component.css' ]
+  selector: 'game',
+  templateUrl: './game.component.html',
+  styleUrls: [ './game.component.css' ]
 })
 export class GameComponent implements OnInit {
   game: Game;
