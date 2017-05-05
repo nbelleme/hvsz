@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by gdanguy on 05/05/17.
  */
 @RestController
-@RequestMapping("/api/human")
+@RequestMapping("/human")
 public class HumainRestController {
     @Autowired
     private HumanService humanService;
