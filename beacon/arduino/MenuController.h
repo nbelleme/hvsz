@@ -3,12 +3,10 @@
 #include <LiquidCrystal_I2C.h>
 #include "MenuCallbacks.h"
 
-#define BTN_RIGHT_PIN 30
-#define BTN_BOTTOM_PIN 31
-#define BTN_LEFT_PIN 32
-#define BTN_TOP_PIN 33
-#define BTN_EXIT_PIN 34
-#define BTN_ENTER_PIN 35
+#define BTN_LEFT_PIN 30
+#define BTN_RIGHT_PIN 31
+#define BTN_EXIT_PIN 32
+#define BTN_ENTER_PIN 33
 
 #define MAX_PAGES 6
 
@@ -25,17 +23,15 @@ public:
   void showPage(byte index);
   void setButtonOverride(boolean btnO);
   void setMenuCallbacks(MenuCallbacks& cb);
-  void onBtnPressed(Button& btn, byte pin);
-  void onBtnReleased(Button& btn, byte pin);
-  void onMenuItemSelected(byte code);
-  void onMenuItemExit(byte code);
-  void onMenuPageChanged (byte code);
+  virtual void onBtnPressed(Button& btn, byte pin);
+  virtual void onBtnReleased(Button& btn, byte pin);
+  virtual void onMenuItemSelected(byte code);
+  virtual void onMenuItemExit(byte code);
+  virtual void onMenuPageChanged (byte code);
 private:
   LiquidCrystal_I2C* lcd;
   Button* btnRight;
-  Button* btnBottom;
   Button* btnLeft;
-  Button* btnTop;
   Button* btnExit;
   Button* btnEnter;
   MenuPage pages[MAX_PAGES];
@@ -43,5 +39,5 @@ private:
   byte currentPage;
   MenuCallbacks* cb;
   boolean buttonOverride;
-  void createBindings(Button* button, byte pin);
+  void checkState(Button& button, byte pin);
 };

@@ -9,18 +9,22 @@
 #define HVSZ_MENU_BT_FS 7
 
 class MenuCallbacks;
-
+class NfcCallbacks;
 /**
  * The Game represents any kind of game
  */
-class HVsZGame : public Game, public MenuCallbacks {
+class HVsZGame : public Game, public MenuCallbacks, public NfcCallbacks {
 public:
   HVsZGame();
-  void onBtnPressed(Button& btn, byte pin);
-  void onBtnReleased(Button& btn, byte pin);
-  void onMenuItemSelected(byte code);
-  void onMenuItemExit(byte code);
-  void onMenuPageChanged(byte code);
+  virtual void init();
+  virtual void onBtnPressed(Button& btn, byte pin);
+  virtual void onBtnReleased(Button& btn, byte pin);
+  virtual void onMenuItemSelected(byte code);
+  virtual void onMenuItemExit(byte code);
+  virtual void onMenuPageChanged(byte code);
+  virtual void onCardIn();
+  virtual void onCardHold();
+  virtual void onCardOut();
 private:
   byte beaconType;
   String remoteHost;

@@ -22,16 +22,10 @@ void MenuController::onBtnPressed(Button& button, byte btnPin) {
         this->showPage(this->currentPage + 1);
       }
       break;
-    case BTN_BOTTOM_PIN:
-      Serial.println("Bottom Pressed");
-      break;
     case BTN_LEFT_PIN:
       if (this->currentPage > 0) {
         this->showPage(this->currentPage - 1);
       }
-      break;
-    case BTN_TOP_PIN:
-      Serial.println("Top Pressed");
       break;
     case BTN_EXIT_PIN:
       this->cb->onMenuItemExit(this->pages[this->currentPage].getCode());
@@ -50,14 +44,8 @@ void MenuController::onBtnReleased(Button& button, byte btnPin) {
   if (btnPin == BTN_RIGHT_PIN) {
      Serial.println("Right Released");
   }
-  if (btnPin == BTN_BOTTOM_PIN) {
-     Serial.println("Bottom Released");
-  }
   if (btnPin == BTN_LEFT_PIN) {
      Serial.println("Left Released");
-  }
-  if (btnPin == BTN_TOP_PIN) {
-     Serial.println("Top Released");
   }
   if (btnPin == BTN_EXIT_PIN) {
      Serial.println("Exit Released");
@@ -71,16 +59,18 @@ MenuController::MenuController() {
   // Set the LCD address to 0x27 for a 16 chars and 2 line display
   lcd = new LiquidCrystal_I2C(0x27, 16, 2);
   // Btns
-  this->btnRight = new Button(BTN_RIGHT_PIN, true, false, 25);
-  this->btnBottom = new Button(BTN_BOTTOM_PIN, true, false, 25);
   this->btnLeft = new Button(BTN_LEFT_PIN, true, false, 25);
-  this->btnTop = new Button(BTN_TOP_PIN, true, false, 25);
+  this->btnRight = new Button(BTN_RIGHT_PIN, true, false, 25);
   this->btnExit = new Button(BTN_EXIT_PIN, true, false, 25);
   this->btnEnter = new Button(BTN_ENTER_PIN, true, false, 25);
   this->cb = this;
+  this->buttonOverride = false;
 }
 
 void MenuController::begin() {
+  #ifdef DEBUG
+    Serial.println("Starting Menu Controller!");
+  #endif
   lcd->begin();
 	lcd->backlight();
   // Custom characters with their ascii index
@@ -92,19 +82,14 @@ void MenuController::begin() {
 }
 
 void MenuController::update() {
-  this->btnRight->read();
-  this->btnBottom->read();
   this->btnLeft->read();
-  this->btnTop->read();
+  this->btnRight->read();
   this->btnExit->read();
   this->btnEnter->read();
-
-  createBindings(this->btnRight, BTN_RIGHT_PIN);
-  createBindings(this->btnBottom, BTN_BOTTOM_PIN);
-  createBindings(this->btnLeft, BTN_LEFT_PIN);
-  createBindings(this->btnTop, BTN_TOP_PIN);
-  createBindings(this->btnExit, BTN_EXIT_PIN);
-  createBindings(this->btnEnter, BTN_ENTER_PIN);
+  checkState(*(this->btnLeft), BTN_LEFT_PIN);
+  checkState(*(this->btnRight), BTN_RIGHT_PIN);
+  checkState(*(this->btnExit), BTN_EXIT_PIN);
+  checkState(*(this->btnEnter), BTN_ENTER_PIN);
 }
 
 void MenuController::setMenuContent(MenuPage pages[], byte count) {
@@ -122,11 +107,11 @@ void MenuController::setButtonOverride(boolean ob) {
   this->buttonOverride = ob;
 }
 
-void MenuController::createBindings(Button* button, byte pin) {
-  if (button->wasReleased()) {
-    this->onBtnPressed(*button, pin);
-  } else if (button->wasPressed()) {
-    this->onBtnReleased(*button, pin);
+void MenuController::checkState(Button& button, byte pin) {
+  if (button.wasReleased()) {
+    this->onBtnPressed(button, pin);
+  } else if (button.wasPressed()) {
+    this->onBtnReleased(button, pin);
   }
 }
 
@@ -136,10 +121,10 @@ void MenuController::showPage(byte index) {
     this->currentPage = index;
     // Go to First Line
     lcd->setCursor(1,0);
-    lcd->print(this->pages[currentPage].getLine1());
+    lcd->print(this->pages[this->currentPage].getLine1());
     // Go to Second Line
     lcd->setCursor(1,1);
-    lcd->print(this->pages[currentPage].getLine2());
+    lcd->print(this->pages[this->currentPage].getLine2());
     // Print Next and Previous
     if (index > 0) {
       lcd->setCursor(0,0);
@@ -149,7 +134,7 @@ void MenuController::showPage(byte index) {
       lcd->setCursor(15,0);
       lcd->write(2); // ASCII value for next
     }
-    this->onMenuPageChanged(this->pages[currentPage].getCode());
+    this->onMenuPageChanged(this->pages[this->currentPage].getCode());
   }
 }
 

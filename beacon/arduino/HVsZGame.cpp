@@ -17,11 +17,14 @@ HVsZGame::HVsZGame() {
   ledController->getHGauge3()->overrideComputeColor(&alwaysPurpleColorCompute);
   this->remainingTime = 600; // 10 min
   this->beaconType = BeaconType::HumanSZ;
+}
+
+void HVsZGame::init() {
   // Show base menu
   menuController->setMenuContent(showBaseMenu(), 2);
   // Create callbacks
-  MenuCallbacks* cb = (MenuCallbacks*)this;
-  menuController->setMenuCallbacks(*cb);
+  menuController->setMenuCallbacks(*this);
+  nfcController->setNfcCallbacks(*this);
 }
 
 void HVsZGame::onMenuItemSelected(byte code) {
@@ -85,6 +88,13 @@ void HVsZGame::onBtnPressed(Button& button, byte btnPin) {
 
 void HVsZGame::onBtnReleased(Button& button, byte btnPin) {
   //TODO
+}
+
+void HVsZGame::onCardIn() {
+}
+void HVsZGame::onCardHold() {
+}
+void HVsZGame::onCardOut() {
 }
 
 /**
