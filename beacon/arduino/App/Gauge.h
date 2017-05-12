@@ -37,6 +37,7 @@ public:
    */
   void overrideComputeColor(CRGB (*func)(byte));
 
+
 private:
   byte ledCount;
   byte level;

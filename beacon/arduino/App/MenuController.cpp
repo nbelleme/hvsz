@@ -42,16 +42,16 @@ void MenuController::onBtnReleased(Button& button, byte btnPin) {
     return;
   }
   if (btnPin == BTN_RIGHT_PIN) {
-     Serial.println("Right Released");
+    Serial.println("Right Released");
   }
   if (btnPin == BTN_LEFT_PIN) {
-     Serial.println("Left Released");
+    Serial.println("Left Released");
   }
   if (btnPin == BTN_EXIT_PIN) {
-     Serial.println("Exit Released");
+    Serial.println("Exit Released");
   }
   if (btnPin == BTN_ENTER_PIN) {
-     Serial.println("Enter Released");
+    Serial.println("Enter Released");
   }
 }
 
@@ -68,11 +68,11 @@ MenuController::MenuController() {
 }
 
 void MenuController::begin() {
-  #ifdef DEBUG
-    Serial.println("Starting Menu Controller!");
-  #endif
+#ifdef DEBUG
+  Serial.println("Starting Menu Controller!");
+#endif
   lcd->begin();
-	lcd->backlight();
+  lcd->backlight();
   // Custom characters with their ascii index
   uint8_t previous[8] = {0x1, 0x3, 0x7, 0xf, 0x7, 0x3, 0x1};
   uint8_t next[8] = {0x10, 0x18, 0x1c, 0x1e, 0x1c, 0x18, 0x10};
@@ -120,18 +120,18 @@ void MenuController::showPage(byte index) {
     lcd->clear();
     this->currentPage = index;
     // Go to First Line
-    lcd->setCursor(1,0);
+    lcd->setCursor(1, 0);
     lcd->print(this->pages[this->currentPage].getLine1());
     // Go to Second Line
-    lcd->setCursor(1,1);
+    lcd->setCursor(1, 1);
     lcd->print(this->pages[this->currentPage].getLine2());
     // Print Next and Previous
     if (index > 0) {
-      lcd->setCursor(0,0);
+      lcd->setCursor(0, 0);
       lcd->write(1); // ASCII value for previous
     }
     if (index < this->pageCount - 1) {
-      lcd->setCursor(15,0);
+      lcd->setCursor(15, 0);
       lcd->write(2); // ASCII value for next
     }
     this->onMenuPageChanged(this->pages[this->currentPage].getCode());

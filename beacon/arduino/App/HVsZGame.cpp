@@ -11,6 +11,8 @@ CRGB alwaysPurpleColorCompute (byte level) { return CRGB::Purple; }
 
 HVsZGame::HVsZGame() {
   ledController->getVGauge2()->setColorStrategy(beacon::ColorStrategy::SingleColor);
+  // Set Strategy to beacon
+  ledController->setHorizontalLEDsStrategy(beacon::HLEDsStrategy::Beacon);
   ledController->getVGauge2()->overrideComputeColor(&alwaysBlueColorCompute);
   ledController->getHGauge1()->overrideComputeColor(&alwaysPurpleColorCompute);
   ledController->getHGauge2()->overrideComputeColor(&alwaysPurpleColorCompute);
