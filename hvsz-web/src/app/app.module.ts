@@ -5,22 +5,18 @@ import {HttpModule} from '@angular/http';
 import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule }   from './app-routing.module';
-
 import {AppComponent} from './app.component';
+
 import {GameComponent} from './game/game.component';
-import {DashboardComponent} from './game/dashboard.component';
-import {FoodSupplyComponent} from './foodsupply/food-supply.component';
-
-import {DashboardService} from './game/dashboard.service';
 import {GameService} from './game/game.service';
-import {FoodSuppplyService} from './foodsupply/food-supply.service';
 
+import {FoodSupplyComponent} from './foodsupply/food-supply.component';
+import {FoodSuppplyService} from './foodsupply/food-supply.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameComponent,
-    DashboardComponent,
     FoodSupplyComponent
   ],
   imports: [
@@ -32,7 +28,6 @@ import {FoodSuppplyService} from './foodsupply/food-supply.service';
   ],
   providers: [
       GameService,
-      DashboardService,
       FoodSuppplyService
   ],
   bootstrap: [AppComponent]

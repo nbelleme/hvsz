@@ -18,6 +18,7 @@ export class FoodSupplyComponent implements OnInit {
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.foodSupplyService.getZone(+params['id']))
-            .subscribe(foodSupply => this.foodSupply = foodSupply);
+            .subscribe(
+              foodSupply => this.foodSupply = foodSupply);
     }
 }

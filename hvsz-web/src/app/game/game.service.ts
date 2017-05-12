@@ -1,14 +1,7 @@
-import {Game} from './game';
-import {Http, Headers} from '@angular/http';
-import {Injectable} from '@angular/core';
+import {Http, Headers} from "@angular/http";
+import {Injectable} from "@angular/core";
+import {Game} from "./game";
 
-import 'rxjs/add/operator/toPromise';
-import {Status} from "../status/status";
-
-
-/**
- * Created by nicolas on 05/05/2017.
- */
 @Injectable()
 export class GameService {
   private headers = new Headers({'Content-Type': 'application/json'});
@@ -18,7 +11,7 @@ export class GameService {
 
   getGame(): Promise<Game> {
     return this.http
-      .get('http://localhost:8080/api/game', {headers : this.headers})
+      .get('http://localhost:8080/api/game', {headers: this.headers})
       .toPromise()
       .then(function (response) {
         console.log(response.json());
@@ -30,4 +23,5 @@ export class GameService {
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
   }
+
 }
