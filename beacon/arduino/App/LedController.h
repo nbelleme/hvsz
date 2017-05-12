@@ -78,5 +78,8 @@ class LedController {
     */
     void nextLed();
 
+    /**
+      Used to update led colors in beacon mode
+    */
     void updateColors(byte offset, byte brightnessRatio, CRGB color);
 };

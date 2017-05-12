@@ -72,7 +72,7 @@ void LedController::update() {
       updateGauge(44, hGauge1);
       break;
     case HLEDsStrategy::Beacon:
-      // TODO will implement cool animation
+      // Beacon <=> all gauges moves like a radar
       updateBeacon(28, hGauge1);
   }
   FastLED.setBrightness(bri);
