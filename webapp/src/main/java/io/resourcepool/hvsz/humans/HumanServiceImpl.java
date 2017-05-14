@@ -29,8 +29,8 @@ public class HumanServiceImpl implements HumanService {
   @Override
   public boolean isAlive(int lifeToken) {
     Game g = gameService.get();
-    Life lifeByToken = g.getStatus().getLifeByToken(lifeToken);
-    return lifeByToken.isAlive();
+    Human humanByToken = g.getStatus().getLifeByToken(lifeToken);
+    return humanByToken.isAlive();
   }
 
   @Override
@@ -48,7 +48,7 @@ public class HumanServiceImpl implements HumanService {
   }
 
   @Override
-  public Life spawn() {
+  public Human spawn() {
     Game g = gameService.get();
     Assert.gameActive(g);
     Status status = g.getStatus();
@@ -62,31 +62,31 @@ public class HumanServiceImpl implements HumanService {
     // Decrement nbLifeLeft in game status and increment nbHumanAlive
     status.setRemainingHumanTickets(status.getRemainingHumanTickets() - 1);
     status.setCurrentHumansOnField(status.getCurrentHumansOnField() + 1);
-    // Create new Life
+    // Create new Human
     Long id = nextId();
-    Life life = GenericBuilder.of(Life::new)
-      .with(Life::setId, nextId())
-      .with(Life::setAlive, true)
-      .with(Life::setNbResources, 0)
-      .with(Life::setToken, generateToken(id))
+    Human human = GenericBuilder.of(Human::new)
+      .with(Human::setId, nextId())
+      .with(Human::setAlive, true)
+      .with(Human::setNbResources, 0)
+      .with(Human::setToken, generateToken(id))
       .build();
-    status.getLives().add(life);
+    status.getLives().add(human);
     g.setStatus(status);
     gameService.update(g);
-    return life;
+    return human;
   }
 
   @Override
-  public Life getLifeByToken(int token) {
+  public Human getHuman(int token) {
     Game g = gameService.get();
     Assert.gameActive(g);
     return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElseGet(() -> null);
   }
 
   @Override
-  public void save(Life life) {
+  public void save(Human human) {
     Game g = gameService.get();
-    g.getStatus().setLife(life.getId(), life);
+    g.getStatus().setLife(human.getId(), human);
     gameService.update(g);
   }
 

@@ -5,7 +5,7 @@ import io.resourcepool.hvsz.common.exceptions.NoHumanLeftException;
 import io.resourcepool.hvsz.game.Game;
 import io.resourcepool.hvsz.game.GameService;
 import io.resourcepool.hvsz.humans.HumanService;
-import io.resourcepool.hvsz.humans.Life;
+import io.resourcepool.hvsz.humans.Human;
 import io.resourcepool.hvsz.humans.SafeZone;
 import io.resourcepool.hvsz.humans.SafeZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,12 +88,12 @@ public class SafeZoneController {
   public String offloadFood(@PathVariable Long zoneId, @RequestParam(value = "lifeToken") int lifeToken, Model model) {
     Game g = gameService.get();
     Assert.gameActive(g);
-    Life life = g.getStatus().getLifeByToken(lifeToken);
+    Human human = g.getStatus().getLifeByToken(lifeToken);
     SafeZone safeZone = zoneService.getSafeZone(zoneId);
 
-    if (life == null) {
+    if (human == null) {
       model.addAttribute("message", "Token invalide, essayes encore !");
-    } else if (!life.isAlive()) {
+    } else if (!human.isAlive()) {
       model.addAttribute("message", "Tu es mort !");
     } else if (safeZone.isDestroyed()) {
       model.addAttribute("message", "La zone est détruite !");
@@ -123,8 +123,8 @@ public class SafeZoneController {
       if (!humanService.canSpawn()) {
         model.addAttribute("spawnResultMsg", "Toutes les vies sont en cours d'utilisation (les zombies ont un petit appétit) ;-(");
       } else {
-        Life life = humanService.spawn();
-        int lifeToken = life.getToken();
+        Human human = humanService.spawn();
+        int lifeToken = human.getToken();
         model.addAttribute("spawnResultMsg", "Une nouvelle vie pour toi <3  token: " + lifeToken);
       }
     } else {

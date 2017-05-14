@@ -1,6 +1,6 @@
 package io.resourcepool.hvsz.game;
 
-import io.resourcepool.hvsz.humans.Life;
+import io.resourcepool.hvsz.humans.Human;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -19,7 +19,7 @@ public class Status implements Serializable {
   private Integer remainingHumanTickets;
   private Long remainingTime;
   private Instant timestampStart;
-  private List<Life> lives = new ArrayList<>();
+  private List<Human> lives = new ArrayList<>();
   private GameState gameState = GameState.NOT_STARTED;
 
   public Integer getMaxHumansOnField() {
@@ -62,11 +62,11 @@ public class Status implements Serializable {
     this.remainingHumanTickets = remainingHumanTickets;
   }
 
-  public List<Life> getLives() {
+  public List<Human> getLives() {
     return this.lives;
   }
 
-  public void setLives(List<Life> lives) {
+  public void setLives(List<Human> lives) {
     this.lives = lives;
   }
 
@@ -85,8 +85,8 @@ public class Status implements Serializable {
    * @param id .
    * @return .
    */
-  public Life getLife(int id) {
-    for (Life l : lives) {
+  public Human getLife(int id) {
+    for (Human l : lives) {
       if (l.getId() == id) {
         return l;
       }
@@ -100,8 +100,8 @@ public class Status implements Serializable {
    * @param token .
    * @return .
    */
-  public Life getLifeByToken(int token) {
-    for (Life l : lives) {
+  public Human getLifeByToken(int token) {
+    for (Human l : lives) {
       if (l.getToken() == token) {
         return l;
       }
@@ -138,16 +138,16 @@ public class Status implements Serializable {
   }
 
   /**
-   * Set life in place of a previous life content.
+   * Set human in place of a previous human content.
    *
-   * @param id   the life id
-   * @param life the new life object
+   * @param id   the human id
+   * @param human the new human object
    */
-  public void setLife(Long id, Life life) {
+  public void setLife(Long id, Human human) {
     for (int i = 0; i < lives.size(); i++) {
-      Life l = lives.get(i);
+      Human l = lives.get(i);
       if (l.getId() == id) {
-        lives.set(i, life);
+        lives.set(i, human);
       }
     }
   }

@@ -109,7 +109,7 @@
         function getNbResource(callback) {
             var token = $("#lifeToken").val();
             // FIXME we need the api
-            $.getJSON("/api/game/1/life/" + token + "/nbResource", function (nbResource) {
+            $.getJSON("/api/game/1/human/" + token + "/nbResource", function (nbResource) {
                 maxRes = defaultMaxRes - nbResource;
                 callback();
             }, function(err) { console.log(err); });

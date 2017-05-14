@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by ebiz on 28/04/17.
  */
-public class Life implements Serializable {
+public class Human implements Serializable {
 
     private Long id;
     private boolean alive;
@@ -104,9 +104,9 @@ public class Life implements Serializable {
             return false;
         }
 
-        Life life = (Life) o;
+        Human human = (Human) o;
 
-        return getId().equals(life.getId());
+        return getId().equals(human.getId());
     }
 
     @Override

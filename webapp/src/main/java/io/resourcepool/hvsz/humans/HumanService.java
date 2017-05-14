@@ -30,7 +30,7 @@ public interface HumanService {
    *
    * @return true if success, false else
    */
-  Life spawn();
+  Human spawn();
 
   /**
    * get life by token.
@@ -38,12 +38,12 @@ public interface HumanService {
    * @param token .
    * @return life.
    */
-  Life getLifeByToken(int token);
+  Human getHuman(int token);
 
   /**
-   * Save life.
+   * Save human.
    *
-   * @param life .
+   * @param human .
    */
-  void save(Life life);
+  void save(Human human);
 }

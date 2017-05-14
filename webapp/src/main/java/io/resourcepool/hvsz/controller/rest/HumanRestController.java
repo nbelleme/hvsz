@@ -1,8 +1,8 @@
 package io.resourcepool.hvsz.controller.rest;
 
 import io.resourcepool.hvsz.game.GameService;
+import io.resourcepool.hvsz.humans.Human;
 import io.resourcepool.hvsz.humans.HumanService;
-import io.resourcepool.hvsz.humans.Life;
 import io.resourcepool.hvsz.zombies.ZombieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/human")
-public class HumainRestController {
+public class HumanRestController {
     @Autowired
     private HumanService humanService;
 
@@ -29,6 +29,7 @@ public class HumainRestController {
 
     /**
      * Kill life by token.
+     *
      * @param token life token.
      * @return bool succes?
      */
@@ -39,26 +40,29 @@ public class HumainRestController {
     }
 
     /**
-     *  Get a new life, return token.
-     *  @return life token
+     * Get a new life, return token.
+     *
+     * @return life token
      */
-    @PostMapping("/takeLife")
-    public Life takeLife() {
+    @PostMapping("/newLife")
+    public Human getNewLife() {
         return humanService.spawn();
     }
 
     /**
-     *  Get resource number by life.
-     *  @param lifeToken the token of the human
-     *  @return the number of resources taken
+     * Get resource number by life.
+     *
+     * @param lifeToken the token of the human
+     * @return the number of resources taken
      */
     @GetMapping("/{lifeToken}/nbResource")
     public int getNbResourceByLife(@PathVariable("lifeToken") int lifeToken) {
-        return humanService.getLifeByToken(lifeToken).getNbResources();
+        return humanService.getHuman(lifeToken).getNbResources();
     }
 
     /**
      * Get remaining lives.
+     *
      * @return the number of remaining live
      */
     @GetMapping("/remaining")
@@ -68,11 +72,34 @@ public class HumainRestController {
 
     /**
      * Get current number of human on field.
+     *
      * @return the current number of human on field
      */
     @GetMapping("/active")
     public int getActiveLives() {
         return gameService.get().getStatus().getCurrentHumansOnField();
+    }
+
+    /**
+     * Check if human is still alive.
+     *
+     * @param token Human's life token to check.
+     * @return boolean is human alive
+     */
+    @GetMapping("/isAlive/{token}")
+    public boolean isAlive(@PathVariable("token") int token) {
+        return humanService.isAlive(token);
+    }
+
+
+    /**
+     * Get human.
+     * @param id of the human
+     * @return .
+     */
+    @GetMapping("/{id}")
+    public Human getHuman(@PathVariable("id") int id) {
+        return humanService.getHuman(id);
     }
 
 }

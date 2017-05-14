@@ -3,7 +3,7 @@ package io.resourcepool.hvsz.supply;
 import io.resourcepool.hvsz.common.Assert;
 import io.resourcepool.hvsz.game.Game;
 import io.resourcepool.hvsz.game.GameService;
-import io.resourcepool.hvsz.humans.Life;
+import io.resourcepool.hvsz.humans.Human;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +38,8 @@ public class FoodSupplyServiceImpl implements FoodSupplyService {
   public int takeFood(Long zoneId, int lifeToken, Integer amount) {
     Game game = gameService.get();
     Assert.gameActive(game);
-    Life life = game.getStatus().getLifeByToken(lifeToken);
-    Assert.humanAlive(life);
+    Human human = game.getStatus().getLifeByToken(lifeToken);
+    Assert.humanAlive(human);
 
     FoodSupply foodSupply = game.getFoodSupplies().stream().filter(supply -> supply.getId().equals(zoneId)).findFirst().get();
     if (foodSupply == null) {
@@ -47,7 +47,7 @@ public class FoodSupplyServiceImpl implements FoodSupplyService {
     }
     int originalResources = foodSupply.getLevel();
     int result = foodSupply.pick(amount);
-    int humanResult = life.addResource(result);
+    int humanResult = human.addResource(result);
     if (humanResult != result) { // if the human didn't have room for all resources, put excess back
       foodSupply.setLevel(originalResources - humanResult);
     }

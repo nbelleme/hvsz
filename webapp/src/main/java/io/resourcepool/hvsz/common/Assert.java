@@ -4,7 +4,7 @@ import io.resourcepool.hvsz.common.exceptions.HumanIsDeadException;
 import io.resourcepool.hvsz.common.exceptions.IllegalGameStateException;
 import io.resourcepool.hvsz.common.exceptions.NoGameDefinedException;
 import io.resourcepool.hvsz.game.Game;
-import io.resourcepool.hvsz.humans.Life;
+import io.resourcepool.hvsz.humans.Human;
 
 /**
  * Business layer assertions.
@@ -84,10 +84,10 @@ public abstract class Assert {
 
   /**
    * Asserts that a human is not null and alive.
-   * @param life the human life
+   * @param human the human human
    */
-  public static void humanAlive(Life life) {
-    if (life == null || !life.isAlive()) {
+  public static void humanAlive(Human human) {
+    if (human == null || !human.isAlive()) {
       throw new HumanIsDeadException();
     }
   }
