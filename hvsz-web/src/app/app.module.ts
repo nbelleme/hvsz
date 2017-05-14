@@ -2,9 +2,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
+import {MaterializeModule} from 'angular2-materialize';
 
-import { AppRoutingModule }   from './app-routing.module';
+
+import {AppRoutingModule}   from './app-routing.module';
 import {AppComponent} from './app.component';
 
 import {GameComponent} from './game/game.component';
@@ -24,11 +26,12 @@ import {FoodSuppplyService} from './foodsupply/food-supply.service';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    MaterializeModule
   ],
   providers: [
-      GameService,
-      FoodSuppplyService
+    GameService,
+    FoodSuppplyService
   ],
   bootstrap: [AppComponent]
 })
