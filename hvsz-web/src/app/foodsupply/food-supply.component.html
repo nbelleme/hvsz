@@ -1,61 +1,72 @@
 <div *ngIf="foodSupply">
-<h1 {{foodSupply.name}}></h1>
-<div *ngIf="message" class="card">
-  <div class="card-content red lighten-2 darken-1">
-    <p class="white-text"><span {{message}}></span></p>
+  <h1>{{foodSupply.name}}</h1>
+  <div *ngIf="message" class="card">
+    <div class="card-content red lighten-2 darken-1">
+      <p class="white-text"><span {{message}}></span></p>
+    </div>
   </div>
-</div>
-<div class="card">
-  <div class="card-content brown darken-1">
-    <p class="white-text">Il reste <span {{foodSupply.level}}></span> ressource(s) dans la zone de
-      sécurité et vous pouvez porter <span {{maxFoodTransfer}}></span>kgs de nourriture maximum.</p>
+  <div class="card">
+    <div class="card-content brown darken-1">
+      <p class="white-text">Il reste <span>{{foodSupply.level}}</span> ressource(s) dans la zone de
+        sécurité. </p>
+      <p *ngIf="currentUser">Vous pouvez porter <span>{{currentUser.maxLoad}}</span>kgs de nourriture maximum.</p>
+    </div>
   </div>
-</div>
-<div *ngIf="foodTaken" class="card">
-  <div class="card-content teal darken-1">
-    <p class="white-text"><span {{foodTaken}}></span> kg(s) de nourriture pris.</p>
+  <div *ngIf="foodTaken" class="card">
+    <div class="card-content teal darken-1">
+      <p class="white-text"><span>{{foodTaken}}</span> kg(s) de nourriture pris.</p>
+    </div>
   </div>
-</div>
 
-  <div [ngSwitch]="zone.level">
-    <div class="card" *ngSwitchCase="0">
-      <div class="card-content orange darken-1">
-        <p>Zone vide, vous avez tout pris</p>
+  <div *ngIf="foodSupply.level == 0" class="card">
+    <div class="card-content orange darken-1">
+      <p>Zone vide, vous avez tout pris</p>
+    </div>
+  </div>
+
+  <div *ngIf="currentUser && currentUser.isFull()" class="card">
+    <div class="card-content orange darken-1">
+      <p>Votre sac est plein, veuillez aller le vider avant de pouvoir charger plus de nourriture.</p>
+    </div>
+  </div>
+  <div *ngIf="foodSupply.level != 0 " class="card">
+      <fieldset class="row valign-wrapper">
+        <legend>Prendre une ressource</legend>
+        <input type="hidden" name="amount" id="amount" value="1"/>
+        <div class="input-field">
+          <label for="lifeToken">Votre code utilisateur</label>
+          <input type="text" name="lifeToken" id="lifeToken" required="required" pattern="\d*" />
+        </div>
+        <button [disabled]="isButtonDisabled" class="btn waves-effect waves-light" type="submit"
+                name="action" id="takeButton"
+                (mousedown)="startTakeFood()"
+                (mouseup)="stopTakeFood()"
+                (touchstart)="startTakeFood()"
+                (touchstop)="stopTakeFood()"
+          >
+          Prendre (maintenir appuyé)
+        </button>
+      </fieldset>
+  </div>
+
+  <div>
+    <div class="stats-label">
+      <p>Ressources<br/>restantes</p>
+      <span>{{foodSupply.level}}</span>
+    </div>
+
+    <div class="stats">
+      <div class="progress">
+        <div class="determinate" [style.width.%]="widthFoodLeft"></div>
       </div>
     </div>
-    <div *ngSwitchDefault>
-      <form method="post" > <!-- //TODO th:action="@{/food-supply/{zoneId}(zoneId=${zone.id})}" -->
-        <fieldset class="row valign-wrapper">
-          <legend>Prendre une ressource</legend>
-          <input type="hidden" name="amount" id="amount" value="1"/>
-          <div class="input-field col s6">
-            <label for="lifeToken">Votre code utilisateur</label>
-            <input type="text" name="lifeToken" id="lifeToken" required="required" pattern="\d*" />
-          </div>
-          <button class="btn waves-effect waves-light col s6" type="submit"
-                  name="action" id="takeButton">Prendre (maintenir appuyé)
-          </button>
-        </fieldset>
-      </form>
+    <div class="stats-label" *ngIf="currentUser">
+      <p>Votre<br/>sac</p>
+      <div class="stats">
+        <div class="progress">
+          <div class="determinate" [style.width.%]="widthCurrentLoad"></div>
+        </div>
+      </div>
     </div>
   </div>
-
-<div>
-  <div class="stats-label">
-    <p>Ressources<br/>restantes</p>
-    <span>25</span>
-  </div>
-  <div class="stats">
-    <div class="progress">
-      <div class="determinate" style="width: 70%"></div>
-    </div>
-    <div class="progress">
-      <div class="determinate" style="width: 70%"></div>
-    </div>
-  </div>
-  <div class="stats-label">
-    <p>Votre<br/>sac</p>
-    <span>8</span>
-  </div>
-</div>
 </div>
