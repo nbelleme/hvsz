@@ -2,7 +2,6 @@ package io.resourcepool.hvsz.game;
 
 import io.resourcepool.hvsz.humans.SafeZone;
 import io.resourcepool.hvsz.supply.FoodSupply;
-import io.resourcepool.hvsz.zombies.ZombieZone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,12 +9,11 @@ import java.util.List;
 
 public class Game implements Serializable {
 
-  Long id = 1L; // Useless
-  Status status = new Status();
-  GameSettings config = new GameSettings();
-  List<SafeZone> safeZones;
-  List<FoodSupply> foodSupplies;
-  List<ZombieZone> zombieZones;
+  private Long id;
+  private Status status;
+  private GameSettings config;
+  private List<SafeZone> safeZones;
+  private List<FoodSupply> foodSupplies;
 
   /**
    * Game constructor.
@@ -46,11 +44,6 @@ public class Game implements Serializable {
     } else {
       this.safeZones = new ArrayList<>();
     }
-    if (g.zombieZones != null) {
-      this.zombieZones = g.zombieZones;
-    } else {
-      this.zombieZones = new ArrayList<>();
-    }
   }
 
   /**
@@ -78,6 +71,10 @@ public class Game implements Serializable {
     this.status = status;
   }
 
+  public GameSettings getConfig() {
+    return config;
+  }
+
   /**
    * Set the configs.
    *
@@ -85,10 +82,6 @@ public class Game implements Serializable {
    */
   public void setConfig(GameSettings config) {
     this.config = config;
-  }
-
-  public GameSettings getConfig() {
-    return config;
   }
 
   public List<SafeZone> getSafeZones() {
@@ -106,16 +99,8 @@ public class Game implements Serializable {
   public void setFoodSupplies(List<FoodSupply> foodSupplies) {
     this.foodSupplies = foodSupplies;
   }
-
-  public List<ZombieZone> getZombieZones() {
-    return zombieZones;
-  }
-
-  public void setZombieZones(List<ZombieZone> zombieZones) {
-    this.zombieZones = zombieZones;
-  }
-
   // CHECKSTYLE_OFF
+
 
   @Override
   public boolean equals(Object o) {
@@ -128,8 +113,7 @@ public class Game implements Serializable {
     if (status != null ? !status.equals(game.status) : game.status != null) return false;
     if (config != null ? !config.equals(game.config) : game.config != null) return false;
     if (safeZones != null ? !safeZones.equals(game.safeZones) : game.safeZones != null) return false;
-    if (foodSupplies != null ? !foodSupplies.equals(game.foodSupplies) : game.foodSupplies != null) return false;
-    return zombieZones != null ? zombieZones.equals(game.zombieZones) : game.zombieZones == null;
+    return foodSupplies != null ? foodSupplies.equals(game.foodSupplies) : game.foodSupplies == null;
   }
 
   @Override
@@ -139,7 +123,6 @@ public class Game implements Serializable {
     result = 31 * result + (config != null ? config.hashCode() : 0);
     result = 31 * result + (safeZones != null ? safeZones.hashCode() : 0);
     result = 31 * result + (foodSupplies != null ? foodSupplies.hashCode() : 0);
-    result = 31 * result + (zombieZones != null ? zombieZones.hashCode() : 0);
     return result;
   }
 

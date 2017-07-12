@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 
 /**
  * Generic static builder class, can be used to build any mutable obj.
+ *
  * @param <T> classtype, not necessary
  */
 public class GenericBuilder<T> {
@@ -21,6 +22,7 @@ public class GenericBuilder<T> {
 
   /**
    * set instantiator.
+   *
    * @param instantiator instanciator
    */
   public GenericBuilder(Supplier<T> instantiator) {
@@ -29,8 +31,9 @@ public class GenericBuilder<T> {
 
   /**
    * reutrn a generic builder of the right ype.
+   *
    * @param instantiator target class instanciator
-   * @param <T> target class
+   * @param <T>          target class
    * @return typed generic builder
    */
   public static <T> GenericBuilder<T> of(Supplier<T> instantiator) {
@@ -39,9 +42,10 @@ public class GenericBuilder<T> {
 
   /**
    * set any param of the class.
+   *
    * @param consumer setter
-   * @param value value
-   * @param <U> target class
+   * @param value    value
+   * @param <U>      target class
    * @return this
    */
   public <U> GenericBuilder<T> with(BiConsumer<T, U> consumer, U value) {
@@ -52,6 +56,7 @@ public class GenericBuilder<T> {
 
   /**
    * final builder method.
+   *
    * @return created object
    */
   public T build() {

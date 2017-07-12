@@ -8,6 +8,7 @@ public class IndexController {
 
   /**
    * Get the index page.
+   *
    * @return String (index vue)
    */
   @GetMapping("/")

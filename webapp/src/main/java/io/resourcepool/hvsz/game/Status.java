@@ -4,7 +4,6 @@ import io.resourcepool.hvsz.humans.Life;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 import static io.resourcepool.hvsz.game.GameState.ACTIVE;
@@ -18,9 +17,9 @@ public class Status implements Serializable {
   private Integer currentHumansOnField;
   private Integer remainingHumanTickets;
   private Long remainingTime;
-  private Instant timestampStart;
-  private List<Life> lives = new ArrayList<>();
-  private GameState gameState = GameState.NOT_STARTED;
+  private transient Instant timestampStart;
+  private List<Life> lives;
+  private GameState gameState;
 
   public Integer getMaxHumansOnField() {
     return maxHumansOnField;
@@ -85,13 +84,11 @@ public class Status implements Serializable {
    * @param id .
    * @return .
    */
-  public Life getLife(int id) {
-    for (Life l : lives) {
-      if (l.getId() == id) {
-        return l;
-      }
-    }
-    return null;
+  public Life getLifeById(int id) {
+    return lives.stream()
+        .filter(life -> life.getId() == id)
+        .findFirst()
+        .orElse(null);
   }
 
   /**
@@ -101,12 +98,10 @@ public class Status implements Serializable {
    * @return .
    */
   public Life getLifeByToken(int token) {
-    for (Life l : lives) {
-      if (l.getToken() == token) {
-        return l;
-      }
-    }
-    return null;
+    return lives.stream()
+        .filter(l -> l.getToken() == token)
+        .findFirst()
+        .orElse(null);
   }
 
   public boolean isReadyToStart() {
@@ -146,7 +141,7 @@ public class Status implements Serializable {
   public void setLife(Long id, Life life) {
     for (int i = 0; i < lives.size(); i++) {
       Life l = lives.get(i);
-      if (l.getId() == id) {
+      if (l.getId().equals(id)) {
         lives.set(i, life);
       }
     }

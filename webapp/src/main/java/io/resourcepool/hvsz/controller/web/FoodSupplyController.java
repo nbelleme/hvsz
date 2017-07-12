@@ -2,11 +2,11 @@ package io.resourcepool.hvsz.controller.web;
 
 import io.resourcepool.hvsz.common.Assert;
 import io.resourcepool.hvsz.game.Game;
-import io.resourcepool.hvsz.game.GameService;
 import io.resourcepool.hvsz.game.GameSettings;
-import io.resourcepool.hvsz.game.GameSettingsService;
+import io.resourcepool.hvsz.services.api.GameService;
+import io.resourcepool.hvsz.services.api.GameSettingsService;
 import io.resourcepool.hvsz.supply.FoodSupply;
-import io.resourcepool.hvsz.supply.FoodSupplyService;
+import io.resourcepool.hvsz.services.api.FoodSupplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,11 +1,14 @@
 package io.resourcepool.hvsz.game;
 
-import io.resourcepool.hvsz.humans.SafeZoneService;
+import io.resourcepool.hvsz.services.api.GameService;
+import io.resourcepool.hvsz.services.api.SafeZoneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 
 /**
@@ -14,15 +17,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class StatusUpdaterCron {
 
-  @Autowired
-  private GameService gameService;
+  private static final Logger LOGGER = LoggerFactory.getLogger(StatusUpdaterCron.class);
+  private static final int SCHEDULED_TIME = 1000;
 
-  @Autowired
+  private GameService gameService;
   private SafeZoneService safeZoneService;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(StatusUpdaterCron.class);
-
-  private static final int SCHEDULED_TIME = 1000;
+  public StatusUpdaterCron(GameService gameService, SafeZoneService safeZoneService) {
+    this.gameService = Objects.requireNonNull(gameService);
+    this.safeZoneService = Objects.requireNonNull(safeZoneService);
+  }
 
   /**
    * Schedules the update of all running games.
@@ -31,10 +35,10 @@ public class StatusUpdaterCron {
   public void gameTimer() {
     Game game = gameService.get();
     if (game == null || !game.getStatus().isOngoing()) {
-      LOGGER.debug("No running game to update.");
+      LOGGER.debug("[ CRON ] : No running game to update.");
     } else {
 
-      LOGGER.info("Update the game of id " + game.getId());
+      LOGGER.info("[ CRON ] : Update the game of id " + game.getId());
       Status status = game.getStatus();
       if (status.isActive() && status.getRemainingTime() > 0) {
         status.setRemainingTime(status.getRemainingTime() - 1);
@@ -60,18 +64,18 @@ public class StatusUpdaterCron {
    */
   private boolean shouldDecreaseLevel(int totalFoodUnits, Long totalTime, Long remainingTime, int difficulty) {
     // Calculate the number of seconds necessary before taking one unit of food.
-    Long timeToHunger = 0L;
-    switch (difficulty) {
-      case 1: // EASY <=> Food gets eaten in 2/3 time
-        timeToHunger = (long) (0.66 * totalTime);
-        break;
-      case 2: // MEDIUM <=> Food gets eaten in 1/2 time
-        timeToHunger = (long) (0.5 * totalTime);
-        break;
-      case 3: // HARD <=> Food gets eaten in 1/3 time
-        timeToHunger = (long) (0.33 * totalTime);
-        break;
+    long timeToHunger = (long) (0.66 * totalTime);
+
+    if (difficulty == 1) {
+      timeToHunger = (long) (0.66 * totalTime);
+
+    } else if (difficulty == 2) {
+      timeToHunger = (long) (0.5 * totalTime);
+
+    } else if (difficulty == 3) {
+      timeToHunger = (long) (0.33 * totalTime);
     }
+
     Long timeToDecrementUnit = timeToHunger / totalFoodUnits;
     return remainingTime % timeToDecrementUnit == 0;
   }

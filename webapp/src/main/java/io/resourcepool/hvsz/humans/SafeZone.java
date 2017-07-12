@@ -3,7 +3,7 @@ package io.resourcepool.hvsz.humans;
 import java.io.Serializable;
 
 public class SafeZone implements Serializable {
-  private static final String NAME = "Zone de sécurité n°";
+  private static final String ZONE_NAME = "Zone de sécurité n°";
   private Long id;
   private int level;
   private int capacity;
@@ -27,7 +27,7 @@ public class SafeZone implements Serializable {
     this.id = id;
     this.level = level;
     this.capacity = capacity;
-    name = NAME + id;
+    name = ZONE_NAME + id;
   }
 
   public Long getId() {
@@ -38,8 +38,23 @@ public class SafeZone implements Serializable {
     this.id = id;
   }
 
+  public int getCapacity() {
+    return this.capacity;
+  }
+
+  public void setCapacity(int capacity) {
+    this.capacity = capacity;
+  }
+
+  public int getLevel() {
+    return this.level;
+  }
+
+  //TODO : use service
+
   /**
    * set resource level, set destroyed to true if level = 0.
+   *
    * @param level level to set
    */
   public void setLevel(int level) {
@@ -49,24 +64,12 @@ public class SafeZone implements Serializable {
     }
   }
 
-  public int getCapacity() {
-    return this.capacity;
-  }
-
-  public void setCapacity(int capacity) {
-    this.capacity = capacity;
+  public String getName() {
+    return name;
   }
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public int getLevel() {
-    return this.level;
-  }
-
-  public String getName() {
-    return name;
   }
 
   public Boolean isDestroyed() {
@@ -76,6 +79,9 @@ public class SafeZone implements Serializable {
   public void setDestroyed(Boolean destroyed) {
     this.destroyed = destroyed;
   }
+
+
+  //TODO : use service
 
   /**
    * Refill an amount of food.
@@ -93,18 +99,19 @@ public class SafeZone implements Serializable {
   }
 
   // CHECKSTYLE_OFF
-
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     SafeZone safeZone = (SafeZone) o;
 
-    if (level != safeZone.level) return false;
-    if (capacity != safeZone.capacity) return false;
-    if (id != null ? !id.equals(safeZone.id) : safeZone.id != null) return false;
-    return name != null ? name.equals(safeZone.name) : safeZone.name == null;
+    return level == safeZone.level && capacity == safeZone.capacity && (id != null ? id.equals(safeZone.id) : safeZone.id == null) && (name != null ? name.equals(safeZone.name) : safeZone.name == null);
   }
 
   @Override
@@ -115,6 +122,5 @@ public class SafeZone implements Serializable {
     result = 31 * result + (name != null ? name.hashCode() : 0);
     return result;
   }
-
   // CHECKSTYLE_ON
 }

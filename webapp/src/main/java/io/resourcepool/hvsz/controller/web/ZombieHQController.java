@@ -2,8 +2,8 @@ package io.resourcepool.hvsz.controller.web;
 
 import io.resourcepool.hvsz.common.Assert;
 import io.resourcepool.hvsz.game.Game;
-import io.resourcepool.hvsz.game.GameService;
-import io.resourcepool.hvsz.zombies.ZombieService;
+import io.resourcepool.hvsz.services.api.GameService;
+import io.resourcepool.hvsz.services.api.ZombieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
