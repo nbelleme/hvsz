@@ -7,20 +7,24 @@ import io.resourcepool.hvsz.humans.SafeZone;
 import io.resourcepool.hvsz.services.api.GameService;
 import io.resourcepool.hvsz.services.api.HumanService;
 import io.resourcepool.hvsz.services.api.SafeZoneService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
-public class SafeZoneServiceImpl implements SafeZoneService {
+final class SafeZoneServiceImpl implements SafeZoneService {
 
   private GameService gameService;
   private HumanService humanService;
 
-  public SafeZoneServiceImpl(GameService gameService, HumanService humanService) {
+  /**
+   * Constructor.
+   *
+   * @param gameService  gameService
+   * @param humanService humanService
+   */
+  SafeZoneServiceImpl(GameService gameService, HumanService humanService) {
     this.gameService = Objects.requireNonNull(gameService);
     this.humanService = Objects.requireNonNull(humanService);
   }

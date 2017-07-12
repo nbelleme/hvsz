@@ -2,11 +2,10 @@ package io.resourcepool.hvsz.services.impl;
 
 import io.resourcepool.hvsz.common.Assert;
 import io.resourcepool.hvsz.game.Game;
+import io.resourcepool.hvsz.humans.Life;
 import io.resourcepool.hvsz.services.api.FoodSupplyService;
 import io.resourcepool.hvsz.services.api.GameService;
-import io.resourcepool.hvsz.humans.Life;
 import io.resourcepool.hvsz.supply.FoodSupply;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +17,16 @@ import java.util.Objects;
  * @author Loïc Ortola on 04/05/2017
  */
 @Service
-public class FoodSupplyServiceImpl implements FoodSupplyService {
+final class FoodSupplyServiceImpl implements FoodSupplyService {
 
   private GameService gameService;
 
-  public FoodSupplyServiceImpl(GameService gameService) {
+  /**
+   * Constructor.
+   *
+   * @param gameService gameService
+   */
+  FoodSupplyServiceImpl(GameService gameService) {
     this.gameService = Objects.requireNonNull(gameService);
   }
 

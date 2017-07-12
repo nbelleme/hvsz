@@ -21,61 +21,88 @@ public class Status implements Serializable {
   private List<Life> lives;
   private GameState gameState;
 
+  /**
+   * Default constructor.
+   */
+  private Status() {
+
+  }
+
+
+  /**
+   * Build generic Status.
+   *
+   * @return new Status
+   */
+  public static Status build() {
+    return new Status();
+  }
+
   public Integer getMaxHumansOnField() {
     return maxHumansOnField;
   }
 
-  public void setMaxHumansOnField(Integer maxHumansOnField) {
+  //CHECKSTYLE_OFF
+  public Status setMaxHumansOnField(Integer maxHumansOnField) {
     this.maxHumansOnField = maxHumansOnField;
+    return this;
   }
 
   public Integer getCurrentHumansOnField() {
     return currentHumansOnField;
   }
 
-  public void setCurrentHumansOnField(Integer currentHumansOnField) {
+  public Status setCurrentHumansOnField(Integer currentHumansOnField) {
     this.currentHumansOnField = currentHumansOnField;
+    return this;
   }
 
   public Long getRemainingTime() {
     return remainingTime;
   }
 
-  public void setRemainingTime(Long remainingTime) {
+  public Status setRemainingTime(Long remainingTime) {
     this.remainingTime = remainingTime;
+    return this;
   }
 
   public Instant getTimestampStart() {
     return timestampStart;
   }
 
-  public void setTimestampStart(Instant timestampStart) {
+  public Status setTimestampStart(Instant timestampStart) {
     this.timestampStart = timestampStart;
+    return this;
   }
 
   public Integer getRemainingHumanTickets() {
     return remainingHumanTickets;
   }
 
-  public void setRemainingHumanTickets(Integer remainingHumanTickets) {
+  public Status setRemainingHumanTickets(Integer remainingHumanTickets) {
     this.remainingHumanTickets = remainingHumanTickets;
+    return this;
   }
 
   public List<Life> getLives() {
     return this.lives;
   }
 
-  public void setLives(List<Life> lives) {
+  public Status setLives(List<Life> lives) {
     this.lives = lives;
+    return this;
   }
 
   public GameState getGameState() {
     return gameState;
   }
 
-  public void setGameState(GameState gameState) {
+  public Status setGameState(GameState gameState) {
     this.gameState = gameState;
+    return this;
   }
+
+  //CHECKSTYLE_ON
 
 
   /**
@@ -109,19 +136,19 @@ public class Status implements Serializable {
   }
 
   public boolean isOver() {
-    return NOT_STARTED.equals(gameState) || HUMAN_VICTORY.equals(gameState) || ZOMBIE_VICTORY.equals(gameState);
+    return gameState.equals(NOT_STARTED) || gameState.equals(HUMAN_VICTORY) || gameState.equals(ZOMBIE_VICTORY);
   }
 
   public boolean isOngoing() {
-    return ACTIVE.equals(gameState) || PAUSED.equals(gameState);
+    return gameState.equals(ACTIVE) || gameState.equals(PAUSED);
   }
 
   public boolean isActive() {
-    return ACTIVE.equals(gameState);
+    return gameState.equals(ACTIVE);
   }
 
   public boolean isNotStarted() {
-    return NOT_STARTED.equals(gameState);
+    return gameState.equals(NOT_STARTED);
   }
 
   public boolean isOngoingOrIdle() {
@@ -129,7 +156,7 @@ public class Status implements Serializable {
   }
 
   public boolean isPaused() {
-    return PAUSED.equals(gameState);
+    return gameState.equals(PAUSED);
   }
 
   /**
@@ -137,13 +164,16 @@ public class Status implements Serializable {
    *
    * @param id   the life id
    * @param life the new life object
+   * @return this
    */
-  public void setLife(Long id, Life life) {
+  public Status setLife(Long id, Life life) {
     for (int i = 0; i < lives.size(); i++) {
       Life l = lives.get(i);
       if (l.getId().equals(id)) {
         lives.set(i, life);
       }
     }
+    return this;
   }
+
 }

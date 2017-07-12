@@ -9,7 +9,7 @@ public interface HumainRestController {
    * @param token life token.
    * @return bool succes?
    */
-  Boolean killHuman(Integer token);
+  Boolean kill(Integer token);
 
   /**
    * Get a new life, return token.

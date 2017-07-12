@@ -47,6 +47,7 @@ public class Life implements Serializable {
   }
 
   //TODO : use service
+
   /**
    * refill res.
    *
@@ -65,6 +66,7 @@ public class Life implements Serializable {
   }
 
   //TODO : use service
+
   /**
    * refill res.
    *
@@ -77,6 +79,7 @@ public class Life implements Serializable {
   }
 
   //TODO : use service
+
   /**
    * add a resource to inventory.
    *

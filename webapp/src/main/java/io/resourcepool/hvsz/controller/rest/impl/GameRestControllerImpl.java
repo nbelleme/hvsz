@@ -41,7 +41,6 @@ public class GameRestControllerImpl implements GameRestController {
   @Override
   @PostMapping("/start/default")
   public Game startDefault() {
-    gameSettingsService.set(new GameSettings());
     gameService.startGame();
     return gameService.get();
   }

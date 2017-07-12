@@ -1,8 +1,8 @@
 package io.resourcepool.hvsz.controller.rest.impl;
 
 import io.resourcepool.hvsz.controller.rest.api.FoodSupplyRestController;
-import io.resourcepool.hvsz.supply.FoodSupply;
 import io.resourcepool.hvsz.services.api.FoodSupplyService;
+import io.resourcepool.hvsz.supply.FoodSupply;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,8 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/food-supply")
-public class FoodSupplyRestControllerImpl implements FoodSupplyRestController {
+final class FoodSupplyRestControllerImpl implements FoodSupplyRestController {
+
   private FoodSupplyService foodSupplyService;
 
   /**
@@ -21,7 +22,7 @@ public class FoodSupplyRestControllerImpl implements FoodSupplyRestController {
    *
    * @param foodSupplyService the foodSupplyService
    */
-  public FoodSupplyRestControllerImpl(FoodSupplyService foodSupplyService) {
+  FoodSupplyRestControllerImpl(FoodSupplyService foodSupplyService) {
     this.foodSupplyService = Objects.requireNonNull(foodSupplyService);
   }
 

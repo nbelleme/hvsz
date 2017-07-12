@@ -2,7 +2,6 @@ package io.resourcepool.hvsz.services.impl;
 
 
 import io.resourcepool.hvsz.common.Assert;
-import io.resourcepool.hvsz.common.models.GenericBuilder;
 import io.resourcepool.hvsz.game.Game;
 import io.resourcepool.hvsz.game.GameSettings;
 import io.resourcepool.hvsz.game.GameState;
@@ -10,9 +9,7 @@ import io.resourcepool.hvsz.game.Status;
 import io.resourcepool.hvsz.humans.SafeZone;
 import io.resourcepool.hvsz.persistence.dao.DaoMapDb;
 import io.resourcepool.hvsz.services.api.GameService;
-import io.resourcepool.hvsz.services.api.GameSettingsService;
 import io.resourcepool.hvsz.supply.FoodSupply;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,16 +19,19 @@ import java.util.Objects;
 import static io.resourcepool.hvsz.common.Constants.GAME_ID;
 
 @Service
-public class GameServiceImpl implements GameService {
+final class GameServiceImpl implements GameService {
 
   private static final long SECONDS_IN_ONE_MINUTE = 60;
 
   private DaoMapDb dao;
-  private GameSettingsService settingsService;
 
-  public GameServiceImpl(DaoMapDb daoMapDb, GameSettingsService gameSettingsService) {
+  /**
+   * Constructor.
+   *
+   * @param daoMapDb dao
+   */
+  GameServiceImpl(DaoMapDb daoMapDb) {
     this.dao = Objects.requireNonNull(daoMapDb);
-    this.settingsService = Objects.requireNonNull(gameSettingsService);
   }
 
   @Override
@@ -49,29 +49,29 @@ public class GameServiceImpl implements GameService {
 
     Game game = new Game();
     // Retrieve settings
-    GameSettings conf = settingsService.get();
+    GameSettings conf = GameSettings.build();
     game.setConfig(conf);
     // Init game status
-    Status status = GenericBuilder.of(Status::new)
-        .with(Status::setRemainingHumanTickets, conf.getHumanTickets())
-        .with(Status::setCurrentHumansOnField, 0)
-        .with(Status::setRemainingTime, conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
-        .with(Status::setMaxHumansOnField, conf.getMaxHumansOnField())
-        .with(Status::setGameState, GameState.ACTIVE)
-        .build();
+    Status status = Status.build()
+        .setRemainingHumanTickets(conf.getHumanTickets())
+        .setCurrentHumansOnField(0)
+        .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
+        .setGameState(GameState.ACTIVE);
+
     game.setStatus(status);
     // Init game supply zones
     List<FoodSupply> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
     int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
-    for (int i = 0; i < conf.getNbFoodSupplyZones(); i++) {
-      foodSupplies.add(new FoodSupply((long) i, foodPerZone, foodPerZone));
+
+    for (long i = 0; i < conf.getNbFoodSupplyZones(); i++) {
+      foodSupplies.add(new FoodSupply(i, foodPerZone, foodPerZone));
     }
     game.setFoodSupplies(foodSupplies);
     // Init game safe zones
     List<SafeZone> safeZones = new ArrayList<>(conf.getNbSafeZones());
     int nbSafeZones = conf.getNbSafeZones();
-    for (int i = 0; i < nbSafeZones; i++) {
-      safeZones.add(new SafeZone((long) i, conf.getStartingSafeZoneSupplies(), 100));
+    for (long i = 0; i < nbSafeZones; i++) {
+      safeZones.add(new SafeZone(i, conf.getStartingSafeZoneSupplies(), 100));
     }
     game.setSafeZones(safeZones);
     // Save game

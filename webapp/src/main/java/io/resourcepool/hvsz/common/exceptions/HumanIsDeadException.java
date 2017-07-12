@@ -8,13 +8,22 @@ import io.resourcepool.hvsz.supply.FoodSupply;
  *
  * @author Loïc Ortola on 04/05/2017
  */
+
 public class HumanIsDeadException extends IllegalStateException {
   private SafeZone safeZone;
   private FoodSupply supplyZone;
 
+  /**
+   * Constructor.
+   */
   public HumanIsDeadException() {
   }
 
+  /**
+   * Constructor with zone.
+   *
+   * @param zone zone
+   */
   public HumanIsDeadException(Object zone) {
     if (zone instanceof SafeZone) {
       safeZone = (SafeZone) zone;

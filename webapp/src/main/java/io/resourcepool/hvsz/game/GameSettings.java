@@ -30,7 +30,7 @@ public class GameSettings implements Serializable {
   /**
    * GameConfig constructor.
    */
-  public GameSettings() {
+  private GameSettings() {
     this.gameDuration = DEFAULT_GAME_DURATION;
     this.difficulty = DEFAULT_DIFFICULTY;
     this.humanTickets = DEFAULT_HUMAN_TICKETS;
@@ -42,6 +42,14 @@ public class GameSettings implements Serializable {
     this.safezoneDropRate = DEFAULT_SAFE_ZONE_DROP_RATE;
   }
 
+  /**
+   * Return new GameSettings with default values.
+   *
+   * @return new GameSettings
+   */
+  public static GameSettings build() {
+    return new GameSettings();
+  }
 
   public int getMaxHumansOnField() {
     return maxHumansOnField;

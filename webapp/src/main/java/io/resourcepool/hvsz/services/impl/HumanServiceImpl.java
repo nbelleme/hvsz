@@ -14,13 +14,18 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class HumanServiceImpl implements HumanService {
+final class HumanServiceImpl implements HumanService {
 
   private Long nextId = 0L;
 
   private GameService gameService;
 
-  public HumanServiceImpl(GameService gameService) {
+  /**
+   * Constructor.
+   *
+   * @param gameService gameService
+   */
+  HumanServiceImpl(GameService gameService) {
     this.gameService = Objects.requireNonNull(gameService);
   }
 
@@ -85,7 +90,7 @@ public class HumanServiceImpl implements HumanService {
   public Life getLifeByToken(int token) {
     Game g = gameService.get();
     Assert.gameActive(g);
-    return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElseGet(() -> null);
+    return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElse(null);
   }
 
   @Override
@@ -93,6 +98,25 @@ public class HumanServiceImpl implements HumanService {
     Game g = gameService.get();
     g.getStatus().setLife(life.getId(), life);
     gameService.update(g);
+  }
+
+  @Override
+  public boolean kill(int lifeToken) {
+    Game game = gameService.get();
+    Status status = game.getStatus();
+    Life life = game.getStatus().getLifeByToken(lifeToken);
+    if (life != null && life.isAlive()) {
+      life.setAlive(false);
+      life.setToken(-1);
+      this.save(life);
+
+      // Decrement humans on field
+      status.setCurrentHumansOnField(status.getCurrentHumansOnField() - 1);
+      game.setStatus(status);
+      gameService.update(game);
+      return true;
+    }
+    return false;
   }
 
   /**

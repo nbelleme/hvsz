@@ -4,7 +4,6 @@ import io.resourcepool.hvsz.services.api.GameService;
 import io.resourcepool.hvsz.services.api.SafeZoneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +22,12 @@ public class StatusUpdaterCron {
   private GameService gameService;
   private SafeZoneService safeZoneService;
 
+  /**
+   * Constructor.
+   *
+   * @param gameService     gameService
+   * @param safeZoneService safeZoneService
+   */
   public StatusUpdaterCron(GameService gameService, SafeZoneService safeZoneService) {
     this.gameService = Objects.requireNonNull(gameService);
     this.safeZoneService = Objects.requireNonNull(safeZoneService);

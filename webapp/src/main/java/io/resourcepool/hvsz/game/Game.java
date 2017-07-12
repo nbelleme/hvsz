@@ -104,15 +104,27 @@ public class Game implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     Game game = (Game) o;
 
-    if (id != null ? !id.equals(game.id) : game.id != null) return false;
-    if (status != null ? !status.equals(game.status) : game.status != null) return false;
-    if (config != null ? !config.equals(game.config) : game.config != null) return false;
-    if (safeZones != null ? !safeZones.equals(game.safeZones) : game.safeZones != null) return false;
+    if (id != null ? !id.equals(game.id) : game.id != null) {
+      return false;
+    }
+    if (status != null ? !status.equals(game.status) : game.status != null) {
+      return false;
+    }
+    if (config != null ? !config.equals(game.config) : game.config != null) {
+      return false;
+    }
+    if (safeZones != null ? !safeZones.equals(game.safeZones) : game.safeZones != null) {
+      return false;
+    }
     return foodSupplies != null ? foodSupplies.equals(game.foodSupplies) : game.foodSupplies == null;
   }
 

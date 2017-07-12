@@ -1,10 +1,9 @@
 package io.resourcepool.hvsz.controller.rest.impl;
 
 import io.resourcepool.hvsz.controller.rest.api.HumainRestController;
+import io.resourcepool.hvsz.humans.Life;
 import io.resourcepool.hvsz.services.api.GameService;
 import io.resourcepool.hvsz.services.api.HumanService;
-import io.resourcepool.hvsz.humans.Life;
-import io.resourcepool.hvsz.services.api.ZombieService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,31 +16,27 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/human")
-public class HumainRestControllerImpl implements HumainRestController {
+final class HumainRestControllerImpl implements HumainRestController {
   private HumanService humanService;
-
-  private ZombieService zombieService;
 
   private GameService gameService;
 
   /**
    * Constructor.
    *
-   * @param humanService  the humanService
-   * @param zombieService the zombieService
-   * @param gameService   the gameService
+   * @param humanService the humanService
+   * @param gameService  the gameService
    */
-  public HumainRestControllerImpl(HumanService humanService, ZombieService zombieService, GameService gameService) {
+  HumainRestControllerImpl(HumanService humanService, GameService gameService) {
     this.humanService = Objects.requireNonNull(humanService);
-    this.zombieService = Objects.requireNonNull(zombieService);
     this.gameService = Objects.requireNonNull(gameService);
   }
 
   @Override
   @PostMapping("/kill/{token}")
   @ResponseBody
-  public Boolean killHuman(@PathVariable(value = "token") Integer token) {
-    return zombieService.kill(token);
+  public Boolean kill(@PathVariable(value = "token") Integer token) {
+    return humanService.kill(token);
   }
 
   @Override
