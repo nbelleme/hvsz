@@ -7,7 +7,7 @@ import io.resourcepool.hvsz.game.GameSettings;
 import io.resourcepool.hvsz.game.GameState;
 import io.resourcepool.hvsz.game.Status;
 import io.resourcepool.hvsz.humans.SafeZone;
-import io.resourcepool.hvsz.persistence.dao.DaoMapDb;
+import io.resourcepool.persistence.dao.DaoMapDb;
 import io.resourcepool.hvsz.services.api.GameService;
 import io.resourcepool.hvsz.supply.FoodSupply;
 import org.springframework.stereotype.Service;

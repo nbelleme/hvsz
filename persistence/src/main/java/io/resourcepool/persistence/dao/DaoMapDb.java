@@ -1,4 +1,4 @@
-package io.resourcepool.hvsz.persistence.dao;
+package io.resourcepool.persistence.dao;
 
 import io.resourcepool.hvsz.game.Game;
 import org.mapdb.DB;

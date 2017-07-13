@@ -3,7 +3,7 @@ package io.resourcepool.hvsz.services.impl;
 import io.resourcepool.hvsz.common.Assert;
 import io.resourcepool.hvsz.game.Game;
 import io.resourcepool.hvsz.game.GameSettings;
-import io.resourcepool.hvsz.persistence.dao.DaoMapDb;
+import io.resourcepool.persistence.dao.DaoMapDb;
 import io.resourcepool.hvsz.services.api.GameService;
 import io.resourcepool.hvsz.services.api.GameSettingsService;
 import org.springframework.stereotype.Service;

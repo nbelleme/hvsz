@@ -13,7 +13,7 @@ public class SafeZone implements Serializable {
   /**
    * SafeZone Empty constructor.
    */
-  public SafeZone() {
+  private SafeZone() {
   }
 
   /**
@@ -30,75 +30,63 @@ public class SafeZone implements Serializable {
     name = ZONE_NAME + id;
   }
 
+  /**
+   * Build default SafeZone.
+   *
+   * @return new SafeZone
+   */
+  public static SafeZone build() {
+    return new SafeZone();
+  }
+
+
+  // CHECKSTYLE_OFF
+
   public Long getId() {
     return this.id;
   }
 
-  public void setId(Long id) {
+  public SafeZone setId(Long id) {
     this.id = id;
+    return this;
   }
 
   public int getCapacity() {
     return this.capacity;
   }
 
-  public void setCapacity(int capacity) {
+  public SafeZone setCapacity(int capacity) {
     this.capacity = capacity;
+    return this;
   }
 
   public int getLevel() {
     return this.level;
   }
 
-  //TODO : use service
-
-  /**
-   * set resource level, set destroyed to true if level = 0.
-   *
-   * @param level level to set
-   */
-  public void setLevel(int level) {
+  public SafeZone setLevel(int level) {
     this.level = level;
-    if (level == 0) {
-      destroyed = true;
-    }
+    return this;
   }
 
   public String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public SafeZone setName(String name) {
     this.name = name;
+    return this;
   }
 
   public Boolean isDestroyed() {
     return destroyed;
   }
 
-  public void setDestroyed(Boolean destroyed) {
+  public SafeZone setDestroyed(Boolean destroyed) {
     this.destroyed = destroyed;
+    return this;
   }
 
-
-  //TODO : use service
-
-  /**
-   * Refill an amount of food.
-   *
-   * @param amount the qty of food we want to refill in
-   * @return how many level we have really refill
-   */
-  public int refill(int amount) {
-    if (destroyed) {
-      return 0;
-    }
-    int oldLevel = level;
-    level = Math.min(oldLevel + amount, capacity);
-    return level - oldLevel;
-  }
-
-  // CHECKSTYLE_OFF
   @Override
   public boolean equals(Object o) {
     if (this == o) {

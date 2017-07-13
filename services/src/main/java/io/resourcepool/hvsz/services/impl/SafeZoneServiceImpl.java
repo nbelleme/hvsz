@@ -5,7 +5,6 @@ import io.resourcepool.hvsz.game.Game;
 import io.resourcepool.hvsz.humans.Life;
 import io.resourcepool.hvsz.humans.SafeZone;
 import io.resourcepool.hvsz.services.api.GameService;
-import io.resourcepool.hvsz.services.api.HumanService;
 import io.resourcepool.hvsz.services.api.SafeZoneService;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +15,14 @@ import java.util.Objects;
 final class SafeZoneServiceImpl implements SafeZoneService {
 
   private GameService gameService;
-  private HumanService humanService;
 
   /**
    * Constructor.
    *
-   * @param gameService  gameService
-   * @param humanService humanService
+   * @param gameService gameService
    */
-  SafeZoneServiceImpl(GameService gameService, HumanService humanService) {
+  SafeZoneServiceImpl(GameService gameService) {
     this.gameService = Objects.requireNonNull(gameService);
-    this.humanService = Objects.requireNonNull(humanService);
   }
 
   @Override
@@ -36,38 +32,47 @@ final class SafeZoneServiceImpl implements SafeZoneService {
         .filter(z -> z.getId().equals(zoneId))
         .findFirst()
         .orElse(null);
-
-
   }
 
   @Override
   public List<SafeZone> getSafeZones() {
-    Game g = gameService.get();
-    Assert.gameOngoing(g);
-    return g.getSafeZones();
+    Game game = gameService.get();
+    Assert.gameOngoing(game);
+    return game.getSafeZones();
   }
 
   @Override
   public int refill(Long zoneId, int token) {
-    Game g = gameService.get();
-    SafeZone safeZone = g.getSafeZones()
+    Game game = gameService.get();
+    SafeZone safeZone = game.getSafeZones()
         .stream()
         .filter(z -> z.getId().equals(zoneId))
         .findFirst()
         .orElse(null);
-    Life life = g.getStatus().getLifeByToken(token);
+
+    Life life = game.getStatus()
+        .getLifeByToken(token);
+
     Assert.humanAlive(life, safeZone);
-    int refilled = safeZone.refill(life.dropAllResources());
-    gameService.update(g);
+
+    if (safeZone.isDestroyed()) {
+      return 0;
+    }
+    int oldLevel = safeZone.getLevel();
+    int level = Math.min(oldLevel + life.getNbResources(), safeZone.getCapacity());
+    int refilled = level - oldLevel;
+
+    safeZone.setLevel(level);
+    gameService.update(game);
     return refilled;
   }
 
   @Override
   public void eatOneUnitOfFood() {
     Game g = gameService.get();
-    g.getSafeZones().forEach(z -> {
-      if (z.getLevel() > 0) {
-        z.setLevel(z.getLevel() - 1);
+    g.getSafeZones().forEach(safeZone -> {
+      if (safeZone.getLevel() > 0) {
+        safeZone.setLevel(safeZone.getLevel() - 1);
       }
     });
     gameService.update(g);
