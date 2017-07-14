@@ -3,7 +3,7 @@ package io.nbelleme.hvsz.zone;
 
 import java.io.Serializable;
 
-public class FoodSupply implements Serializable {
+public class SupplyZone implements Serializable {
 
   private static final long serialVersionUID = 4499800033671757363L;
 
@@ -17,7 +17,7 @@ public class FoodSupply implements Serializable {
   /**
    * SupplyZone Empty constructor.
    */
-  private FoodSupply() {
+  private SupplyZone() {
   }
 
   /**
@@ -27,7 +27,7 @@ public class FoodSupply implements Serializable {
    * @param level    the current amount of resource
    * @param capacity the maximum amount of Resource (<=> available at the start of the game)
    */
-  private FoodSupply(Long id, int level, int capacity) {
+  private SupplyZone(Long id, int level, int capacity) {
     this.id = id;
     this.level = level;
     this.capacity = capacity;
@@ -39,8 +39,8 @@ public class FoodSupply implements Serializable {
    *
    * @return default FoodSupply
    */
-  public static FoodSupply build() {
-    return new FoodSupply();
+  public static SupplyZone build() {
+    return new SupplyZone();
   }
 
 
@@ -49,7 +49,7 @@ public class FoodSupply implements Serializable {
     return this.id;
   }
 
-  public FoodSupply setId(Long id) {
+  public SupplyZone setId(Long id) {
     this.id = id;
     return this;
   }
@@ -58,7 +58,7 @@ public class FoodSupply implements Serializable {
     return capacity;
   }
 
-  public FoodSupply setCapacity(int capacity) {
+  public SupplyZone setCapacity(int capacity) {
     this.capacity = capacity;
     return this;
   }
@@ -67,7 +67,7 @@ public class FoodSupply implements Serializable {
     return level;
   }
 
-  public FoodSupply setLevel(int level) {
+  public SupplyZone setLevel(int level) {
     this.level = level;
     return this;
   }
@@ -76,7 +76,7 @@ public class FoodSupply implements Serializable {
     return name;
   }
 
-  public FoodSupply setName(String name) {
+  public SupplyZone setName(String name) {
     this.name = name;
     return this;
   }
@@ -104,7 +104,7 @@ public class FoodSupply implements Serializable {
       return false;
     }
 
-    FoodSupply that = (FoodSupply) o;
+    SupplyZone that = (SupplyZone) o;
 
     return capacity == that.capacity && (id != null ? id.equals(that.id) : that.id == null) && (name != null ? name.equals(that.name) : that.name == null);
   }

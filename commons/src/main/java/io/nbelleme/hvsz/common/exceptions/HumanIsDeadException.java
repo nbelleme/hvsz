@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.common.exceptions;
 
-import io.nbelleme.hvsz.humans.SafeZone;
-import io.nbelleme.hvsz.supply.FoodSupply;
+import io.nbelleme.hvsz.zone.SafeZone;
+import io.nbelleme.hvsz.zone.SupplyZone;
 
 /**
  * TODO class details.
@@ -12,7 +12,7 @@ import io.nbelleme.hvsz.supply.FoodSupply;
 public class HumanIsDeadException extends IllegalStateException {
   private static final long serialVersionUID = -1222432595373111364L;
   private SafeZone safeZone;
-  private FoodSupply supplyZone;
+  private SupplyZone supplyZone;
 
   /**
    * Constructor.
@@ -29,8 +29,8 @@ public class HumanIsDeadException extends IllegalStateException {
     if (zone instanceof SafeZone) {
       safeZone = (SafeZone) zone;
     }
-    if (zone instanceof FoodSupply) {
-      supplyZone = (FoodSupply) zone;
+    if (zone instanceof SupplyZone) {
+      supplyZone = (SupplyZone) zone;
     }
   }
 
@@ -42,11 +42,11 @@ public class HumanIsDeadException extends IllegalStateException {
     this.safeZone = safeZone;
   }
 
-  public FoodSupply getSupplyZone() {
+  public SupplyZone getSupplyZone() {
     return supplyZone;
   }
 
-  public void setSupplyZone(FoodSupply supplyZone) {
+  public void setSupplyZone(SupplyZone supplyZone) {
     this.supplyZone = supplyZone;
   }
 

@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.controller.api;
 
-import io.nbelleme.hvsz.humans.SafeZone;
+import io.nbelleme.hvsz.zone.SafeZone;
 
 import java.util.List;
 

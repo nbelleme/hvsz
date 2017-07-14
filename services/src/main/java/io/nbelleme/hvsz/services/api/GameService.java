@@ -7,7 +7,7 @@ public interface GameService {
   /**
    * @return the active game or null if none found.
    */
-  Game get();
+  Game getCurrent();
 
   /**
    * Start game using the game settings previously saved.

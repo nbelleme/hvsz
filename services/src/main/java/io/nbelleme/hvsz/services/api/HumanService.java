@@ -35,7 +35,7 @@ public interface HumanService {
   Life spawn();
 
   /**
-   * get life by token.
+   * getCurrent life by token.
    *
    * @param token .
    * @return life.

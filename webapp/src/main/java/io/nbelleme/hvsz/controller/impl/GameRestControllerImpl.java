@@ -35,14 +35,14 @@ public class GameRestControllerImpl implements GameRestController {
   @Override
   @GetMapping()
   public Game get() {
-    return gameService.get();
+    return gameService.getCurrent();
   }
 
   @Override
   @PostMapping("/start/default")
   public Game startDefault() {
     gameService.startGame();
-    return gameService.get();
+    return gameService.getCurrent();
   }
 
   @Override
@@ -50,7 +50,7 @@ public class GameRestControllerImpl implements GameRestController {
   public Game startGame(@RequestBody GameSettings settings) {
     gameSettingsService.set(settings);
     gameService.startGame();
-    return gameService.get();
+    return gameService.getCurrent();
   }
 
   @Override

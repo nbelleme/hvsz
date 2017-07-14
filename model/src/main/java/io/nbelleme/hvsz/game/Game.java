@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.game;
 
-import io.nbelleme.hvsz.humans.SafeZone;
-import io.nbelleme.hvsz.supply.FoodSupply;
+import io.nbelleme.hvsz.zone.SafeZone;
+import io.nbelleme.hvsz.zone.SupplyZone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class Game implements Serializable {
   private Status status;
   private GameSettings config;
   private List<SafeZone> safeZones;
-  private List<FoodSupply> foodSupplies;
+  private List<SupplyZone> foodSupplies;
 
   /**
    * Game constructor.
@@ -104,11 +104,11 @@ public class Game implements Serializable {
     this.safeZones = safeZones;
   }
 
-  public List<FoodSupply> getFoodSupplies() {
+  public List<SupplyZone> getFoodSupplies() {
     return foodSupplies;
   }
 
-  public void setFoodSupplies(List<FoodSupply> foodSupplies) {
+  public void setFoodSupplies(List<SupplyZone> foodSupplies) {
     this.foodSupplies = foodSupplies;
   }
   // CHECKSTYLE_OFF

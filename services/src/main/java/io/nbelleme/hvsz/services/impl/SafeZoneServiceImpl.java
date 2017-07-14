@@ -3,7 +3,7 @@ package io.nbelleme.hvsz.services.impl;
 import io.nbelleme.hvsz.common.Assert;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.humans.Life;
-import io.nbelleme.hvsz.humans.SafeZone;
+import io.nbelleme.hvsz.zone.SafeZone;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
 import org.springframework.stereotype.Service;
@@ -36,14 +36,14 @@ final class SafeZoneServiceImpl implements SafeZoneService {
 
   @Override
   public List<SafeZone> getSafeZones() {
-    Game game = gameService.get();
+    Game game = gameService.getCurrent();
     Assert.gameOngoing(game);
     return game.getSafeZones();
   }
 
   @Override
   public int refill(Long zoneId, int token) {
-    Game game = gameService.get();
+    Game game = gameService.getCurrent();
     SafeZone safeZone = game.getSafeZones()
         .stream()
         .filter(z -> z.getId().equals(zoneId))
@@ -69,7 +69,7 @@ final class SafeZoneServiceImpl implements SafeZoneService {
 
   @Override
   public void eatOneUnitOfFood() {
-    Game g = gameService.get();
+    Game g = gameService.getCurrent();
     g.getSafeZones().forEach(safeZone -> {
       if (safeZone.getLevel() > 0) {
         safeZone.setLevel(safeZone.getLevel() - 1);

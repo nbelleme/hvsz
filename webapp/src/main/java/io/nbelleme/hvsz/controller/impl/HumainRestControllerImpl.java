@@ -54,13 +54,13 @@ final class HumainRestControllerImpl implements HumainRestController {
   @Override
   @GetMapping("/remaining")
   public int getRemainingLives() {
-    return gameService.get().getStatus().getRemainingHumanTickets();
+    return gameService.getCurrent().getStatus().getRemainingHumanTickets();
   }
 
   @Override
   @GetMapping("/active")
   public int getActiveLives() {
-    return gameService.get().getStatus().getCurrentHumansOnField();
+    return gameService.getCurrent().getStatus().getCurrentHumansOnField();
   }
 
 }

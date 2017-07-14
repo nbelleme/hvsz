@@ -105,17 +105,17 @@ public class Life implements Serializable {
    * @param qte qte to add
    * @return qte added
    */
-  public int addResource(int qte) {
+  public boolean addResource(int qte) {
     if (!alive) {
-      return 0;
+      return false;
     }
+
     if (this.nbResources + qte <= MAX_RESOURCES) {
       this.nbResources += qte;
-      return qte;
+      return true;
     } else {
-      int addedRes = MAX_RESOURCES - this.nbResources;
       this.nbResources = MAX_RESOURCES;
-      return addedRes;
+      return false;
     }
   }
 
