@@ -28,7 +28,7 @@ subprojects {
         checkstyleTest.enabled = false
     }
 
-    dependencies{
+    dependencies {
         compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     }
 
@@ -58,8 +58,8 @@ subprojects {
 project(':model') {
 }
 
-project(':services'){
-    dependencies{
+project(':services') {
+    dependencies {
         api "org.slf4j:slf4j-api:$slf4jApi"
         compile project(':commons')
         compile project(':persistence')
@@ -67,14 +67,14 @@ project(':services'){
 }
 
 project(':commons') {
-    dependencies{
+    dependencies {
         compile project(':model')
     }
 
 }
 
 project(':persistence') {
-    dependencies{
+    dependencies {
         compile project(':model')
         api "org.slf4j:slf4j-api:$slf4jApi"
         compile 'org.mapdb:mapdb:3.0.5'
@@ -83,7 +83,7 @@ project(':persistence') {
 }
 
 project(':webapp') {
-    dependencies{
+    dependencies {
         compile project(':services')
     }
 }
