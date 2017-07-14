@@ -1,5 +1,5 @@
 rootProject.name = 'hvsz-server'
-include 'entities'
+include 'model'
 include 'commons'
 include 'persistence'
 include 'webapp'

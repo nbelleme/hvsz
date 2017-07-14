@@ -55,7 +55,7 @@ subprojects {
     ]
 }
 
-project(':entities') {
+project(':model') {
 }
 
 project(':services'){
@@ -68,14 +68,14 @@ project(':services'){
 
 project(':commons') {
     dependencies{
-        compile project(':entities')
+        compile project(':model')
     }
 
 }
 
 project(':persistence') {
     dependencies{
-        compile project(':entities')
+        compile project(':model')
         api "org.slf4j:slf4j-api:$slf4jApi"
         compile 'org.mapdb:mapdb:3.0.5'
 
