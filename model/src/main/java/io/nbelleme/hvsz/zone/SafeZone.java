@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.humans;
+package io.nbelleme.hvsz.zone;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ public class SafeZone implements Serializable {
 
   private static final long serialVersionUID = -8759367013773257550L;
 
-  private static final String ZONE_NAME = "Zone de sécurité n°";
+  private static final String ZONE_NAME = "Zone de sécurié n° ";
 
   private Long id;
   private int level;
@@ -32,7 +32,6 @@ public class SafeZone implements Serializable {
     this.id = id;
     this.level = level;
     this.capacity = capacity;
-    name = ZONE_NAME + id;
   }
 
   /**
