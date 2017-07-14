@@ -17,7 +17,7 @@ public class FoodSupply implements Serializable {
   /**
    * SupplyZone Empty constructor.
    */
-  public FoodSupply() {
+  private FoodSupply() {
   }
 
   /**
@@ -27,44 +27,61 @@ public class FoodSupply implements Serializable {
    * @param level    the current amount of resource
    * @param capacity the maximum amount of Resource (<=> available at the start of the game)
    */
-  public FoodSupply(Long id, int level, int capacity) {
+  private FoodSupply(Long id, int level, int capacity) {
     this.id = id;
     this.level = level;
     this.capacity = capacity;
     name = NAME + id;
   }
 
+  /**
+   * Build default FoodSupply.
+   *
+   * @return default FoodSupply
+   */
+  public static FoodSupply build() {
+    return new FoodSupply();
+  }
+
+
+  //CHECKSTYLE_OFF
   public Long getId() {
     return this.id;
   }
 
-  public void setId(Long id) {
+  public FoodSupply setId(Long id) {
     this.id = id;
+    return this;
   }
 
   public int getCapacity() {
     return capacity;
   }
 
-  public void setCapacity(int capacity) {
+  public FoodSupply setCapacity(int capacity) {
     this.capacity = capacity;
+    return this;
   }
 
   public int getLevel() {
     return level;
   }
 
-  public void setLevel(int level) {
+  public FoodSupply setLevel(int level) {
     this.level = level;
+    return this;
   }
 
   public String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public FoodSupply setName(String name) {
     this.name = name;
+    return this;
   }
+
+  //CHECKSTYLE_ON
 
   /**
    * Take away an amount of food.

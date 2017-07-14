@@ -54,86 +54,99 @@ public class GameSettings implements Serializable {
     return new GameSettings();
   }
 
+
+  //CHECKSTYLE_OFF
   public int getMaxHumansOnField() {
     return maxHumansOnField;
   }
 
-  public void setMaxHumansOnField(int maxHumansOnField) {
+  public GameSettings setMaxHumansOnField(int maxHumansOnField) {
     this.maxHumansOnField = maxHumansOnField;
+    return this;
   }
 
   public int getGameDuration() {
     return gameDuration;
   }
 
-  public void setGameDuration(int gameDuration) {
+  public GameSettings setGameDuration(int gameDuration) {
     this.gameDuration = gameDuration;
+    return this;
   }
 
   public int getDifficulty() {
     return difficulty;
   }
 
-  public void setDifficulty(int difficulty) {
+  public GameSettings setDifficulty(int difficulty) {
     this.difficulty = difficulty;
+    return this;
   }
 
   public int getHumanTickets() {
     return humanTickets;
   }
 
-  public void setHumanTickets(int humanTickets) {
+  public GameSettings setHumanTickets(int humanTickets) {
     this.humanTickets = humanTickets;
+    return this;
   }
 
   public int getNbSafeZones() {
     return nbSafeZones;
   }
 
-  public void setNbSafeZones(int nbSafezone) {
+  public GameSettings setNbSafeZones(int nbSafezone) {
     this.nbSafeZones = nbSafezone;
+    return this;
   }
 
   public int getNbFoodSupplyZones() {
     return nbFoodSupplyZones;
   }
 
-  public void setNbFoodSupplyZones(int nbFoodSupplyZones) {
+  public GameSettings setNbFoodSupplyZones(int nbFoodSupplyZones) {
     this.nbFoodSupplyZones = nbFoodSupplyZones;
+    return this;
   }
 
   public int getNbFoodSupplies() {
     return nbFoodSupplies;
   }
 
-  public void setNbFoodSupplies(int nbFoodSupplies) {
+  public GameSettings setNbFoodSupplies(int nbFoodSupplies) {
     this.nbFoodSupplies = nbFoodSupplies;
+    return this;
   }
 
   public int getSafezoneDropRate() {
     return safezoneDropRate;
   }
 
-  public void setSafezoneDropRate(int safezoneDropRate) {
+  public GameSettings setSafezoneDropRate(int safezoneDropRate) {
     this.safezoneDropRate = safezoneDropRate;
+    return this;
   }
 
   public int getMaximumFoodTransfer() {
     return maximumFoodTransfer;
   }
 
-  public void setMaximumFoodTransfer(int maximumFoodTransfer) {
+  public GameSettings setMaximumFoodTransfer(int maximumFoodTransfer) {
     this.maximumFoodTransfer = maximumFoodTransfer;
+    return this;
   }
 
   public int getStartingSafeZoneSupplies() {
     return startingSafeZoneSupplies;
   }
 
-  public void setStartingSafeZoneSupplies(int startingSafeZoneSupplies) {
+  public GameSettings setStartingSafeZoneSupplies(int startingSafeZoneSupplies) {
     this.startingSafeZoneSupplies = startingSafeZoneSupplies;
+    return this;
   }
 
+  //CHECKSTYLE_ON
   @Override
   public String toString() {
     return "GameConfig{" +

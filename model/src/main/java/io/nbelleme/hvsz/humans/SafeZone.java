@@ -18,6 +18,7 @@ public class SafeZone implements Serializable {
    * SafeZone Empty constructor.
    */
   private SafeZone() {
+    capacity = 100;
   }
 
   /**
@@ -27,7 +28,7 @@ public class SafeZone implements Serializable {
    * @param level    the amount of Resource at the start of the game
    * @param capacity the max of Resource the zone can hold.
    */
-  public SafeZone(Long id, int level, int capacity) {
+  private SafeZone(Long id, int level, int capacity) {
     this.id = id;
     this.level = level;
     this.capacity = capacity;

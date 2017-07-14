@@ -20,8 +20,18 @@ public class Game implements Serializable {
   /**
    * Game constructor.
    */
-  public Game() {
+  private Game() {
   }
+
+  /**
+   * Build default Game Object.
+   *
+   * @return new Game
+   */
+  public static Game build() {
+    return new Game();
+  }
+
 
   /**
    * Set default values to the status if null.

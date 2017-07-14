@@ -7,9 +7,9 @@ import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.game.GameState;
 import io.nbelleme.hvsz.game.Status;
 import io.nbelleme.hvsz.humans.SafeZone;
-import io.nbelleme.persistence.dao.DaoMapDb;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.supply.FoodSupply;
+import io.nbelleme.persistence.dao.DaoMapDb;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ final class GameServiceImpl implements GameService {
       Assert.gameOver(currentGame);
     }
 
-    Game game = new Game();
+    Game game = Game.build();
     // Retrieve settings
     GameSettings conf = GameSettings.build();
     game.setConfig(conf);
@@ -64,14 +64,21 @@ final class GameServiceImpl implements GameService {
     int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
 
     for (long i = 0; i < conf.getNbFoodSupplyZones(); i++) {
-      foodSupplies.add(new FoodSupply(i, foodPerZone, foodPerZone));
+      FoodSupply foodSupply = FoodSupply.build()
+          .setId(i)
+          .setCapacity(foodPerZone)
+          .setLevel(foodPerZone);
+      foodSupplies.add(foodSupply);
     }
     game.setFoodSupplies(foodSupplies);
     // Init game safe zones
     List<SafeZone> safeZones = new ArrayList<>(conf.getNbSafeZones());
     int nbSafeZones = conf.getNbSafeZones();
     for (long i = 0; i < nbSafeZones; i++) {
-      safeZones.add(new SafeZone(i, conf.getStartingSafeZoneSupplies(), 100));
+      SafeZone safeZone = SafeZone.build()
+          .setId(i)
+          .setLevel(conf.getStartingSafeZoneSupplies());
+      safeZones.add(safeZone);
     }
     game.setSafeZones(safeZones);
     // Save game

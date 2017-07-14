@@ -3,7 +3,6 @@ package io.nbelleme.hvsz.services.impl;
 import io.nbelleme.hvsz.common.Assert;
 import io.nbelleme.hvsz.common.exceptions.CannotSpawnException;
 import io.nbelleme.hvsz.common.exceptions.NoHumanLeftException;
-import io.nbelleme.hvsz.common.models.GenericBuilder;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.game.Status;
 import io.nbelleme.hvsz.humans.Life;
@@ -74,12 +73,7 @@ final class HumanServiceImpl implements HumanService {
     status.setCurrentHumansOnField(status.getCurrentHumansOnField() + 1);
     // Create new Life
     Long id = nextId();
-    Life life = GenericBuilder.of(Life::new)
-        .with(Life::setId, nextId())
-        .with(Life::setAlive, true)
-        .with(Life::setNbResources, 0)
-        .with(Life::setToken, generateToken(id))
-        .build();
+    Life life = Life.build();
     status.getLives().add(life);
     g.setStatus(status);
     gameService.update(g);

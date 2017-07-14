@@ -12,6 +12,23 @@ public class Life implements Serializable {
   private int token;
   private int nbResources;
 
+  /**
+   * Default constructor.
+   */
+  private Life() {
+
+  }
+
+  /**
+   * Build default Life object.
+   *
+   * @return new Life.
+   */
+  public static Life build() {
+    return new Life();
+  }
+
+  //CHECKSTYLE_OFF
   public static int getMaxResources() {
     return MAX_RESOURCES;
   }
@@ -20,35 +37,39 @@ public class Life implements Serializable {
     return this.id;
   }
 
-  public void setId(Long id) {
+  public Life setId(Long id) {
     this.id = id;
+    return this;
   }
 
   public boolean isAlive() {
     return this.alive;
   }
 
-  public void setAlive(boolean alive) {
+  public Life setAlive(boolean alive) {
     this.alive = alive;
+    return this;
   }
 
   public int getNbResources() {
     return this.nbResources;
   }
 
-  public void setNbResources(int nbResources) {
+  public Life setNbResources(int nbResources) {
     this.nbResources = nbResources;
+    return this;
   }
 
   public int getToken() {
     return token;
   }
 
-  public void setToken(int token) {
+  public Life setToken(int token) {
     this.token = token;
+    return this;
   }
 
-  //TODO : use service
+  //CHECKSTYLE_ON
 
   /**
    * refill res.
@@ -67,8 +88,6 @@ public class Life implements Serializable {
     }
   }
 
-  //TODO : use service
-
   /**
    * refill res.
    *
@@ -79,8 +98,6 @@ public class Life implements Serializable {
     this.nbResources = 0;
     return removed;
   }
-
-  //TODO : use service
 
   /**
    * add a resource to inventory.
