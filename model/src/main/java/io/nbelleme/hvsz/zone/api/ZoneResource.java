@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.common.models;
+package io.nbelleme.hvsz.zone.api;
 
 public interface ZoneResource extends Zone {
 
