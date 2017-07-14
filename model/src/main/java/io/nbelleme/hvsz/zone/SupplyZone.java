@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.supply;
+package io.nbelleme.hvsz.zone;
 
 
 import java.io.Serializable;

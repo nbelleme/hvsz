@@ -1,21 +1,21 @@
 package io.nbelleme.hvsz.services.api;
 
-import io.nbelleme.hvsz.supply.FoodSupply;
+import io.nbelleme.hvsz.zone.SupplyZone;
 
 import java.util.List;
 
-public interface FoodSupplyService {
+public interface SupplyZoneService {
 
   /**
    * @param zoneId the zone id
    * @return the food supply zone associated with the zoneId.
    */
-  FoodSupply get(Long zoneId);
+  SupplyZone get(Long zoneId);
 
   /**
    * @return the list of food supply zones
    */
-  List<FoodSupply> getAll();
+  List<SupplyZone> getAll();
 
   /**
    * Take some food out of a supply zone.
