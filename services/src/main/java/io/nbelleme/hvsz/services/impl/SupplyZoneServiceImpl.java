@@ -17,7 +17,7 @@ import java.util.Objects;
  * @author Loïc Ortola on 04/05/2017
  */
 @Service
-final class SupplyZoneZoneServiceImpl implements SupplyZoneService {
+final class SupplyZoneServiceImpl implements SupplyZoneService {
 
   private GameService gameService;
 
@@ -26,7 +26,7 @@ final class SupplyZoneZoneServiceImpl implements SupplyZoneService {
    *
    * @param gameService gameService
    */
-  SupplyZoneZoneServiceImpl(GameService gameService) {
+  SupplyZoneServiceImpl(GameService gameService) {
     this.gameService = Objects.requireNonNull(gameService);
   }
 
