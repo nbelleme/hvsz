@@ -8,27 +8,12 @@ target/
 webapp/target/
 webapp/target/*
 *db
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
+build
+.gradle
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-out/
-/training.pem
+/entities/build/

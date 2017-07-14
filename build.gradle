@@ -1,0 +1,90 @@
+ext {
+    javaVersion = '1.8'
+    checkstyleVersion = '7.5'
+
+    springBootVersion = '1.5.4.RELEASE'
+    slf4jApi = '1.7.25'
+
+}
+
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'checkstyle'
+
+    sourceCompatibility = "$javaVersion"
+    targetCompatibility = "$javaVersion"
+    group = 'nbelleme'
+    version = '1.0-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    checkstyle {
+        toolVersion = "$checkstyleVersion"
+        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+        checkstyleTest.enabled = false
+    }
+
+    dependencies{
+        compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    }
+
+    compileJava.options*.compilerArgs = [
+            '-Xlint:cast',
+            '-Xlint:classfile',
+            '-Xlint:deprecation',
+            '-Xlint:dep-ann',
+            '-Xlint:divzero',
+            '-Xlint:empty',
+            '-Xlint:fallthrough',
+            '-Xlint:finally',
+            '-Xlint:overrides',
+            '-Xlint:path',
+            '-Xlint:processing',
+            '-Xlint:rawtypes',
+            '-Xlint:serial',
+            '-Xlint:static',
+            '-Xlint:try',
+            '-Xlint:unchecked',
+            '-Xlint:varargs',
+            '-Xlint:-options',
+            '-Werror'
+    ]
+}
+
+project(':entities') {
+}
+
+project(':services'){
+    dependencies{
+        api "org.slf4j:slf4j-api:$slf4jApi"
+        compile project(':entities')
+        compile project(':commons')
+        compile project(':persistence')
+    }
+}
+
+project(':commons') {
+    dependencies{
+        compile project(':entities')
+    }
+
+}
+
+project(':persistence') {
+    dependencies{
+        api "org.slf4j:slf4j-api:$slf4jApi"
+        compile project(':entities')
+        compile group: 'org.mapdb', name: 'mapdb', version: '3.0.5'
+
+    }
+}
+
+project(':webapp') {
+    dependencies{
+        compile project(':entities')
+    }
+}
