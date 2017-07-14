@@ -61,7 +61,6 @@ project(':entities') {
 project(':services'){
     dependencies{
         api "org.slf4j:slf4j-api:$slf4jApi"
-        compile project(':entities')
         compile project(':commons')
         compile project(':persistence')
     }
@@ -76,15 +75,15 @@ project(':commons') {
 
 project(':persistence') {
     dependencies{
-        api "org.slf4j:slf4j-api:$slf4jApi"
         compile project(':entities')
-        compile group: 'org.mapdb', name: 'mapdb', version: '3.0.5'
+        api "org.slf4j:slf4j-api:$slf4jApi"
+        compile 'org.mapdb:mapdb:3.0.5'
 
     }
 }
 
 project(':webapp') {
     dependencies{
-        compile project(':entities')
+        compile project(':services')
     }
 }
