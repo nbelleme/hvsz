@@ -1,6 +1,6 @@
-package io.nbelleme.hvsz.controller.rest.impl;
+package io.nbelleme.hvsz.controller.impl;
 
-import io.nbelleme.hvsz.controller.rest.api.SafeZoneRestController;
+import io.nbelleme.hvsz.controller.api.SafeZoneRestController;
 import io.nbelleme.hvsz.humans.SafeZone;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
 import org.springframework.web.bind.annotation.GetMapping;

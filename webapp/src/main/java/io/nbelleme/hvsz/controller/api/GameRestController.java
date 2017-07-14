@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.controller.rest.api;
+package io.nbelleme.hvsz.controller.api;
 
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.game.GameSettings;

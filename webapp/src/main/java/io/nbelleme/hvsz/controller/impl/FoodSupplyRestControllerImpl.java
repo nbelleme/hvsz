@@ -1,6 +1,6 @@
-package io.nbelleme.hvsz.controller.rest.impl;
+package io.nbelleme.hvsz.controller.impl;
 
-import io.nbelleme.hvsz.controller.rest.api.FoodSupplyRestController;
+import io.nbelleme.hvsz.controller.api.FoodSupplyRestController;
 import io.nbelleme.hvsz.services.api.FoodSupplyService;
 import io.nbelleme.hvsz.supply.FoodSupply;
 import org.springframework.web.bind.annotation.GetMapping;
