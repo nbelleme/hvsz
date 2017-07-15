@@ -82,7 +82,7 @@ project(':persistence') {
     }
 }
 
-project(':webapp') {
+project(':webservices') {
     dependencies {
         compile project(':services')
     }
