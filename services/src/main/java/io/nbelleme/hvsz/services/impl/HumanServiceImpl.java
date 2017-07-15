@@ -5,7 +5,7 @@ import io.nbelleme.hvsz.common.exceptions.CannotSpawnException;
 import io.nbelleme.hvsz.common.exceptions.NoHumanLeftException;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.game.Status;
-import io.nbelleme.hvsz.humans.Life;
+import io.nbelleme.hvsz.humans.Human;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.HumanService;
 import org.springframework.stereotype.Service;
@@ -38,8 +38,8 @@ final class HumanServiceImpl implements HumanService {
   @Override
   public boolean isAlive(int lifeToken) {
     Game g = gameService.getCurrent();
-    Life lifeByToken = g.getStatus().getLifeByToken(lifeToken);
-    return lifeByToken.isAlive();
+    Human humanByToken = g.getStatus().getLifeByToken(lifeToken);
+    return humanByToken.isAlive();
   }
 
   @Override
@@ -57,7 +57,7 @@ final class HumanServiceImpl implements HumanService {
   }
 
   @Override
-  public Life spawn() {
+  public Human spawn() {
     Game g = gameService.getCurrent();
     Assert.gameActive(g);
     Status status = g.getStatus();
@@ -73,24 +73,24 @@ final class HumanServiceImpl implements HumanService {
     status.setCurrentHumansOnField(status.getCurrentHumansOnField() + 1);
     // Create new Life
     Long id = nextId();
-    Life life = Life.build();
-    status.getLives().add(life);
+    Human human = Human.build();
+    status.getLives().add(human);
     g.setStatus(status);
     gameService.update(g);
-    return life;
+    return human;
   }
 
   @Override
-  public Life getLifeByToken(int token) {
+  public Human getLifeByToken(int token) {
     Game g = gameService.getCurrent();
     Assert.gameActive(g);
     return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElse(null);
   }
 
   @Override
-  public void save(Life life) {
+  public void save(Human human) {
     Game g = gameService.getCurrent();
-    g.getStatus().setLife(life.getId(), life);
+    g.getStatus().setLife(human.getId(), human);
     gameService.update(g);
   }
 
@@ -98,11 +98,11 @@ final class HumanServiceImpl implements HumanService {
   public boolean kill(int lifeToken) {
     Game game = gameService.getCurrent();
     Status status = game.getStatus();
-    Life life = game.getStatus().getLifeByToken(lifeToken);
-    if (life != null && life.isAlive()) {
-      life.setAlive(false);
-      life.setToken(-1);
-      this.save(life);
+    Human human = game.getStatus().getLifeByToken(lifeToken);
+    if (human != null && human.isAlive()) {
+      human.setAlive(false);
+      human.setToken(-1);
+      this.save(human);
 
       // Decrement humans on field
       status.setCurrentHumansOnField(status.getCurrentHumansOnField() - 1);

@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.services.api;
 
-import io.nbelleme.hvsz.humans.Life;
+import io.nbelleme.hvsz.humans.Human;
 
 public interface HumanService {
 
@@ -32,7 +32,7 @@ public interface HumanService {
    *
    * @return true if success, false else
    */
-  Life spawn();
+  Human spawn();
 
   /**
    * getCurrent life by token.
@@ -40,14 +40,14 @@ public interface HumanService {
    * @param token .
    * @return life.
    */
-  Life getLifeByToken(int token);
+  Human getLifeByToken(int token);
 
   /**
    * Save life.
    *
-   * @param life .
+   * @param human .
    */
-  void save(Life life);
+  void save(Human human);
 
   /**
    * Deactivate an human life by id (do not decrease gameStatus.nbLifeLeft).

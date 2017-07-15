@@ -2,7 +2,7 @@ package io.nbelleme.hvsz.services.impl;
 
 import io.nbelleme.hvsz.common.Assert;
 import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.humans.Life;
+import io.nbelleme.hvsz.humans.Human;
 import io.nbelleme.hvsz.zone.SafeZone;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
@@ -50,16 +50,16 @@ final class SafeZoneServiceImpl implements SafeZoneService {
         .findFirst()
         .orElse(null);
 
-    Life life = game.getStatus()
+    Human human = game.getStatus()
         .getLifeByToken(token);
 
-    Assert.humanAlive(life, safeZone);
+    Assert.humanAlive(human, safeZone);
 
     if (safeZone.isDestroyed()) {
       return 0;
     }
     int oldLevel = safeZone.getLevel();
-    int level = Math.min(oldLevel + life.getNbResources(), safeZone.getCapacity());
+    int level = Math.min(oldLevel + human.getNbResources(), safeZone.getCapacity());
     int refilled = level - oldLevel;
 
     safeZone.setLevel(level);
