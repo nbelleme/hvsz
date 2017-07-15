@@ -1,9 +1,11 @@
 package io.nbelleme.hvsz.game;
 
 
+import io.nbelleme.hvsz.api.DPO;
+
 import java.io.Serializable;
 
-public class GameSettings implements Serializable {
+public class GameSettings implements Serializable, DPO {
 
   private static final long serialVersionUID = -6131853646598165461L;
 

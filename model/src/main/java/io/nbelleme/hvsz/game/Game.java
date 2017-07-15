@@ -1,5 +1,6 @@
 package io.nbelleme.hvsz.game;
 
+import io.nbelleme.hvsz.api.DPO;
 import io.nbelleme.hvsz.zone.SafeZone;
 import io.nbelleme.hvsz.zone.SupplyZone;
 
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements Serializable {
+public class Game implements Serializable, DPO {
 
   private static final long serialVersionUID = 3753312791177172327L;
 

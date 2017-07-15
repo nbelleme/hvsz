@@ -1,6 +1,7 @@
 package io.nbelleme.hvsz.game;
 
-import io.nbelleme.hvsz.humans.Life;
+import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.humans.Human;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -12,7 +13,7 @@ import static io.nbelleme.hvsz.game.GameState.NOT_STARTED;
 import static io.nbelleme.hvsz.game.GameState.PAUSED;
 import static io.nbelleme.hvsz.game.GameState.ZOMBIE_VICTORY;
 
-public class Status implements Serializable {
+public class Status implements Serializable, DPO {
 
   private static final long serialVersionUID = -3433632584769693093L;
 
@@ -21,7 +22,7 @@ public class Status implements Serializable {
   private Integer remainingHumanTickets;
   private Long remainingTime;
   private transient Instant timestampStart;
-  private List<Life> lives;
+  private List<Human> lives;
   private GameState gameState;
 
   /**
@@ -87,11 +88,11 @@ public class Status implements Serializable {
     return this;
   }
 
-  public List<Life> getLives() {
+  public List<Human> getLives() {
     return this.lives;
   }
 
-  public Status setLives(List<Life> lives) {
+  public Status setLives(List<Human> lives) {
     this.lives = lives;
     return this;
   }
@@ -114,7 +115,7 @@ public class Status implements Serializable {
    * @param id .
    * @return .
    */
-  public Life getLifeById(int id) {
+  public Human getLifeById(int id) {
     return lives.stream()
         .filter(life -> life.getId() == id)
         .findFirst()
@@ -127,7 +128,7 @@ public class Status implements Serializable {
    * @param token .
    * @return .
    */
-  public Life getLifeByToken(int token) {
+  public Human getLifeByToken(int token) {
     return lives.stream()
         .filter(l -> l.getToken() == token)
         .findFirst()
@@ -165,15 +166,15 @@ public class Status implements Serializable {
   /**
    * Set life in place of a previous life content.
    *
-   * @param id   the life id
-   * @param life the new life object
+   * @param id    the life id
+   * @param human the new life object
    * @return this
    */
-  public Status setLife(Long id, Life life) {
+  public Status setLife(Long id, Human human) {
     for (int i = 0; i < lives.size(); i++) {
-      Life l = lives.get(i);
+      Human l = lives.get(i);
       if (l.getId().equals(id)) {
-        lives.set(i, life);
+        lives.set(i, human);
       }
     }
     return this;
