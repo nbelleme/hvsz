@@ -2,7 +2,7 @@ package io.nbelleme.hvsz.humans;
 
 import java.io.Serializable;
 
-public class Life implements Serializable {
+public class Human implements Serializable {
 
   private static final long serialVersionUID = -302241752023615893L;
   private static final int MAX_RESOURCES = 10;
@@ -15,17 +15,17 @@ public class Life implements Serializable {
   /**
    * Default constructor.
    */
-  private Life() {
+  private Human() {
 
   }
 
   /**
-   * Build default Life object.
+   * Build default Human object.
    *
-   * @return new Life.
+   * @return new Human.
    */
-  public static Life build() {
-    return new Life();
+  public static Human build() {
+    return new Human();
   }
 
   //CHECKSTYLE_OFF
@@ -37,7 +37,7 @@ public class Life implements Serializable {
     return this.id;
   }
 
-  public Life setId(Long id) {
+  public Human setId(Long id) {
     this.id = id;
     return this;
   }
@@ -46,7 +46,7 @@ public class Life implements Serializable {
     return this.alive;
   }
 
-  public Life setAlive(boolean alive) {
+  public Human setAlive(boolean alive) {
     this.alive = alive;
     return this;
   }
@@ -55,7 +55,7 @@ public class Life implements Serializable {
     return this.nbResources;
   }
 
-  public Life setNbResources(int nbResources) {
+  public Human setNbResources(int nbResources) {
     this.nbResources = nbResources;
     return this;
   }
@@ -64,7 +64,7 @@ public class Life implements Serializable {
     return token;
   }
 
-  public Life setToken(int token) {
+  public Human setToken(int token) {
     this.token = token;
     return this;
   }
@@ -128,9 +128,9 @@ public class Life implements Serializable {
       return false;
     }
 
-    Life life = (Life) o;
+    Human human = (Human) o;
 
-    return getId().equals(life.getId());
+    return getId().equals(human.getId());
   }
 
   @Override
