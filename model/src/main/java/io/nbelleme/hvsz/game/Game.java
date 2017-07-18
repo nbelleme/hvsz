@@ -22,6 +22,9 @@ public class Game implements Serializable, DTO {
    * Game constructor.
    */
   private Game() {
+    status = Status.build();
+    config = GameSettings.build();
+
   }
 
   /**

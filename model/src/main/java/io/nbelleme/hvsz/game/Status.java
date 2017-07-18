@@ -29,7 +29,7 @@ public class Status implements Serializable, DTO {
    * Default constructor.
    */
   private Status() {
-
+    gameState = GameState.NOT_STARTED;
   }
 
 
