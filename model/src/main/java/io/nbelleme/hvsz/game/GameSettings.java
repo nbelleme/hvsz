@@ -1,11 +1,11 @@
 package io.nbelleme.hvsz.game;
 
 
-import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.api.DTO;
 
 import java.io.Serializable;
 
-public class GameSettings implements Serializable, DPO {
+public class GameSettings implements Serializable, DTO {
 
   private static final long serialVersionUID = -6131853646598165461L;
 
@@ -152,14 +152,14 @@ public class GameSettings implements Serializable, DPO {
   @Override
   public String toString() {
     return "GameConfig{" +
-        "gameDuration=" + gameDuration +
-        ", difficulty=" + difficulty +
-        ", humanTickets=" + humanTickets +
-        ", nbSafeZones=" + nbSafeZones +
-        ", nbFoodSupplyZones=" + nbFoodSupplyZones +
-        ", nbFoodSupplies=" + nbFoodSupplies +
-        ", safezoneDropRate=" + safezoneDropRate +
-        ", maximumFoodTransfer=" + maximumFoodTransfer +
-        '}';
+            "gameDuration=" + gameDuration +
+            ", difficulty=" + difficulty +
+            ", humanTickets=" + humanTickets +
+            ", nbSafeZones=" + nbSafeZones +
+            ", nbFoodSupplyZones=" + nbFoodSupplyZones +
+            ", nbFoodSupplies=" + nbFoodSupplies +
+            ", safezoneDropRate=" + safezoneDropRate +
+            ", maximumFoodTransfer=" + maximumFoodTransfer +
+            '}';
   }
 }

@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.game;
 
-import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.api.DTO;
 import io.nbelleme.hvsz.humans.Human;
 
 import java.io.Serializable;
@@ -13,7 +13,7 @@ import static io.nbelleme.hvsz.game.GameState.NOT_STARTED;
 import static io.nbelleme.hvsz.game.GameState.PAUSED;
 import static io.nbelleme.hvsz.game.GameState.ZOMBIE_VICTORY;
 
-public class Status implements Serializable, DPO {
+public class Status implements Serializable, DTO {
 
   private static final long serialVersionUID = -3433632584769693093L;
 
@@ -117,9 +117,9 @@ public class Status implements Serializable, DPO {
    */
   public Human getLifeById(int id) {
     return lives.stream()
-        .filter(life -> life.getId() == id)
-        .findFirst()
-        .orElse(null);
+                .filter(life -> life.getId() == id)
+                .findFirst()
+                .orElse(null);
   }
 
   /**
@@ -130,9 +130,9 @@ public class Status implements Serializable, DPO {
    */
   public Human getLifeByToken(int token) {
     return lives.stream()
-        .filter(l -> l.getToken() == token)
-        .findFirst()
-        .orElse(null);
+                .filter(l -> l.getToken() == token)
+                .findFirst()
+                .orElse(null);
   }
 
   public boolean isReadyToStart() {

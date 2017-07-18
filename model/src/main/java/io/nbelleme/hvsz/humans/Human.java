@@ -1,10 +1,10 @@
 package io.nbelleme.hvsz.humans;
 
-import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.api.DTO;
 
 import java.io.Serializable;
 
-public class Human implements Serializable, DPO {
+public class Human implements Serializable, DTO {
 
   private static final long serialVersionUID = -302241752023615893L;
   private static final int MAX_RESOURCES = 10;
