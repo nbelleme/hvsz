@@ -3,9 +3,9 @@ package io.nbelleme.hvsz.services.impl;
 import io.nbelleme.hvsz.common.Assert;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.humans.Human;
-import io.nbelleme.hvsz.zone.SafeZone;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
+import io.nbelleme.hvsz.zone.SafeZone;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,10 +28,10 @@ final class SafeZoneServiceImpl implements SafeZoneService {
   @Override
   public SafeZone getSafeZone(Long zoneId) {
     return getSafeZones()
-        .stream()
-        .filter(z -> z.getId().equals(zoneId))
-        .findFirst()
-        .orElse(null);
+            .stream()
+            .filter(z -> z.getId().equals(zoneId))
+            .findFirst()
+            .orElse(null);
   }
 
   @Override
@@ -45,13 +45,13 @@ final class SafeZoneServiceImpl implements SafeZoneService {
   public int refill(Long zoneId, int token) {
     Game game = gameService.getCurrent();
     SafeZone safeZone = game.getSafeZones()
-        .stream()
-        .filter(z -> z.getId().equals(zoneId))
-        .findFirst()
-        .orElse(null);
+                            .stream()
+                            .filter(z -> z.getId().equals(zoneId))
+                            .findFirst()
+                            .orElse(null);
 
     Human human = game.getStatus()
-        .getLifeByToken(token);
+                      .getLifeByToken(token);
 
     Assert.humanAlive(human, safeZone);
 
