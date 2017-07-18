@@ -9,7 +9,7 @@ ext {
 
     springBootVersion = '1.5.4.RELEASE'
     slf4jApi = '1.7.25'
-    mongoDBVersion = '3.4.2'
+    mongoJack = '2.7.0'
 
 }
 
@@ -83,9 +83,8 @@ project(':persistence') {
     dependencies {
         compile project(':model')
         api "org.slf4j:slf4j-api:$slf4jApi"
-        compile "org.mongodb:mongo-java-driver:$mongoDBVersion"
-
-    }
+        compile "org.mongojack:mongojack:$mongoJack"
+   }
 }
 
 project(':webservices') {
