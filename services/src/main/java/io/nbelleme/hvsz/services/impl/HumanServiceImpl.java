@@ -81,7 +81,7 @@ final class HumanServiceImpl implements HumanService {
   }
 
   @Override
-  public Human getLifeByToken(int token) {
+  public Human getHumanByToken(int token) {
     Game g = gameService.getCurrent();
     Assert.gameActive(g);
     return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElse(null);

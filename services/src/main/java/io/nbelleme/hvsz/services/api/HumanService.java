@@ -5,12 +5,12 @@ import io.nbelleme.hvsz.humans.Human;
 public interface HumanService {
 
   /**
-   * Check whether the lifeToken (representing a human) is still alive or not.
+   * Check whether the humanToken (representing a human) is still alive or not.
    *
-   * @param lifeToken the life token.
+   * @param humanToken the human token.
    * @return true if alive, false otherwise.
    */
-  boolean isAlive(int lifeToken);
+  boolean isAlive(int humanToken);
 
   /**
    * Check whether humans have enough tickets left.
@@ -28,32 +28,32 @@ public interface HumanService {
   boolean canSpawn();
 
   /**
-   * Spawn a new life.
+   * Spawn a new human.
    *
    * @return true if success, false else
    */
   Human spawn();
 
   /**
-   * getCurrent life by token.
+   * getCurrent human by token.
    *
    * @param token .
-   * @return life.
+   * @return human.
    */
-  Human getLifeByToken(int token);
+  Human getHumanByToken(int token);
 
   /**
-   * Save life.
+   * Save human.
    *
    * @param human .
    */
   void save(Human human);
 
   /**
-   * Deactivate an human life by id (do not decrease gameStatus.nbLifeLeft).
+   * Deactivate an human human by id (do not decrease gameStatus.nbHumanLeft).
    *
-   * @param lifeToken the token to deactivate
+   * @param humanToken the token to deactivate
    * @return true if number human left > 0, else false
    */
-  boolean kill(int lifeToken);
+  boolean kill(int humanToken);
 }

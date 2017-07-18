@@ -1,30 +1,30 @@
 package io.nbelleme.hvsz.controller.api;
 
-import io.nbelleme.hvsz.humans.Life;
+import io.nbelleme.hvsz.humans.Human;
 
-public interface HumainRestController {
+public interface HumanRestController {
   /**
-   * Kill life by token.
+   * Kill human by token.
    *
-   * @param token life token.
+   * @param token human token.
    * @return bool succes?
    */
   Boolean kill(Integer token);
 
   /**
-   * Get a new life, return token.
+   * Get a new human, return token.
    *
-   * @return life token
+   * @return human token
    */
-  Life takeLife();
+  Human takeHuman();
 
   /**
-   * Get resource number by life.
+   * Get resource number by human.
    *
-   * @param lifeToken the token of the human
+   * @param humanToken the token of the human
    * @return the number of resources taken
    */
-  int getNbResourceByLife(int lifeToken);
+  int getNbResourceByHuman(int humanToken);
 
   /**
    * Get remaining lives.

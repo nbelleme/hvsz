@@ -1,8 +1,6 @@
 package io.nbelleme.persistence.dao;
 
 import io.nbelleme.hvsz.game.Game;
-import org.mapdb.DB;
-import org.mapdb.DBMaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -23,8 +21,6 @@ public class DaoMapDb {
    * Initizalize a map_db db backed on a file at DB_FILE.
    */
   public DaoMapDb() {
-    DB db = DBMaker.fileDB(DB_FILE).closeOnJvmShutdown().make();
-//    games = (ConcurrentMap) db.hashMap("games").createOrOpen();
   }
 
   /**

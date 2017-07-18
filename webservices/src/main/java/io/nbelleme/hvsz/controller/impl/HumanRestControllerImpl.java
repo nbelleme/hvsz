@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.controller.impl;
 
-import io.nbelleme.hvsz.controller.api.HumainRestController;
-import io.nbelleme.hvsz.humans.Life;
+import io.nbelleme.hvsz.controller.api.HumanRestController;
+import io.nbelleme.hvsz.humans.Human;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.HumanService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/human")
-final class HumainRestControllerImpl implements HumainRestController {
+final class HumanRestControllerImpl implements HumanRestController {
   private HumanService humanService;
 
   private GameService gameService;
@@ -27,7 +27,7 @@ final class HumainRestControllerImpl implements HumainRestController {
    * @param humanService the humanService
    * @param gameService  the gameService
    */
-  HumainRestControllerImpl(HumanService humanService, GameService gameService) {
+  HumanRestControllerImpl(HumanService humanService, GameService gameService) {
     this.humanService = Objects.requireNonNull(humanService);
     this.gameService = Objects.requireNonNull(gameService);
   }
@@ -40,15 +40,15 @@ final class HumainRestControllerImpl implements HumainRestController {
   }
 
   @Override
-  @PostMapping("/takeLife")
-  public Life takeLife() {
+  @PostMapping("/takeHuman")
+  public Human takeHuman() {
     return humanService.spawn();
   }
 
   @Override
-  @GetMapping("/{lifeToken}/nbResource")
-  public int getNbResourceByLife(@PathVariable("lifeToken") int lifeToken) {
-    return humanService.getLifeByToken(lifeToken).getNbResources();
+  @GetMapping("/{HumanToken}/nbResource")
+  public int getNbResourceByHuman(@PathVariable("humanToken") int lifeToken) {
+    return humanService.getHumanByToken(lifeToken).getNbResources();
   }
 
   @Override
