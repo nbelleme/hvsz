@@ -9,21 +9,26 @@ import io.nbelleme.hvsz.game.Status;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.zone.SafeZone;
 import io.nbelleme.hvsz.zone.SupplyZone;
+import io.nbelleme.persistence.dao.api.GameDao;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 final class GameServiceImpl implements GameService {
 
   private static final long SECONDS_IN_ONE_MINUTE = 60;
+  private GameDao gameDao;
 
 
   /**
    * Constructor.
+   * @param gameDao gameDao
    */
-  GameServiceImpl() {
+  GameServiceImpl(GameDao gameDao) {
+    this.gameDao = Objects.requireNonNull(gameDao);
   }
 
   @Override
@@ -73,6 +78,8 @@ final class GameServiceImpl implements GameService {
       safeZones.add(safeZone);
     }
     game.setSafeZones(safeZones);
+
+    this.gameDao.save(game);
     // Save game
     update(game);
   }
