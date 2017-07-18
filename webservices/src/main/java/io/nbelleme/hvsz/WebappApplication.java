@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @EnableWebMvc
 @EnableScheduling
-@ComponentScan(basePackages = {"io.nbelleme.hvsz", "io.nbelleme.hvsz.controller.web"})
+@ComponentScan(basePackages = {"io.nbelleme.hvsz", "io.nbelleme.persistence"})
 public class WebappApplication {
 
   /**
