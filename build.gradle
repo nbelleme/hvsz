@@ -1,9 +1,15 @@
+plugins {
+    id 'org.springframework.boot' version "1.5.4.RELEASE" apply false
+}
+
+
 ext {
     javaVersion = '1.8'
     checkstyleVersion = '7.5'
 
     springBootVersion = '1.5.4.RELEASE'
     slf4jApi = '1.7.25'
+    mongoDBVersion = '3.4.2'
 
 }
 
@@ -77,12 +83,18 @@ project(':persistence') {
     dependencies {
         compile project(':model')
         api "org.slf4j:slf4j-api:$slf4jApi"
-        compile 'org.mapdb:mapdb:3.0.5'
+        compile "org.mongodb:mongo-java-driver:$mongoDBVersion"
 
     }
 }
 
 project(':webservices') {
+    apply plugin: 'org.springframework.boot'
+
+    configurations {
+        jar.archiveName = 'hvsz-server.jar'
+    }
+
     dependencies {
         compile project(':services')
     }
