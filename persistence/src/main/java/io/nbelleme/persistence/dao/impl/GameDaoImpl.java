@@ -13,7 +13,7 @@ final class GameDaoImpl extends AbstractDao<Game, GameDpo> implements GameDao {
   /**
    * Constructor.
    */
-  public GameDaoImpl() {
+  GameDaoImpl() {
     super(COLLECTION_NAME);
   }
 }

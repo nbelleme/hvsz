@@ -8,10 +8,18 @@ import io.nbelleme.persistence.dpo.AbstractDPO;
 public class GameDpo extends AbstractDPO<Game> {
 
 
+  /**
+   * Contructor.
+   */
   public GameDpo() {
     super();
   }
 
+  /**
+   * Constructor.
+   *
+   * @param game game
+   */
   @JsonCreator
   public GameDpo(@JsonProperty("game") Game game) {
     super(game);

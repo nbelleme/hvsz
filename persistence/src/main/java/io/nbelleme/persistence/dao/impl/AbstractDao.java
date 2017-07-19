@@ -10,7 +10,6 @@ import org.mongojack.JacksonDBCollection;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
-import java.time.LocalDate;
 import java.util.Objects;
 
 @SuppressWarnings("deprecation")

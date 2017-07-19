@@ -8,11 +8,19 @@ public abstract class AbstractDPO<DTO> {
   private Long lastUpdate;
   private DTO dto;
 
+  /**
+   * Constructor.
+   *
+   * @param dto dto
+   */
   public AbstractDPO(DTO dto) {
     super();
     this.dto = dto;
   }
 
+  /**
+   * Default constructor.
+   */
   public AbstractDPO() {
     LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
   }
