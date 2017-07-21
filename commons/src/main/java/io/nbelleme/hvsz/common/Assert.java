@@ -42,7 +42,6 @@ public abstract class Assert {
    *
    * @param game The game
    */
-
   public static void gameActive(Game game) {
     gameDefined(game);
     if (!game.getStatus().isActive()) {
@@ -51,11 +50,22 @@ public abstract class Assert {
   }
 
   /**
+   * Asserts that the game has not a state Stopped.
+   *
+   * @param game The game
+   */
+  public static void gameStopped(Game game) {
+    gameDefined(game);
+    if (!game.getStatus().isStopped()) {
+      throw new IllegalGameStateException("Game is stopped");
+    }
+  }
+
+  /**
    * Asserts that the game is not null, and is over (either a new game not started yet, or a victory).
    *
    * @param game The game
    */
-
   public static void gameOver(Game game) {
     gameDefined(game);
     if (!game.getStatus().isOver()) {
@@ -68,7 +78,6 @@ public abstract class Assert {
    *
    * @param game The game
    */
-
   public static void gameReadyToStart(Game game) {
     gameDefined(game);
     if (game.getStatus().isOngoing()) {
@@ -103,7 +112,7 @@ public abstract class Assert {
    * Asserts that a human is not null and alive.
    *
    * @param human the human life
-   * @param zone zone that asked the check
+   * @param zone  zone that asked the check
    */
   public static void humanAlive(Human human, Object zone) {
     if (human == null || !human.isAlive()) {
