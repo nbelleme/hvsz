@@ -8,8 +8,6 @@ import java.time.ZoneOffset;
 
 public abstract class AbstractDPO<DTO> {
 
-  @ObjectId
-  private String id;
   private Long lastUpdate;
   private DTO dto;
 
@@ -33,12 +31,10 @@ public abstract class AbstractDPO<DTO> {
   /**
    * Constructor.
    *
-   * @param id         id
    * @param lastUpdate lastUpdate
    * @param dto        dto
    */
-  public AbstractDPO(String id, Long lastUpdate, DTO dto) {
-    this.id = id;
+  public AbstractDPO(Long lastUpdate, DTO dto) {
     this.lastUpdate = lastUpdate;
     this.dto = dto;
   }

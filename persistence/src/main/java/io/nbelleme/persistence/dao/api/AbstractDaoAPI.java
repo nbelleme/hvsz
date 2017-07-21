@@ -1,5 +1,7 @@
 package io.nbelleme.persistence.dao.api;
 
+import java.util.Optional;
+
 /**
  * Created by nicolas on 15/07/2017.
  */
@@ -10,14 +12,14 @@ public interface AbstractDaoAPI<DTO> {
    *
    * @param dto dto to insert
    */
-  void save(DTO dto);
+  DTO save(DTO dto);
 
   /**
    * Return DTO from database.
    *
    * @return DTO from database
    */
-  DTO get();
+  Optional<DTO> get();
 
   /**
    * Update DTO in database.

@@ -63,7 +63,7 @@ final class SafeZoneServiceImpl implements SafeZoneService {
     int refilled = level - oldLevel;
 
     safeZone.setLevel(level);
-    gameService.update(game);
+    gameService.save(game);
     return refilled;
   }
 
@@ -75,7 +75,7 @@ final class SafeZoneServiceImpl implements SafeZoneService {
         safeZone.setLevel(safeZone.getLevel() - 1);
       }
     });
-    gameService.update(g);
+    gameService.save(g);
   }
 
 }

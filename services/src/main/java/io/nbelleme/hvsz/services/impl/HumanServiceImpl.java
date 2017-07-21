@@ -76,7 +76,7 @@ final class HumanServiceImpl implements HumanService {
     Human human = Human.build();
     status.getLives().add(human);
     g.setStatus(status);
-    gameService.update(g);
+    gameService.save(g);
     return human;
   }
 
@@ -91,7 +91,7 @@ final class HumanServiceImpl implements HumanService {
   public void save(Human human) {
     Game g = gameService.getCurrent();
     g.getStatus().setLife(human.getId(), human);
-    gameService.update(g);
+    gameService.save(g);
   }
 
   @Override
@@ -107,7 +107,7 @@ final class HumanServiceImpl implements HumanService {
       // Decrement humans on field
       status.setCurrentHumansOnField(status.getCurrentHumansOnField() - 1);
       game.setStatus(status);
-      gameService.update(game);
+      gameService.save(game);
       return true;
     }
     return false;

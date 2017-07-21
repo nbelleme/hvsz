@@ -2,17 +2,15 @@ package io.nbelleme.persistence.dao.impl;
 
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
-
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.persistence.dao.api.GameDao;
 import io.nbelleme.persistence.dpo.impl.GameDpo;
-import org.mongojack.DBCursor;
 import org.mongojack.JacksonDBCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
 final class GameDaoImpl implements GameDao {
@@ -41,16 +39,16 @@ final class GameDaoImpl implements GameDao {
   }
 
   @Override
-  public void save(Game game) {
+  public Game save(Game game) {
     GameDpo gameDpo = GameDpo.build(game);
-    collection.save(gameDpo);
+    return collection.save(gameDpo).getSavedObject().getDto();
   }
 
   @Override
-  public Game get() {
-    DBCursor<GameDpo> cursor = collection.find();
-    List<GameDpo> gameList = cursor.toArray();
-    return cursor.toArray().get(0).getDto();
+  public Optional<Game> get() {
+    GameDpo gameDpo = collection.findOne();
+    return gameDpo != null ? Optional.ofNullable(gameDpo.getDto()) : Optional.empty();
+
   }
 
   @Override

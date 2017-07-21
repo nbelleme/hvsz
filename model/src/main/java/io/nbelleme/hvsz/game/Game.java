@@ -7,12 +7,13 @@ import io.nbelleme.hvsz.zone.SupplyZone;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Game implements Serializable, DTO {
 
   private static final long serialVersionUID = 3753312791177172327L;
 
-  private Long id;
+  private String id;
   private Status status;
   private GameSettings config;
   private List<SafeZone> safeZones;
@@ -22,6 +23,7 @@ public class Game implements Serializable, DTO {
    * Game constructor.
    */
   private Game() {
+    id = UUID.randomUUID().toString();
     status = Status.build();
     config = GameSettings.build();
 
@@ -62,20 +64,12 @@ public class Game implements Serializable, DTO {
     }
   }
 
-  /**
-   * Game constructor, set an id.
-   *
-   * @param id Long
-   */
-  public Game(Long id) {
-    this.id = id;
-  }
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 

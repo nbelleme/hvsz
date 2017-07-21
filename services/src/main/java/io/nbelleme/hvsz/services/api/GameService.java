@@ -43,5 +43,5 @@ public interface GameService {
    *
    * @param g the game to update
    */
-  void update(Game g);
+  Game save(Game g);
 }

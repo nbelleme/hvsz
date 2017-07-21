@@ -29,10 +29,10 @@ final class GameSettingsServiceImpl implements GameSettingsService {
   public void set(GameSettings gameSettings) {
     Game g = gameService.getCurrent();
     if (g == null) {
-      g = new Game(GAME_ID);
+      g = Game.build()  ;
     }
     g.setConfig(gameSettings);
-    gameService.update(g);
+    gameService.save(g);
   }
 
   @Override

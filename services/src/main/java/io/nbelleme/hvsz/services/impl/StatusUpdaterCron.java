@@ -42,20 +42,21 @@ public class StatusUpdaterCron {
   public void gameTimer() {
     Game game = gameService.getCurrent();
     if (game == null || !game.getStatus().isOngoing()) {
-      LOGGER.debug("[ CRON ] : No running game to update.");
+      LOGGER.info("[ CRON ] : No running game to update.");
     } else {
 
-      LOGGER.info("[ CRON ] : Update the game of id " + game.getId());
       Status status = game.getStatus();
+
       if (status.isActive() && status.getRemainingTime() > 0) {
-        status.setRemainingTime(status.getRemainingTime() - 1);
-        gameService.update(game);
+        status.setRemainingTime(status.getRemainingTime() - SCHEDULED_TIME/1000);
       }
+
       if (shouldDecreaseLevel(100, (long) (game.getConfig().getGameDuration() * 60), status.getRemainingTime(), game.getConfig().getDifficulty())) {
         safeZoneService.eatOneUnitOfFood();
       }
       game = gameService.getCurrent();
-      gameService.update(game);
+      Game gameUpdated = gameService.save(game);
+      LOGGER.info("[ CRON ] : Update the game of id " + gameUpdated.getId());
     }
   }
 

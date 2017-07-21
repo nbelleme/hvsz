@@ -5,12 +5,14 @@ import com.mongodb.MongoClient;
 import io.nbelleme.persistence.dao.api.AbstractDaoAPI;
 import io.nbelleme.persistence.dpo.AbstractDPO;
 import io.nbelleme.persistence.exceptions.DaoException;
+import org.mongojack.DBCursor;
 import org.mongojack.JacksonDBCollection;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
+import java.util.Optional;
 
 @SuppressWarnings("deprecation")
 public abstract class AbstractDao<DTO, DPO extends AbstractDPO<DTO>> implements AbstractDaoAPI<DTO> {
@@ -39,7 +41,7 @@ public abstract class AbstractDao<DTO, DPO extends AbstractDPO<DTO>> implements 
 
 
   @Override
-  public void save(DTO dto) {
+  public DTO save(DTO dto) {
     Objects.requireNonNull(dto);
 
     try {
@@ -51,12 +53,14 @@ public abstract class AbstractDao<DTO, DPO extends AbstractDPO<DTO>> implements 
       throw new DaoException(e.getMessage(), e);
     }
 
+    return null;
+
 
   }
 
 
   @Override
-  public DTO get() {
+  public Optional<DTO> get() {
     return null;
   }
 

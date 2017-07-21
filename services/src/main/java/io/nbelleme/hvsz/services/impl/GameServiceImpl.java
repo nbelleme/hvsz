@@ -1,7 +1,6 @@
 package io.nbelleme.hvsz.services.impl;
 
 
-import io.nbelleme.hvsz.common.Assert;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.game.GameState;
@@ -28,6 +27,7 @@ final class GameServiceImpl implements GameService {
 
   /**
    * Constructor.
+   *
    * @param gameDao gameDao
    */
   GameServiceImpl(GameDao gameDao) {
@@ -37,7 +37,7 @@ final class GameServiceImpl implements GameService {
   @Override
   public Game getCurrent() {
     LOGGER.info("GameServiceImpl getCurrent");
-    return gameDao.get();
+    return gameDao.get().orElse(Game.build());
   }
 
   @Override
@@ -45,16 +45,18 @@ final class GameServiceImpl implements GameService {
     LOGGER.info("Start Game");
     //TODO use currentGame
     //Asserts that the game is over if it exists
-    Game game = Game.build();
+
+    Game game = gameDao.get().orElse(Game.build());
+
     // Retrieve settings
     GameSettings conf = GameSettings.build();
     game.setConfig(conf);
     // Init game status
     Status status = Status.build()
-                          .setRemainingHumanTickets(conf.getHumanTickets())
-                          .setCurrentHumansOnField(0)
-                          .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
-                          .setGameState(GameState.ACTIVE);
+        .setRemainingHumanTickets(conf.getHumanTickets())
+        .setCurrentHumansOnField(0)
+        .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
+        .setGameState(GameState.ACTIVE);
 
     game.setStatus(status);
     // Init game supply zones
@@ -63,9 +65,9 @@ final class GameServiceImpl implements GameService {
 
     for (long i = 0; i < conf.getNbFoodSupplyZones(); i++) {
       SupplyZone supplyZone = SupplyZone.build()
-                                        .setId(i)
-                                        .setCapacity(foodPerZone)
-                                        .setLevel(foodPerZone);
+          .setId(i)
+          .setCapacity(foodPerZone)
+          .setLevel(foodPerZone);
       foodSupplies.add(supplyZone);
     }
     game.setFoodSupplies(foodSupplies);
@@ -74,14 +76,14 @@ final class GameServiceImpl implements GameService {
     int nbSafeZones = conf.getNbSafeZones();
     for (long i = 0; i < nbSafeZones; i++) {
       SafeZone safeZone = SafeZone.build()
-                                  .setId(i)
-                                  .setLevel(conf.getStartingSafeZoneSupplies());
+          .setId(i)
+          .setLevel(conf.getStartingSafeZoneSupplies());
       safeZones.add(safeZone);
     }
     game.setSafeZones(safeZones);
 
     // Save game
-    update(game);
+    save(game);
   }
 
   @Override
@@ -97,8 +99,9 @@ final class GameServiceImpl implements GameService {
   }
 
   @Override
-  public void update(Game game) {
-    gameDao.save(game);
+  public Game save(Game game) {
+    //TODO check if game over
+    return gameDao.save(game);
   }
 
   /**
@@ -123,9 +126,9 @@ final class GameServiceImpl implements GameService {
    */
   private boolean allSafeZonesDestroyed(Game g) {
     return g.getSafeZones() == null || g.getSafeZones()
-                                        .stream()
-                                        .filter(z -> z.getLevel() > 0)
-                                        .count() == 0;
+        .stream()
+        .filter(z -> z.getLevel() > 0)
+        .count() == 0;
   }
 
 }

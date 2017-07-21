@@ -71,7 +71,7 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
       supplyZone.setLevel(originalResources - human.getNbResources());
     }
 
-    gameService.update(game);
+    gameService.save(game);
     return human.getNbResources();
   }
 }
