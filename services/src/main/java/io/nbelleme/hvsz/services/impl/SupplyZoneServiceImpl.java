@@ -3,14 +3,18 @@ package io.nbelleme.hvsz.services.impl;
 import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.common.AssertHuman;
 import io.nbelleme.hvsz.game.Game;
+import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.humans.Human;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.SupplyZone;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.LongFunction;
+import java.util.stream.LongStream;
 
 /**
  * TODO class details.
@@ -78,5 +82,29 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
 
     gameService.save(game);
     return human.getNbResources();
+  }
+
+  @Override
+  public List<SupplyZone> initFoodSupplies(GameSettings conf) {
+    List<SupplyZone> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
+    int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
+
+    LongStream.range(0, conf.getNbFoodSupplyZones())
+              .mapToObj(buildSupplyZone(foodPerZone))
+              .forEach(foodSupplies::add);
+
+    return foodSupplies;
+  }
+
+  /**
+   * Build supplyzone.
+   * @param foodPerZone parameter
+   * @return lambda
+   */
+  private LongFunction<SupplyZone> buildSupplyZone(int foodPerZone) {
+    return i -> SupplyZone.build()
+                          .setId(i)
+                          .setCapacity(foodPerZone)
+                          .setLevel(foodPerZone);
   }
 }

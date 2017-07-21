@@ -1,6 +1,7 @@
 package io.nbelleme.hvsz.services.api;
 
 import io.nbelleme.hvsz.game.Game;
+import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.zone.SafeZone;
 
 import java.util.List;
@@ -38,4 +39,11 @@ public interface SafeZoneService {
    * @see io.nbelleme.hvsz.game.StatusUpdaterCron for more details.
    */
   void decreaseFoodLevel(Game game);
+
+  /**
+   * Init array of safezone.
+   * @param gameSettings gameSettings to init safezones
+   * @return List
+   */
+  List<SafeZone> initSafeZones(GameSettings gameSettings);
 }

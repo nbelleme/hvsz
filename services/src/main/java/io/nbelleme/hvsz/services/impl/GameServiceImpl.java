@@ -7,6 +7,8 @@ import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.game.GameState;
 import io.nbelleme.hvsz.game.Status;
 import io.nbelleme.hvsz.services.api.GameService;
+import io.nbelleme.hvsz.services.api.SafeZoneService;
+import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.SafeZone;
 import io.nbelleme.hvsz.zone.SupplyZone;
 import io.nbelleme.persistence.dao.api.GameDao;
@@ -14,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,15 +26,23 @@ final class GameServiceImpl implements GameService {
   private static final long SECONDS_IN_ONE_MINUTE = 60;
   private GameDao gameDao;
 
+  private SafeZoneService safeZoneService;
+  private SupplyZoneService supplyZoneService;
+
 
   /**
    * Constructor.
    *
-   * @param gameDao gameDao
+   * @param gameDao           gameDao
+   * @param safeZoneService   safeZoneService
+   * @param supplyZoneService supplyZoneService
    */
-  GameServiceImpl(GameDao gameDao) {
+  GameServiceImpl(GameDao gameDao, SafeZoneService safeZoneService, SupplyZoneService supplyZoneService) {
     this.gameDao = Objects.requireNonNull(gameDao);
+    this.safeZoneService = Objects.requireNonNull(safeZoneService);
+    this.supplyZoneService = Objects.requireNonNull(supplyZoneService);
   }
+
 
   @Override
   public Game getCurrent() {
@@ -54,39 +63,53 @@ final class GameServiceImpl implements GameService {
 
   @Override
   public void pauseGame() {
-    Game game = gameDao.get().orElse(null);
-
+    Game game = getCurrent();
     AssertGame.gameOngoing(game);
-
-    Status status = game.getStatus();
-    status.setGameState(GameState.PAUSED);
-    game.setStatus(status);
-
+    updateGameState(game, GameState.PAUSED);
     save(game);
   }
 
+
   @Override
   public void resumeGame() {
+    Game game = gameDao.get().orElse(null);
+    AssertGame.gameReadyToStart(game);
   }
 
   @Override
   public void stopGame() {
-    Game game = gameDao.get().orElse(null);
-
+    Game game = getCurrent();
     AssertGame.gameOngoing(game);
-
-    Status status = game.getStatus()
-                        .setGameState(GameState.STOPPED);
-
-    game.setStatus(status);
-
-    gameDao.save(game);
+    updateGameState(game, GameState.STOPPED);
+    save(game);
   }
 
   @Override
   public Game save(Game game) {
     //TODO check if game over
     return gameDao.save(game);
+  }
+
+  /**
+   * Check and update game status if needed.
+   *
+   * @param game gmae
+   */
+  private void checkGameStatus(Game game) {
+
+  }
+
+
+  /**
+   * Update game's state.
+   *
+   * @param game      game to update
+   * @param gameState new gameState
+   */
+  private void updateGameState(Game game, GameState gameState) {
+    Status status = game.getStatus()
+                        .setGameState(gameState);
+    game.setStatus(status);
   }
 
   /**
@@ -123,38 +146,27 @@ final class GameServiceImpl implements GameService {
    * @return game created
    */
   private Game newGame() {
-    Game game;
-    game = Game.build();
+    Game game = Game.build();
+
     GameSettings conf = GameSettings.build();
     game.setConfig(conf);
+
     Status status = Status.build()
                           .setRemainingHumanTickets(conf.getHumanTickets())
                           .setCurrentHumansOnField(0)
                           .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
                           .setGameState(GameState.ACTIVE);
     game.setStatus(status);
-    List<SupplyZone> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
-    int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
 
-    for (long i = 0; i < conf.getNbFoodSupplyZones(); i++) {
-      SupplyZone supplyZone = SupplyZone.build()
-                                        .setId(i)
-                                        .setCapacity(foodPerZone)
-                                        .setLevel(foodPerZone);
-      foodSupplies.add(supplyZone);
-    }
-    game.setFoodSupplies(foodSupplies);
-    // Init game safe zones
-    List<SafeZone> safeZones = new ArrayList<>(conf.getNbSafeZones());
-    int nbSafeZones = conf.getNbSafeZones();
-    for (long i = 0; i < nbSafeZones; i++) {
-      SafeZone safeZone = SafeZone.build()
-                                  .setId(i)
-                                  .setLevel(conf.getStartingSafeZoneSupplies());
-      safeZones.add(safeZone);
-    }
+    List<SupplyZone> supplyZones = supplyZoneService.initFoodSupplies(conf);
+    game.setFoodSupplies(supplyZones);
+
+    List<SafeZone> safeZones = safeZoneService.initSafeZones(conf);
     game.setSafeZones(safeZones);
+
     return game;
   }
+
+
 
 }
