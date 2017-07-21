@@ -10,7 +10,7 @@ public class GameSettings implements Serializable, DTO {
   private static final long serialVersionUID = -6131853646598165461L;
 
   private static final int DEFAULT_GAME_DURATION = 30;
-  private static final int DEFAULT_DIFFICULTY = 1;
+  private static final GameDifficulty DEFAULT_DIFFICULTY = GameDifficulty.NORMAL;
   private static final int DEFAULT_HUMAN_TICKETS = 100;
   private static final int DEFAULT_MAX_HUMAN_ON_FIELD = 30;
   private static final int DEFAULT_NB_SAFE_ZONE = 2;
@@ -21,7 +21,7 @@ public class GameSettings implements Serializable, DTO {
 
 
   private int gameDuration;
-  private int difficulty;
+  private GameDifficulty difficulty;
   private int humanTickets;
   private int maxHumansOnField;
   private int nbSafeZones;
@@ -76,11 +76,11 @@ public class GameSettings implements Serializable, DTO {
     return this;
   }
 
-  public int getDifficulty() {
+  public GameDifficulty getDifficulty() {
     return difficulty;
   }
 
-  public GameSettings setDifficulty(int difficulty) {
+  public GameSettings setDifficulty(GameDifficulty difficulty) {
     this.difficulty = difficulty;
     return this;
   }

@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.services.impl;
 
 import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.game.GameState;
+import io.nbelleme.hvsz.game.GameDifficulty;
 import io.nbelleme.hvsz.game.Status;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
@@ -21,6 +21,7 @@ public class StatusUpdaterCron {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(StatusUpdaterCron.class);
   private static final int SCHEDULED_TIME = 2000;
+  public static final int TOTAL_FOOD_UNITS = 100;
 
   private GameService gameService;
   private SafeZoneService safeZoneService;
@@ -52,16 +53,19 @@ public class StatusUpdaterCron {
         status.setRemainingTime(status.getRemainingTime() - SCHEDULED_TIME / 1000);
       }
 
-      if (status.getGameState().equals(GameState.STOPPED)) {
-        LOGGER.error("STOPPED");
+      long totalTime = (game.getConfig().getGameDuration() * 60);
+      boolean shouldDecreaseLevel = shouldDecreaseLevel(TOTAL_FOOD_UNITS,
+                                                        totalTime,
+                                                        status.getRemainingTime(),
+                                                        game.getConfig().getDifficulty());
+
+      if (shouldDecreaseLevel) {
+        safeZoneService.decreaseFoodLevel();
       }
 
-      if (shouldDecreaseLevel(100, (long) (game.getConfig().getGameDuration() * 60), status.getRemainingTime(),
-                              game.getConfig().getDifficulty())) {
-        safeZoneService.eatOneUnitOfFood();
-      }
-      game = gameService.getCurrent();
+      game.setStatus(status);
       Game gameUpdated = gameService.save(game);
+
       LOGGER.info("[ CRON ] : Update the game of id " + gameUpdated.getId());
     }
   }
@@ -76,17 +80,23 @@ public class StatusUpdaterCron {
    * @param difficulty     .
    * @return true if should decrease, false otherwise
    */
-  private boolean shouldDecreaseLevel(int totalFoodUnits, Long totalTime, Long remainingTime, int difficulty) {
+  private boolean shouldDecreaseLevel(int totalFoodUnits, Long totalTime, Long remainingTime, GameDifficulty difficulty) {
     // Calculate the number of seconds necessary before taking one unit of food.
+
+    Objects.requireNonNull(difficulty);
+    if(totalFoodUnits == 0){
+      return false;
+    }
+
     long timeToHunger = (long) (0.66 * totalTime);
 
-    if (difficulty == 1) {
+    if (difficulty.equals(GameDifficulty.EASY)) {
       timeToHunger = (long) (0.66 * totalTime);
 
-    } else if (difficulty == 2) {
+    } else if (difficulty.equals(GameDifficulty.NORMAL)) {
       timeToHunger = (long) (0.5 * totalTime);
 
-    } else if (difficulty == 3) {
+    } else if (difficulty.equals(GameDifficulty.HARD)) {
       timeToHunger = (long) (0.33 * totalTime);
     }
 
