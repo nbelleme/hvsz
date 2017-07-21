@@ -1,5 +1,6 @@
 package io.nbelleme.hvsz.services.api;
 
+import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.zone.SafeZone;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface SafeZoneService {
    * @param zoneId the id of the safe zone
    * @return the SafeZone
    */
-  SafeZone getSafeZone(Long zoneId);
+  SafeZone getSafeZone(long zoneId);
 
   /**
    * Return all the Safe Zone.
@@ -28,12 +29,13 @@ public interface SafeZoneService {
    * @param token  the human token
    * @return the amount which was offloaded
    */
-  int refill(Long zoneId, int token);
+  int refill(long zoneId, int token);
 
   /**
    * This method will decrement the units of food by 1 in each safe zone.
    *
+   * @param game game
    * @see io.nbelleme.hvsz.game.StatusUpdaterCron for more details.
    */
-  void decreaseFoodLevel();
+  void decreaseFoodLevel(Game game);
 }
