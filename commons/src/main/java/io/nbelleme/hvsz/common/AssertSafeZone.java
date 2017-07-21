@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class AssertSafeZone {
   /**
-   * Asserts that a safezone is not null and not destroyed;
+   * Asserts that a safezone is not null and not destroyed.
    *
    * @param safeZone the human life
    */
