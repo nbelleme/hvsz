@@ -3,8 +3,8 @@ package io.nbelleme.hvsz.services.impl;
 import io.nbelleme.hvsz.common.Assert;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.humans.Human;
-import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.services.api.GameService;
+import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.SupplyZone;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,11 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
   public SupplyZone get(Long zoneId) {
     Game game = gameService.getCurrent();
     Assert.gameOngoing(game);
-    return game.getFoodSupplies().stream().filter(foodSupply -> foodSupply.getId().equals(zoneId)).findFirst().orElse(null);
+    return game.getFoodSupplies()
+               .stream()
+               .filter(foodSupply -> foodSupply.getId().equals(zoneId))
+               .findFirst()
+               .orElse(null);
   }
 
   @Override
@@ -52,10 +56,10 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
     Human human = game.getStatus().getLifeByToken(lifeToken);
 
     SupplyZone supplyZone = game.getFoodSupplies()
-        .stream()
-        .filter(supply -> supply.getId().equals(zoneId))
-        .findFirst()
-        .orElse(null);
+                                .stream()
+                                .filter(supply -> supply.getId().equals(zoneId))
+                                .findFirst()
+                                .orElse(null);
 
     if (supplyZone == null) {
       throw new IllegalStateException("Cannot find the right food supply");

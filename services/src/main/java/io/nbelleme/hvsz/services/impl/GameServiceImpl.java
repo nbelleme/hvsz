@@ -53,10 +53,10 @@ final class GameServiceImpl implements GameService {
     game.setConfig(conf);
     // Init game status
     Status status = Status.build()
-        .setRemainingHumanTickets(conf.getHumanTickets())
-        .setCurrentHumansOnField(0)
-        .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
-        .setGameState(GameState.ACTIVE);
+                          .setRemainingHumanTickets(conf.getHumanTickets())
+                          .setCurrentHumansOnField(0)
+                          .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
+                          .setGameState(GameState.ACTIVE);
 
     game.setStatus(status);
     // Init game supply zones
@@ -65,9 +65,9 @@ final class GameServiceImpl implements GameService {
 
     for (long i = 0; i < conf.getNbFoodSupplyZones(); i++) {
       SupplyZone supplyZone = SupplyZone.build()
-          .setId(i)
-          .setCapacity(foodPerZone)
-          .setLevel(foodPerZone);
+                                        .setId(i)
+                                        .setCapacity(foodPerZone)
+                                        .setLevel(foodPerZone);
       foodSupplies.add(supplyZone);
     }
     game.setFoodSupplies(foodSupplies);
@@ -76,8 +76,8 @@ final class GameServiceImpl implements GameService {
     int nbSafeZones = conf.getNbSafeZones();
     for (long i = 0; i < nbSafeZones; i++) {
       SafeZone safeZone = SafeZone.build()
-          .setId(i)
-          .setLevel(conf.getStartingSafeZoneSupplies());
+                                  .setId(i)
+                                  .setLevel(conf.getStartingSafeZoneSupplies());
       safeZones.add(safeZone);
     }
     game.setSafeZones(safeZones);
@@ -126,9 +126,9 @@ final class GameServiceImpl implements GameService {
    */
   private boolean allSafeZonesDestroyed(Game g) {
     return g.getSafeZones() == null || g.getSafeZones()
-        .stream()
-        .filter(z -> z.getLevel() > 0)
-        .count() == 0;
+                                        .stream()
+                                        .filter(z -> z.getLevel() > 0)
+                                        .count() == 0;
   }
 
 }

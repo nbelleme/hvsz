@@ -6,5 +6,4 @@ package io.nbelleme.persistence.dao.api;
 interface HumanDao {
 
 
-
 }

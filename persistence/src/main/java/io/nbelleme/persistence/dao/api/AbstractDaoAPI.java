@@ -11,6 +11,7 @@ public interface AbstractDaoAPI<DTO> {
    * Transform dto into dpo then insert it in database.
    *
    * @param dto dto to insert
+   * @return DTO saved DTO
    */
   DTO save(DTO dto);
 

@@ -66,7 +66,8 @@ public abstract class AbstractDPO<DTO> {
 
     AbstractDPO<?> that = (AbstractDPO<?>) o;
 
-    return (lastUpdate != null ? lastUpdate.equals(that.lastUpdate) : that.lastUpdate == null) && (dto != null ? dto.equals(that.dto) : that.dto == null);
+    return (lastUpdate != null ? lastUpdate.equals(
+        that.lastUpdate) : that.lastUpdate == null) && (dto != null ? dto.equals(that.dto) : that.dto == null);
   }
 
   @Override
