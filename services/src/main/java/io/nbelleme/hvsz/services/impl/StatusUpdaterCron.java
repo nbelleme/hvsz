@@ -1,6 +1,7 @@
 package io.nbelleme.hvsz.services.impl;
 
 import io.nbelleme.hvsz.game.Game;
+import io.nbelleme.hvsz.game.GameState;
 import io.nbelleme.hvsz.game.Status;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
@@ -19,7 +20,7 @@ import java.util.Objects;
 public class StatusUpdaterCron {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(StatusUpdaterCron.class);
-  private static final int SCHEDULED_TIME = 1000;
+  private static final int SCHEDULED_TIME = 2000;
 
   private GameService gameService;
   private SafeZoneService safeZoneService;
@@ -48,10 +49,15 @@ public class StatusUpdaterCron {
       Status status = game.getStatus();
 
       if (status.isActive() && status.getRemainingTime() > 0) {
-        status.setRemainingTime(status.getRemainingTime() - SCHEDULED_TIME/1000);
+        status.setRemainingTime(status.getRemainingTime() - SCHEDULED_TIME / 1000);
       }
 
-      if (shouldDecreaseLevel(100, (long) (game.getConfig().getGameDuration() * 60), status.getRemainingTime(), game.getConfig().getDifficulty())) {
+      if (status.getGameState().equals(GameState.STOPPED)) {
+        LOGGER.error("STOPPED");
+      }
+
+      if (shouldDecreaseLevel(100, (long) (game.getConfig().getGameDuration() * 60), status.getRemainingTime(),
+                              game.getConfig().getDifficulty())) {
         safeZoneService.eatOneUnitOfFood();
       }
       game = gameService.getCurrent();

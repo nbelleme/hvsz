@@ -1,6 +1,8 @@
 package io.nbelleme.persistence.dao.impl;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.persistence.dao.api.GameDao;
@@ -10,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -26,6 +29,7 @@ final class GameDaoImpl implements GameDao {
   /**
    * Constructor.
    */
+  @SuppressWarnings("deprecation")
   GameDaoImpl() {
     LOGGER.info("Start initialize GameDaoImpl");
     MongoClient mongoClient = new MongoClient(DATABASE_URL);
@@ -46,7 +50,9 @@ final class GameDaoImpl implements GameDao {
 
   @Override
   public Optional<Game> get() {
-    GameDpo gameDpo = collection.findOne();
+    DBObject dbObject = new BasicDBObject("lastUpdate", -1);
+    List<GameDpo> list = collection.find().sort(dbObject).toArray();
+    GameDpo gameDpo = list.stream().findFirst().orElse(null);
     return gameDpo != null ? Optional.ofNullable(gameDpo.getDto()) : Optional.empty();
 
   }

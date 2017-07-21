@@ -42,6 +42,7 @@ public interface GameService {
    * Will check the current status and update it accordingly (detects end of game for instance)
    *
    * @param g the game to update
+   * @return game game inserted
    */
   Game save(Game g);
 }
