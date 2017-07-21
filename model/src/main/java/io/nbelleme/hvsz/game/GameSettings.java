@@ -36,15 +36,15 @@ public class GameSettings implements Serializable, DTO {
    * GameConfig constructor.
    */
   private GameSettings() {
-    this.gameDuration = DEFAULT_GAME_DURATION;
-    this.difficulty = DEFAULT_DIFFICULTY;
-    this.humanTickets = DEFAULT_HUMAN_TICKETS;
-    this.maxHumansOnField = DEFAULT_MAX_HUMAN_ON_FIELD;
-    this.nbSafeZones = DEFAULT_NB_SAFE_ZONE;
-    this.nbFoodSupplyZones = DEFAULT_NB_FOOD_ZONE;
-    this.nbFoodSupplies = DEFAULT_FOOD_SUPPLIES;
-    this.maximumFoodTransfer = DEFAULT_MAX_FOOD_TRANSFERT;
-    this.safezoneDropRate = DEFAULT_SAFE_ZONE_DROP_RATE;
+    gameDuration = DEFAULT_GAME_DURATION;
+    difficulty = DEFAULT_DIFFICULTY;
+    humanTickets = DEFAULT_HUMAN_TICKETS;
+    maxHumansOnField = DEFAULT_MAX_HUMAN_ON_FIELD;
+    nbSafeZones = DEFAULT_NB_SAFE_ZONE;
+    nbFoodSupplyZones = DEFAULT_NB_FOOD_ZONE;
+    nbFoodSupplies = DEFAULT_FOOD_SUPPLIES;
+    maximumFoodTransfer = DEFAULT_MAX_FOOD_TRANSFERT;
+    safezoneDropRate = DEFAULT_SAFE_ZONE_DROP_RATE;
   }
 
   /**
