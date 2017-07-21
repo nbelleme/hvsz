@@ -21,7 +21,7 @@ public class StatusUpdaterCron {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(StatusUpdaterCron.class);
   private static final int SCHEDULED_TIME = 2000;
-  public static final int TOTAL_FOOD_UNITS = 100;
+  private static final int TOTAL_FOOD_UNITS = 100;
 
   private GameService gameService;
   private SafeZoneService safeZoneService;
@@ -81,8 +81,6 @@ public class StatusUpdaterCron {
    * @return true if should decrease, false otherwise
    */
   private boolean shouldDecreaseLevel(int totalFoodUnits, long totalTime, long remainingTime, GameDifficulty difficulty) {
-    // Calculate the number of seconds necessary before taking one unit of food.
-
     Objects.requireNonNull(difficulty);
 
     if (totalFoodUnits == 0) {
