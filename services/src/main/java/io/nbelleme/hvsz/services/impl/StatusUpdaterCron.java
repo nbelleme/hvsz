@@ -80,27 +80,18 @@ public class StatusUpdaterCron {
    * @param difficulty     .
    * @return true if should decrease, false otherwise
    */
-  private boolean shouldDecreaseLevel(int totalFoodUnits, Long totalTime, Long remainingTime, GameDifficulty difficulty) {
+  private boolean shouldDecreaseLevel(int totalFoodUnits, long totalTime, long remainingTime, GameDifficulty difficulty) {
     // Calculate the number of seconds necessary before taking one unit of food.
 
     Objects.requireNonNull(difficulty);
-    if(totalFoodUnits == 0){
+
+    if (totalFoodUnits == 0) {
       return false;
     }
 
-    long timeToHunger = (long) (0.66 * totalTime);
+    long timeToHunger = (long) difficulty.getValue() * totalTime;
+    long timeToDecrementUnit = timeToHunger / totalFoodUnits;
 
-    if (difficulty.equals(GameDifficulty.EASY)) {
-      timeToHunger = (long) (0.66 * totalTime);
-
-    } else if (difficulty.equals(GameDifficulty.NORMAL)) {
-      timeToHunger = (long) (0.5 * totalTime);
-
-    } else if (difficulty.equals(GameDifficulty.HARD)) {
-      timeToHunger = (long) (0.33 * totalTime);
-    }
-
-    Long timeToDecrementUnit = timeToHunger / totalFoodUnits;
     return remainingTime % timeToDecrementUnit == 0;
   }
 
