@@ -9,6 +9,7 @@ public enum GameState {
   ZOMBIE_VICTORY,
   ACTIVE,
   NOT_STARTED,
-  PAUSED
+  PAUSED,
+  STOPPED
 }
 

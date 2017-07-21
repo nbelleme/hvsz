@@ -12,6 +12,7 @@ import static io.nbelleme.hvsz.game.GameState.ACTIVE;
 import static io.nbelleme.hvsz.game.GameState.HUMAN_VICTORY;
 import static io.nbelleme.hvsz.game.GameState.NOT_STARTED;
 import static io.nbelleme.hvsz.game.GameState.PAUSED;
+import static io.nbelleme.hvsz.game.GameState.STOPPED;
 import static io.nbelleme.hvsz.game.GameState.ZOMBIE_VICTORY;
 
 public class Status implements Serializable, DTO {
@@ -169,6 +170,11 @@ public class Status implements Serializable, DTO {
   @JsonIgnore
   public boolean isPaused() {
     return gameState.equals(PAUSED);
+  }
+
+  @JsonIgnore
+  public boolean isStopped() {
+    return gameState.equals(STOPPED);
   }
 
   /**
