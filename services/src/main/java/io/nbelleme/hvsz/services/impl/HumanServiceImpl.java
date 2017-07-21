@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.services.impl;
 
-import io.nbelleme.hvsz.common.Assert;
+import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.common.exceptions.CannotSpawnException;
 import io.nbelleme.hvsz.common.exceptions.NoHumanLeftException;
 import io.nbelleme.hvsz.game.Game;
@@ -45,7 +45,7 @@ final class HumanServiceImpl implements HumanService {
   @Override
   public boolean hasTicketsLeft() {
     Game g = gameService.getCurrent();
-    Assert.gameActive(g);
+    AssertGame.gameActive(g);
     return g.getStatus().getRemainingHumanTickets() > 0;
 
   }
@@ -59,7 +59,7 @@ final class HumanServiceImpl implements HumanService {
   @Override
   public Human spawn() {
     Game g = gameService.getCurrent();
-    Assert.gameActive(g);
+    AssertGame.gameActive(g);
     Status status = g.getStatus();
 
     if (!hasTicketsLeft()) {
@@ -83,7 +83,7 @@ final class HumanServiceImpl implements HumanService {
   @Override
   public Human getHumanByToken(int token) {
     Game g = gameService.getCurrent();
-    Assert.gameActive(g);
+    AssertGame.gameActive(g);
     return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElse(null);
   }
 

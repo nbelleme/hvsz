@@ -1,8 +1,7 @@
 package io.nbelleme.hvsz.services.impl;
 
 
-import io.nbelleme.hvsz.common.Assert;
-import io.nbelleme.hvsz.common.exceptions.IllegalGameStateException;
+import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.game.GameState;
@@ -57,7 +56,7 @@ final class GameServiceImpl implements GameService {
   public void pauseGame() {
     Game game = gameDao.get().orElse(null);
 
-    Assert.gameOngoing(game);
+    AssertGame.gameOngoing(game);
 
     Status status = game.getStatus();
     status.setGameState(GameState.PAUSED);
@@ -74,7 +73,7 @@ final class GameServiceImpl implements GameService {
   public void stopGame() {
     Game game = gameDao.get().orElse(null);
 
-    Assert.gameOngoing(game);
+    AssertGame.gameOngoing(game);
 
     Status status = game.getStatus()
         .setGameState(GameState.STOPPED);

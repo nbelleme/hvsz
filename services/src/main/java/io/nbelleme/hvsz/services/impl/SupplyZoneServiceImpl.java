@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.services.impl;
 
-import io.nbelleme.hvsz.common.Assert;
+import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.humans.Human;
 import io.nbelleme.hvsz.services.api.GameService;
@@ -33,7 +33,7 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
   @Override
   public SupplyZone get(Long zoneId) {
     Game game = gameService.getCurrent();
-    Assert.gameOngoing(game);
+    AssertGame.gameOngoing(game);
     return game.getFoodSupplies()
                .stream()
                .filter(foodSupply -> foodSupply.getId().equals(zoneId))
@@ -44,14 +44,14 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
   @Override
   public List<SupplyZone> getAll() {
     Game game = gameService.getCurrent();
-    Assert.gameOngoing(game);
+    AssertGame.gameOngoing(game);
     return game.getFoodSupplies();
   }
 
   @Override
   public int takeFood(Long zoneId, int lifeToken, Integer amount) {
     Game game = gameService.getCurrent();
-    Assert.gameActive(game);
+    AssertGame.gameActive(game);
 
     Human human = game.getStatus().getLifeByToken(lifeToken);
 
@@ -65,7 +65,7 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
       throw new IllegalStateException("Cannot find the right food supply");
     }
 
-    Assert.humanAlive(human, supplyZone);
+    AssertGame.humanAlive(human, supplyZone);
 
     int originalResources = supplyZone.getLevel();
     int result = supplyZone.pick(amount);

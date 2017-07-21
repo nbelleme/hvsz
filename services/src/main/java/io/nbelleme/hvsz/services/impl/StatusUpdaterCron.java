@@ -62,10 +62,7 @@ public class StatusUpdaterCron {
                                                         status.getRemainingTime(),
                                                         game.getConfig().getDifficulty());
 
-      if (shouldDecreaseLevel) {
-        safeZoneService.decreaseFoodLevel();
-      }
-
+      safeZoneService.decreaseFoodLevel(game);
       game.setStatus(status);
       Game gameUpdated = gameService.save(game);
 
@@ -90,7 +87,7 @@ public class StatusUpdaterCron {
       return false;
     }
 
-    long timeToHunger = (long) difficulty.getValue() * totalTime;
+    long timeToHunger = (long) (difficulty.getValue() * totalTime);
     long timeToDecrementUnit = timeToHunger / totalFoodUnits;
 
     return remainingTime % timeToDecrementUnit == 0;

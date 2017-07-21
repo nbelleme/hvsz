@@ -1,6 +1,8 @@
 package io.nbelleme.hvsz.services.impl;
 
-import io.nbelleme.hvsz.common.Assert;
+import io.nbelleme.hvsz.common.AssertGame;
+import io.nbelleme.hvsz.common.AssertHuman;
+import io.nbelleme.hvsz.common.AssertSafeZone;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.humans.Human;
 import io.nbelleme.hvsz.services.api.GameService;
@@ -26,7 +28,7 @@ final class SafeZoneServiceImpl implements SafeZoneService {
   }
 
   @Override
-  public SafeZone getSafeZone(Long zoneId) {
+  public SafeZone getSafeZone(long zoneId) {
     return getSafeZones()
             .stream()
             .filter(z -> z.getId().equals(zoneId))
@@ -37,27 +39,29 @@ final class SafeZoneServiceImpl implements SafeZoneService {
   @Override
   public List<SafeZone> getSafeZones() {
     Game game = gameService.getCurrent();
-    Assert.gameOngoing(game);
+    AssertGame.gameOngoing(game);
     return game.getSafeZones();
   }
 
   @Override
-  public int refill(Long zoneId, int token) {
+  public int refill(long zoneId, int token) {
     Game game = gameService.getCurrent();
+    AssertGame.gameOngoing(game);
+
     SafeZone safeZone = game.getSafeZones()
                             .stream()
                             .filter(z -> z.getId().equals(zoneId))
                             .findFirst()
                             .orElse(null);
 
+    AssertSafeZone.zoneNotDestroyed(safeZone);
+
     Human human = game.getStatus()
                       .getLifeByToken(token);
 
-    Assert.humanAlive(human, safeZone);
+    AssertHuman.humanAlive(human, safeZone);
 
-    if (safeZone.isDestroyed()) {
-      return 0;
-    }
+
     int oldLevel = safeZone.getLevel();
     int level = Math.min(oldLevel + human.getNbResources(), safeZone.getCapacity());
     int refilled = level - oldLevel;
@@ -68,14 +72,13 @@ final class SafeZoneServiceImpl implements SafeZoneService {
   }
 
   @Override
-  public void decreaseFoodLevel() {
-    Game g = gameService.getCurrent();
-    g.getSafeZones().forEach(safeZone -> {
+  public void decreaseFoodLevel(Game game) {
+    gameService.getCurrent();
+    game.getSafeZones().forEach(safeZone -> {
       if (safeZone.getLevel() > 0) {
         safeZone.setLevel(safeZone.getLevel() - 1);
       }
     });
-    gameService.save(g);
   }
 
 }

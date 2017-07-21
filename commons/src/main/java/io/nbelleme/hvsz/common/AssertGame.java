@@ -1,17 +1,15 @@
 package io.nbelleme.hvsz.common;
 
-import io.nbelleme.hvsz.common.exceptions.HumanIsDeadException;
 import io.nbelleme.hvsz.common.exceptions.IllegalGameStateException;
 import io.nbelleme.hvsz.common.exceptions.NoGameDefinedException;
 import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.humans.Human;
 
 /**
  * Business layer assertions.
  *
  * @author Loïc Ortola on 04/05/2017
  */
-public abstract class Assert {
+public abstract class AssertGame {
 
   /**
    * Asserts that the game is not null.
@@ -97,27 +95,5 @@ public abstract class Assert {
     }
   }
 
-  /**
-   * Asserts that a human is not null and alive.
-   *
-   * @param human the human life
-   */
-  public static void humanAlive(Human human) {
-    if (human == null || !human.isAlive()) {
-      throw new HumanIsDeadException();
-    }
-  }
-
-  /**
-   * Asserts that a human is not null and alive.
-   *
-   * @param human the human life
-   * @param zone  zone that asked the check
-   */
-  public static void humanAlive(Human human, Object zone) {
-    if (human == null || !human.isAlive()) {
-      throw new HumanIsDeadException(zone);
-    }
-  }
 
 }
