@@ -93,7 +93,7 @@ public abstract class Assert {
   public static void gamePaused(Game game) {
     gameDefined(game);
     if (!game.getStatus().isPaused()) {
-      throw new IllegalGameStateException();
+      throw new IllegalGameStateException("Game is not paused.");
     }
   }
 
