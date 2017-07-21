@@ -22,6 +22,8 @@ public class StatusUpdaterCron {
   private static final Logger LOGGER = LoggerFactory.getLogger(StatusUpdaterCron.class);
   private static final int SCHEDULED_TIME = 2000;
   private static final int TOTAL_FOOD_UNITS = 100;
+  private static final int MILLIS_IN_SECOND = 1000;
+  private static final int SECOND_IN_MINUTE = 60;
 
   private GameService gameService;
   private SafeZoneService safeZoneService;
@@ -50,10 +52,11 @@ public class StatusUpdaterCron {
       Status status = game.getStatus();
 
       if (status.isActive() && status.getRemainingTime() > 0) {
-        status.setRemainingTime(status.getRemainingTime() - SCHEDULED_TIME / 1000);
+        status.setRemainingTime(status.getRemainingTime() - SCHEDULED_TIME / MILLIS_IN_SECOND);
       }
 
-      long totalTime = (game.getConfig().getGameDuration() * 60);
+      long totalTime = (game.getConfig().getGameDuration() * SECOND_IN_MINUTE);
+
       boolean shouldDecreaseLevel = shouldDecreaseLevel(TOTAL_FOOD_UNITS,
                                                         totalTime,
                                                         status.getRemainingTime(),
