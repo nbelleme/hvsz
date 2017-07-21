@@ -1,6 +1,8 @@
 package io.nbelleme.hvsz.services.impl;
 
 
+import io.nbelleme.hvsz.common.Assert;
+import io.nbelleme.hvsz.common.exceptions.IllegalGameStateException;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.game.GameState;
@@ -36,55 +38,20 @@ final class GameServiceImpl implements GameService {
 
   @Override
   public Game getCurrent() {
-    LOGGER.info("GameServiceImpl getCurrent");
     return gameDao.get().orElse(Game.build());
   }
 
   @Override
   public void startGame() {
-    LOGGER.info("Start Game");
-    //TODO use currentGame
-    //Asserts that the game is over if it exists
-
     Game game = gameDao.get().orElse(Game.build());
 
-    // Retrieve settings
-    GameSettings conf = GameSettings.build();
-    game.setConfig(conf);
-    // Init game status
-    Status status = Status.build()
-                          .setRemainingHumanTickets(conf.getHumanTickets())
-                          .setCurrentHumansOnField(0)
-                          .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
-                          .setGameState(GameState.ACTIVE);
-
-    game.setStatus(status);
-    // Init game supply zones
-    List<SupplyZone> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
-    int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
-
-    for (long i = 0; i < conf.getNbFoodSupplyZones(); i++) {
-      SupplyZone supplyZone = SupplyZone.build()
-                                        .setId(i)
-                                        .setCapacity(foodPerZone)
-                                        .setLevel(foodPerZone);
-      foodSupplies.add(supplyZone);
+    if(game.getStatus().isStopped()){
+      game = newGame();
     }
-    game.setFoodSupplies(foodSupplies);
-    // Init game safe zones
-    List<SafeZone> safeZones = new ArrayList<>(conf.getNbSafeZones());
-    int nbSafeZones = conf.getNbSafeZones();
-    for (long i = 0; i < nbSafeZones; i++) {
-      SafeZone safeZone = SafeZone.build()
-                                  .setId(i)
-                                  .setLevel(conf.getStartingSafeZoneSupplies());
-      safeZones.add(safeZone);
-    }
-    game.setSafeZones(safeZones);
 
-    // Save game
     save(game);
   }
+
 
   @Override
   public void pauseGame() {
@@ -96,6 +63,16 @@ final class GameServiceImpl implements GameService {
 
   @Override
   public void stopGame() {
+    Game game = gameDao.get().orElse(null);
+
+    Assert.gameOngoing(game);
+
+    Status status = game.getStatus()
+        .setGameState(GameState.STOPPED);
+
+    game.setStatus(status);
+
+    gameDao.save(game);
   }
 
   @Override
@@ -126,9 +103,49 @@ final class GameServiceImpl implements GameService {
    */
   private boolean allSafeZonesDestroyed(Game g) {
     return g.getSafeZones() == null || g.getSafeZones()
-                                        .stream()
-                                        .filter(z -> z.getLevel() > 0)
-                                        .count() == 0;
+        .stream()
+        .filter(z -> z.getLevel() > 0)
+        .count() == 0;
+  }
+
+
+  /**
+   * Create new default game.
+   * @return game created
+   */
+  private Game newGame() {
+    Game game;
+    game = Game.build();
+    GameSettings conf = GameSettings.build();
+    game.setConfig(conf);
+    Status status = Status.build()
+        .setRemainingHumanTickets(conf.getHumanTickets())
+        .setCurrentHumansOnField(0)
+        .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
+        .setGameState(GameState.ACTIVE);
+    game.setStatus(status);
+    List<SupplyZone> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
+    int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
+
+    for (long i = 0; i < conf.getNbFoodSupplyZones(); i++) {
+      SupplyZone supplyZone = SupplyZone.build()
+          .setId(i)
+          .setCapacity(foodPerZone)
+          .setLevel(foodPerZone);
+      foodSupplies.add(supplyZone);
+    }
+    game.setFoodSupplies(foodSupplies);
+    // Init game safe zones
+    List<SafeZone> safeZones = new ArrayList<>(conf.getNbSafeZones());
+    int nbSafeZones = conf.getNbSafeZones();
+    for (long i = 0; i < nbSafeZones; i++) {
+      SafeZone safeZone = SafeZone.build()
+          .setId(i)
+          .setLevel(conf.getStartingSafeZoneSupplies());
+      safeZones.add(safeZone);
+    }
+    game.setSafeZones(safeZones);
+    return game;
   }
 
 }
