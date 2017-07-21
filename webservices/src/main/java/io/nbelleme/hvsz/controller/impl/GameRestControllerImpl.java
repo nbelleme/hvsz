@@ -33,7 +33,7 @@ public class GameRestControllerImpl implements GameRestController {
   }
 
   @Override
-  @GetMapping()
+  @GetMapping("/current")
   public Game get() {
     return gameService.getCurrent();
   }
