@@ -1,10 +1,15 @@
 package io.nbelleme.persistence.dpo;
 
+import org.mongojack.ObjectId;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+
 public abstract class AbstractDPO<DTO> {
 
+  @ObjectId
+  private String id;
   private Long lastUpdate;
   private DTO dto;
 
@@ -14,7 +19,7 @@ public abstract class AbstractDPO<DTO> {
    * @param dto dto
    */
   public AbstractDPO(DTO dto) {
-    super();
+    this();
     this.dto = dto;
   }
 
@@ -22,7 +27,20 @@ public abstract class AbstractDPO<DTO> {
    * Default constructor.
    */
   public AbstractDPO() {
-    LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+    this.lastUpdate = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param id         id
+   * @param lastUpdate lastUpdate
+   * @param dto        dto
+   */
+  public AbstractDPO(String id, Long lastUpdate, DTO dto) {
+    this.id = id;
+    this.lastUpdate = lastUpdate;
+    this.dto = dto;
   }
 
   public Long getLastUpdate() {
@@ -45,8 +63,12 @@ public abstract class AbstractDPO<DTO> {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     AbstractDPO<?> that = (AbstractDPO<?>) o;
 

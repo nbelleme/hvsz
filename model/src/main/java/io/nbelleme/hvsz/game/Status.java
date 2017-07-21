@@ -1,5 +1,6 @@
 package io.nbelleme.hvsz.game;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.nbelleme.hvsz.api.DTO;
 import io.nbelleme.hvsz.humans.Human;
 
@@ -135,30 +136,37 @@ public class Status implements Serializable, DTO {
                 .orElse(null);
   }
 
+  @JsonIgnore
   public boolean isReadyToStart() {
     return isOver() || isNotStarted();
   }
 
+  @JsonIgnore
   public boolean isOver() {
     return gameState.equals(NOT_STARTED) || gameState.equals(HUMAN_VICTORY) || gameState.equals(ZOMBIE_VICTORY);
   }
 
+  @JsonIgnore
   public boolean isOngoing() {
     return gameState.equals(ACTIVE) || gameState.equals(PAUSED);
   }
 
+  @JsonIgnore
   public boolean isActive() {
     return gameState.equals(ACTIVE);
   }
 
+  @JsonIgnore
   public boolean isNotStarted() {
     return gameState.equals(NOT_STARTED);
   }
 
+  @JsonIgnore
   public boolean isOngoingOrIdle() {
     return isOngoing() || isNotStarted();
   }
 
+  @JsonIgnore
   public boolean isPaused() {
     return gameState.equals(PAUSED);
   }

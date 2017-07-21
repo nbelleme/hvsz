@@ -20,9 +20,29 @@ public class GameDpo extends AbstractDPO<Game> {
    *
    * @param game game
    */
-  @JsonCreator
-  public GameDpo(@JsonProperty("game") Game game) {
+  public GameDpo(Game game) {
     super(game);
   }
+
+  /**
+   * Constructor.
+   *
+   * @param game       game
+   * @param id         id
+   * @param lastUpdate lastUpdate
+   */
+  @JsonCreator
+  public GameDpo(@JsonProperty("dto") Game game,
+                 @JsonProperty("_id") String id,
+                 @JsonProperty("lastUpdate") Long lastUpdate) {
+    super(id, lastUpdate, game);
+  }
+
+
+  public static GameDpo build(Game game) {
+    return new GameDpo(game);
+
+  }
+
 
 }
