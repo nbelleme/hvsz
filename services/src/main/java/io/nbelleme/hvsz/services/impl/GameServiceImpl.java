@@ -10,6 +10,8 @@ import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.zone.SafeZone;
 import io.nbelleme.hvsz.zone.SupplyZone;
 import io.nbelleme.persistence.dao.api.GameDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.Objects;
 @Service
 final class GameServiceImpl implements GameService {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(GameServiceImpl.class);
   private static final long SECONDS_IN_ONE_MINUTE = 60;
   private GameDao gameDao;
 
@@ -33,17 +36,15 @@ final class GameServiceImpl implements GameService {
 
   @Override
   public Game getCurrent() {
-    return null;
+    LOGGER.info("GameServiceImpl getCurrent");
+    return gameDao.get();
   }
 
   @Override
   public void startGame() {
+    LOGGER.info("Start Game");
+    //TODO use currentGame
     //Asserts that the game is over if it exists
-    Game currentGame = getCurrent();
-    if (currentGame != null) {
-      Assert.gameOver(currentGame);
-    }
-
     Game game = Game.build();
     // Retrieve settings
     GameSettings conf = GameSettings.build();
@@ -79,7 +80,6 @@ final class GameServiceImpl implements GameService {
     }
     game.setSafeZones(safeZones);
 
-    this.gameDao.save(game);
     // Save game
     update(game);
   }
@@ -97,15 +97,16 @@ final class GameServiceImpl implements GameService {
   }
 
   @Override
-  public void update(Game g) {
+  public void update(Game game) {
+    gameDao.save(game);
   }
 
   /**
-   * @param g the active game
+   * @param game the active game
    * @return true if the time is up
    */
-  private boolean timesUp(Game g) {
-    return g.getStatus().getRemainingTime() <= 0;
+  private boolean timesUp(Game game) {
+    return game.getStatus().getRemainingTime() <= 0;
   }
 
   /**
