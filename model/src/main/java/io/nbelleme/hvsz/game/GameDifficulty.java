@@ -7,11 +7,17 @@ public enum GameDifficulty {
 
   private double value;
 
+  /**
+   * Constructor.
+   * @param value value
+   */
   GameDifficulty(double value) {
     this.value = value;
   }
 
+  //CHECKSTYLE_OFF
   public double getValue() {
     return value;
   }
+  //CHECKSTYLE_ON
 }
