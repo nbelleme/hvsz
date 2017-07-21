@@ -5,7 +5,7 @@ import io.nbelleme.hvsz.zone.SafeZone;
 
 import java.util.Objects;
 
-public class AssertSafeZone {
+public abstract class AssertSafeZone {
   /**
    * Asserts that a safezone is not null and not destroyed.
    *
