@@ -8,4 +8,12 @@ package io.nbelleme.hvsz.common.exceptions;
  */
 public class IllegalGameStateException extends IllegalStateException {
   private static final long serialVersionUID = 101442697398023937L;
+
+  public IllegalGameStateException() {
+    super();
+  }
+
+  public IllegalGameStateException(String message) {
+    super(message);
+  }
 }
