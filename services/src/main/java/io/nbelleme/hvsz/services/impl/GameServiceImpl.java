@@ -38,7 +38,7 @@ final class GameServiceImpl implements GameService {
 
   @Override
   public Game getCurrent() {
-    return gameDao.get().orElse(Game.build());
+    return gameDao.get().orElse(null);
   }
 
   @Override
@@ -55,6 +55,15 @@ final class GameServiceImpl implements GameService {
 
   @Override
   public void pauseGame() {
+    Game game = gameDao.get().orElse(null);
+
+    Assert.gameOngoing(game);
+
+    Status status = game.getStatus();
+    status.setGameState(GameState.PAUSED);
+    game.setStatus(status);
+
+    save(game);
   }
 
   @Override
