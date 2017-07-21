@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.services.impl;
 
-import io.nbelleme.hvsz.common.Assert;
+import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.game.Game;
 import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.services.api.GameService;
@@ -36,7 +36,7 @@ final class GameSettingsServiceImpl implements GameSettingsService {
   @Override
   public GameSettings get() {
     Game active = gameService.getCurrent();
-    Assert.gameDefined(active);
+    AssertGame.gameDefined(active);
     return active.getConfig();
   }
 }
