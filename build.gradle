@@ -84,7 +84,7 @@ project(':persistence') {
         compile project(':model')
         api "org.slf4j:slf4j-api:$slf4jApi"
         compile "org.mongojack:mongojack:$mongoJack"
-@    }
+    }
 }
 
 project(':webservices') {
