@@ -18,6 +18,7 @@ public class IllegalGameStateException extends IllegalStateException {
 
   /**
    * Constructor.
+   *
    * @param message message
    */
   public IllegalGameStateException(String message) {

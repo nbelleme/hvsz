@@ -44,7 +44,7 @@ final class GameServiceImpl implements GameService {
   public void startGame() {
     Game game = gameDao.get().orElse(Game.build());
 
-    if(game.getStatus().isStopped()){
+    if (game.getStatus().isStopped()) {
       game = newGame();
     }
 
@@ -76,7 +76,7 @@ final class GameServiceImpl implements GameService {
     AssertGame.gameOngoing(game);
 
     Status status = game.getStatus()
-        .setGameState(GameState.STOPPED);
+                        .setGameState(GameState.STOPPED);
 
     game.setStatus(status);
 
@@ -111,14 +111,15 @@ final class GameServiceImpl implements GameService {
    */
   private boolean allSafeZonesDestroyed(Game g) {
     return g.getSafeZones() == null || g.getSafeZones()
-        .stream()
-        .filter(z -> z.getLevel() > 0)
-        .count() == 0;
+                                        .stream()
+                                        .filter(z -> z.getLevel() > 0)
+                                        .count() == 0;
   }
 
 
   /**
    * Create new default game.
+   *
    * @return game created
    */
   private Game newGame() {
@@ -127,19 +128,19 @@ final class GameServiceImpl implements GameService {
     GameSettings conf = GameSettings.build();
     game.setConfig(conf);
     Status status = Status.build()
-        .setRemainingHumanTickets(conf.getHumanTickets())
-        .setCurrentHumansOnField(0)
-        .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
-        .setGameState(GameState.ACTIVE);
+                          .setRemainingHumanTickets(conf.getHumanTickets())
+                          .setCurrentHumansOnField(0)
+                          .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
+                          .setGameState(GameState.ACTIVE);
     game.setStatus(status);
     List<SupplyZone> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
     int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
 
     for (long i = 0; i < conf.getNbFoodSupplyZones(); i++) {
       SupplyZone supplyZone = SupplyZone.build()
-          .setId(i)
-          .setCapacity(foodPerZone)
-          .setLevel(foodPerZone);
+                                        .setId(i)
+                                        .setCapacity(foodPerZone)
+                                        .setLevel(foodPerZone);
       foodSupplies.add(supplyZone);
     }
     game.setFoodSupplies(foodSupplies);
@@ -148,8 +149,8 @@ final class GameServiceImpl implements GameService {
     int nbSafeZones = conf.getNbSafeZones();
     for (long i = 0; i < nbSafeZones; i++) {
       SafeZone safeZone = SafeZone.build()
-          .setId(i)
-          .setLevel(conf.getStartingSafeZoneSupplies());
+                                  .setId(i)
+                                  .setLevel(conf.getStartingSafeZoneSupplies());
       safeZones.add(safeZone);
     }
     game.setSafeZones(safeZones);

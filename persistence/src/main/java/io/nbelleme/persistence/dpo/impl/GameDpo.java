@@ -42,6 +42,7 @@ public class GameDpo extends AbstractDPO<Game> {
 
   /**
    * Default constructor.
+   *
    * @param game game
    * @return GameDpo new GameDpo
    */
