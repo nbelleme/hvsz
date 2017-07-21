@@ -1,7 +1,5 @@
 package io.nbelleme.persistence.dpo;
 
-import org.mongojack.ObjectId;
-
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
