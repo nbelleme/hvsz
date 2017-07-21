@@ -68,7 +68,7 @@ final class SafeZoneServiceImpl implements SafeZoneService {
   }
 
   @Override
-  public void eatOneUnitOfFood() {
+  public void decreaseFoodLevel() {
     Game g = gameService.getCurrent();
     g.getSafeZones().forEach(safeZone -> {
       if (safeZone.getLevel() > 0) {

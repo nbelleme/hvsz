@@ -35,5 +35,5 @@ public interface SafeZoneService {
    *
    * @see io.nbelleme.hvsz.game.StatusUpdaterCron for more details.
    */
-  void eatOneUnitOfFood();
+  void decreaseFoodLevel();
 }
