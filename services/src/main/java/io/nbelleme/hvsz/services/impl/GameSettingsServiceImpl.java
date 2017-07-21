@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-import static io.nbelleme.hvsz.common.Constants.GAME_ID;
-
 @Service
 final class GameSettingsServiceImpl implements GameSettingsService {
 
@@ -29,7 +27,7 @@ final class GameSettingsServiceImpl implements GameSettingsService {
   public void set(GameSettings gameSettings) {
     Game g = gameService.getCurrent();
     if (g == null) {
-      g = Game.build()  ;
+      g = Game.build();
     }
     g.setConfig(gameSettings);
     gameService.save(g);
