@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+
+        <encoder>
+            <pattern>[ %highlight(%-6level)] %d{yyyy-MM-dd HH:mm:ss.SSS, UTC} [%green(%-40logger{36})] - %X{requestUuid} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="org.mongodb.driver.connection" level="warn"/>
+    <logger name="org.mongodb.driver.cluster" level="warn"/>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
