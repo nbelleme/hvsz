@@ -17,8 +17,6 @@ import java.util.function.LongFunction;
 import java.util.stream.LongStream;
 
 /**
- * TODO class details.
- *
  * @author Loïc Ortola on 04/05/2017
  */
 @Service
@@ -37,6 +35,7 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
 
   @Override
   public SupplyZone get(Long zoneId) {
+    Objects.requireNonNull(zoneId);
     Game game = gameService.getCurrent();
     AssertGame.gameOngoing(game);
     return game.getFoodSupplies()
@@ -66,26 +65,28 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
                                 .findFirst()
                                 .orElse(null);
 
-    if (supplyZone == null) {
-      throw new IllegalStateException("Cannot find the right food supply");
-    }
+    Objects.requireNonNull(supplyZone);
 
     AssertHuman.humanAlive(human, supplyZone);
 
     int originalResources = supplyZone.getLevel();
     int result = supplyZone.pick(amount);
-    boolean humanFull = human.addResource(result);
 
-    if (humanFull) { // if the human didn't have room for all resources, put excess back
-      supplyZone.setLevel(originalResources - human.getNbResources());
+    if (human.isAlive()) {
+      if (human.getNbResources() + result <= Human.MAX_RESOURCES) {
+        human.addResource(result);
+      } else {
+        human.setNbResources(Human.MAX_RESOURCES);
+      }
     }
 
+    supplyZone.setLevel(originalResources - human.getNbResources());
     gameService.save(game);
     return human.getNbResources();
   }
 
   @Override
-  public List<SupplyZone> initFoodSupplies(GameSettings conf) {
+  public List<SupplyZone> initSupplyZones(GameSettings conf) {
     List<SupplyZone> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
     int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
 
@@ -98,6 +99,7 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
 
   /**
    * Build supplyzone.
+   *
    * @param foodPerZone parameter
    * @return lambda
    */

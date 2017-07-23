@@ -33,6 +33,6 @@ public interface SupplyZoneService {
    * @param gameSettings gameSettings to init supplyzones
    * @return List of supplyzones
    */
-  List<SupplyZone> initFoodSupplies(GameSettings gameSettings);
+  List<SupplyZone> initSupplyZones(GameSettings gameSettings);
 
 }
