@@ -28,11 +28,5 @@ public interface SupplyZoneService {
    */
   int takeFood(Long zoneId, int lifeToken, Integer amount);
 
-  /**
-   * Init array of supplyzones.
-   * @param gameSettings gameSettings to init supplyzones
-   * @return List of supplyzones
-   */
-  List<SupplyZone> initSupplyZones(GameSettings gameSettings);
 
 }

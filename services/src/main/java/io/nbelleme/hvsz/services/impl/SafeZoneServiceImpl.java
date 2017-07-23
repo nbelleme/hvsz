@@ -4,18 +4,14 @@ import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.common.AssertHuman;
 import io.nbelleme.hvsz.common.AssertSafeZone;
 import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.humans.Human;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
 import io.nbelleme.hvsz.zone.SafeZone;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.LongFunction;
-import java.util.stream.LongStream;
 
 @Service
 final class SafeZoneServiceImpl implements SafeZoneService {
@@ -58,6 +54,7 @@ final class SafeZoneServiceImpl implements SafeZoneService {
                             .findFirst()
                             .orElse(null);
 
+    Objects.requireNonNull(safeZone);
     AssertSafeZone.zoneNotDestroyed(safeZone);
 
     Human human = game.getStatus()
@@ -83,30 +80,6 @@ final class SafeZoneServiceImpl implements SafeZoneService {
         safeZone.setLevel(safeZone.getLevel() - 1);
       }
     });
-  }
-
-  @Override
-  public List<SafeZone> initSafeZones(GameSettings conf) {
-    int nbSafeZones = conf.getNbSafeZones();
-    int defaultLevel = conf.getStartingSafeZoneSupplies();
-
-    List<SafeZone> safeZones = new ArrayList<>();
-    LongStream.range(0, nbSafeZones)
-              .mapToObj(buildSafeZone(defaultLevel))
-              .forEach(safeZones::add);
-
-    return safeZones;
-  }
-
-  /**
-   * Build SafeZone.
-   * @param defaultLevel parameter
-   * @return lambda
-   */
-  private LongFunction<SafeZone> buildSafeZone(int defaultLevel) {
-    return i -> SafeZone.build()
-                        .setId(i)
-                        .setLevel(defaultLevel);
   }
 
 }

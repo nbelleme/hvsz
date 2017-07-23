@@ -7,8 +7,6 @@ import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.game.GameState;
 import io.nbelleme.hvsz.game.Status;
 import io.nbelleme.hvsz.services.api.GameService;
-import io.nbelleme.hvsz.services.api.SafeZoneService;
-import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.SafeZone;
 import io.nbelleme.hvsz.zone.SupplyZone;
 import io.nbelleme.persistence.dao.api.GameDao;
@@ -26,21 +24,14 @@ final class GameServiceImpl implements GameService {
   private static final long SECONDS_IN_ONE_MINUTE = 60;
   private GameDao gameDao;
 
-  private SafeZoneService safeZoneService;
-  private SupplyZoneService supplyZoneService;
-
 
   /**
    * Constructor.
    *
-   * @param gameDao           gameDao
-   * @param safeZoneService   safeZoneService
-   * @param supplyZoneService supplyZoneService
+   * @param gameDao gameDao
    */
-  GameServiceImpl(GameDao gameDao, SafeZoneService safeZoneService, SupplyZoneService supplyZoneService) {
+  GameServiceImpl(GameDao gameDao) {
     this.gameDao = Objects.requireNonNull(gameDao);
-    this.safeZoneService = Objects.requireNonNull(safeZoneService);
-    this.supplyZoneService = Objects.requireNonNull(supplyZoneService);
   }
 
 
@@ -158,15 +149,14 @@ final class GameServiceImpl implements GameService {
                           .setGameState(GameState.ACTIVE);
     game.setStatus(status);
 
-    List<SupplyZone> supplyZones = supplyZoneService.initSupplyZones(conf);
+    List<SupplyZone> supplyZones = ZoneFactory.initSupplyZones(conf);
     game.setFoodSupplies(supplyZones);
 
-    List<SafeZone> safeZones = safeZoneService.initSafeZones(conf);
+    List<SafeZone> safeZones = ZoneFactory.initSafeZones(conf);
     game.setSafeZones(safeZones);
 
     return game;
   }
-
 
 
 }

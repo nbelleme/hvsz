@@ -40,10 +40,4 @@ public interface SafeZoneService {
    */
   void decreaseFoodLevel(Game game);
 
-  /**
-   * Init array of safezone.
-   * @param gameSettings gameSettings to init safezones
-   * @return List
-   */
-  List<SafeZone> initSafeZones(GameSettings gameSettings);
 }

@@ -85,28 +85,4 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
     return human.getNbResources();
   }
 
-  @Override
-  public List<SupplyZone> initSupplyZones(GameSettings conf) {
-    List<SupplyZone> foodSupplies = new ArrayList<>(conf.getNbFoodSupplyZones());
-    int foodPerZone = conf.getNbFoodSupplies() / conf.getNbFoodSupplyZones();
-
-    LongStream.range(0, conf.getNbFoodSupplyZones())
-              .mapToObj(buildSupplyZone(foodPerZone))
-              .forEach(foodSupplies::add);
-
-    return foodSupplies;
-  }
-
-  /**
-   * Build supplyzone.
-   *
-   * @param foodPerZone parameter
-   * @return lambda
-   */
-  private LongFunction<SupplyZone> buildSupplyZone(int foodPerZone) {
-    return i -> SupplyZone.build()
-                          .setId(i)
-                          .setCapacity(foodPerZone)
-                          .setLevel(foodPerZone);
-  }
 }
