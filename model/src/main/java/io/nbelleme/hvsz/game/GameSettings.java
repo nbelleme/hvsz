@@ -26,7 +26,7 @@ public class GameSettings implements Serializable, DTO {
   private int maxHumansOnField;
   private int nbSafeZones;
   private int startingSafeZoneSupplies;
-  private int nbFoodSupplyZones;
+  private int ngSupplyZones;
   private int nbFoodSupplies;
   private int maximumFoodTransfer;
   // Generated values with difficulty
@@ -41,7 +41,7 @@ public class GameSettings implements Serializable, DTO {
     humanTickets = DEFAULT_HUMAN_TICKETS;
     maxHumansOnField = DEFAULT_MAX_HUMAN_ON_FIELD;
     nbSafeZones = DEFAULT_NB_SAFE_ZONE;
-    nbFoodSupplyZones = DEFAULT_NB_FOOD_ZONE;
+    ngSupplyZones = DEFAULT_NB_FOOD_ZONE;
     nbFoodSupplies = DEFAULT_FOOD_SUPPLIES;
     maximumFoodTransfer = DEFAULT_MAX_FOOD_TRANSFERT;
     safezoneDropRate = DEFAULT_SAFE_ZONE_DROP_RATE;
@@ -103,12 +103,12 @@ public class GameSettings implements Serializable, DTO {
     return this;
   }
 
-  public int getNbFoodSupplyZones() {
-    return nbFoodSupplyZones;
+  public int getNgSupplyZones() {
+    return ngSupplyZones;
   }
 
-  public GameSettings setNbFoodSupplyZones(int nbFoodSupplyZones) {
-    this.nbFoodSupplyZones = nbFoodSupplyZones;
+  public GameSettings setNgSupplyZones(int ngSupplyZones) {
+    this.ngSupplyZones = ngSupplyZones;
     return this;
   }
 
@@ -156,7 +156,7 @@ public class GameSettings implements Serializable, DTO {
         ", difficulty=" + difficulty +
         ", humanTickets=" + humanTickets +
         ", nbSafeZones=" + nbSafeZones +
-        ", nbFoodSupplyZones=" + nbFoodSupplyZones +
+        ", ngSupplyZones=" + ngSupplyZones +
         ", nbFoodSupplies=" + nbFoodSupplies +
         ", safezoneDropRate=" + safezoneDropRate +
         ", maximumFoodTransfer=" + maximumFoodTransfer +
