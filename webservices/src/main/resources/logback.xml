@@ -3,7 +3,7 @@
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>TRACE</level>
+            <level>INFO</level>
         </filter>
 
         <encoder>
@@ -16,7 +16,7 @@
     <logger name="org.mongodb.driver.connection" level="info"/>
     <logger name="org.mongodb.driver.cluster" level="info"/>
 
-    <root level="info">
+    <root level="error">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
