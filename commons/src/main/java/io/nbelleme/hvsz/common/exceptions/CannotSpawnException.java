@@ -8,6 +8,9 @@ package io.nbelleme.hvsz.common.exceptions;
 public class CannotSpawnException extends RuntimeException {
   private static final long serialVersionUID = -7064594754154497644L;
 
+  /**
+   * Constructor.
+   */
   public CannotSpawnException() {
     super();
   }
