@@ -21,20 +21,6 @@ public class SupplyZone implements Serializable {
   }
 
   /**
-   * SupplyZone constructor.
-   *
-   * @param id       the id of the SupplyZone
-   * @param level    the current amount of resource
-   * @param capacity the maximum amount of Resource (<=> available at the start of the game)
-   */
-  private SupplyZone(Long id, int level, int capacity) {
-    this.id = id;
-    this.level = level;
-    this.capacity = capacity;
-    name = NAME + id;
-  }
-
-  /**
    * Build default FoodSupply.
    *
    * @return default FoodSupply
