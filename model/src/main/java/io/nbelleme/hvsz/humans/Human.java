@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Human implements Serializable, DTO {
 
   private static final long serialVersionUID = -302241752023615893L;
-  private static final int MAX_RESOURCES = 10;
+  public static final int MAX_RESOURCES = 10;
 
   private Long id;
   private boolean alive;
@@ -105,20 +105,9 @@ public class Human implements Serializable, DTO {
    * add a resource to inventory.
    *
    * @param qte qte to add
-   * @return qte added
    */
-  public boolean addResource(int qte) {
-    if (!alive) {
-      return false;
-    }
-
-    if (this.nbResources + qte <= MAX_RESOURCES) {
-      this.nbResources += qte;
-      return true;
-    } else {
-      this.nbResources = MAX_RESOURCES;
-      return false;
-    }
+  public void addResource(int qte) {
+      nbResources += qte;
   }
 
   @Override

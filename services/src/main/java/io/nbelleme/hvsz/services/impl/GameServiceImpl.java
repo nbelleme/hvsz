@@ -158,7 +158,7 @@ final class GameServiceImpl implements GameService {
                           .setGameState(GameState.ACTIVE);
     game.setStatus(status);
 
-    List<SupplyZone> supplyZones = supplyZoneService.initFoodSupplies(conf);
+    List<SupplyZone> supplyZones = supplyZoneService.initSupplyZones(conf);
     game.setFoodSupplies(supplyZones);
 
     List<SafeZone> safeZones = safeZoneService.initSafeZones(conf);
