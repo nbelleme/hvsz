@@ -1,8 +1,6 @@
-package io.nbelleme.hvsz.services.impl;
+package io.nbelleme.hvsz.zone;
 
 import io.nbelleme.hvsz.game.GameSettings;
-import io.nbelleme.hvsz.zone.SafeZone;
-import io.nbelleme.hvsz.zone.SupplyZone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +49,7 @@ public class ZoneFactory {
                         .setLevel(defaultLevel);
   }
 
-  private static LongFunction<io.nbelleme.hvsz.zone.SupplyZone> buildSupplyZone(int foodPerZone) {
+  private static LongFunction<SupplyZone> buildSupplyZone(int foodPerZone) {
     return i -> SupplyZone.build()
                           .setId(i)
                           .setCapacity(foodPerZone)
