@@ -107,7 +107,7 @@ public class Human implements Serializable, DTO {
    * @param qte qte to add
    */
   public void addResource(int qte) {
-      nbResources += qte;
+    nbResources += qte;
   }
 
   @Override

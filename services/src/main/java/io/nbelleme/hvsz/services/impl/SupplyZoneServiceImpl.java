@@ -3,18 +3,14 @@ package io.nbelleme.hvsz.services.impl;
 import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.common.AssertHuman;
 import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.game.GameSettings;
 import io.nbelleme.hvsz.humans.Human;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.SupplyZone;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.LongFunction;
-import java.util.stream.LongStream;
 
 /**
  * @author Loïc Ortola on 04/05/2017

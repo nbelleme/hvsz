@@ -9,6 +9,7 @@ public enum GameDifficulty {
 
   /**
    * Constructor.
+   *
    * @param value value
    */
   GameDifficulty(double value) {

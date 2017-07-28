@@ -11,14 +11,19 @@ import java.util.stream.LongStream;
 public class ZoneFactory {
 
 
+  /**
+   * Init List of SupplyZones.
+   *
+   * @param conf conf
+   * @return List of SupplyZones
+   */
   public static List<SupplyZone> initSupplyZones(GameSettings conf) {
     Objects.requireNonNull(conf);
 
     int ngSupplyZone = conf.getNgSupplyZones();
     int foodPerZone = conf.getNbFoodSupplies() / conf.getNgSupplyZones();
 
-    List<io.nbelleme.hvsz.zone.SupplyZone> foodSupplies = new ArrayList<>(ngSupplyZone);
-
+    List<SupplyZone> foodSupplies = new ArrayList<>(ngSupplyZone);
 
     LongStream.range(0, ngSupplyZone)
               .mapToObj(buildSupplyZone(foodPerZone))
@@ -27,7 +32,12 @@ public class ZoneFactory {
     return foodSupplies;
   }
 
-
+  /**
+   * Init List of SafeZone.
+   *
+   * @param conf conf
+   * @return List of SafeZone
+   */
   public static List<SafeZone> initSafeZones(GameSettings conf) {
     Objects.requireNonNull(conf);
 
@@ -43,16 +53,30 @@ public class ZoneFactory {
     return safeZones;
   }
 
+  /**
+   * Fonctional interface building safeZone.
+   *
+   * @param defaultLevel defaultLevel
+   * @return fonctional interface
+   */
   private static LongFunction<SafeZone> buildSafeZone(int defaultLevel) {
     return i -> SafeZone.build()
                         .setId(i)
-                        .setLevel(defaultLevel);
+                        .setLevel(defaultLevel)
+                        .setCapacity(defaultLevel);
   }
 
-  private static LongFunction<SupplyZone> buildSupplyZone(int foodPerZone) {
+
+  /**
+   * Fonctional interface building safeZone.
+   *
+   * @param defaultLevel defaultLevel
+   * @return fonctional interface
+   */
+  private static LongFunction<SupplyZone> buildSupplyZone(int defaultLevel) {
     return i -> SupplyZone.build()
                           .setId(i)
-                          .setCapacity(foodPerZone)
-                          .setLevel(foodPerZone);
+                          .setLevel(defaultLevel)
+                          .setCapacity(defaultLevel);
   }
 }
