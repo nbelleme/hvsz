@@ -10,12 +10,24 @@ import java.util.Objects;
  */
 public class UserMapper {
 
+  /**
+   * Map {@link User} to {@link UserDTO}.
+   *
+   * @param user user object to map
+   * @return userDTO mapped
+   */
   public static UserDTO toDTO(User user) {
     Objects.requireNonNull(user);
     return UserDTO.build()
                   .setId(user.getId());
   }
 
+  /**
+   * Map {@link User} to {@link UserDTO}.
+   *
+   * @param userDTO userDTO object to unmap
+   * @return userDTO unmapped
+   */
   public static User fromDTO(UserDTO userDTO) {
     Objects.requireNonNull(userDTO);
     return User.build()

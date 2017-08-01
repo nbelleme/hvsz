@@ -12,6 +12,12 @@ import java.util.stream.Collectors;
  */
 public class SupplyZoneMapper {
 
+  /**
+   * Map {@link SupplyZone} to {@link SupplyZoneDTO}.
+   *
+   * @param supplyZone supplyZone object to map
+   * @return safeZoneDTO mapped
+   */
   public static SupplyZoneDTO toDTO(SupplyZone supplyZone) {
     Objects.requireNonNull(supplyZone);
     return SupplyZoneDTO.build()
@@ -21,6 +27,12 @@ public class SupplyZoneMapper {
                         .setName(supplyZone.getName());
   }
 
+  /**
+   * Map {@link List} of {@link SupplyZone} to {@link List} of {@link SupplyZoneDTO}.
+   *
+   * @param supplyZones supplyZones object to map
+   * @return safeZoneDTO mapped
+   */
   public static List<SupplyZoneDTO> toDTO(List<SupplyZone> supplyZones) {
     Objects.requireNonNull(supplyZones);
     return supplyZones.stream()
@@ -29,6 +41,12 @@ public class SupplyZoneMapper {
 
   }
 
+  /**
+   * Map {@link SupplyZone} to {@link SupplyZoneDTO}.
+   *
+   * @param supplyZoneDTO supplyZone object to unmap
+   * @return supplyZone unmapped
+   */
   public static SupplyZone fromDTO(SupplyZoneDTO supplyZoneDTO) {
     Objects.requireNonNull(supplyZoneDTO);
     return SupplyZone.build()
