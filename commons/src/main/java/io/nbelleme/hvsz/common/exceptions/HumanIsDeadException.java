@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.common.exceptions;
 
-import io.nbelleme.hvsz.zone.SafeZone;
-import io.nbelleme.hvsz.zone.SupplyZone;
+import io.nbelleme.hvsz.zone.internal.SafeZone;
+import io.nbelleme.hvsz.zone.internal.SupplyZone;
 
 /**
  * TODO class details.

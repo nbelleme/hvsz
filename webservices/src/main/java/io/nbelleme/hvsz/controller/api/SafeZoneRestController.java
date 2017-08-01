@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.controller.api;
 
-import io.nbelleme.hvsz.zone.SafeZone;
+import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
 
 import java.util.List;
 
@@ -12,14 +12,14 @@ public interface SafeZoneRestController {
    * @param zoneId the id of the safe-zone
    * @return the safe-zone
    */
-  SafeZone getSafeZone(Long zoneId);
+  SafeZoneDTO getSafeZone(Long zoneId);
 
   /**
    * Get all safe-zone.
    *
    * @return List<safe-zone>
    */
-  List<SafeZone> getAllSafeZone();
+  List<SafeZoneDTO> getAllSafeZone();
 
   /**
    * Drop resource in zone.

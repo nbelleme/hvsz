@@ -2,7 +2,7 @@ package io.nbelleme.hvsz.common;
 
 import io.nbelleme.hvsz.common.exceptions.IllegalGameStateException;
 import io.nbelleme.hvsz.common.exceptions.NoGameDefinedException;
-import io.nbelleme.hvsz.game.Game;
+import io.nbelleme.hvsz.game.internal.Game;
 
 /**
  * Business layer assertions.
@@ -55,7 +55,7 @@ public abstract class AssertGame {
   public static void gameStopped(Game game) {
     gameDefined(game);
     if (!game.getStatus().isStopped()) {
-      throw new IllegalGameStateException("Game is stopped");
+      throw new IllegalGameStateException("GameDTO is stopped");
     }
   }
 
@@ -91,7 +91,7 @@ public abstract class AssertGame {
   public static void gamePaused(Game game) {
     gameDefined(game);
     if (!game.getStatus().isPaused()) {
-      throw new IllegalGameStateException("Game is not paused.");
+      throw new IllegalGameStateException("GameDTO is not paused.");
     }
   }
 

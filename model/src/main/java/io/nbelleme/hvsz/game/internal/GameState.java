@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.game;
+package io.nbelleme.hvsz.game.internal;
 
 /**
  * A game is ongoing when active or paused.

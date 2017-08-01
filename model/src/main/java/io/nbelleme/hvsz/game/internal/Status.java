@@ -1,21 +1,21 @@
-package io.nbelleme.hvsz.game;
+package io.nbelleme.hvsz.game.internal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.nbelleme.hvsz.api.DTO;
-import io.nbelleme.hvsz.humans.Human;
+import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.human.internal.Human;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
-import static io.nbelleme.hvsz.game.GameState.ACTIVE;
-import static io.nbelleme.hvsz.game.GameState.HUMAN_VICTORY;
-import static io.nbelleme.hvsz.game.GameState.NOT_STARTED;
-import static io.nbelleme.hvsz.game.GameState.PAUSED;
-import static io.nbelleme.hvsz.game.GameState.STOPPED;
-import static io.nbelleme.hvsz.game.GameState.ZOMBIE_VICTORY;
+import static io.nbelleme.hvsz.game.internal.GameState.ACTIVE;
+import static io.nbelleme.hvsz.game.internal.GameState.HUMAN_VICTORY;
+import static io.nbelleme.hvsz.game.internal.GameState.NOT_STARTED;
+import static io.nbelleme.hvsz.game.internal.GameState.PAUSED;
+import static io.nbelleme.hvsz.game.internal.GameState.STOPPED;
+import static io.nbelleme.hvsz.game.internal.GameState.ZOMBIE_VICTORY;
 
-public class Status implements Serializable, DTO {
+public class Status implements Serializable, DPO {
 
   private static final long serialVersionUID = -3433632584769693093L;
 

@@ -2,14 +2,14 @@ package io.nbelleme.hvsz.services.impl;
 
 
 import io.nbelleme.hvsz.common.AssertGame;
-import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.game.GameSettings;
-import io.nbelleme.hvsz.game.GameState;
-import io.nbelleme.hvsz.game.Status;
+import io.nbelleme.hvsz.game.internal.Game;
+import io.nbelleme.hvsz.game.internal.GameSettings;
+import io.nbelleme.hvsz.game.internal.GameState;
+import io.nbelleme.hvsz.game.internal.Status;
 import io.nbelleme.hvsz.services.api.GameService;
-import io.nbelleme.hvsz.zone.SafeZone;
-import io.nbelleme.hvsz.zone.SupplyZone;
-import io.nbelleme.hvsz.zone.ZoneFactory;
+import io.nbelleme.hvsz.zone.internal.SafeZone;
+import io.nbelleme.hvsz.zone.internal.SupplyZone;
+import io.nbelleme.hvsz.zone.internal.ZoneFactory;
 import io.nbelleme.persistence.dao.api.GameDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +38,7 @@ final class GameServiceImpl implements GameService {
 
   @Override
   public Game getCurrent() {
+
     return gameDao.get().orElse(null);
   }
 

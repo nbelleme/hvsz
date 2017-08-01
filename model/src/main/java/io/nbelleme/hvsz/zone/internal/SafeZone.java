@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.zone;
+package io.nbelleme.hvsz.zone.internal;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ public class SafeZone implements Serializable {
 
   private static final long serialVersionUID = -8759367013773257550L;
 
-  private static final String ZONE_NAME = "Zone de sécurié n° ";
+  private static final String ZONE_NAME = "ZoneDTO de sécurié n° ";
 
   private Long id;
   private int level;
@@ -15,16 +15,16 @@ public class SafeZone implements Serializable {
   private Boolean destroyed = false;
 
   /**
-   * SafeZone Empty constructor.
+   * SafeZoneDTO Empty constructor.
    */
   private SafeZone() {
     capacity = 100;
   }
 
   /**
-   * SafeZone constructor.
+   * SafeZoneDTO constructor.
    *
-   * @param id       the id of the SafeZone
+   * @param id       the id of the SafeZoneDTO
    * @param level    the amount of Resource at the start of the game
    * @param capacity the max of Resource the zone can hold.
    */
@@ -35,9 +35,9 @@ public class SafeZone implements Serializable {
   }
 
   /**
-   * Build default SafeZone.
+   * Build default SafeZoneDTO.
    *
-   * @return new SafeZone
+   * @return new SafeZoneDTO
    */
   public static SafeZone build() {
     return new SafeZone();

@@ -1,6 +1,6 @@
 package io.nbelleme.persistence.dao.api;
 
-import io.nbelleme.hvsz.user.User;
+import io.nbelleme.hvsz.user.internal.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.services.api;
 
-import io.nbelleme.hvsz.humans.Human;
+import io.nbelleme.hvsz.human.internal.Human;
 
 public interface HumanService {
 

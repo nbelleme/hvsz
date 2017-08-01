@@ -3,7 +3,7 @@ package io.nbelleme.persistence.dpo.impl;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.nbelleme.hvsz.game.Game;
+import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.persistence.dpo.AbstractDPO;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

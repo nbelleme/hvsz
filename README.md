@@ -84,7 +84,7 @@ Cette webapp permet de:
  * voir un dashboard temps réel du score et des différentes ressources restantes (Etat des Safe Zones, Quantité de nourriture restante dans les bunkers, Nombre d'humains restant, Position des joueurs, Temps de jeu restant)
 
 ### Real-Life-Game Human vs Zombies Companion
-Cette application mobile permet aux joueurs d'avoir un certain nombre d'informations in-game (comme le dashboard, mais personnalisé selon le camp du joueur)
+Cette application mobile permet aux joueurs d'avoir un certain nombre d'informations in-gameDTO (comme le dashboard, mais personnalisé selon le camp du joueur)
 
 
 ## Hardware Specs

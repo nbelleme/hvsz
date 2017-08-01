@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.controller.api;
 
-import io.nbelleme.hvsz.user.User;
+import io.nbelleme.hvsz.user.transfer.UserDTO;
 
 /**
  * Created by nbelleme on 28/07/2017.
@@ -8,11 +8,11 @@ import io.nbelleme.hvsz.user.User;
 public interface UserController {
 
   /**
-   * Create new User.
+   * Create new UserDTO.
    *
    * @return user created
    */
-  User create();
+  UserDTO create();
 
   /**
    * Get user.
@@ -20,5 +20,5 @@ public interface UserController {
    * @param id id
    * @return user
    */
-  User get(String id);
+  UserDTO get(String id);
 }

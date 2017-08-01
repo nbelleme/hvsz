@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.services.impl;
 
 import io.nbelleme.hvsz.services.api.UserService;
-import io.nbelleme.hvsz.user.User;
+import io.nbelleme.hvsz.user.internal.User;
 import io.nbelleme.persistence.dao.api.UserDao;
 import org.springframework.stereotype.Service;
 

@@ -1,23 +1,23 @@
 package io.nbelleme.hvsz.controller.api;
 
-import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.game.GameSettings;
+import io.nbelleme.hvsz.game.internal.GameSettings;
+import io.nbelleme.hvsz.game.transfer.GameDTO;
 
 public interface GameRestController {
 
   /**
    * Get the current game.
    *
-   * @return Game
+   * @return GameDTO
    */
-  Game get();
+  GameDTO get();
 
   /**
    * Start a new game with default parameter.
    *
    * @return the game created
    */
-  Game startDefault();
+  GameDTO startDefault();
 
   /**
    * Start a new game using the GameSettings done.
@@ -25,7 +25,7 @@ public interface GameRestController {
    * @param settings GameSettings
    * @return the game created
    */
-  Game startGame(GameSettings settings);
+  GameDTO startGame(GameSettings settings);
 
   /**
    * Put the game on pause.

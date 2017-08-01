@@ -2,7 +2,9 @@ package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.SafeZoneRestController;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
-import io.nbelleme.hvsz.zone.SafeZone;
+import io.nbelleme.hvsz.zone.internal.SafeZone;
+import io.nbelleme.hvsz.zone.mapper.SafeZoneMapper;
+import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,14 +32,17 @@ public class SafeZoneRestControllerImpl implements SafeZoneRestController {
 
   @Override
   @GetMapping("/{zoneId}")
-  public SafeZone getSafeZone(@PathVariable("zoneId") Long zoneId) {
-    return safeZoneService.getSafeZone(zoneId);
+  public SafeZoneDTO getSafeZone(@PathVariable("zoneId") Long zoneId) {
+    SafeZone safeZone = safeZoneService.getSafeZone(zoneId);
+    return SafeZoneMapper.toDTO(safeZone);
   }
 
   @Override
   @GetMapping("/all")
-  public List<SafeZone> getAllSafeZone() {
-    return safeZoneService.getSafeZones();
+  public List<SafeZoneDTO> getAllSafeZone() {
+    List<SafeZone> safeZones = safeZoneService.getSafeZones();
+    return SafeZoneMapper.toDTO(safeZones);
+
   }
 
   @Override

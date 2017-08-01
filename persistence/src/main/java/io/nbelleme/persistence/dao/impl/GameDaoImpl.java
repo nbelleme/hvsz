@@ -4,7 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import io.nbelleme.hvsz.game.Game;
+import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.persistence.dao.api.GameDao;
 import io.nbelleme.persistence.dpo.impl.GameDpo;
 import org.mongojack.JacksonDBCollection;

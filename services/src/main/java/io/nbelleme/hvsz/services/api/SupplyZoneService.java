@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.services.api;
 
-import io.nbelleme.hvsz.zone.SupplyZone;
+import io.nbelleme.hvsz.zone.internal.SupplyZone;
 
 import java.util.List;
 

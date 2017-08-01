@@ -1,15 +1,14 @@
-package io.nbelleme.hvsz.game;
+package io.nbelleme.hvsz.game.internal;
 
-import io.nbelleme.hvsz.api.DTO;
-import io.nbelleme.hvsz.zone.SafeZone;
-import io.nbelleme.hvsz.zone.SupplyZone;
+import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.zone.internal.SafeZone;
+import io.nbelleme.hvsz.zone.internal.SupplyZone;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Game implements Serializable, DTO {
+public class Game implements Serializable, DPO {
 
   private static final long serialVersionUID = 3753312791177172327L;
 
@@ -20,7 +19,7 @@ public class Game implements Serializable, DTO {
   private List<SupplyZone> foodSupplies;
 
   /**
-   * Game constructor.
+   * GameDTO constructor.
    */
   private Game() {
     id = UUID.randomUUID().toString();
@@ -30,87 +29,64 @@ public class Game implements Serializable, DTO {
   }
 
   /**
-   * Build default Game Object.
+   * Build default GameDTO Object.
    *
-   * @return new Game
+   * @return new GameDTO
    */
   public static Game build() {
     return new Game();
   }
 
+// CHECKSTYLE_OFF
 
-  /**
-   * Set default values to the status if null.
-   *
-   * @param g Game
-   */
-  public Game(Game g) {
-    this.id = g.id;
-    if (g.status != null) {
-      this.status = g.status;
-    }
-    if (g.config != null) {
-      this.config = g.config;
-    }
-    if (g.foodSupplies != null) {
-      this.foodSupplies = g.foodSupplies;
-    } else {
-      this.foodSupplies = new ArrayList<>();
-    }
-    if (g.safeZones != null) {
-      this.safeZones = g.safeZones;
-    } else {
-      this.safeZones = new ArrayList<>();
-    }
+  public static long getSerialVersionUID() {
+    return serialVersionUID;
   }
-
 
   public String getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public Game setId(String id) {
     this.id = id;
+    return this;
   }
 
   public Status getStatus() {
     return status;
   }
 
-  public void setStatus(Status status) {
+  public Game setStatus(Status status) {
     this.status = status;
+    return this;
   }
 
   public GameSettings getConfig() {
     return config;
   }
 
-  /**
-   * Set the configs.
-   *
-   * @param config GameConfig
-   */
-  public void setConfig(GameSettings config) {
+  public Game setConfig(GameSettings config) {
     this.config = config;
+    return this;
   }
 
   public List<SafeZone> getSafeZones() {
     return safeZones;
   }
 
-  public void setSafeZones(List<SafeZone> safeZones) {
+  public Game setSafeZones(List<SafeZone> safeZones) {
     this.safeZones = safeZones;
+    return this;
   }
 
   public List<SupplyZone> getFoodSupplies() {
     return foodSupplies;
   }
 
-  public void setFoodSupplies(List<SupplyZone> foodSupplies) {
+  public Game setFoodSupplies(List<SupplyZone> foodSupplies) {
     this.foodSupplies = foodSupplies;
+    return this;
   }
-  // CHECKSTYLE_OFF
-
 
   @Override
   public boolean equals(Object o) {

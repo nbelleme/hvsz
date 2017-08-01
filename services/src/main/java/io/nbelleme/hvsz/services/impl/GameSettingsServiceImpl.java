@@ -1,8 +1,8 @@
 package io.nbelleme.hvsz.services.impl;
 
 import io.nbelleme.hvsz.common.AssertGame;
-import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.game.GameSettings;
+import io.nbelleme.hvsz.game.internal.Game;
+import io.nbelleme.hvsz.game.internal.GameSettings;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.GameSettingsService;
 import org.springframework.stereotype.Service;

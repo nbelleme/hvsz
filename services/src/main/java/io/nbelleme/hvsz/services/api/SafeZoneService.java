@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.services.api;
 
-import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.zone.SafeZone;
+import io.nbelleme.hvsz.game.internal.Game;
+import io.nbelleme.hvsz.zone.internal.SafeZone;
 
 import java.util.List;
 
@@ -11,12 +11,12 @@ public interface SafeZoneService {
    * Get the correponding safe zone.
    *
    * @param zoneId the id of the safe zone
-   * @return the SafeZone
+   * @return the SafeZoneDTO
    */
   SafeZone getSafeZone(long zoneId);
 
   /**
-   * Return all the Safe Zone.
+   * Return all the Safe ZoneDTO.
    *
    * @return a list of safe zone
    */

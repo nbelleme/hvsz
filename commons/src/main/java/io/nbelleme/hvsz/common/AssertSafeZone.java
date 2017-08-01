@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.common;
 
 import io.nbelleme.hvsz.common.exceptions.ZoneDestroyedException;
-import io.nbelleme.hvsz.zone.SafeZone;
+import io.nbelleme.hvsz.zone.internal.SafeZone;
 
 import java.util.Objects;
 

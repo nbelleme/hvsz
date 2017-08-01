@@ -1,6 +1,6 @@
-package io.nbelleme.hvsz.zone;
+package io.nbelleme.hvsz.zone.internal;
 
-import io.nbelleme.hvsz.game.GameSettings;
+import io.nbelleme.hvsz.game.internal.GameSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +33,10 @@ public class ZoneFactory {
   }
 
   /**
-   * Init List of SafeZone.
+   * Init List of SafeZoneDTO.
    *
    * @param conf conf
-   * @return List of SafeZone
+   * @return List of SafeZoneDTO
    */
   public static List<SafeZone> initSafeZones(GameSettings conf) {
     Objects.requireNonNull(conf);

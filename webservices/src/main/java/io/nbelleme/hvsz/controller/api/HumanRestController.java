@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.controller.api;
 
-import io.nbelleme.hvsz.humans.Human;
+import io.nbelleme.hvsz.human.transfer.HumanDTO;
 
 public interface HumanRestController {
   /**
@@ -16,7 +16,7 @@ public interface HumanRestController {
    *
    * @return human token
    */
-  Human takeHuman();
+  HumanDTO takeHuman();
 
   /**
    * Get resource number by human.

@@ -1,13 +1,13 @@
-package io.nbelleme.hvsz.zone;
+package io.nbelleme.hvsz.zone.transfer;
 
 
 import java.io.Serializable;
 
-public class SupplyZone implements Serializable {
+public class SupplyZoneDTO implements Serializable {
 
   private static final long serialVersionUID = 4499800033671757363L;
 
-  private static final String NAME = "Zone de ravitaillement n°";
+  private static final String NAME = "ZoneDTO de ravitaillement n°";
 
   private Long id;
   private int level;
@@ -15,9 +15,9 @@ public class SupplyZone implements Serializable {
   private String name;
 
   /**
-   * SupplyZone Empty constructor.
+   * SupplyZoneDTO Empty constructor.
    */
-  private SupplyZone() {
+  private SupplyZoneDTO() {
   }
 
   /**
@@ -25,8 +25,8 @@ public class SupplyZone implements Serializable {
    *
    * @return default FoodSupply
    */
-  public static SupplyZone build() {
-    return new SupplyZone();
+  public static SupplyZoneDTO build() {
+    return new SupplyZoneDTO();
   }
 
 
@@ -35,7 +35,7 @@ public class SupplyZone implements Serializable {
     return this.id;
   }
 
-  public SupplyZone setId(Long id) {
+  public SupplyZoneDTO setId(Long id) {
     this.id = id;
     return this;
   }
@@ -44,7 +44,7 @@ public class SupplyZone implements Serializable {
     return capacity;
   }
 
-  public SupplyZone setCapacity(int capacity) {
+  public SupplyZoneDTO setCapacity(int capacity) {
     this.capacity = capacity;
     return this;
   }
@@ -53,7 +53,7 @@ public class SupplyZone implements Serializable {
     return level;
   }
 
-  public SupplyZone setLevel(int level) {
+  public SupplyZoneDTO setLevel(int level) {
     this.level = level;
     return this;
   }
@@ -62,7 +62,7 @@ public class SupplyZone implements Serializable {
     return name;
   }
 
-  public SupplyZone setName(String name) {
+  public SupplyZoneDTO setName(String name) {
     this.name = name;
     return this;
   }
@@ -90,7 +90,7 @@ public class SupplyZone implements Serializable {
       return false;
     }
 
-    SupplyZone that = (SupplyZone) o;
+    SupplyZoneDTO that = (SupplyZoneDTO) o;
 
     return capacity == that.capacity && (id != null ? id.equals(
             that.id) : that.id == null) && (name != null ? name.equals(that.name) : that.name == null);

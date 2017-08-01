@@ -3,11 +3,11 @@ package io.nbelleme.hvsz.services.impl;
 import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.common.AssertHuman;
 import io.nbelleme.hvsz.common.AssertSafeZone;
-import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.humans.Human;
+import io.nbelleme.hvsz.game.internal.Game;
+import io.nbelleme.hvsz.human.internal.Human;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
-import io.nbelleme.hvsz.zone.SafeZone;
+import io.nbelleme.hvsz.zone.internal.SafeZone;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

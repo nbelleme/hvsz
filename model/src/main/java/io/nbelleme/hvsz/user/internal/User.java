@@ -1,6 +1,6 @@
-package io.nbelleme.hvsz.user;
+package io.nbelleme.hvsz.user.internal;
 
-import io.nbelleme.hvsz.api.DTO;
+import io.nbelleme.hvsz.api.DPO;
 import org.mongojack.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 @Document(collection = "user")
-public class User implements Serializable, DTO {
+public class User implements Serializable, DPO {
 
   private static final long serialVersionUID = 8910219810353397902L;
 
@@ -31,7 +31,7 @@ public class User implements Serializable, DTO {
   /**
    * Create default {@link User}.
    *
-   * @return new User
+   * @return new UserDTO
    */
   public static User build() {
     return new User();

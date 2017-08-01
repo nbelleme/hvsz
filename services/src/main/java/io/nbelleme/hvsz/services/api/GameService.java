@@ -1,6 +1,6 @@
 package io.nbelleme.hvsz.services.api;
 
-import io.nbelleme.hvsz.game.Game;
+import io.nbelleme.hvsz.game.internal.Game;
 
 public interface GameService {
 

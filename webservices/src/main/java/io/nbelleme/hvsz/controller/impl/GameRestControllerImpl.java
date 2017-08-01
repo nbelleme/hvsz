@@ -1,8 +1,10 @@
 package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.GameRestController;
-import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.game.GameSettings;
+import io.nbelleme.hvsz.game.internal.Game;
+import io.nbelleme.hvsz.game.internal.GameSettings;
+import io.nbelleme.hvsz.game.mapper.GameMapper;
+import io.nbelleme.hvsz.game.transfer.GameDTO;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.GameSettingsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,23 +36,26 @@ public class GameRestControllerImpl implements GameRestController {
 
   @Override
   @GetMapping("/current")
-  public Game get() {
-    return gameService.getCurrent();
+  public GameDTO get() {
+    Game game = gameService.getCurrent();
+    return GameMapper.toDTO(game);
   }
 
   @Override
   @PostMapping("/start/default")
-  public Game startDefault() {
+  public GameDTO startDefault() {
     gameService.startGame();
-    return gameService.getCurrent();
+    Game game = gameService.getCurrent();
+    return GameMapper.toDTO(game);
   }
 
   @Override
   @PostMapping("/start")
-  public Game startGame(@RequestBody GameSettings settings) {
+  public GameDTO startGame(@RequestBody GameSettings settings) {
     gameSettingsService.set(settings);
     gameService.startGame();
-    return gameService.getCurrent();
+    Game game = gameService.getCurrent();
+    return GameMapper.toDTO(game);
   }
 
   @Override

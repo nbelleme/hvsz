@@ -1,24 +1,24 @@
 package io.nbelleme.hvsz.controller.api;
 
-import io.nbelleme.hvsz.zone.SupplyZone;
+import io.nbelleme.hvsz.zone.transfer.SupplyZoneDTO;
 
 import java.util.List;
 
-public interface FoodSupplyRestController {
+public interface SupplyZoneRestController {
   /**
    * Get a foodZone.
    *
    * @param zoneId the id of the foodSupply
    * @return the FoodSupply
    */
-  SupplyZone getSupplyZone(Long zoneId);
+  SupplyZoneDTO getSupplyZone(Long zoneId);
 
   /**
    * Get all foodZone.
    *
    * @return List<FoodSupply>
    */
-  List<SupplyZone> getAllSupplyZone();
+  List<SupplyZoneDTO> getAllSupplyZone();
 
   /**
    * Get if the safe-zone is empty or not.

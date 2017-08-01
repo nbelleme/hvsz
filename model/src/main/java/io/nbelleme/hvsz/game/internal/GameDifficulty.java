@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.game;
+package io.nbelleme.hvsz.game.internal;
 
 public enum GameDifficulty {
   EASY(0.33),

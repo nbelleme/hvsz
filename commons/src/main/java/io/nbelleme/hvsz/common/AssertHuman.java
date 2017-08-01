@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.common;
 
 import io.nbelleme.hvsz.common.exceptions.HumanIsDeadException;
-import io.nbelleme.hvsz.humans.Human;
+import io.nbelleme.hvsz.human.internal.Human;
 
 public abstract class AssertHuman {
   /**

@@ -1,8 +1,8 @@
 package io.nbelleme.hvsz.services.impl;
 
-import io.nbelleme.hvsz.game.Game;
-import io.nbelleme.hvsz.game.GameDifficulty;
-import io.nbelleme.hvsz.game.Status;
+import io.nbelleme.hvsz.game.internal.Game;
+import io.nbelleme.hvsz.game.internal.GameDifficulty;
+import io.nbelleme.hvsz.game.internal.Status;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
 import org.slf4j.Logger;

@@ -1,10 +1,10 @@
-package io.nbelleme.hvsz.humans;
+package io.nbelleme.hvsz.human.transfer;
 
-import io.nbelleme.hvsz.api.DTO;
+import io.nbelleme.hvsz.api.DPO;
 
 import java.io.Serializable;
 
-public class Human implements Serializable, DTO {
+public class HumanDTO implements Serializable, DPO {
 
   private static final long serialVersionUID = -302241752023615893L;
   public static final int MAX_RESOURCES = 10;
@@ -17,17 +17,17 @@ public class Human implements Serializable, DTO {
   /**
    * Default constructor.
    */
-  private Human() {
+  private HumanDTO() {
 
   }
 
   /**
-   * Build default Human object.
+   * Build default HumanDTO object.
    *
-   * @return new Human.
+   * @return new HumanDTO.
    */
-  public static Human build() {
-    return new Human();
+  public static HumanDTO build() {
+    return new HumanDTO();
   }
 
   //CHECKSTYLE_OFF
@@ -39,7 +39,7 @@ public class Human implements Serializable, DTO {
     return this.id;
   }
 
-  public Human setId(Long id) {
+  public HumanDTO setId(Long id) {
     this.id = id;
     return this;
   }
@@ -48,7 +48,7 @@ public class Human implements Serializable, DTO {
     return this.alive;
   }
 
-  public Human setAlive(boolean alive) {
+  public HumanDTO setAlive(boolean alive) {
     this.alive = alive;
     return this;
   }
@@ -57,7 +57,7 @@ public class Human implements Serializable, DTO {
     return this.nbResources;
   }
 
-  public Human setNbResources(int nbResources) {
+  public HumanDTO setNbResources(int nbResources) {
     this.nbResources = nbResources;
     return this;
   }
@@ -66,7 +66,7 @@ public class Human implements Serializable, DTO {
     return token;
   }
 
-  public Human setToken(int token) {
+  public HumanDTO setToken(int token) {
     this.token = token;
     return this;
   }
@@ -119,9 +119,9 @@ public class Human implements Serializable, DTO {
       return false;
     }
 
-    Human human = (Human) o;
+    HumanDTO humanDTO = (HumanDTO) o;
 
-    return getId().equals(human.getId());
+    return getId().equals(humanDTO.getId());
   }
 
   @Override
