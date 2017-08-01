@@ -1,7 +1,5 @@
 package io.nbelleme.persistence.dao.impl;
 
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
 import io.nbelleme.persistence.dao.api.AbstractDaoAPI;
 import io.nbelleme.persistence.dpo.AbstractDPO;
 import io.nbelleme.persistence.exceptions.DaoException;
@@ -9,7 +7,6 @@ import org.mongojack.JacksonDBCollection;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -30,11 +27,12 @@ public abstract class AbstractDao<DTO, DPO extends AbstractDPO<DTO>> implements 
   public AbstractDao(String collectionName) {
     Objects.requireNonNull(collectionName);
 
-    DBCollection dbCollection = new MongoClient(DATABASE_URL)
-        .getDB(DATABASE_NAME)
-        .getCollection(collectionName);
-    dpoClass = (Class<DPO>) ParameterizedType.class.cast(getClass().getGenericSuperclass()).getActualTypeArguments()[1];
-    collection = JacksonDBCollection.wrap(dbCollection, dpoClass, String.class);
+//    DBCollection dbCollection = new MongoClient(DATABASE_URL)
+//        .getDB(DATABASE_NAME)
+//        .getCollection(collectionName);
+//    dpoClass = (Class<DPO>) ParameterizedType.class.cast(getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+//    collection =
+    collection = null;
 
   }
 

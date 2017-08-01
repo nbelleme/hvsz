@@ -93,7 +93,7 @@ public class SupplyZone implements Serializable {
     SupplyZone that = (SupplyZone) o;
 
     return capacity == that.capacity && (id != null ? id.equals(
-        that.id) : that.id == null) && (name != null ? name.equals(that.name) : that.name == null);
+            that.id) : that.id == null) && (name != null ? name.equals(that.name) : that.name == null);
   }
 
   @Override

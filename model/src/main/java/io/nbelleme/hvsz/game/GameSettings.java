@@ -152,14 +152,14 @@ public class GameSettings implements Serializable, DTO {
   @Override
   public String toString() {
     return "GameConfig{" +
-        "gameDuration=" + gameDuration +
-        ", difficulty=" + difficulty +
-        ", humanTickets=" + humanTickets +
-        ", nbSafeZones=" + nbSafeZones +
-        ", ngSupplyZones=" + ngSupplyZones +
-        ", nbFoodSupplies=" + nbFoodSupplies +
-        ", safezoneDropRate=" + safezoneDropRate +
-        ", maximumFoodTransfer=" + maximumFoodTransfer +
-        '}';
+            "gameDuration=" + gameDuration +
+            ", difficulty=" + difficulty +
+            ", humanTickets=" + humanTickets +
+            ", nbSafeZones=" + nbSafeZones +
+            ", ngSupplyZones=" + ngSupplyZones +
+            ", nbFoodSupplies=" + nbFoodSupplies +
+            ", safezoneDropRate=" + safezoneDropRate +
+            ", maximumFoodTransfer=" + maximumFoodTransfer +
+            '}';
   }
 }

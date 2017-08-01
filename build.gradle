@@ -62,6 +62,11 @@ subprojects {
 }
 
 project(':model') {
+    dependencies {
+        compile "org.mongojack:mongojack:$mongoJack"
+        compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '1.10.6.RELEASE'
+
+    }
 }
 
 project(':services') {
@@ -84,6 +89,7 @@ project(':persistence') {
         compile project(':model')
         api "org.slf4j:slf4j-api:$slf4jApi"
         compile "org.mongojack:mongojack:$mongoJack"
+        compile "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
     }
 }
 

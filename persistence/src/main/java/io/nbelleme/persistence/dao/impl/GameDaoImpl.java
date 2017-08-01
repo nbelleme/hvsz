@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-final class GameDaoImpl implements GameDao {
+public class GameDaoImpl implements GameDao {
 
   private static final String COLLECTION_NAME = "game";
   private static final String DATABASE_NAME = "hvsz";
@@ -34,8 +34,8 @@ final class GameDaoImpl implements GameDao {
     LOGGER.info("Start initialize GameDaoImpl");
     MongoClient mongoClient = new MongoClient(DATABASE_URL);
     DBCollection dbCollection = mongoClient
-        .getDB(DATABASE_NAME)
-        .getCollection(COLLECTION_NAME);
+            .getDB(DATABASE_NAME)
+            .getCollection(COLLECTION_NAME);
 
 
     collection = JacksonDBCollection.wrap(dbCollection, GameDpo.class, String.class);

@@ -58,9 +58,9 @@ public class StatusUpdaterCron {
       long totalTime = (game.getConfig().getGameDuration() * SECOND_IN_MINUTE);
 
       boolean shouldDecreaseLevel = shouldDecreaseLevel(TOTAL_FOOD_UNITS,
-                                                        totalTime,
-                                                        status.getRemainingTime(),
-                                                        game.getConfig().getDifficulty());
+              totalTime,
+              status.getRemainingTime(),
+              game.getConfig().getDifficulty());
 
       safeZoneService.decreaseFoodLevel(game);
       game.setStatus(status);

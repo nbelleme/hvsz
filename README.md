@@ -23,6 +23,11 @@ Quantité de vivres en kg
 Vitesse de chute des vivres en kg/min
 Quantité de vivres dans chaque SupplyBunker en kg
 
+##TODO
+  - [ ] Use JWT
+  - [ ] Map Objects from database to front
+  - [ ] Use map
+
 
 ## Primitives du jeu
 
@@ -121,3 +126,5 @@ https://goo.gl/TGvw2G
 
 
 Pour le reste (écran et boutons), c'est facile
+
+

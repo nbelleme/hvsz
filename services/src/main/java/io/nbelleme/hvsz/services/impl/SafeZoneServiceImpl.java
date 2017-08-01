@@ -30,10 +30,10 @@ final class SafeZoneServiceImpl implements SafeZoneService {
   @Override
   public SafeZone getSafeZone(long zoneId) {
     return getSafeZones()
-        .stream()
-        .filter(z -> z.getId().equals(zoneId))
-        .findFirst()
-        .orElse(null);
+            .stream()
+            .filter(z -> z.getId().equals(zoneId))
+            .findFirst()
+            .orElse(null);
   }
 
   @Override
