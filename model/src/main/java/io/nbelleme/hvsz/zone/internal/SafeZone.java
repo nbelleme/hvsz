@@ -104,7 +104,7 @@ public class SafeZone implements Serializable {
     SafeZone safeZone = (SafeZone) o;
 
     return level == safeZone.level && capacity == safeZone.capacity && (id != null ? id.equals(
-            safeZone.id) : safeZone.id == null) && (name != null ? name.equals(safeZone.name) : safeZone.name == null);
+        safeZone.id) : safeZone.id == null) && (name != null ? name.equals(safeZone.name) : safeZone.name == null);
   }
 
   @Override

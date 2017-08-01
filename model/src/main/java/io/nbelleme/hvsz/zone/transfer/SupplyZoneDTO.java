@@ -93,7 +93,7 @@ public class SupplyZoneDTO implements Serializable {
     SupplyZoneDTO that = (SupplyZoneDTO) o;
 
     return capacity == that.capacity && (id != null ? id.equals(
-            that.id) : that.id == null) && (name != null ? name.equals(that.name) : that.name == null);
+        that.id) : that.id == null) && (name != null ? name.equals(that.name) : that.name == null);
   }
 
   @Override
