@@ -39,14 +39,17 @@ public class GameRestControllerImpl implements GameRestController {
   @Override
   @GetMapping("/get/one/{id}")
   public GameDTO get(@PathVariable("id") String id) {
-    return GameMapper.toDTO(Game.build());
+    return gameService.get(id)
+                      .map(GameMapper::toDTO)
+                      .orElse(null);
   }
 
   @Override
   @GetMapping("/get/all")
   public List<GameDTO> getAll() {
-    List<Game> games = gameService.getAll();
-    return GameMapper.toDTO(games);
+    return gameService.getAll()
+                      .map(GameMapper::toDTO)
+                      .orElse(null);
   }
 
   @Override

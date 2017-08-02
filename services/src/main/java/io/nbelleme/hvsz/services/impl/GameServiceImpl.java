@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 final class GameServiceImpl implements GameService {
@@ -35,12 +36,12 @@ final class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game get(String id) {
+  public Optional<Game> get(String id) {
     return gameDao.findOne(id);
   }
 
   @Override
-  public List<Game> getAll() {
+  public Optional<List<Game>> getAll() {
     return gameDao.findAll();
   }
 
@@ -63,7 +64,7 @@ final class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game save(Game game) {
+  public Optional<Game> save(Game game) {
     return gameDao.insert(game);
   }
 
@@ -93,6 +94,4 @@ final class GameServiceImpl implements GameService {
 
     return game;
   }
-
-
 }

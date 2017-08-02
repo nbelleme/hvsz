@@ -3,6 +3,7 @@ package io.nbelleme.hvsz.services.api;
 import io.nbelleme.hvsz.game.internal.Game;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GameService {
 
@@ -11,14 +12,14 @@ public interface GameService {
    *
    * @return the active game or null if none found.
    */
-  Game get(String id);
+  Optional<Game> get(String id);
 
   /**
    * Return all games.
    *
    * @return all games.
    */
-  List<Game> getAll();
+  Optional<List<Game>> getAll();
 
   /**
    * Start game using the game settings previously saved.
@@ -55,5 +56,5 @@ public interface GameService {
    * @param g the game to update
    * @return game game inserted
    */
-  Game save(Game g);
+  Optional<Game> save(Game g);
 }
