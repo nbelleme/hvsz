@@ -2,8 +2,12 @@ package io.nbelleme.hvsz.game.mapper;
 
 import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.transfer.GameDTO;
+import io.nbelleme.hvsz.zone.internal.SafeZone;
+import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by nbelleme on 01/08/2017.
@@ -24,6 +28,21 @@ public class GameMapper {
                   .setId(game.getId())
                   .setConfig(game.getConfig());
   }
+
+  /**
+   * Map {@link List} of {@link Game} to {@link List} of {@link GameDTO}.
+   *
+   * @param games list of Game objects to map
+   * @return list of GameDTO mapped
+   */
+  public static List<GameDTO> toDTO(List<Game> games) {
+    Objects.requireNonNull(games);
+
+    return games.stream()
+                .map(GameMapper::toDTO)
+                .collect(Collectors.toList());
+  }
+
 
   /**
    * Unmap {@link GameDTO} to {@link Game}.

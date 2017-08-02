@@ -44,6 +44,7 @@ public class StatusUpdaterCron {
    */
   @Scheduled(fixedRate = SCHEDULED_TIME)
   public void gameTimer() {
+    /*
     Game game = gameService.getCurrent();
     if (game == null || !game.getStatus().isActive()) {
       LOGGER.info("[ CRON ] : No running game to update.");
@@ -68,6 +69,7 @@ public class StatusUpdaterCron {
 
       LOGGER.info("[ CRON ] : Update the game of id " + gameUpdated.getId());
     }
+    */
   }
 
   /**

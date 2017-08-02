@@ -1,6 +1,7 @@
 package io.nbelleme.hvsz.human.internal;
 
 import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.user.internal.User;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ public class Human implements Serializable, DPO {
   private boolean alive;
   private int token;
   private int nbResources;
+  private User user;
 
   /**
    * Default constructor.
@@ -68,6 +70,15 @@ public class Human implements Serializable, DPO {
 
   public Human setToken(int token) {
     this.token = token;
+    return this;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public Human setUser(User user) {
+    this.user = user;
     return this;
   }
 

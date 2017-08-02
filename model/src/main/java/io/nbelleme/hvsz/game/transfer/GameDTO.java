@@ -15,7 +15,7 @@ public class GameDTO implements Serializable, DPO {
   private String id;
   private Status status;
   private GameSettings config;
-  private List<SafeZoneDTO> safeZoneDTOS;
+  private List<SafeZoneDTO> safeZoneDTO;
   private List<SupplyZoneDTO> foodSupplies;
 
   /**
@@ -63,12 +63,12 @@ public class GameDTO implements Serializable, DPO {
     return this;
   }
 
-  public List<SafeZoneDTO> getSafeZoneDTOS() {
-    return safeZoneDTOS;
+  public List<SafeZoneDTO> getSafeZoneDTO() {
+    return safeZoneDTO;
   }
 
-  public GameDTO setSafeZoneDTOS(List<SafeZoneDTO> safeZoneDTOS) {
-    this.safeZoneDTOS = safeZoneDTOS;
+  public GameDTO setSafeZoneDTO(List<SafeZoneDTO> safeZoneDTO) {
+    this.safeZoneDTO = safeZoneDTO;
     return this;
   }
 
@@ -101,7 +101,7 @@ public class GameDTO implements Serializable, DPO {
     if (config != null ? !config.equals(gameDTO.config) : gameDTO.config != null) {
       return false;
     }
-    if (safeZoneDTOS != null ? !safeZoneDTOS.equals(gameDTO.safeZoneDTOS) : gameDTO.safeZoneDTOS != null) {
+    if (safeZoneDTO != null ? !safeZoneDTO.equals(gameDTO.safeZoneDTO) : gameDTO.safeZoneDTO != null) {
       return false;
     }
     return foodSupplies != null ? foodSupplies.equals(gameDTO.foodSupplies) : gameDTO.foodSupplies == null;
@@ -112,7 +112,7 @@ public class GameDTO implements Serializable, DPO {
     int result = id != null ? id.hashCode() : 0;
     result = 31 * result + (status != null ? status.hashCode() : 0);
     result = 31 * result + (config != null ? config.hashCode() : 0);
-    result = 31 * result + (safeZoneDTOS != null ? safeZoneDTOS.hashCode() : 0);
+    result = 31 * result + (safeZoneDTO != null ? safeZoneDTO.hashCode() : 0);
     result = 31 * result + (foodSupplies != null ? foodSupplies.hashCode() : 0);
     return result;
   }

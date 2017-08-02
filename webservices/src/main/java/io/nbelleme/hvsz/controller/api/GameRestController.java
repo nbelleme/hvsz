@@ -3,14 +3,24 @@ package io.nbelleme.hvsz.controller.api;
 import io.nbelleme.hvsz.game.internal.GameSettings;
 import io.nbelleme.hvsz.game.transfer.GameDTO;
 
+import java.util.List;
+
 public interface GameRestController {
 
   /**
-   * Get the current game.
+   * Get game by id.
    *
+   * @param id of the game to get
    * @return GameDTO
    */
-  GameDTO get();
+  GameDTO get(String id);
+
+  /**
+   * List all games in database.
+   *
+   * @return list of game.
+   */
+  List<GameDTO> getAll();
 
   /**
    * Start a new game with default parameter.

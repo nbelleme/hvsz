@@ -1,7 +1,6 @@
 package io.nbelleme.hvsz.services.impl;
 
 
-import io.nbelleme.hvsz.common.AssertGame;
 import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.internal.GameSettings;
 import io.nbelleme.hvsz.game.internal.GameState;
@@ -35,103 +34,38 @@ final class GameServiceImpl implements GameService {
     this.gameDao = Objects.requireNonNull(gameDao);
   }
 
+  @Override
+  public Game get(String id) {
+    return gameDao.findOne(id);
+  }
 
   @Override
-  public Game getCurrent() {
-
-    return gameDao.get().orElse(null);
+  public List<Game> getAll() {
+    return gameDao.findAll();
   }
 
   @Override
   public void startGame() {
-    Game game = gameDao.get().orElse(Game.build());
-
-    if (game.getStatus().isStopped()) {
-      game = newGame();
-    }
-
-    save(game);
+    save(newGame());
   }
-
 
   @Override
   public void pauseGame() {
-    Game game = getCurrent();
-    AssertGame.gameOngoing(game);
-    updateGameState(game, GameState.PAUSED);
-    save(game);
   }
 
 
   @Override
   public void resumeGame() {
-    Game game = gameDao.get().orElse(null);
-    AssertGame.gameReadyToStart(game);
   }
 
   @Override
   public void stopGame() {
-    Game game = getCurrent();
-    AssertGame.gameOngoing(game);
-    updateGameState(game, GameState.STOPPED);
-    save(game);
   }
 
   @Override
   public Game save(Game game) {
-    //TODO check if game over
-    return gameDao.save(game);
+    return gameDao.insert(game);
   }
-
-  /**
-   * Check and update game status if needed.
-   *
-   * @param game gmae
-   */
-  private void checkGameStatus(Game game) {
-
-  }
-
-
-  /**
-   * Update game's state.
-   *
-   * @param game      game to update
-   * @param gameState new gameState
-   */
-  private void updateGameState(Game game, GameState gameState) {
-    Status status = game.getStatus()
-                        .setGameState(gameState);
-    game.setStatus(status);
-  }
-
-  /**
-   * @param game the active game
-   * @return true if the time is up
-   */
-  private boolean timesUp(Game game) {
-    return game.getStatus().getRemainingTime() <= 0;
-  }
-
-  /**
-   * @param g the active game
-   * @return true if all human lives have been consumed
-   */
-  private boolean noHumanLivesLeft(Game g) {
-    return g.getStatus().getRemainingHumanTickets() + g.getStatus().getCurrentHumansOnField() <= 0;
-  }
-
-  /**
-   * @param g the active game
-   * @return true if all safe zones were destroyed
-   */
-  private boolean allSafeZonesDestroyed(Game g) {
-    return g.getSafeZones() == null || g.getSafeZones()
-                                        .stream()
-                                        .filter(z -> z.getLevel() > 0)
-                                        .count() == 0;
-  }
-
 
   /**
    * Create new default game.

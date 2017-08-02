@@ -8,11 +8,13 @@ import io.nbelleme.hvsz.game.transfer.GameDTO;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.GameSettingsService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -35,27 +37,29 @@ public class GameRestControllerImpl implements GameRestController {
   }
 
   @Override
-  @GetMapping("/current")
-  public GameDTO get() {
-    Game game = gameService.getCurrent();
-    return GameMapper.toDTO(game);
+  @GetMapping("/get/one/{id}")
+  public GameDTO get(@PathVariable("id") String id) {
+    return GameMapper.toDTO(Game.build());
+  }
+
+  @Override
+  @GetMapping("/get/all")
+  public List<GameDTO> getAll() {
+    List<Game> games = gameService.getAll();
+    return GameMapper.toDTO(games);
   }
 
   @Override
   @PostMapping("/start/default")
   public GameDTO startDefault() {
     gameService.startGame();
-    Game game = gameService.getCurrent();
-    return GameMapper.toDTO(game);
+    return GameMapper.toDTO(Game.build());
   }
 
   @Override
   @PostMapping("/start")
   public GameDTO startGame(@RequestBody GameSettings settings) {
-    gameSettingsService.set(settings);
-    gameService.startGame();
-    Game game = gameService.getCurrent();
-    return GameMapper.toDTO(game);
+    return null;
   }
 
   @Override

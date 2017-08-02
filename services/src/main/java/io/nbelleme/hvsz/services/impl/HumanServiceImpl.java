@@ -1,10 +1,5 @@
 package io.nbelleme.hvsz.services.impl;
 
-import io.nbelleme.hvsz.common.AssertGame;
-import io.nbelleme.hvsz.common.exceptions.CannotSpawnException;
-import io.nbelleme.hvsz.common.exceptions.NoHumanLeftException;
-import io.nbelleme.hvsz.game.internal.Game;
-import io.nbelleme.hvsz.game.internal.Status;
 import io.nbelleme.hvsz.human.internal.Human;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.HumanService;
@@ -37,92 +32,36 @@ final class HumanServiceImpl implements HumanService {
 
   @Override
   public boolean isAlive(int lifeToken) {
-    Game g = gameService.getCurrent();
-    Human humanByToken = g.getStatus().getLifeByToken(lifeToken);
-    return humanByToken.isAlive();
+    return false;
   }
 
   @Override
   public boolean hasTicketsLeft() {
-    Game g = gameService.getCurrent();
-    AssertGame.gameActive(g);
-    return g.getStatus().getRemainingHumanTickets() > 0;
-
+    return false;
   }
 
   @Override
   public boolean canSpawn() {
-    Game g = gameService.getCurrent();
-    return hasTicketsLeft() && g.getStatus().getCurrentHumansOnField() < g.getStatus().getMaxHumansOnField();
+    return false;
   }
 
   @Override
   public Human spawn() {
-    Game g = gameService.getCurrent();
-    AssertGame.gameActive(g);
-    Status status = g.getStatus();
-
-    if (!hasTicketsLeft()) {
-      throw new NoHumanLeftException();
-    }
-    if (!canSpawn()) {
-      throw new CannotSpawnException();
-    }
-    // Decrement nbLifeLeft in game status and increment nbHumanAlive
-    status.setRemainingHumanTickets(status.getRemainingHumanTickets() - 1);
-    status.setCurrentHumansOnField(status.getCurrentHumansOnField() + 1);
-    // Create new Life
-    Long id = nextId();
-    Human human = Human.build();
-    status.getLives().add(human);
-    g.setStatus(status);
-    gameService.save(g);
-    return human;
+    return null;
   }
 
   @Override
   public Human getHumanByToken(int token) {
-    Game g = gameService.getCurrent();
-    AssertGame.gameActive(g);
-    return g.getStatus().getLives().stream().filter(l -> l.getToken() == token).findFirst().orElse(null);
+    return null;
   }
 
   @Override
   public void save(Human human) {
-    Game g = gameService.getCurrent();
-    g.getStatus().setLife(human.getId(), human);
-    gameService.save(g);
   }
 
   @Override
   public boolean kill(int lifeToken) {
-    Game game = gameService.getCurrent();
-    Status status = game.getStatus();
-    Human human = game.getStatus().getLifeByToken(lifeToken);
-    if (human != null && human.isAlive()) {
-      human.setAlive(false);
-      human.setToken(-1);
-      this.save(human);
-
-      // Decrement humans on field
-      status.setCurrentHumansOnField(status.getCurrentHumansOnField() - 1);
-      game.setStatus(status);
-      gameService.save(game);
-      return true;
-    }
     return false;
-  }
-
-  /**
-   * Generate random token from id.
-   *
-   * @param id the id to use as seed
-   * @return the generated token.
-   */
-  private int generateToken(Long id) {
-    int token = (int) ((id % 10) * 10_000);
-    token += Math.random() * 10_000;
-    return token;
   }
 
 }

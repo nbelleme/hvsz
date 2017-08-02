@@ -1,10 +1,6 @@
 package io.nbelleme.hvsz.services.impl;
 
-import io.nbelleme.hvsz.common.AssertGame;
-import io.nbelleme.hvsz.common.AssertHuman;
-import io.nbelleme.hvsz.common.AssertSafeZone;
 import io.nbelleme.hvsz.game.internal.Game;
-import io.nbelleme.hvsz.human.internal.Human;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
 import io.nbelleme.hvsz.zone.internal.SafeZone;
@@ -29,57 +25,22 @@ final class SafeZoneServiceImpl implements SafeZoneService {
 
   @Override
   public SafeZone getSafeZone(long zoneId) {
-    return getSafeZones()
-            .stream()
-            .filter(z -> z.getId().equals(zoneId))
-            .findFirst()
-            .orElse(null);
+    return null;
   }
 
   @Override
   public List<SafeZone> getSafeZones() {
-    Game game = gameService.getCurrent();
-    AssertGame.gameOngoing(game);
-    return game.getSafeZones();
+    return null;
   }
 
   @Override
   public int refill(long zoneId, int token) {
-    Game game = gameService.getCurrent();
-    AssertGame.gameOngoing(game);
-
-    SafeZone safeZone = game.getSafeZones()
-                            .stream()
-                            .filter(z -> z.getId().equals(zoneId))
-                            .findFirst()
-                            .orElse(null);
-
-    Objects.requireNonNull(safeZone);
-    AssertSafeZone.zoneNotDestroyed(safeZone);
-
-    Human human = game.getStatus()
-                      .getLifeByToken(token);
-
-    AssertHuman.humanAlive(human, safeZone);
-
-
-    int oldLevel = safeZone.getLevel();
-    int level = Math.min(oldLevel + human.getNbResources(), safeZone.getCapacity());
-    int refilled = level - oldLevel;
-
-    safeZone.setLevel(level);
-    gameService.save(game);
-    return refilled;
+    return 0;
   }
 
   @Override
   public void decreaseFoodLevel(Game game) {
-    gameService.getCurrent();
-    game.getSafeZones().forEach(safeZone -> {
-      if (safeZone.getLevel() > 0) {
-        safeZone.setLevel(safeZone.getLevel() - 1);
-      }
-    });
+
   }
 
 }

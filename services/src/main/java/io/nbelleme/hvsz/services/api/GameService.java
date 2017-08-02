@@ -2,12 +2,23 @@ package io.nbelleme.hvsz.services.api;
 
 import io.nbelleme.hvsz.game.internal.Game;
 
+import java.util.List;
+
 public interface GameService {
 
   /**
+   * Return game by id.
+   *
    * @return the active game or null if none found.
    */
-  Game getCurrent();
+  Game get(String id);
+
+  /**
+   * Return all games.
+   *
+   * @return all games.
+   */
+  List<Game> getAll();
 
   /**
    * Start game using the game settings previously saved.

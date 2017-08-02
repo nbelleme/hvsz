@@ -1,6 +1,7 @@
 package io.nbelleme.hvsz.game.internal;
 
 import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.user.internal.User;
 import io.nbelleme.hvsz.zone.internal.SafeZone;
 import io.nbelleme.hvsz.zone.internal.SupplyZone;
 
@@ -14,6 +15,7 @@ public class Game implements Serializable, DPO {
 
   private String id;
   private Status status;
+  private User owner;
   private GameSettings config;
   private List<SafeZone> safeZones;
   private List<SupplyZone> foodSupplies;
@@ -22,7 +24,6 @@ public class Game implements Serializable, DPO {
    * GameDTO constructor.
    */
   private Game() {
-    id = UUID.randomUUID().toString();
     status = Status.build();
     config = GameSettings.build();
 
@@ -38,6 +39,15 @@ public class Game implements Serializable, DPO {
   }
 
 // CHECKSTYLE_OFF
+
+  public User getOwner() {
+    return owner;
+  }
+
+  public Game setOwner(User owner) {
+    this.owner = owner;
+    return this;
+  }
 
   public static long getSerialVersionUID() {
     return serialVersionUID;
