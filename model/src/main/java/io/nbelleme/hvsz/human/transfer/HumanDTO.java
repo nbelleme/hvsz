@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class HumanDTO implements Serializable, DPO {
 
   private static final long serialVersionUID = -302241752023615893L;
-  public static final int MAX_RESOURCES = 10;
+  private static final int MAX_RESOURCES = 10;
 
   private Long id;
   private boolean alive;
@@ -70,45 +70,7 @@ public class HumanDTO implements Serializable, DPO {
     this.token = token;
     return this;
   }
-
   //CHECKSTYLE_ON
-
-  /**
-   * refill res.
-   *
-   * @param qte qte to refill
-   * @return dropped qte
-   */
-  public int dropResources(int qte) {
-    if (nbResources - qte >= 0) {
-      this.nbResources -= qte;
-      return qte;
-    } else {
-      int removed = this.nbResources;
-      this.nbResources = 0;
-      return removed;
-    }
-  }
-
-  /**
-   * refill res.
-   *
-   * @return dropped qte
-   */
-  public int dropAllResources() {
-    int removed = this.nbResources;
-    this.nbResources = 0;
-    return removed;
-  }
-
-  /**
-   * add a resource to inventory.
-   *
-   * @param qte qte to add
-   */
-  public void addResource(int qte) {
-    nbResources += qte;
-  }
 
   @Override
   public boolean equals(Object o) {
