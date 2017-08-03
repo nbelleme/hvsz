@@ -83,7 +83,7 @@ final class GameServiceImpl implements GameService {
                           .setRemainingHumanTickets(conf.getHumanTickets())
                           .setCurrentHumansOnField(0)
                           .setRemainingTime(conf.getGameDuration() * SECONDS_IN_ONE_MINUTE)
-                          .setGameState(GameState.ACTIVE);
+                          .setState(GameState.ACTIVE);
     game.setStatus(status);
 
     List<SupplyZone> supplyZones = ZoneFactory.initSupplyZones(conf);

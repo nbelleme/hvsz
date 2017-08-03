@@ -1,5 +1,6 @@
 package io.nbelleme.hvsz.controller.impl;
 
+import io.nbelleme.hvsz.common.exceptions.NoGameDefinedException;
 import io.nbelleme.hvsz.controller.api.GameRestController;
 import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.internal.GameSettings;
@@ -41,7 +42,7 @@ public class GameRestControllerImpl implements GameRestController {
   public GameDTO get(@PathVariable("id") String id) {
     return gameService.get(id)
                       .map(GameMapper::toDTO)
-                      .orElse(null);
+                      .orElseThrow(NoGameDefinedException::new);
   }
 
   @Override
@@ -49,7 +50,7 @@ public class GameRestControllerImpl implements GameRestController {
   public List<GameDTO> getAll() {
     return gameService.getAll()
                       .map(GameMapper::toDTO)
-                      .orElse(null);
+                      .orElseThrow(NoGameDefinedException::new);
   }
 
   @Override
