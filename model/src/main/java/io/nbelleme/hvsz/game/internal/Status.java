@@ -19,21 +19,19 @@ public class Status implements Serializable, DPO {
 
   private static final long serialVersionUID = -3433632584769693093L;
 
-  private Integer maxHumansOnField;
-  private Integer currentHumansOnField;
-  private Integer remainingHumanTickets;
-  private Long remainingTime;
+  private int currentHumansOnField;
+  private int remainingHumanTickets;
+  private long remainingTime;
   private transient Instant timestampStart;
   private List<Human> lives;
-  private GameState gameState;
+  private GameState state;
 
   /**
    * Default constructor.
    */
   private Status() {
-    gameState = GameState.NOT_STARTED;
+    state = GameState.NOT_STARTED;
   }
-
 
   /**
    * Build generic Status.
@@ -44,30 +42,35 @@ public class Status implements Serializable, DPO {
     return new Status();
   }
 
-  public Integer getMaxHumansOnField() {
-    return maxHumansOnField;
-  }
-
   //CHECKSTYLE_OFF
-  public Status setMaxHumansOnField(Integer maxHumansOnField) {
-    this.maxHumansOnField = maxHumansOnField;
-    return this;
+
+  public static long getSerialVersionUID() {
+    return serialVersionUID;
   }
 
-  public Integer getCurrentHumansOnField() {
+  public int getCurrentHumansOnField() {
     return currentHumansOnField;
   }
 
-  public Status setCurrentHumansOnField(Integer currentHumansOnField) {
+  public Status setCurrentHumansOnField(int currentHumansOnField) {
     this.currentHumansOnField = currentHumansOnField;
     return this;
   }
 
-  public Long getRemainingTime() {
+  public int getRemainingHumanTickets() {
+    return remainingHumanTickets;
+  }
+
+  public Status setRemainingHumanTickets(int remainingHumanTickets) {
+    this.remainingHumanTickets = remainingHumanTickets;
+    return this;
+  }
+
+  public long getRemainingTime() {
     return remainingTime;
   }
 
-  public Status setRemainingTime(Long remainingTime) {
+  public Status setRemainingTime(long remainingTime) {
     this.remainingTime = remainingTime;
     return this;
   }
@@ -81,17 +84,8 @@ public class Status implements Serializable, DPO {
     return this;
   }
 
-  public Integer getRemainingHumanTickets() {
-    return remainingHumanTickets;
-  }
-
-  public Status setRemainingHumanTickets(Integer remainingHumanTickets) {
-    this.remainingHumanTickets = remainingHumanTickets;
-    return this;
-  }
-
   public List<Human> getLives() {
-    return this.lives;
+    return lives;
   }
 
   public Status setLives(List<Human> lives) {
@@ -99,12 +93,12 @@ public class Status implements Serializable, DPO {
     return this;
   }
 
-  public GameState getGameState() {
-    return gameState;
+  public GameState getState() {
+    return state;
   }
 
-  public Status setGameState(GameState gameState) {
-    this.gameState = gameState;
+  public Status setState(GameState gameState) {
+    this.state = gameState;
     return this;
   }
 
@@ -144,22 +138,22 @@ public class Status implements Serializable, DPO {
 
   @JsonIgnore
   public boolean isOver() {
-    return gameState.equals(NOT_STARTED) || gameState.equals(HUMAN_VICTORY) || gameState.equals(ZOMBIE_VICTORY);
+    return state.equals(NOT_STARTED) || state.equals(HUMAN_VICTORY) || state.equals(ZOMBIE_VICTORY);
   }
 
   @JsonIgnore
   public boolean isOngoing() {
-    return gameState.equals(ACTIVE) || gameState.equals(PAUSED);
+    return state.equals(ACTIVE) || state.equals(PAUSED);
   }
 
   @JsonIgnore
   public boolean isActive() {
-    return gameState.equals(ACTIVE);
+    return state.equals(ACTIVE);
   }
 
   @JsonIgnore
   public boolean isNotStarted() {
-    return gameState.equals(NOT_STARTED);
+    return state.equals(NOT_STARTED);
   }
 
   @JsonIgnore
@@ -169,12 +163,12 @@ public class Status implements Serializable, DPO {
 
   @JsonIgnore
   public boolean isPaused() {
-    return gameState.equals(PAUSED);
+    return state.equals(PAUSED);
   }
 
   @JsonIgnore
   public boolean isStopped() {
-    return gameState.equals(STOPPED);
+    return state.equals(STOPPED);
   }
 
   /**

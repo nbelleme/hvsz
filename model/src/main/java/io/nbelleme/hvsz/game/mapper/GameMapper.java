@@ -26,7 +26,8 @@ public class GameMapper {
     Objects.requireNonNull(game);
     return GameDTO.build()
                   .setId(game.getId())
-                  .setConfig(game.getConfig());
+                  .setConfig(game.getConfig())
+                  .setStatus(game.getStatus());
   }
 
   /**
