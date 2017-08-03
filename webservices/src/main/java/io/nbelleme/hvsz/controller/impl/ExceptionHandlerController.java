@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 final class ExceptionHandlerController {
 
+  /**
+   * Handle NoGameDefinedException.
+   */
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(NoGameDefinedException.class)
   public void handleNoGameDefinedException() {
