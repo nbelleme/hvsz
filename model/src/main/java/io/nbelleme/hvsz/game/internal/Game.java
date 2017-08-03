@@ -7,7 +7,6 @@ import io.nbelleme.hvsz.zone.internal.SupplyZone;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 
 public class Game implements Serializable, DPO {
 

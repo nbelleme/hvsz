@@ -104,7 +104,7 @@ public class SafeZoneDTO implements Serializable {
     SafeZoneDTO safeZoneDTO = (SafeZoneDTO) o;
 
     return level == safeZoneDTO.level && capacity == safeZoneDTO.capacity && (id != null ? id.equals(
-        safeZoneDTO.id) : safeZoneDTO.id == null) && (name != null ? name.equals(safeZoneDTO.name) : safeZoneDTO.name == null);
+            safeZoneDTO.id) : safeZoneDTO.id == null) && (name != null ? name.equals(safeZoneDTO.name) : safeZoneDTO.name == null);
   }
 
   @Override

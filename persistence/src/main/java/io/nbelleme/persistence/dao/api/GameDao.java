@@ -30,6 +30,7 @@ public interface GameDao {
   /**
    * Insert {@link Game} in database, and return inserted object wrapped in {@link Optional}.
    *
+   * @param game to insert
    * @return inserted {@link Game}
    */
   Optional<Game> insert(Game game);

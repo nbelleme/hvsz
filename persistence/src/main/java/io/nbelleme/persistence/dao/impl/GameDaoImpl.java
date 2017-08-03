@@ -16,6 +16,10 @@ import java.util.Optional;
 public class GameDaoImpl implements GameDao {
   private GameRepository gameRepository;
 
+  /**
+   * Constructor.
+   * @param gameRepository gameRepository
+   */
   GameDaoImpl(GameRepository gameRepository) {
     this.gameRepository = Objects.requireNonNull(gameRepository);
   }

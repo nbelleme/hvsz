@@ -10,6 +10,7 @@ public interface GameService {
   /**
    * Return game by id.
    *
+   * @param id to retreive
    * @return the active game or null if none found.
    */
   Optional<Game> get(String id);

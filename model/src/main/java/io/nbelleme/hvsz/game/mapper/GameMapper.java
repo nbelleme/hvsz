@@ -2,8 +2,6 @@ package io.nbelleme.hvsz.game.mapper;
 
 import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.transfer.GameDTO;
-import io.nbelleme.hvsz.zone.internal.SafeZone;
-import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
 
 import java.util.List;
 import java.util.Objects;
