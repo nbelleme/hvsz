@@ -1,9 +1,9 @@
 package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.SafeZoneRestController;
+import io.nbelleme.hvsz.mapper.impl.SafeZoneMapper;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
 import io.nbelleme.hvsz.zone.internal.SafeZone;
-import io.nbelleme.hvsz.mapper.impl.SafeZoneMapper;
 import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,28 +20,31 @@ import java.util.Objects;
 public class SafeZoneRestControllerImpl implements SafeZoneRestController {
 
   private SafeZoneService safeZoneService;
+  private SafeZoneMapper safeZoneMapper;
 
   /**
    * Constructor.
    *
    * @param safeZoneService the SafeZoneService
+   * @param safeZoneMapper  safeZoneMapperg
    */
-  public SafeZoneRestControllerImpl(SafeZoneService safeZoneService) {
+  public SafeZoneRestControllerImpl(SafeZoneService safeZoneService, SafeZoneMapper safeZoneMapper) {
     this.safeZoneService = Objects.requireNonNull(safeZoneService);
+    this.safeZoneMapper = Objects.requireNonNull(safeZoneMapper);
   }
 
   @Override
   @GetMapping("/{zoneId}")
   public SafeZoneDTO getSafeZone(@PathVariable("zoneId") Long zoneId) {
     SafeZone safeZone = safeZoneService.getSafeZone(zoneId);
-    return SafeZoneMapper.toDTO(safeZone);
+    return safeZoneMapper.toDTO(safeZone);
   }
 
   @Override
   @GetMapping("/all")
   public List<SafeZoneDTO> getAllSafeZone() {
     List<SafeZone> safeZones = safeZoneService.getSafeZones();
-    return SafeZoneMapper.toDTO(safeZones);
+    return safeZoneMapper.toDTO(safeZones);
 
   }
 

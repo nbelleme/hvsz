@@ -2,6 +2,8 @@ package io.nbelleme.hvsz.mapper.impl;
 
 import io.nbelleme.hvsz.zone.internal.SafeZone;
 import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
+import org.dozer.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,19 @@ import java.util.stream.Collectors;
 /**
  * Created by nbelleme on 01/08/2017.
  */
+@Component
 public class SafeZoneMapper {
+
+  private Mapper mapper;
+
+  /**
+   * Constructor.
+   *
+   * @param mapper mapper
+   */
+  SafeZoneMapper(Mapper mapper) {
+    this.mapper = mapper;
+  }
 
   /**
    * Map {@link SafeZone} to {@link SafeZoneDTO}.
@@ -18,14 +32,9 @@ public class SafeZoneMapper {
    * @param safeZone safeZone object to map
    * @return safeZoneDTO mapped
    */
-  public static SafeZoneDTO toDTO(SafeZone safeZone) {
+  public SafeZoneDTO toDTO(SafeZone safeZone) {
     Objects.requireNonNull(safeZone);
-    return SafeZoneDTO.build()
-                      .setId(safeZone.getId())
-                      .setCapacity(safeZone.getCapacity())
-                      .setDestroyed(safeZone.isDestroyed())
-                      .setLevel(safeZone.getLevel())
-                      .setName(safeZone.getName());
+    return mapper.map(safeZone, SafeZoneDTO.class);
   }
 
   /**
@@ -34,10 +43,10 @@ public class SafeZoneMapper {
    * @param safeZones list of safeZone objects to map
    * @return list of safeZoneDTO mapped
    */
-  public static List<SafeZoneDTO> toDTO(List<SafeZone> safeZones) {
+  public List<SafeZoneDTO> toDTO(List<SafeZone> safeZones) {
     Objects.requireNonNull(safeZones);
     return safeZones.stream()
-                    .map(SafeZoneMapper::toDTO)
+                    .map(this::toDTO)
                     .collect(Collectors.toList());
   }
 
@@ -47,14 +56,9 @@ public class SafeZoneMapper {
    * @param safeZoneDTO object to unmap
    * @return safeZone unmapped
    */
-  public static SafeZone fromDTO(SafeZoneDTO safeZoneDTO) {
+  public SafeZone fromDTO(SafeZoneDTO safeZoneDTO) {
     Objects.requireNonNull(safeZoneDTO);
-    return SafeZone.build()
-                   .setId(safeZoneDTO.getId())
-                   .setCapacity(safeZoneDTO.getCapacity())
-                   .setDestroyed(safeZoneDTO.isDestroyed())
-                   .setLevel(safeZoneDTO.getLevel())
-                   .setName(safeZoneDTO.getName());
+    return mapper.map(safeZoneDTO, SafeZone.class);
 
   }
 
