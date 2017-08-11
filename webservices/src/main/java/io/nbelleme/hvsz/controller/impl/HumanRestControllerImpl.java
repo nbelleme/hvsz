@@ -2,8 +2,8 @@ package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.HumanRestController;
 import io.nbelleme.hvsz.human.internal.Human;
-import io.nbelleme.hvsz.mapper.impl.HumanMapper;
 import io.nbelleme.hvsz.human.transfer.HumanDTO;
+import io.nbelleme.hvsz.mapper.impl.HumanMapper;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.HumanService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +22,19 @@ final class HumanRestControllerImpl implements HumanRestController {
   private HumanService humanService;
 
   private GameService gameService;
+  private HumanMapper humanMapper;
 
   /**
    * Constructor.
    *
    * @param humanService the humanService
    * @param gameService  the gameService
+   * @param humanMapper  humanMapper
    */
-  HumanRestControllerImpl(HumanService humanService, GameService gameService) {
+  HumanRestControllerImpl(HumanService humanService, GameService gameService, HumanMapper humanMapper) {
     this.humanService = Objects.requireNonNull(humanService);
     this.gameService = Objects.requireNonNull(gameService);
+    this.humanMapper = Objects.requireNonNull(humanMapper);
   }
 
   @Override
@@ -45,7 +48,7 @@ final class HumanRestControllerImpl implements HumanRestController {
   @PostMapping("/new")
   public HumanDTO takeHuman() {
     Human human = humanService.spawn();
-    return HumanMapper.toDTO(human);
+    return humanMapper.toDTO(human);
   }
 
   @Override

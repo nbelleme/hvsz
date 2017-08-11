@@ -2,13 +2,27 @@ package io.nbelleme.hvsz.mapper.impl;
 
 import io.nbelleme.hvsz.human.internal.Human;
 import io.nbelleme.hvsz.human.transfer.HumanDTO;
+import org.dozer.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 /**
  * Created by nbelleme on 01/08/2017.
  */
+@Component
 public class HumanMapper {
+
+  private Mapper mapper;
+
+  /**
+   * Constructor.
+   *
+   * @param mapper mapper
+   */
+  HumanMapper(Mapper mapper) {
+    this.mapper = Objects.requireNonNull(mapper);
+  }
 
   /**
    * Map {@link Human} to {@link HumanDTO}.
@@ -16,10 +30,9 @@ public class HumanMapper {
    * @param human human object to map
    * @return humanDTO mapped
    */
-  public static HumanDTO toDTO(Human human) {
+  public HumanDTO toDTO(Human human) {
     Objects.requireNonNull(human);
-    return HumanDTO.build()
-                   .setId(human.getId());
+    return mapper.map(human, HumanDTO.class);
   }
 
   /**
@@ -28,9 +41,8 @@ public class HumanMapper {
    * @param humanDTO supplyZone object to unmap
    * @return humanDTO unmapped
    */
-  public static Human fromDTO(HumanDTO humanDTO) {
+  public Human fromDTO(HumanDTO humanDTO) {
     Objects.requireNonNull(humanDTO);
-    return Human.build()
-                .setId(humanDTO.getId());
+    return mapper.map(humanDTO, Human.class);
   }
 }
