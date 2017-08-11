@@ -1,9 +1,9 @@
 package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.SupplyZoneRestController;
+import io.nbelleme.hvsz.mapper.api.SupplyZoneMapper;
 import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.internal.SupplyZone;
-import io.nbelleme.hvsz.mapper.impl.SupplyZoneMapper;
 import io.nbelleme.hvsz.zone.transfer.SupplyZoneDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,28 +18,31 @@ import java.util.Objects;
 final class SupplyZoneZoneRestControllerImpl implements SupplyZoneRestController {
 
   private SupplyZoneService supplyZoneService;
+  private SupplyZoneMapper supplyZoneMapper;
 
   /**
    * Constructor.
    *
    * @param supplyZoneService the foodSupplyService
+   * @param supplyZoneMapper  supplyZoneMapper
    */
-  SupplyZoneZoneRestControllerImpl(SupplyZoneService supplyZoneService) {
+  SupplyZoneZoneRestControllerImpl(SupplyZoneService supplyZoneService, SupplyZoneMapper supplyZoneMapper) {
     this.supplyZoneService = Objects.requireNonNull(supplyZoneService);
+    this.supplyZoneMapper = Objects.requireNonNull(supplyZoneMapper);
   }
 
   @Override
   @GetMapping("/{zoneId}")
   public SupplyZoneDTO getSupplyZone(@PathVariable("zoneId") Long zoneId) {
     SupplyZone supplyZone = supplyZoneService.get(zoneId);
-    return SupplyZoneMapper.toDTO(supplyZone);
+    return supplyZoneMapper.toDTO(supplyZone);
   }
 
   @Override
   @GetMapping("/all")
   public List<SupplyZoneDTO> getAllSupplyZone() {
     List<SupplyZone> supplyZones = supplyZoneService.getAll();
-    return SupplyZoneMapper.toDTO(supplyZones);
+    return supplyZoneMapper.toDTO(supplyZones);
   }
 
   @Override
