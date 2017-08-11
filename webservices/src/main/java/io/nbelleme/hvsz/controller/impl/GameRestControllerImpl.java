@@ -37,7 +37,7 @@ public class GameRestControllerImpl implements GameRestController {
   }
 
   @Override
-  @GetMapping("/get/one/{id}")
+  @GetMapping("/get/{id}")
   public GameDTO get(@PathVariable("id") String id) {
     return gameService.get(id)
                       .map(gameMapper::toDTO)
