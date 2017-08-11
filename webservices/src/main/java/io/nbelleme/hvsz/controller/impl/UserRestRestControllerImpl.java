@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.UserRestController;
-import io.nbelleme.hvsz.mapper.impl.UserMapper;
+import io.nbelleme.hvsz.mapper.api.UserMapper;
 import io.nbelleme.hvsz.services.api.UserService;
 import io.nbelleme.hvsz.user.internal.User;
 import io.nbelleme.hvsz.user.transfer.UserDTO;
