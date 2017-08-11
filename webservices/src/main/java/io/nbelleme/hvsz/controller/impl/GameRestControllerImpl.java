@@ -26,26 +26,26 @@ public class GameRestControllerImpl implements GameRestController {
 
   private GameSettingsService gameSettingsService;
 
-  private GameMapper mapper;
+  private GameMapper gameMapper;
 
   /**
    * Constructor.
    *
    * @param gameService         the gameService
    * @param gameSettingsService the gameSettingsService
-   * @param mapper              mapper
+   * @param gameMapper              gameMapper
    */
-  public GameRestControllerImpl(GameService gameService, GameSettingsService gameSettingsService, GameMapper mapper) {
+  public GameRestControllerImpl(GameService gameService, GameSettingsService gameSettingsService, GameMapper gameMapper) {
     this.gameService = Objects.requireNonNull(gameService);
     this.gameSettingsService = Objects.requireNonNull(gameSettingsService);
-    this.mapper = Objects.requireNonNull(mapper);
+    this.gameMapper = Objects.requireNonNull(gameMapper);
   }
 
   @Override
   @GetMapping("/get/one/{id}")
   public GameDTO get(@PathVariable("id") String id) {
     return gameService.get(id)
-                      .map(mapper::toDTO)
+                      .map(gameMapper::toDTO)
                       .orElseThrow(NoGameDefinedException::new);
   }
 
@@ -53,7 +53,7 @@ public class GameRestControllerImpl implements GameRestController {
   @GetMapping("/get/all")
   public List<GameDTO> getAll() {
     return gameService.getAll()
-                      .map(mapper::toDTO)
+                      .map(gameMapper::toDTO)
                       .orElseThrow(NoGameDefinedException::new);
   }
 
@@ -61,7 +61,7 @@ public class GameRestControllerImpl implements GameRestController {
   @PostMapping("/start/default")
   public GameDTO startDefault() {
     gameService.startGame();
-    return mapper.toDTO(Game.build());
+    return gameMapper.toDTO(Game.build());
   }
 
   @Override
