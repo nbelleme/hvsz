@@ -4,7 +4,7 @@ import io.nbelleme.hvsz.common.exceptions.NoGameDefinedException;
 import io.nbelleme.hvsz.controller.api.GameRestController;
 import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.internal.GameSettings;
-import io.nbelleme.hvsz.game.mapper.GameMapper;
+import io.nbelleme.hvsz.mapper.GameMapper;
 import io.nbelleme.hvsz.game.transfer.GameDTO;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.GameSettingsService;

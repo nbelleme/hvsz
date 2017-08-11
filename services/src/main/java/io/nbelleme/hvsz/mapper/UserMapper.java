@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.user.mapper;
+package io.nbelleme.hvsz.mapper;
 
 import io.nbelleme.hvsz.user.internal.User;
 import io.nbelleme.hvsz.user.transfer.UserDTO;

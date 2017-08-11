@@ -3,7 +3,7 @@ package io.nbelleme.hvsz.controller.impl;
 import io.nbelleme.hvsz.controller.api.UserController;
 import io.nbelleme.hvsz.services.api.UserService;
 import io.nbelleme.hvsz.user.internal.User;
-import io.nbelleme.hvsz.user.mapper.UserMapper;
+import io.nbelleme.hvsz.mapper.UserMapper;
 import io.nbelleme.hvsz.user.transfer.UserDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

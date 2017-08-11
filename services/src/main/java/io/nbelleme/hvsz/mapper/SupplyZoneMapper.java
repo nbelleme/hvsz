@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.zone.mapper;
+package io.nbelleme.hvsz.mapper;
 
 import io.nbelleme.hvsz.zone.internal.SupplyZone;
 import io.nbelleme.hvsz.zone.transfer.SupplyZoneDTO;

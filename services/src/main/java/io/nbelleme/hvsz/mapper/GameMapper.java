@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.game.mapper;
+package io.nbelleme.hvsz.mapper;
 
 import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.transfer.GameDTO;
