@@ -10,6 +10,11 @@ import java.util.List;
 @Configuration
 public class DozerConfig {
 
+  /**
+   * Define bean Dozer mapper.
+   *
+   * @return bean
+   */
   @Bean(name = "org.dozer.Mapper")
   public DozerBeanMapper dozerBean() {
     List<String> mappingFiles = Arrays.asList(
