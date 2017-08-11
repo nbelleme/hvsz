@@ -57,7 +57,7 @@ public class GameMapper {
 
 
   /**
-   * Map {@link List} of {@link GameDTO} to {@link List} of {@link Game}
+   * Map {@link List} of {@link GameDTO} to {@link List} of {@link Game}.
    *
    * @param games list of object to map
    * @return list of object mapped
