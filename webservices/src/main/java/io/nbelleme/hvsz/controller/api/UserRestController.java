@@ -5,7 +5,7 @@ import io.nbelleme.hvsz.user.transfer.UserDTO;
 /**
  * Created by nbelleme on 28/07/2017.
  */
-public interface UserController {
+public interface UserRestController {
 
   /**
    * Create new UserDTO.

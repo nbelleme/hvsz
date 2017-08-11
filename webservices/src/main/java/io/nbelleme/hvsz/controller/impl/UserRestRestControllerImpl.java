@@ -1,9 +1,9 @@
 package io.nbelleme.hvsz.controller.impl;
 
-import io.nbelleme.hvsz.controller.api.UserController;
+import io.nbelleme.hvsz.controller.api.UserRestController;
+import io.nbelleme.hvsz.mapper.impl.UserMapper;
 import io.nbelleme.hvsz.services.api.UserService;
 import io.nbelleme.hvsz.user.internal.User;
-import io.nbelleme.hvsz.mapper.impl.UserMapper;
 import io.nbelleme.hvsz.user.transfer.UserDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,26 +18,27 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/api/user")
-final class UserControllerImpl implements UserController {
+final class UserRestRestControllerImpl implements UserRestController {
 
   private UserService userService;
+  private UserMapper userMapper;
 
   /**
    * Constructor.
    *
    * @param userService userService
+   * @param userMapper  userMapper
    */
-  UserControllerImpl(UserService userService) {
-    Objects.requireNonNull(userService);
-
-    this.userService = userService;
+  UserRestRestControllerImpl(UserService userService, UserMapper userMapper) {
+    this.userService = Objects.requireNonNull(userService);
+    this.userMapper = Objects.requireNonNull(userMapper);
   }
 
   @Override
   @PostMapping("/create")
   public UserDTO create() {
     User user = userService.create("username", "password");
-    return UserMapper.toDTO(user);
+    return userMapper.toDTO(user);
   }
 
   @Override
@@ -46,7 +47,7 @@ final class UserControllerImpl implements UserController {
     Objects.requireNonNull(id);
 
     User user = userService.get(id);
-    return UserMapper.toDTO(user);
+    return userMapper.toDTO(user);
   }
 
 
