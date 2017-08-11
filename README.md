@@ -27,7 +27,9 @@ Quantité de vivres dans chaque SupplyBunker en kg
   - [ ] Use JWT
   - [ ] Map Objects from database to front
   - [ ] Use map
-
+  - [ ] Implements levels for all (hp, toughness)
+  - [ ] Implements weapons for humans 
+  - [ ] Levels increase detection range
 
 ## Primitives du jeu
 
