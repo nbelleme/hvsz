@@ -7,14 +7,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
 @EnableWebMvc
 @EnableScheduling
 @ComponentScan(basePackages = {"io.nbelleme.*"})
-
-public class WebappApplication {
+public class WebappApplication extends WebMvcConfigurerAdapter{
 
   /**
    * Webapp application.
@@ -23,6 +25,11 @@ public class WebappApplication {
    */
   public static void main(String[] args) {
     SpringApplication.run(WebappApplication.class, args);
+  }
+
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry.addMapping("/**");
   }
 
   /**
