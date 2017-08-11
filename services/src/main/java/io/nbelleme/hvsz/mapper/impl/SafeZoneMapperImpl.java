@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * Created by nbelleme on 01/08/2017.
  */
 @Component
-public class SafeZoneMapperImpl implements SafeZoneMapper {
+final class SafeZoneMapperImpl implements SafeZoneMapper {
 
   private Mapper mapper;
 
