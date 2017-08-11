@@ -10,6 +10,8 @@ ext {
     springBootVersion = '1.5.4.RELEASE'
     slf4jApi = '1.7.25'
     mongoJack = '2.7.0'
+    dozerVersion = '5.5.1'
+    springDataMongoDbVersion = '1.10.6.RELEASE'
 
 }
 
@@ -64,7 +66,7 @@ subprojects {
 project(':model') {
     dependencies {
         compile "org.mongojack:mongojack:$mongoJack"
-        compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '1.10.6.RELEASE'
+        compile "org.springframework.data:spring-data-mongodb:$springDataMongoDbVersion"
 
     }
 }
@@ -74,6 +76,8 @@ project(':services') {
         api "org.slf4j:slf4j-api:$slf4jApi"
         compile project(':commons')
         compile project(':persistence')
+        compile "net.sf.dozer:dozer:$dozerVersion"
+
     }
 }
 
