@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.controller;
+package io.nbelleme.hvsz.config;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
