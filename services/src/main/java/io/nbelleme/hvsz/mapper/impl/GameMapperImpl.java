@@ -25,7 +25,7 @@ final class GameMapperImpl implements GameMapper {
    *
    * @param mapper dozer mapper
    */
-  public GameMapperImpl(Mapper mapper) {
+  GameMapperImpl(Mapper mapper) {
     this.mapper = Objects.requireNonNull(mapper);
   }
 
