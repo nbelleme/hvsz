@@ -2,7 +2,7 @@ package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.HumanRestController;
 import io.nbelleme.hvsz.human.internal.Human;
-import io.nbelleme.hvsz.mapper.HumanMapper;
+import io.nbelleme.hvsz.mapper.impl.HumanMapper;
 import io.nbelleme.hvsz.human.transfer.HumanDTO;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.HumanService;

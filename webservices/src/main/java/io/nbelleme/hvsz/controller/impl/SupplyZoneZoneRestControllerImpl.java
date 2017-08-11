@@ -3,7 +3,7 @@ package io.nbelleme.hvsz.controller.impl;
 import io.nbelleme.hvsz.controller.api.SupplyZoneRestController;
 import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.internal.SupplyZone;
-import io.nbelleme.hvsz.mapper.SupplyZoneMapper;
+import io.nbelleme.hvsz.mapper.impl.SupplyZoneMapper;
 import io.nbelleme.hvsz.zone.transfer.SupplyZoneDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

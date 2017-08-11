@@ -1,4 +1,4 @@
-package io.nbelleme.hvsz.mapper;
+package io.nbelleme.hvsz.mapper.impl;
 
 import io.nbelleme.hvsz.human.internal.Human;
 import io.nbelleme.hvsz.human.transfer.HumanDTO;

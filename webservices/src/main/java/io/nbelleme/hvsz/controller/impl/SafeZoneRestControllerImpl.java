@@ -3,7 +3,7 @@ package io.nbelleme.hvsz.controller.impl;
 import io.nbelleme.hvsz.controller.api.SafeZoneRestController;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
 import io.nbelleme.hvsz.zone.internal.SafeZone;
-import io.nbelleme.hvsz.mapper.SafeZoneMapper;
+import io.nbelleme.hvsz.mapper.impl.SafeZoneMapper;
 import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
