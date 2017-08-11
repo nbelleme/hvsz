@@ -29,6 +29,19 @@ public class GameMapper {
   }
 
   /**
+   * Unmap {@link GameDTO} to {@link Game}.
+   *
+   * @param gameDTO object to unmap
+   * @return game unmapped
+   */
+  public static Game fromDTO(GameDTO gameDTO) {
+    Objects.requireNonNull(gameDTO);
+    return Game.build()
+               .setId(gameDTO.getId());
+
+  }
+
+  /**
    * Map {@link List} of {@link Game} to {@link List} of {@link GameDTO}.
    *
    * @param games list of Game objects to map
@@ -44,15 +57,17 @@ public class GameMapper {
 
 
   /**
-   * Unmap {@link GameDTO} to {@link Game}.
+   * Map {@link List} of {@link GameDTO} to {@link List} of {@link Game}
    *
-   * @param gameDTO object to unmap
-   * @return game unmapped
+   * @param games list of object to map
+   * @return list of object mapped
    */
-  public static Game fromDTO(GameDTO gameDTO) {
-    Objects.requireNonNull(gameDTO);
-    return Game.build()
-               .setId(gameDTO.getId());
+  public static List<Game> fromDTO(List<GameDTO> games) {
+    Objects.requireNonNull(games);
 
+    return games.stream()
+                .map(GameMapper::fromDTO)
+                .collect(Collectors.toList());
   }
+
 }
