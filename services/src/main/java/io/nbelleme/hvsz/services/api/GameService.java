@@ -27,7 +27,7 @@ public interface GameService {
    *
    * @throws io.nbelleme.hvsz.common.exceptions.IllegalGameStateException if game is already in progress.
    */
-  void startGame();
+  Game startGame();
 
   /**
    * Pause current game.

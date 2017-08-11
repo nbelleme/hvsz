@@ -46,8 +46,9 @@ final class GameServiceImpl implements GameService {
   }
 
   @Override
-  public void startGame() {
-    save(newGame());
+  public Game startGame() {
+    return save(newGame())
+        .orElseThrow(NoClassDefFoundError::new);
   }
 
   @Override
