@@ -35,7 +35,7 @@ public class GameRestControllerImpl implements GameRestController {
    * @param gameSettingsService the gameSettingsService
    * @param gameMapper          gameMapper
    */
-  public GameRestControllerImpl(GameService gameService, GameSettingsService gameSettingsService, GenericMapper<Game, GameDTO> gameMapper) {
+  public GameRestControllerImpl(GameService gameService, GameSettingsService gameSettingsService, GenericMapper<Game, GameDTO>   gameMapper) {
     this.gameService = Objects.requireNonNull(gameService);
     this.gameSettingsService = Objects.requireNonNull(gameSettingsService);
     this.gameMapper = Objects.requireNonNull(gameMapper);
@@ -60,8 +60,8 @@ public class GameRestControllerImpl implements GameRestController {
   @Override
   @PostMapping("/start/default")
   public GameDTO startDefault() {
-    gameService.startGame();
-    return gameMapper.toDTO(Game.build());
+    Game game = gameService.startGame();
+    return gameMapper.toDTO(game);
   }
 
   @Override
