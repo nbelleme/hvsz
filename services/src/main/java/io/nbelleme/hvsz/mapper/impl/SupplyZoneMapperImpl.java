@@ -12,9 +12,19 @@ import java.util.stream.Collectors;
 /**
  * Created by nbelleme on 01/08/2017.
  */
-public class SupplyZoneMapperImpl implements SupplyZoneMapper {
+final class SupplyZoneMapperImpl implements SupplyZoneMapper {
 
   private Mapper mapper;
+
+  /**
+   * Constructor.
+   *
+   * @param mapper mapper
+   */
+  SupplyZoneMapperImpl(Mapper mapper) {
+    this.mapper = mapper;
+  }
+
   @Override
   public SupplyZoneDTO toDTO(SupplyZone supplyZone) {
     Objects.requireNonNull(supplyZone);
