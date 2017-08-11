@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.SafeZoneRestController;
-import io.nbelleme.hvsz.mapper.api.SafeZoneMapper;
+import io.nbelleme.hvsz.mapper.api.GenericMapper;
 import io.nbelleme.hvsz.services.api.SafeZoneService;
 import io.nbelleme.hvsz.zone.internal.SafeZone;
 import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class SafeZoneRestControllerImpl implements SafeZoneRestController {
 
   private SafeZoneService safeZoneService;
-  private SafeZoneMapper safeZoneMapper;
+  private GenericMapper<SafeZone, SafeZoneDTO> safeZoneMapper;
 
   /**
    * Constructor.
@@ -28,7 +28,7 @@ public class SafeZoneRestControllerImpl implements SafeZoneRestController {
    * @param safeZoneService the SafeZoneService
    * @param safeZoneMapper  safeZoneMapperg
    */
-  public SafeZoneRestControllerImpl(SafeZoneService safeZoneService, SafeZoneMapper safeZoneMapper) {
+  public SafeZoneRestControllerImpl(SafeZoneService safeZoneService, GenericMapper<SafeZone, SafeZoneDTO> safeZoneMapper) {
     this.safeZoneService = Objects.requireNonNull(safeZoneService);
     this.safeZoneMapper = Objects.requireNonNull(safeZoneMapper);
   }

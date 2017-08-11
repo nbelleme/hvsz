@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.UserRestController;
-import io.nbelleme.hvsz.mapper.api.UserMapper;
+import io.nbelleme.hvsz.mapper.api.GenericMapper;
 import io.nbelleme.hvsz.services.api.UserService;
 import io.nbelleme.hvsz.user.internal.User;
 import io.nbelleme.hvsz.user.transfer.UserDTO;
@@ -21,7 +21,7 @@ import java.util.Objects;
 final class UserRestRestControllerImpl implements UserRestController {
 
   private UserService userService;
-  private UserMapper userMapper;
+  private GenericMapper<User, UserDTO> userMapper;
 
   /**
    * Constructor.
@@ -29,7 +29,7 @@ final class UserRestRestControllerImpl implements UserRestController {
    * @param userService userService
    * @param userMapper  userMapper
    */
-  UserRestRestControllerImpl(UserService userService, UserMapper userMapper) {
+  UserRestRestControllerImpl(UserService userService, GenericMapper<User, UserDTO> userMapper) {
     this.userService = Objects.requireNonNull(userService);
     this.userMapper = Objects.requireNonNull(userMapper);
   }

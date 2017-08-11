@@ -12,7 +12,7 @@ import java.util.Objects;
  * Created by nbelleme on 01/08/2017.
  */
 @Component
-public class HumanMapperImpl implements HumanMapper {
+public class HumanMapperImpl implements HumanMapper<Human, HumanDTO> {
 
   private Mapper mapper;
 

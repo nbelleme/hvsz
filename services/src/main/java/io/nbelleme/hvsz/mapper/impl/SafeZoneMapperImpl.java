@@ -6,15 +6,13 @@ import io.nbelleme.hvsz.zone.transfer.SafeZoneDTO;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Created by nbelleme on 01/08/2017.
  */
 @Component
-final class SafeZoneMapperImpl implements SafeZoneMapper {
+final class SafeZoneMapperImpl implements SafeZoneMapper<SafeZone, SafeZoneDTO> {
 
   private Mapper mapper;
 
@@ -33,13 +31,6 @@ final class SafeZoneMapperImpl implements SafeZoneMapper {
     return mapper.map(safeZone, SafeZoneDTO.class);
   }
 
-  @Override
-  public List<SafeZoneDTO> toDTO(List<SafeZone> safeZones) {
-    Objects.requireNonNull(safeZones);
-    return safeZones.stream()
-                    .map(this::toDTO)
-                    .collect(Collectors.toList());
-  }
 
   @Override
   public SafeZone fromDTO(SafeZoneDTO safeZoneDTO) {

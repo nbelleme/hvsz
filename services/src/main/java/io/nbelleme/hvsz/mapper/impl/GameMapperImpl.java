@@ -6,15 +6,13 @@ import io.nbelleme.hvsz.mapper.api.GameMapper;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Created by nbelleme on 01/08/2017.
  */
 @Component
-final class GameMapperImpl implements GameMapper {
+final class GameMapperImpl implements GameMapper<Game, GameDTO> {
 
   //TODO implemnts
 
@@ -41,24 +39,4 @@ final class GameMapperImpl implements GameMapper {
     return mapper.map(gameDTO, Game.class);
 
   }
-
-  @Override
-  public List<GameDTO> toDTO(List<Game> games) {
-    Objects.requireNonNull(games);
-
-    return games.stream()
-                .map(this::toDTO)
-                .collect(Collectors.toList());
-  }
-
-
-  @Override
-  public List<Game> fromDTO(List<GameDTO> games) {
-    Objects.requireNonNull(games);
-
-    return games.stream()
-                .map(this::fromDTO)
-                .collect(Collectors.toList());
-  }
-
 }

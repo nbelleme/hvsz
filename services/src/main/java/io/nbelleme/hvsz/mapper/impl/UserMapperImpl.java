@@ -12,15 +12,16 @@ import java.util.Objects;
  * Created by nbelleme on 01/08/2017.
  */
 @Component
-public class UserMapperImpl implements UserMapper {
+public class UserMapperImpl implements UserMapper<User, UserDTO> {
 
   private Mapper mapper;
 
   /**
    * Constructor.
+   *
    * @param mapper mapper
    */
-   UserMapperImpl(Mapper mapper) {
+  UserMapperImpl(Mapper mapper) {
     this.mapper = Objects.requireNonNull(mapper);
   }
 

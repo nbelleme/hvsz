@@ -5,7 +5,7 @@ import io.nbelleme.hvsz.controller.api.GameRestController;
 import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.internal.GameSettings;
 import io.nbelleme.hvsz.game.transfer.GameDTO;
-import io.nbelleme.hvsz.mapper.api.GameMapper;
+import io.nbelleme.hvsz.mapper.api.GenericMapper;
 import io.nbelleme.hvsz.services.api.GameService;
 import io.nbelleme.hvsz.services.api.GameSettingsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,16 +26,16 @@ public class GameRestControllerImpl implements GameRestController {
 
   private GameSettingsService gameSettingsService;
 
-  private GameMapper gameMapper;
+  private GenericMapper<Game, GameDTO> gameMapper;
 
   /**
    * Constructor.
    *
    * @param gameService         the gameService
    * @param gameSettingsService the gameSettingsService
-   * @param gameMapper              gameMapper
+   * @param gameMapper          gameMapper
    */
-  public GameRestControllerImpl(GameService gameService, GameSettingsService gameSettingsService, GameMapper gameMapper) {
+  public GameRestControllerImpl(GameService gameService, GameSettingsService gameSettingsService, GenericMapper<Game, GameDTO> gameMapper) {
     this.gameService = Objects.requireNonNull(gameService);
     this.gameSettingsService = Objects.requireNonNull(gameSettingsService);
     this.gameMapper = Objects.requireNonNull(gameMapper);

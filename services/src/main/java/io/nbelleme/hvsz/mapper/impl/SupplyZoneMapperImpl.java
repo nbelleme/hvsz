@@ -6,15 +6,13 @@ import io.nbelleme.hvsz.zone.transfer.SupplyZoneDTO;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Created by nbelleme on 01/08/2017.
  */
 @Component
-final class SupplyZoneMapperImpl implements SupplyZoneMapper {
+final class SupplyZoneMapperImpl implements SupplyZoneMapper<SupplyZone, SupplyZoneDTO> {
 
   private Mapper mapper;
 
@@ -33,14 +31,6 @@ final class SupplyZoneMapperImpl implements SupplyZoneMapper {
     return mapper.map(supplyZone, SupplyZoneDTO.class);
   }
 
-  @Override
-  public List<SupplyZoneDTO> toDTO(List<SupplyZone> supplyZones) {
-    Objects.requireNonNull(supplyZones);
-    return supplyZones.stream()
-                      .map(this::toDTO)
-                      .collect(Collectors.toList());
-
-  }
 
   @Override
   public SupplyZone fromDTO(SupplyZoneDTO supplyZoneDTO) {

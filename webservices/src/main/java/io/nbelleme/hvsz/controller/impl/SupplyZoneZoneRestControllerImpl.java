@@ -1,7 +1,7 @@
 package io.nbelleme.hvsz.controller.impl;
 
 import io.nbelleme.hvsz.controller.api.SupplyZoneRestController;
-import io.nbelleme.hvsz.mapper.api.SupplyZoneMapper;
+import io.nbelleme.hvsz.mapper.api.GenericMapper;
 import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.internal.SupplyZone;
 import io.nbelleme.hvsz.zone.transfer.SupplyZoneDTO;
@@ -18,7 +18,7 @@ import java.util.Objects;
 final class SupplyZoneZoneRestControllerImpl implements SupplyZoneRestController {
 
   private SupplyZoneService supplyZoneService;
-  private SupplyZoneMapper supplyZoneMapper;
+  private GenericMapper<SupplyZone, SupplyZoneDTO> supplyZoneMapper;
 
   /**
    * Constructor.
@@ -26,7 +26,7 @@ final class SupplyZoneZoneRestControllerImpl implements SupplyZoneRestController
    * @param supplyZoneService the foodSupplyService
    * @param supplyZoneMapper  supplyZoneMapper
    */
-  SupplyZoneZoneRestControllerImpl(SupplyZoneService supplyZoneService, SupplyZoneMapper supplyZoneMapper) {
+  SupplyZoneZoneRestControllerImpl(SupplyZoneService supplyZoneService, GenericMapper<SupplyZone, SupplyZoneDTO> supplyZoneMapper) {
     this.supplyZoneService = Objects.requireNonNull(supplyZoneService);
     this.supplyZoneMapper = Objects.requireNonNull(supplyZoneMapper);
   }
