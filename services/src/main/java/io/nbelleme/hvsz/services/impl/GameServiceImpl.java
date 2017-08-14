@@ -70,7 +70,11 @@ final class GameServiceImpl implements GameService {
   }
 
   @Override
-  public void stopGame() {
+  public Optional<Game> stopGame(String id) {
+    Game game = gameDao.findOne(id)
+                       .orElseThrow(NoGameDefinedException::new);
+    game.getStatus().setState(GameState.STOPPED);
+    return gameDao.save(game);
   }
 
   @Override

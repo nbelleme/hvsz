@@ -21,6 +21,8 @@ import java.util.Objects;
 @RequestMapping("/api/game")
 public class GameRestControllerImpl implements GameRestController {
 
+  //TODO check exceptions
+
   private GameService gameService;
 
   private GenericMapper<Game, GameDTO> gameMapper;
@@ -82,8 +84,9 @@ public class GameRestControllerImpl implements GameRestController {
   }
 
   @Override
-  @PostMapping("/stop")
-  public void stop() {
-    gameService.stopGame();
+  @PostMapping("/{id}//stop")
+  public GameDTO stop(@PathVariable("id") String id) {
+    return gameService.stopGame(id).map(gameMapper::toDTO)
+                   .orElseThrow(NoGameDefinedException::new);
   }
 }

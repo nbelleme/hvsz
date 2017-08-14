@@ -26,7 +26,6 @@ public interface GameService {
    * Start game using the game settings previously saved.
    *
    * @return game started
-   * @throws io.nbelleme.hvsz.common.exceptions.IllegalGameStateException if game is already in progress.
    */
   Game startGame();
 
@@ -35,7 +34,6 @@ public interface GameService {
    *
    * @param id game id
    * @return optional
-   * @throws io.nbelleme.hvsz.common.exceptions.NoGameDefinedException if no game is currently being played
    */
   Optional<Game> pause(String id);
 
@@ -44,16 +42,16 @@ public interface GameService {
    *
    * @param id game id
    * @return updated game
-   * @throws io.nbelleme.hvsz.common.exceptions.NoGameDefinedException if no game is currently being played
    */
   Optional<Game> resumeGame(String id);
 
   /**
    * Stop current game.
    *
-   * @throws io.nbelleme.hvsz.common.exceptions.NoGameDefinedException if no game is currently being played
+   * @param id game id
+   * @return game updated
    */
-  void stopGame();
+  Optional<Game> stopGame(String id);
 
   /**
    * Update game in database.

@@ -30,7 +30,7 @@ public interface GameRestController {
   GameDTO startDefault();
 
   /**
-   * Start a new game using the GameSettings done.
+   * Start a game.
    *
    * @param settings GameSettings
    * @return the game created
@@ -55,6 +55,9 @@ public interface GameRestController {
 
   /**
    * Stop the current game.
+   *
+   * @param id game id
+   * @return updated game
    */
-  void stop();
+  GameDTO stop(String id);
 }
