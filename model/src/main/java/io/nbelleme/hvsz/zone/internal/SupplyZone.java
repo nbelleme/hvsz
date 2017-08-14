@@ -9,7 +9,7 @@ public class SupplyZone implements Serializable {
 
   private static final String NAME = "ZoneDTO de ravitaillement n°";
 
-  private Long id;
+  private String id;
   private int level;
   private int capacity;
   private String name;
@@ -31,11 +31,11 @@ public class SupplyZone implements Serializable {
 
 
   //CHECKSTYLE_OFF
-  public Long getId() {
+  public String getId() {
     return this.id;
   }
 
-  public SupplyZone setId(Long id) {
+  public SupplyZone setId(String id) {
     this.id = id;
     return this;
   }

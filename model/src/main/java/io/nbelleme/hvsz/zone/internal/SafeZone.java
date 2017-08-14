@@ -1,7 +1,11 @@
 package io.nbelleme.hvsz.zone.internal;
 
+import org.mongojack.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 
+@Document( collection = "safeZone")
 public class SafeZone implements Serializable {
 
   private static final long serialVersionUID = -8759367013773257550L;
