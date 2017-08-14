@@ -74,9 +74,11 @@ public class GameRestControllerImpl implements GameRestController {
   }
 
   @Override
-  @PostMapping("/resume")
-  public void resume() {
-    gameService.resumeGame();
+  @PostMapping("/{id}/resume")
+  public GameDTO resume(@PathVariable("id") String id) {
+    return gameService.resumeGame(id)
+                      .map(gameMapper::toDTO)
+                      .orElseThrow(NoGameDefinedException::new);
   }
 
   @Override

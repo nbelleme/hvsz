@@ -48,7 +48,7 @@ final class GameServiceImpl implements GameService {
 
   @Override
   public Game startGame() {
-    return save(newGame())
+    return gameDao.insert(newGame())
         .orElseThrow(NoClassDefFoundError::new);
   }
 
@@ -56,15 +56,17 @@ final class GameServiceImpl implements GameService {
   public Optional<Game> pause(String id) {
     Game game = gameDao.findOne(id)
                        .orElseThrow(NoGameDefinedException::new);
-    Status status = game.getStatus();
-    status.setState(GameState.PAUSED);
-    game.setStatus(status);
+    game.getStatus().setState(GameState.PAUSED);
     return gameDao.save(game);
   }
 
 
   @Override
-  public void resumeGame() {
+  public Optional<Game> resumeGame(String id) {
+    Game game = gameDao.findOne(id)
+                       .orElseThrow(NoGameDefinedException::new);
+    game.getStatus().setState(GameState.ACTIVE);
+    return gameDao.save(game);
   }
 
   @Override
@@ -72,8 +74,8 @@ final class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Optional<Game> save(Game game) {
-    return gameDao.insert(game);
+  public Optional<Game> update(Game game) {
+    return gameDao.save(game);
   }
 
   /**

@@ -42,9 +42,11 @@ public interface GameService {
   /**
    * Resume current game.
    *
+   * @param id game id
+   * @return updated game
    * @throws io.nbelleme.hvsz.common.exceptions.NoGameDefinedException if no game is currently being played
    */
-  void resumeGame();
+  Optional<Game> resumeGame(String id);
 
   /**
    * Stop current game.
@@ -54,11 +56,12 @@ public interface GameService {
   void stopGame();
 
   /**
-   * Update game.
-   * Will check the current status and update it accordingly (detects end of game for instance)
+   * Update game in database.
    *
-   * @param g the game to update
-   * @return game game inserted
+   * @param game game to update
+   * @return game updated
    */
-  Optional<Game> save(Game g);
+  Optional<Game> update(Game game);
+
+
 }

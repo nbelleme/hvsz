@@ -1,11 +1,9 @@
 package io.nbelleme.hvsz.controller.api;
 
-import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.internal.GameSettings;
 import io.nbelleme.hvsz.game.transfer.GameDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface GameRestController {
 
@@ -43,14 +41,17 @@ public interface GameRestController {
    * Put the game on pause.
    *
    * @param id game id
-   *           @return updated game
+   * @return updated game
    */
   GameDTO pause(String id);
 
   /**
    * Resume game.
+   *
+   * @param id game id
+   * @return updated game
    */
-  void resume();
+  GameDTO resume(String id);
 
   /**
    * Stop the current game.
