@@ -18,6 +18,7 @@ public class GameDaoImpl implements GameDao {
 
   /**
    * Constructor.
+   *
    * @param gameRepository gameRepository
    */
   GameDaoImpl(GameRepository gameRepository) {
@@ -37,5 +38,10 @@ public class GameDaoImpl implements GameDao {
   @Override
   public Optional<Game> insert(Game game) {
     return Optional.ofNullable(gameRepository.insert(game));
+  }
+
+  @Override
+  public Optional<Game> save(Game game) {
+    return Optional.ofNullable(gameRepository.save(game));
   }
 }

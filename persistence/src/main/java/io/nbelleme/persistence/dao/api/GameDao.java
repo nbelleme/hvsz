@@ -34,4 +34,12 @@ public interface GameDao {
    * @return inserted {@link Game}
    */
   Optional<Game> insert(Game game);
+
+  /**
+   * Update {@link Game} in database.
+   *
+   * @param game game to update
+   * @return Optional Game
+   */
+  Optional<Game> save(Game game);
 }

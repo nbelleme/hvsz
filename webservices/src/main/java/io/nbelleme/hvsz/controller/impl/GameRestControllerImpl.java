@@ -28,8 +28,8 @@ public class GameRestControllerImpl implements GameRestController {
   /**
    * Constructor.
    *
-   * @param gameService         the gameService
-   * @param gameMapper          gameMapper
+   * @param gameService the gameService
+   * @param gameMapper  gameMapper
    */
   public GameRestControllerImpl(GameService gameService, GenericMapper<Game, GameDTO> gameMapper) {
     this.gameService = Objects.requireNonNull(gameService);
@@ -66,9 +66,11 @@ public class GameRestControllerImpl implements GameRestController {
   }
 
   @Override
-  @PostMapping("/pause")
-  public void pause() {
-    gameService.pauseGame();
+  @PostMapping("/{id}/pause")
+  public GameDTO pause(@PathVariable("id") String id) {
+    return gameService.pause(id)
+                      .map(gameMapper::toDTO)
+                      .orElseThrow(NoGameDefinedException::new);
   }
 
   @Override

@@ -1,6 +1,7 @@
 package io.nbelleme.hvsz.services.impl;
 
 
+import io.nbelleme.hvsz.common.exceptions.NoGameDefinedException;
 import io.nbelleme.hvsz.game.internal.Game;
 import io.nbelleme.hvsz.game.internal.GameSettings;
 import io.nbelleme.hvsz.game.internal.GameState;
@@ -52,7 +53,13 @@ final class GameServiceImpl implements GameService {
   }
 
   @Override
-  public void pauseGame() {
+  public Optional<Game> pause(String id) {
+    Game game = gameDao.findOne(id)
+                       .orElseThrow(NoGameDefinedException::new);
+    Status status = game.getStatus();
+    status.setState(GameState.PAUSED);
+    game.setStatus(status);
+    return gameDao.save(game);
   }
 
 
