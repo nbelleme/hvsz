@@ -61,7 +61,6 @@ public class ZoneFactory {
    */
   private static LongFunction<SafeZone> buildSafeZone(int defaultLevel) {
     return i -> SafeZone.build()
-                        .setId(i)
                         .setLevel(defaultLevel)
                         .setCapacity(defaultLevel);
   }
@@ -75,7 +74,6 @@ public class ZoneFactory {
    */
   private static LongFunction<SupplyZone> buildSupplyZone(int defaultLevel) {
     return i -> SupplyZone.build()
-                          .setId(i)
                           .setLevel(defaultLevel)
                           .setCapacity(defaultLevel);
   }

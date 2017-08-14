@@ -1,14 +1,17 @@
 package io.nbelleme.hvsz.zone.internal;
 
 
+import org.mongojack.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 
+@Document(collection = "supplyZone")
 public class SupplyZone implements Serializable {
 
   private static final long serialVersionUID = 4499800033671757363L;
 
-  private static final String NAME = "ZoneDTO de ravitaillement n°";
-
+  @Id
   private String id;
   private int level;
   private int capacity;

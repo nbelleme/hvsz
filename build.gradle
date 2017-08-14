@@ -39,7 +39,7 @@ subprojects {
     dependencies {
         compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
         testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-
+        compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.11.6.RELEASE'
     }
 
     compileJava.options*.compilerArgs = [
@@ -67,6 +67,7 @@ subprojects {
 
 project(':model') {
     dependencies {
+        compile project(':commons')
         compile "org.mongojack:mongojack:$mongoJack"
         compile "org.springframework.data:spring-data-mongodb:$springDataMongoDbVersion"
 
@@ -76,7 +77,6 @@ project(':model') {
 project(':services') {
     dependencies {
         api "org.slf4j:slf4j-api:$slf4jApi"
-        compile project(':commons')
         compile project(':persistence')
         compile "net.sf.dozer:dozer:$dozerVersion"
 

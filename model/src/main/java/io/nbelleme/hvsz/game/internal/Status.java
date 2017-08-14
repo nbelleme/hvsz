@@ -3,6 +3,7 @@ package io.nbelleme.hvsz.game.internal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.nbelleme.hvsz.api.DPO;
 import io.nbelleme.hvsz.human.internal.Human;
+import org.mongojack.Id;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -19,6 +20,7 @@ public class Status implements Serializable, DPO {
 
   private static final long serialVersionUID = -3433632584769693093L;
 
+  private String id;
   private int currentHumansOnField;
   private int remainingHumanTickets;
   private long remainingTime;

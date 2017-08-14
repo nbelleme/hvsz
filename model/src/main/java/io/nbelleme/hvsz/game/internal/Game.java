@@ -1,9 +1,12 @@
 package io.nbelleme.hvsz.game.internal;
 
 import io.nbelleme.hvsz.api.DPO;
+import io.nbelleme.hvsz.common.cascade.CascadeSave;
 import io.nbelleme.hvsz.user.internal.User;
 import io.nbelleme.hvsz.zone.internal.SafeZone;
 import io.nbelleme.hvsz.zone.internal.SupplyZone;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +19,11 @@ public class Game implements Serializable, DPO {
   private Status status;
   private User owner;
   private GameSettings config;
+  @DBRef
+  @CascadeSave
   private List<SafeZone> safeZones;
+  @DBRef
+  @CascadeSave
   private List<SupplyZone> foodSupplies;
 
   /**
