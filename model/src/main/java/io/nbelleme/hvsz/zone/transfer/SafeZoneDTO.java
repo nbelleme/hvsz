@@ -23,12 +23,11 @@ public class SafeZoneDTO implements Serializable {
 
   /**
    * SafeZoneDTO constructor.
-   *
-   * @param id       the id of the SafeZoneDTO
+   *  @param id       the id of the SafeZoneDTO
    * @param level    the amount of Resource at the start of the game
    * @param capacity the max of Resource the zone can hold.
    */
-  private SafeZoneDTO(Long id, int level, int capacity) {
+  private SafeZoneDTO(String id, int level, int capacity) {
     this.id = id;
     this.level = level;
     this.capacity = capacity;
