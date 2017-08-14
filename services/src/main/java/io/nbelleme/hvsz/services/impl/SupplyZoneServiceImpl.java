@@ -1,12 +1,15 @@
 package io.nbelleme.hvsz.services.impl;
 
-import io.nbelleme.hvsz.services.api.GameService;
+import io.nbelleme.hvsz.game.internal.GameSettings;
 import io.nbelleme.hvsz.services.api.SupplyZoneService;
 import io.nbelleme.hvsz.zone.internal.SupplyZone;
+import io.nbelleme.persistence.dao.api.SupplyZoneDao;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author Loïc Ortola on 04/05/2017
@@ -14,15 +17,15 @@ import java.util.Objects;
 @Service
 final class SupplyZoneServiceImpl implements SupplyZoneService {
 
-  private GameService gameService;
+  private SupplyZoneDao dao;
 
   /**
    * Constructor.
    *
-   * @param gameService gameService
+   * @param dao SupplyZoneDao
    */
-  SupplyZoneServiceImpl(GameService gameService) {
-    this.gameService = Objects.requireNonNull(gameService);
+  SupplyZoneServiceImpl(SupplyZoneDao dao) {
+    this.dao = Objects.requireNonNull(dao);
   }
 
   @Override
@@ -40,4 +43,18 @@ final class SupplyZoneServiceImpl implements SupplyZoneService {
     return 0;
   }
 
+  @Override
+  public List<SupplyZone> initSupplyZones(GameSettings conf) {
+    List<SupplyZone> supplyZones = new ArrayList<>();
+    int foodPerZone = conf.getNbFoodSupplies() / conf.getNgSupplyZones();
+
+    SupplyZone supplyZone = SupplyZone.build()
+                                      .setLevel(foodPerZone)
+                                      .setCapacity(foodPerZone);
+
+    Optional<SupplyZone> supplyZoneOptional = dao.insert(supplyZone);
+
+    supplyZones.add(supplyZoneOptional.orElse(null));
+    return supplyZones;
+  }
 }

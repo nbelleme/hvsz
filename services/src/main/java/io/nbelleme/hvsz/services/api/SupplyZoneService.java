@@ -1,5 +1,6 @@
 package io.nbelleme.hvsz.services.api;
 
+import io.nbelleme.hvsz.game.internal.GameSettings;
 import io.nbelleme.hvsz.zone.internal.SupplyZone;
 
 import java.util.List;
@@ -26,6 +27,13 @@ public interface SupplyZoneService {
    * @return the amount of food taken
    */
   int takeFood(Long zoneId, int lifeToken, Integer amount);
+
+  /**
+   * Init {@link List} of {@link SupplyZone}
+   * @param gameSettings settings
+   * @return {@link List} of {@link SupplyZone}
+   */
+  List<SupplyZone> initSupplyZones(GameSettings gameSettings);
 
 
 }
